@@ -118,7 +118,7 @@ datasetname <- "C-DBR"
 doi.concept <- "10.5281/zenodo.3832111" # checked
 
 #'## DOI der konkreten Version
-doi.version <- "10.5281/zenodo.5133932" 
+doi.version <- "10.5281/zenodo.5510458" # checked
 
 
 #'## Lizenz
@@ -505,10 +505,16 @@ download <- data.table(title.xml,
 
 #'## Abkürzungsverzeichnis erstellen
 
-conctable <- data.table(shorttitle,
+ID <- gsub("\\.epub",
+           "",
+           filenames.epub)
+
+conctable <- data.table(ID,
+                        shorttitle,
                         longtitle.raw)
 
-colnames(conctable) <- c("Kurztitel",
+colnames(conctable) <- c("ID",
+                         "Kurztitel",
                          "Langtitel")
 
 
