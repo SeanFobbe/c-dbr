@@ -1258,8 +1258,8 @@ kable(testresult, format = "latex", booktabs = TRUE,
 #'
 #' \begin{itemize}
 #' \item Vollständige Aktualisierung der Daten
-#' \item Einfügung von Kurzbezeichnungen der Rechtsakte in die Netzwerkdateien
-#' \item Einfügung von der ID der Rechtsakte in die CSV-Liste aller Kurz- und Langtitel
+#' \item Einfügung von Kurzbezeichnungen der Rechtsakte in die Dateinamen der Netzwerkanalysen
+#' \item Einfügung der ID der Rechtsakte in die CSV-Tabelle aller Kurz- und Langtitel
 #' \end{itemize}
 #' 
 #'## Version 2021-07-30
