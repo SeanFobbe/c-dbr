@@ -1253,17 +1253,16 @@ kable(testresult, format = "latex", booktabs = TRUE,
 #+
 #'# Changelog
 #'
-#'\ra{1.3}
 #'
+#'## Version \version
+#'
+#' \begin{itemize}
+#' \item Vollständige Aktualisierung der Daten
+#' \item Einfügung von Kurzbezeichnungen der Rechtsakte in die Netzwerkdateien
+#' \item Einfügung von der ID der Rechtsakte in die CSV-Liste aller Kurz- und Langtitel
+#' \end{itemize}
 #' 
-#'\begin{centering}
-#'\begin{longtable}{p{2.5cm}p{11.5cm}}
-#'\toprule
-#'Version & Details\\
-#'\midrule
-#'\endhead
-#'
-#' \version &
+#'## Version 2021-07-30
 #' 
 #' \begin{itemize}
 #' \item Vollständige Aktualisierung der Daten
@@ -1275,9 +1274,9 @@ kable(testresult, format = "latex", booktabs = TRUE,
 #' \item Neues Diagramm für Verteilung von Zeichen
 #' \item Falls die XML-Datei mehrere Bemerkungen für Hinweise, Änderung, Neufassung, den Stand oder sonstige Angaben aufweist werden diese nun durch einen vertikalen Strich getrennt (vorher nur mehrere Leerzeichen). 
 #' \item Kleinere Korrekturen und Ergänzungen im Codebook
-#' \end{itemize}\\
+#' \end{itemize}
 #' 
-#' 2021-01-05  &
+#'## Version 2021-01-05
 #'
 #' \begin{itemize}
 #' \item Vollständige Aktualisierung der Daten
@@ -1289,31 +1288,28 @@ kable(testresult, format = "latex", booktabs = TRUE,
 #' \item Automatisierung und deutliche Erweiterung der Qualitätskontrolle
 #' \item Einführung von Diagrammen zur Visualisierung von Prüfergebnissen
 #' \item Einführung kryptographischer Signaturen
-#' \end{itemize}\\
+#' \end{itemize}
 #' 
-#' 2020-10-09  &
+#'## Version 2020-10-09
 #'
 #' \begin{itemize}
 #' \item Vollständige Aktualisierung der Daten
 #' \item Erstveröffentlichung des Source Codes
 #' \item XML-Daten nun fehlerfrei. In Version 2020-07-08 waren XML-Dateien mit Anhängen fehlerhaft.
-#' \end{itemize}\\
+#' \end{itemize}
 #' 
-#'2020-07-08  &
+#'## Version 2020-07-08
 #'
 #' \begin{itemize}
 #' \item Vollständige Aktualisierung der Daten
-#' \end{itemize}\\
+#' \end{itemize}
 #' 
-#'2020-05-18  &
+#'## Version 2020-05-18
 #'
 #' \begin{itemize}
 #' \item Erstveröffentlichung
-#' \end{itemize}\\
+#' \end{itemize}
 #' 
-#'\bottomrule
-#'\end{longtable}
-#'\end{centering}
 
 #'\newpage
 #+
