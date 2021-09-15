@@ -1397,7 +1397,11 @@ f.network.analysis <- function(xml.name){
     M.adjacency <- as.matrix(get.adjacency(g,
                                            edges = F))
 
-    filename <- paste0(gsub("\\.xml",
+    filename <- paste0(gsub(" +",
+                            "-",
+                            jurabk),
+                       "_",
+                       gsub("\\.xml",
                             "",
                             xml.name))
 
