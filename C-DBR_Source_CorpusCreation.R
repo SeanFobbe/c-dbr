@@ -27,7 +27,7 @@ knitr::opts_chunk$set(echo = TRUE,
 
 #+
 #'## Überblick
-#' Dieses Skript wertet das amtliche Internetangebot "Gesetze im Internet" (\url{https://www.gesetze-im-internet.de}) der Bundesrepublik Deutschland vollständig aus und kompiliert es in einen reichhaltigen menschen- und maschinenlesbaren Korpus. Es ist die Grundlage des **\datatitle\ (\datashort)**.
+#' Dieses Skript wertet das amtliche Internetangebot \enquote{Gesetze im Internet} (\url{https://www.gesetze-im-internet.de}) der Bundesrepublik Deutschland vollständig aus und kompiliert es in einen reichhaltigen menschen- und maschinenlesbaren Korpus. Es ist die Grundlage des **\datatitle\ (\datashort)**.
 #'
 #' Alle mit diesem Skript erstellten Datensätze werden dauerhaft kostenlos und urheberrechtsfrei auf Zenodo, dem wissenschaftlichen Archiv des CERN, veröffentlicht. Alle Versionen sind mit einem persistenten Digital Object Identifier (DOI) versehen. Die neueste Version des Datensatzes ist immer über den Link der Concept DOI erreichbar: \url{https://doi.org/10.5281/zenodo.3832111}
 
