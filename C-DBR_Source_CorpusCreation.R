@@ -558,7 +558,7 @@ download[, .N] * 3
 #'## Document Type Definition herunterladen
 #' Die Document Type Definition (DTD) "definiert den Aufbau des XML-Formats zur Veroeffentlichung der aktuellen Bundesgesetze und Rechtsverordnungen ueber www.gesetze-im-internet.de" (Zitat aus dem Inhalt der Datei).
 
-download.file("http://www.gesetze-im-internet.de/dtd/1.01/gii-norm.dtd",
+download.file("https://www.gesetze-im-internet.de/dtd/1.01/gii-norm.dtd",
               paste0(datasetname,
                      "_",
                      datestamp,
