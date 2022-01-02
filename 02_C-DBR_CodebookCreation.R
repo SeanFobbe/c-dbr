@@ -12,7 +12,7 @@
 #'    pandoc_args: --listings
 #'    includes:
 #'      in_header: tex/Preamble_DE.tex
-#'      before_body: [tex/C-DBR_Definitions.tex, tex/C-DBR_CodebookTitle.tex]
+#'      before_body: [temp/C-DBR_Definitions.tex, tex/C-DBR_CodebookTitle.tex]
 #'bibliography: temp/packages.bib
 #'nocite: '@*'
 #' ---
