@@ -1959,18 +1959,18 @@ ggplot(data = freqtable) +
 
 #+
 #'### Funktion anzeigen:  f.summarize.iterator
-print(f.summarize.iterator)
+print(f.lingsummarize.iterator)
 
 
 
 #'### Berechnung durchführen
-lingstats.normen.raw <- f.summarize.iterator(dt.normen,
-                                             threads = fullCores,
-                                             chunksize = 1)
-
-lingstats.rechtsakte.raw <- f.summarize.iterator(dt.rechtsakte,
+lingstats.normen.raw <- f.lingsummarize.iterator(dt.normen,
                                                  threads = fullCores,
                                                  chunksize = 1)
+
+lingstats.rechtsakte.raw <- f.lingsummarize.iterator(dt.rechtsakte,
+                                                     threads = fullCores,
+                                                     chunksize = 1)
 
 
 #'## Variablen-Namen anpassen
