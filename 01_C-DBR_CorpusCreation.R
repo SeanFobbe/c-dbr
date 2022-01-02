@@ -243,13 +243,19 @@ caption <- paste("Fobbe | DOI:",
 print(caption)
 
 
-#'### Präfix für Output definieren
+#'### Präfix für Dateien definieren
 
 prefix.files <- paste0(config$project$short,
                  "_",
                  datestamp)
 print(prefix.files)
 
+
+#'### Präfix für Diagrammed definieren
+
+prefix.figuretitle <- paste(config$project$short,
+                            "| Version",
+                            datestamp)
 
 #'### Quanteda-Optionen setzen
 quanteda_options(tokens_locale = config$quanteda$tokens_locale)
@@ -1601,8 +1607,8 @@ print(config$freqtable$ignore)
 
 #'## Frequenztabellen erstellen
 
-prefix.freqtable <- paste0(config$project$short,
-                           "_01_Einzelnormen_Frequenztabelle_var-")
+prefix.freqtable.einzelnormen <- paste0(config$project$short,
+                                        "_01_Einzelnormen_Frequenztabelle_var-")
 
 
 #+ results = "asis"
@@ -1613,7 +1619,7 @@ f.fast.freqtable(dt.normen,
                  output.kable = TRUE,
                  output.csv = TRUE,
                  outputdir = dir.analysis,
-                 prefix = prefix.freqtable)
+                 prefix = prefix.freqtable.einzelnormen)
 
 
 
@@ -1641,8 +1647,8 @@ print(vars.freqtable.rechtsakte)
 
 #'## Frequenztabellen erstellen
 
-prefix <- paste0(config$project$short,
-                 "_01_Rechtsakte_Frequenztabelle_var-")
+prefix.freqtable.rechtsakte <- paste0(config$project$short,
+                                      "_01_Rechtsakte_Frequenztabelle_var-")
 
 
 #+ results = "asis"
@@ -1653,7 +1659,7 @@ f.fast.freqtable(dt.rechtsakte,
                  output.kable = TRUE,
                  output.csv = TRUE,
                  outputdir = dir.analysis,
-                 prefix = prefix.freqtable)
+                 prefix = prefix.freqtable.rechtsakte)
 
 
 
@@ -1670,7 +1676,7 @@ print(vars.freqtable.rechtsakte)
 
 #'## Frequenztabellen erstellen
 
-prefix <- paste0(config$project$short,
+prefix.freqtable.meta <- paste0(config$project$short,
                  "_01_Meta_Frequenztabelle_var-")
 
 
@@ -1682,7 +1688,7 @@ f.fast.freqtable(dt.meta,
                  output.kable = TRUE,
                  output.csv = TRUE,
                  outputdir = dir.analysis,
-                 prefix = prefix.freqtable)
+                 prefix = prefix.freqtable.meta)
 
 
 
