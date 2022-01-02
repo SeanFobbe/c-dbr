@@ -172,7 +172,7 @@ dir.figures <- paste0(getwd(),
 
 
 
-#'## Output aus vorherigen Runs bereinigen
+#'## Dateien aus vorherigen Runs bereinigen
 
 unlink(c("output",
          "temp",
