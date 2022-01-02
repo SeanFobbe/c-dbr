@@ -3221,7 +3221,7 @@ zip(paste0("output/",
 
 #'## Verpacken der Source-Dateien
 
-files.source <- c(list.files(pattern = "\\.R|\\.toml"),
+files.source <- c(list.files(pattern = "\\.R$|\\.toml$"),
                   "R-fobbe-proto-package",
                   "functions",
                   "tex",
