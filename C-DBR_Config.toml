@@ -15,6 +15,14 @@ doi.data.version = "???"
 doi.software.concept = "???"
 doi.software.version = "???"
 
+# Debugging
+
+debug.toggle = "TRUE"   # Ob Debugging aktiv ist; Möglichkeiten sind "TRUE" oder "FALSE"
+debug.sample = 100      # Die Anzahl der zufällig ausgewählten Rechtsakte, die im Debugging-Modus berücksichtigt werden sollen.
+
+# Download
+download.timeout = 600			# Timeout für Downloads
+
 
 # Quanteda
 quanteda.tokens_locale = "de_DE" # Locale in denen Tokens analyisert werden
@@ -25,8 +33,7 @@ fig.dpi = 300     	 	# Auflösung für Diagramme
 fig.align = "center"    	# Ausrichtung von Diagrammen im Compilation Report
 
 
-# Download
-download.timeout = 600			# Timeout für Downloads
+
 
 # Frequenztabellen: Liste zu prüfender Variablen
 #' **Hinweis:** Nur diese Variablen werden bei der Erstellung der Frequenztabellen berücksichtigt.
