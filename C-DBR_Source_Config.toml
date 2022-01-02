@@ -1,0 +1,23 @@
+projectname = Corpus des Deutschen Bundesrechts
+projectshort = C-DBR
+
+license-data = "Creative Commons Zero 1.0 Universal"
+license-code = MIT-0
+
+doi.concept = "10.5281/zenodo.3832111" # checked
+doi.version = "???"
+
+
+[quanteda]
+tokens_locale = "de_DE"
+
+[knitr]
+fig.format = [pdf, png] 	# Ausgabe-Format für Diagramme
+fig.dpi = 300     	 	# Auflösung für Diagramme
+fig.align = center    		# Ausrichtung von Diagrammen im Compilation Report
+
+
+dl.timeout = 600     		# Timeout für Downloads
+
+
+
