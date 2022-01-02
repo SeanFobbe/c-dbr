@@ -1601,7 +1601,7 @@ print(config$freqtable$ignore)
 
 #'## Frequenztabellen erstellen
 
-prefix.freqtable <- paste0(datasetname,
+prefix.freqtable <- paste0(config$project$short,
                            "_01_Einzelnormen_Frequenztabelle_var-")
 
 
