@@ -2717,8 +2717,8 @@ names(dt.meta)
 #+
 #'### Name für CSV definieren
 
-csvname.normen.gesamt <- paste(prefix.files,
-                               "DE_CSV_Einzelnormen_Datensatz.csv")
+csvname.normen.gesamt <- paste0(prefix.files,
+                               "_DE_CSV_Einzelnormen_Datensatz.csv")
 
 #'### Datensatz speichern
 
@@ -2734,8 +2734,8 @@ fwrite(dt.normen,
 #+
 #'### Name für CSV definieren
 
-csvname.normen.meta <- paste(prefix.files,
-                             "DE_CSV_Einzelnormen_Metadaten.csv")
+csvname.normen.meta <- paste0(prefix.files,
+                             "_DE_CSV_Einzelnormen_Metadaten.csv")
 
 #'### Datensatz speichern
 
@@ -2752,8 +2752,8 @@ fwrite(meta.normen,
 #+
 #'### Name für CSV definieren
 
-csvname.rechtsakte.gesamt <- paste(prefix.files,
-                                   "DE_CSV_Rechtsakte_Datensatz.csv")
+csvname.rechtsakte.gesamt <- paste0(prefix.files,
+                                   "_DE_CSV_Rechtsakte_Datensatz.csv")
 
 #'### Datensatz speichern
 
@@ -2769,8 +2769,8 @@ fwrite(dt.rechtsakte,
 #+
 #'### Name für CSV definieren
 
-csvname.rechtsakte.meta <- paste(prefix.files,
-                                 "DE_CSV_Rechtsakte_Metadaten.csv")
+csvname.rechtsakte.meta <- paste0(prefix.files,
+                                 "_DE_CSV_Rechtsakte_Metadaten.csv")
 
 
 #'### Datensatz speichern
@@ -2790,8 +2790,8 @@ fwrite(meta.rechtsakte,
 #+
 #'### Name für CSV definieren
 
-csvname.meta <- paste(prefix.files,
-                      "DE_CSV_MetadatenXML.csv")
+csvname.meta <- paste0(prefix.files,
+                      "_DE_CSV_MetadatenXML.csv")
 
 
 #'### Datensatz speichern
