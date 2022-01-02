@@ -173,16 +173,27 @@ dir.analysis <- paste0(getwd(),
 dir.figures <- paste0(getwd(),
                   "/diagramme/")
 
+#'## Weitere Verzeichnisse definieren
+
+dirs <- c("output",
+          "temp",
+          "diagramme",
+          "analyse",
+          "netzwerke",
+          "XML",
+          "PDF",
+          "TXT",
+          "EPUB")
+
 
 
 #'## Dateien aus vorherigen Runs bereinigen
 
-unlink(c("output",
-         "temp",
-         "diagramme",
-         "analyse"),
-       recursive = TRUE)
 
+unlink(dir.analysis, recursive = TRUE)
+unlink(dir.figures, recursive = TRUE)
+
+unlink(dirs, recursive = TRUE)
 
 
 #'## Verzeichnisse anlegen
@@ -190,12 +201,9 @@ unlink(c("output",
 dir.create(dir.analysis)
 dir.create(dir.figures)
 
-dir.create("temp")
-dir.create("output")
+lapply(dirs, dir.create)
 
 
-
-dir.create("netzwerke")
 dir.create("netzwerke/Edgelists")
 dir.create("netzwerke/Adjazenzmatrizen")
 dir.create("netzwerke/Netzwerkdiagramme")
