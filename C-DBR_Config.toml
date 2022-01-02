@@ -31,7 +31,7 @@ download.timeout = 600			# Timeout für Downloads
 # Frequenztabellen: Liste zu prüfender Variablen
 #' **Hinweis:** Nur diese Variablen werden bei der Erstellung der Frequenztabellen berücksichtigt.
 
-freqtable-ignore =  ["periodikum",
+freqtable.ignore =  ["periodikum",
 		    "fundstellentyp",
 		    "check_neuf",
 		    "check_aufh",
