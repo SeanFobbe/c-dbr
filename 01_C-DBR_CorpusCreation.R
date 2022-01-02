@@ -542,6 +542,10 @@ fwrite(conctable,
        na = "NA")
 
 
+#'## Debugging-Modus: Anzahl der heruntergeladenen Dateien reduzieren
+
+download <- download[sample(.N, config$debug$sample)]
+
 
 #'## Anzahl herunterzuladender Dateien
 
