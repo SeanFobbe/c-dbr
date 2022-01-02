@@ -1,0 +1,34 @@
+library(groundhog)    # Strenge Versionskontrolle von R packages
+
+groundhog.library(pkg = "rmarkdown",
+                  date = "2021-02-20")
+
+
+
+#+
+#'### Datensatz 
+#' 
+#' Um den **vollständigen Datensatz** zu kompilieren und einen PDF-Bericht zu erstellen, kopieren Sie bitte alle im Source-Archiv bereitgestellten Dateien in einen leeren Ordner und führen mit R diesen Befehl aus:
+
+#+ eval = FALSE
+
+rmarkdown::render(input = "C-DBR_Source_CorpusCreation.R",
+                  output_file = paste0("C-DBR_",
+                                       Sys.Date(),
+                                       "_CompilationReport.pdf"),
+                  envir = new.env())
+
+
+
+#'### Codebook
+#' Um das **Codebook** zu kompilieren und einen PDF-Bericht zu erstellen, führen Sie bitte im Anschluss an die Kompilierung des Datensatzes (!) untenstehenden Befehl mit R aus.
+#'
+#' Bei der Prüfung der GPG-Signatur wird ein Fehler auftreten und im Codebook dokumentiert, weil die Daten nicht mit meiner Original-Signatur versehen sind. Dieser Fehler hat jedoch keine Auswirkungen auf die Funktionalität und hindert die Kompilierung nicht.
+
+#+ eval = FALSE
+
+rmarkdown::render(input = "C-DBR_Source_CodebookCreation.R",
+                  output_file = paste0("C-DBR_",
+                                       Sys.Date(),
+                                       "_Codebook.pdf"),
+                  envir = new.env())
