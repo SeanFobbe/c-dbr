@@ -156,16 +156,19 @@ groundhog.library(pkg = packages,
 
 
 
-#'## Konfiguration laden
-
-config <- parseTOML("C-DBR_Source_Config.toml")
-
-
-
 #'## Zusätzliche Funktionen einlesen
 #' **Hinweis:** Die hieraus verwendeten Funktionen werden jeweils vor der ersten Benutzung in vollem Umfang angezeigt um den Lesefluss zu verbessern.
 
 source("General_Source_Functions.R")
+
+
+
+#'## Konfiguration einlesen und anzeigen
+
+config <- parseTOML("C-DBR_Source_Config.toml")
+print(config)
+
+
 
 
 
