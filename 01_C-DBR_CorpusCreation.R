@@ -208,7 +208,7 @@ knitr::write_bib(c(.packages()),
 
 
 
-#'## Konfiguration
+#'## Allgemeine Konfiguration
 
 #+
 #'### Konfiguration einlesen
@@ -232,14 +232,14 @@ options(timeout = config$download$timeout)
 
 
 
-#'## Quellenangabe für Diagramme definieren
+#'### Quellenangabe für Diagramme definieren
 
 caption <- paste("Fobbe | DOI:",
                  config$doi$data$version)
 print(caption)
 
 
-#'## Präfix für Output definieren
+#'### Präfix für Output definieren
 
 prefix <- paste0(config$project$short,
                  "_",
@@ -248,7 +248,7 @@ prefix <- paste0(config$project$short,
 print(prefix)
 
 
-#'## Quanteda-Optionen setzen
+#'### Quanteda-Optionen setzen
 quanteda_options(tokens_locale = config$quanteda$tokens_locale)
 
 
