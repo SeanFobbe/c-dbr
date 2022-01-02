@@ -245,10 +245,10 @@ print(caption)
 
 #'### Präfix für Output definieren
 
-files.prefix <- paste0(config$project$short,
+prefix.files <- paste0(config$project$short,
                  "_",
                  datestamp)
-print(files.prefix)
+print(prefix.files)
 
 
 #'### Quanteda-Optionen setzen
@@ -533,7 +533,7 @@ fwrite(download,
 
 fwrite(conctable,
        paste0("output/",
-              files.prefix,
+              prefix.files,
               "_DE_AlleRechtsakteVerzeichnis.csv"),
        na = "NA")
 
@@ -571,7 +571,7 @@ download[, .N] * 3
 
 download.file("https://www.gesetze-im-internet.de/dtd/1.01/gii-norm.dtd",
               paste0("output/",
-                     files.prefix,
+                     prefix.files,
                      "_DE_XML_DocumentTypeDefinition_v1-01.dtd"))
 
 
@@ -979,7 +979,7 @@ check <- dt.normen[idx]
 
 fwrite(check,
        paste0(dir.analysis,
-              files.prefix,
+              prefix.files,
               "_Stichprobe_Normen.csv"),
        na = "NA")
 
@@ -1556,7 +1556,7 @@ files.xml <- list.files("XML",
 #'### XML-Dateien verpacken
 
 zip(paste0("output/",
-          files.prefix,
+          prefix.files,
           "_DE_XML_Datensatz.zip"),
     files.xml)
 
@@ -1573,7 +1573,7 @@ attachments <- list.files("XML",
 if (length(attachments) > 0){
 
 zip(paste0("output/",
-          files.prefix,
+          prefix.files,
           "_DE_XML_Anlagen.zip"),
     attachments)
 
@@ -1601,8 +1601,8 @@ print(config$freqtable$ignore)
 
 #'## Frequenztabellen erstellen
 
-prefix <- paste0(datasetname,
-                 "_01_Einzelnormen_Frequenztabelle_var-")
+prefix.freqtable <- paste0(datasetname,
+                           "_01_Einzelnormen_Frequenztabelle_var-")
 
 
 #+ results = "asis"
@@ -1613,7 +1613,7 @@ f.fast.freqtable(dt.normen,
                  output.kable = TRUE,
                  output.csv = TRUE,
                  outputdir = dir.analysis,
-                 prefix = prefix)
+                 prefix = prefix.freqtable)
 
 
 
@@ -1653,7 +1653,7 @@ f.fast.freqtable(dt.rechtsakte,
                  output.kable = TRUE,
                  output.csv = TRUE,
                  outputdir = dir.analysis,
-                 prefix = prefix)
+                 prefix = prefix.freqtable)
 
 
 
@@ -1682,7 +1682,7 @@ f.fast.freqtable(dt.meta,
                  output.kable = TRUE,
                  output.csv = TRUE,
                  outputdir = dir.analysis,
-                 prefix = prefix)
+                 prefix = prefix.freqtable)
 
 
 
