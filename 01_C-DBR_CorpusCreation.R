@@ -212,7 +212,7 @@ knitr::write_bib(c(.packages()),
 
 #+
 #'### Konfiguration einlesen
-config <- parseTOML("C-DBR_Source_Config.toml")
+config <- parseTOML("C-DBR_Config.toml")
 
 #'### Konfiguration anzeigen
 print(config)
