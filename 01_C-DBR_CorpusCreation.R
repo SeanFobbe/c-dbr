@@ -242,7 +242,7 @@ print(caption)
 
 #'### Präfix für Dateien definieren
 
-prefix.files <- paste0(config$project$short,
+prefix.files <- paste0(config$project$shortname,
                  "_",
                  datestamp)
 print(prefix.files)
@@ -250,7 +250,7 @@ print(prefix.files)
 
 #'### Präfix für Diagrammed definieren
 
-prefix.figuretitle <- paste(config$project$short,
+prefix.figuretitle <- paste(config$project$shortname,
                             "| Version",
                             datestamp)
 
@@ -277,16 +277,16 @@ latexdefs <- c("%===========================\n% Definitionen\n%=================
                       "}"),
                "\n%-----Titles-----",
                paste0("\\newcommand{\\datatitle}{",
-                      config$project$name,
+                      config$project$fullname,
                       "}"),
                paste0("\\newcommand{\\datashort}{",
-                      config$project$short,
+                      config$project$shortname,
                       "}"),
                paste0("\\newcommand{\\softwaretitle}{Source Code des \\enquote{",
-                      config$project$name,
+                      config$project$fullname,
                       "}}"),
                paste0("\\newcommand{\\softwareshort}{",
-                      config$project$short,
+                      config$project$shortname,
                       "-Source}"),
                "\n%-----Data DOIs-----",
                paste0("\\newcommand{\\dataconceptdoi}{",
@@ -323,7 +323,7 @@ latexdefs <- c("%===========================\n% Definitionen\n%=================
 
 writeLines(latexdefs,
            paste0("temp/",
-                  config$project$short,
+                  config$project$shortname,
                   "_Definitions.tex"))
 
 
@@ -539,7 +539,7 @@ colnames(conctable) <- c("ID",
 
 fwrite(download,
        paste0(dir.analysis,
-              config$project$short,
+              config$project$shortname,
               "_02_Links.csv"),
        na = "NA")
 
@@ -1616,7 +1616,7 @@ print(config$freqtable$ignore)
 
 #'## Frequenztabellen erstellen
 
-prefix.freqtable.einzelnormen <- paste0(config$project$short,
+prefix.freqtable.einzelnormen <- paste0(config$project$shortname,
                                         "_01_Einzelnormen_Frequenztabelle_var-")
 
 
@@ -1656,7 +1656,7 @@ print(vars.freqtable.rechtsakte)
 
 #'## Frequenztabellen erstellen
 
-prefix.freqtable.rechtsakte <- paste0(config$project$short,
+prefix.freqtable.rechtsakte <- paste0(config$project$shortname,
                                       "_01_Rechtsakte_Frequenztabelle_var-")
 
 
@@ -1685,7 +1685,7 @@ print(vars.freqtable.rechtsakte)
 
 #'## Frequenztabellen erstellen
 
-prefix.freqtable.meta <- paste0(config$project$short,
+prefix.freqtable.meta <- paste0(config$project$shortname,
                  "_01_Meta_Frequenztabelle_var-")
 
 
@@ -1714,17 +1714,17 @@ f.fast.freqtable(dt.meta,
 
 prefix.normen <- paste0(basename(dir.analysis),
                         "/",
-                        config$project$short,
+                        config$project$shortname,
                         "_01_Einzelnormen_Frequenztabelle_var-")
 
 prefix.rechtsakte <- paste0(basename(dir.analysis),
                             "/",
-                            config$project$short,
+                            config$project$shortname,
                             "_01_Rechtsakte_Frequenztabelle_var-")
 
 prefix.meta <- paste0(basename(dir.analysis),
                       "/",
-                      config$project$short,
+                      config$project$shortname,
                       "_01_Meta_Frequenztabelle_var-")
 
 
@@ -2104,7 +2104,7 @@ kable(dt.stats.ling,
 
 fwrite(dt.stats.ling,
        paste0(dir.analysis,
-              config$project$short,
+              config$project$shortname,
               "_00_Einzelnormen_KorpusStatistik_ZusammenfassungLinguistisch.csv"),
        na = "NA")
 
@@ -2181,7 +2181,7 @@ kable(dt.stats.ling,
 
 fwrite(dt.stats.ling,
        paste0(dir.analysis,
-              config$project$short,
+              config$project$shortname,
               "_00_Rechtsakte_KorpusStatistik_ZusammenfassungLinguistisch.csv"),
        na = "NA")
 
