@@ -12,7 +12,7 @@ license.code = "MIT-0"
 doi.data.concept = "10.5281/zenodo.3832111" # checked
 doi.data.version = "???"
 
-doi.software.concept = "???"
+doi.software.concept = "10.5281/zenodo.4072934" # checked
 doi.software.version = "???"
 
 # Debugging
