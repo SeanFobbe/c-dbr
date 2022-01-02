@@ -2790,16 +2790,15 @@ fwrite(meta.rechtsakte,
 #+
 #'### Name für CSV definieren
 
-csvname.meta <- paste(config$project$short,
-                      datestamp,
-                      "DE_CSV_MetadatenXML.csv",
-                      sep = "_")
+csvname.meta <- paste(prefix.files,
+                      "DE_CSV_MetadatenXML.csv")
 
 
 #'### Datensatz speichern
 
 fwrite(dt.meta,
-       csvname.meta,
+       paste0("output/",
+              csvname.meta),
        na = "NA")
 
 
