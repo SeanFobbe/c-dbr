@@ -202,20 +202,27 @@ dir.create("Netzwerke/GraphML")
 #+
 #'## Packages Laden
 
-library(rvest)        # HTML/XML-Extraktion
-library(xml2)         # Arbeit mit XML-Format
-library(knitr)        # Professionelles Reporting
-library(kableExtra)   # Verbesserte Kable Tabellen
-library(pdftools)     # Extrahieren von PDF-Dateien
-library(doParallel)   # Parallelisierung
-library(ggplot2)      # Fortgeschrittene Datenvisualisierung
-library(data.table)   # Fortgeschrittene Datenverarbeitung
-library(quanteda)     # Fortgeschrittene Computerlinguistik
-library(scales)       # Skalierung von Diagrammen
-library(openssl)      # Kryptographische Signaturen
-library(igraph)       # Analyse von Graphen
-library(ggraph)       # Analyse von Graphen
-library(qgraph)       # Analyse von Graphen
+library(groundhog)    # Strenge Versionskontrolle von R packages
+
+packages <- c("rvest",        # HTML/XML-Extraktion
+              "xml2",         # Arbeit mit XML-Format
+              "knitr",        # Professionelles Reporting
+              "kableExtra",   # Verbesserte Kable Tabellen
+              "pdftools",     # Extrahieren von PDF-Dateien
+              "doParallel",   # Parallelisierung
+              "ggplot2",      # Fortgeschrittene Datenvisualisierung
+              "data.table",   # Fortgeschrittene Datenverarbeitung
+              "quanteda",     # Fortgeschrittene Computerlinguistik
+              "scales",       # Skalierung von Diagrammen
+              "openssl",      # Kryptographische Signaturen
+              "igraph",       # Analyse von Graphen
+              "ggraph",       # Analyse von Graphen
+              "qgraph")       # Analyse von Graphen
+
+groundhog.library(pkg = packages,
+                  date = "2021-02-20")
+
+
 
 
 #'## Zusätzliche Funktionen einlesen
