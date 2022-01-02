@@ -1671,7 +1671,7 @@ prefix <- paste0(datasetname,
 
 #+ results = "asis"
 f.fast.freqtable(dt.normen,
-                 varlist = config$freqtable-ignore,
+                 varlist = config$freqtable$ignore,
                  sumrow = TRUE,
                  output.list = FALSE,
                  output.kable = TRUE,
