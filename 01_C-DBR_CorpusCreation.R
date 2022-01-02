@@ -2466,7 +2466,7 @@ summary(dt.meta$ausfertigung_jahr)
 
 
 
-#'# Kontrolle der Variablen
+#'# Strenge Kontrolle der Variablen-Namen
 
 #+
 #'## Semantische Sortierung der Variablen
@@ -2717,10 +2717,8 @@ names(dt.meta)
 #+
 #'### Name für CSV definieren
 
-csvname.normen.gesamt <- paste(config$project$short,
-                               datestamp,
-                               "DE_CSV_Einzelnormen_Datensatz.csv",
-                               sep = "_")
+csvname.normen.gesamt <- paste(prefix.files,
+                               "DE_CSV_Einzelnormen_Datensatz.csv")
 
 #'### Datensatz speichern
 
@@ -2735,10 +2733,8 @@ fwrite(dt.normen,
 #+
 #'### Name für CSV definieren
 
-csvname.normen.meta <- paste(config$project$short,
-                             datestamp,
-                             "DE_CSV_Einzelnormen_Metadaten.csv",
-                             sep = "_")
+csvname.normen.meta <- paste(prefix.files,
+                             "DE_CSV_Einzelnormen_Metadaten.csv")
 
 #'### Datensatz speichern
 
