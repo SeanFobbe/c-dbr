@@ -3019,6 +3019,8 @@ ggplot(data = dt.plot,
     )
 
 
+
+
 #'\newpage
 #'## Verteilung der Dateigrößen (EPUB)
 
@@ -3047,6 +3049,8 @@ ggplot(data = dt.plot,
         legend.position = "none",
         plot.margin = margin(10, 20, 10, 10)
     )
+
+
 
 
 
@@ -3128,6 +3132,9 @@ files.csv <- c(csvname.normen.gesamt,
                csvname.rechtsakte.meta,
                csvname.meta)
 
+files.csv <- paste0("output/",
+                    files.csv)
+
 csvnames.zip <- gsub(".csv",
                      ".zip",
                      files.csv)
@@ -3143,13 +3150,13 @@ unlink(files.csv)
 
 #'## Verpacken der PDF-Dateien
 
-files.pdf <- list.files(pattern = "\\.pdf$",
-                         ignore.case = TRUE)
+files.pdf <- list.files("PDF",
+                        pattern = "\\.pdf$",
+                        ignore.case = TRUE,
+                        full.names = TRUE)
 
-zip(paste(config$project$short,
-          datestamp,
-          "DE_PDF_Datensatz.zip",
-          sep = "_"),
+zip(paste0(prefix.files
+          "DE_PDF_Datensatz.zip"),
     files.pdf)
 
 
