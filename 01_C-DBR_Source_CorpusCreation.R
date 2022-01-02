@@ -242,7 +242,8 @@ options(timeout = config$download$timeout)
 #'### Quellenangabe für Diagramme
 
 caption <- paste("Fobbe | DOI:",
-                 config$doi$version)
+                 config$doi$data$version)
+print(caption)
 
 
 
@@ -258,7 +259,7 @@ quanteda_options(tokens_locale = config$quanteda$tokens_locale)
 #'### LaTeX Parameter definieren
 
 latexdefs <- c("%===========================\n% Definitionen\n%===========================",
-               "\n% NOTE: Diese Datei wurde während dem Kompilierungs-Prozess automatisch erstellt.\n",
+               "\n% NOTE: Diese Datei wurde während dem Kompilierungs-Prozesses automatisch erstellt.\n",
                "\n%-----Version-----",
                paste0("\\newcommand{\\version}{",
                       datestamp,
