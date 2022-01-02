@@ -9,8 +9,11 @@ license.code = "MIT-0"
 
 
 # Digital Object Identifier (DOI)
-doi.concept = "10.5281/zenodo.3832111" # checked
-doi.version = "???"
+doi.data.concept = "10.5281/zenodo.3832111" # checked
+doi.data.version = "???"
+
+doi.software.concept = "???"
+doi.software.version = "???"
 
 
 # Quanteda
