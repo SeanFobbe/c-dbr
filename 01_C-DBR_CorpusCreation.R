@@ -121,6 +121,7 @@ print(begin.script)
 
 #+
 #'## Packages Laden
+#' Das package *groundhog* nimmt eine strenge Versionskontrolle von R packages vor, indem es nur solche Versionen lädt, die an einem bestimmten Stichtag auf CRAN verfügbar waren. Diese werden in einer separaten library gesichert. Falls entsprechende Versionen nicht vorhanden sind, nimmt es eine automatische Installation derselben vor.
 
 library(groundhog)    # Strenge Versionskontrolle von R packages
 
