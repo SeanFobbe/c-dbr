@@ -170,15 +170,11 @@ source("functions/f.zero.NA.R")
 dir.analysis <- paste0(getwd(),
                     "/analyse/") 
 
-dir.figures <- paste0(getwd(),
-                  "/diagramme/")
 
 #'## Weitere Verzeichnisse definieren
 
 dirs <- c("output",
           "temp",
-          "diagramme",
-          "analyse",
           "netzwerke",
           "XML",
           "PDF",
@@ -191,7 +187,6 @@ dirs <- c("output",
 
 
 unlink(dir.analysis, recursive = TRUE)
-unlink(dir.figures, recursive = TRUE)
 
 unlink(dirs, recursive = TRUE)
 
@@ -199,7 +194,6 @@ unlink(dirs, recursive = TRUE)
 #'## Verzeichnisse anlegen
 
 dir.create(dir.analysis)
-dir.create(dir.figures)
 
 lapply(dirs, dir.create)
 
@@ -231,7 +225,7 @@ print(config)
 
 #+
 #'### Knitr Optionen setzen
-knitr::opts_chunk$set(fig.path = dir.figures,
+knitr::opts_chunk$set(fig.path = dir.analysis,
                       dev = config$fig$format,
                       dpi = config$fig$dpi,
                       fig.align = config$fig$align)
