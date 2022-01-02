@@ -170,6 +170,7 @@ source("General_Source_Functions.R")
 #'## Output aus vorherigen Runs bereinigen
 
 unlink(c("output",
+         "temp",
          "figures"),
        recursive = TRUE)
 
@@ -189,9 +190,10 @@ fig.dir <- paste0(getwd(),
 dir.create(outputdir)
 dir.create(fig.dir)
 
-dir.create("output")
-dir.create("data")
 dir.create("temp")
+dir.create("output")
+
+
 
 dir.create("Netzwerke")
 dir.create("Netzwerke/Edgelists")
