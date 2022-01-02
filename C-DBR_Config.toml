@@ -1,6 +1,6 @@
 # Project
-project.name = "Corpus des Deutschen Bundesrechts"
-project.short = "C-DBR"
+project.fullname = "Corpus des Deutschen Bundesrechts"
+project.shortname = "C-DBR"
 project.author = "Seán Fobbe"
 
 # License
