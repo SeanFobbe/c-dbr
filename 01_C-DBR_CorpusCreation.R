@@ -3174,8 +3174,7 @@ files.txt <- list.files("TXT",
 
 zip(paste0("output/",
            prefix.files,
-           "_DE_TXT_Datensatz.zip",
-           sep = "_"),
+           "_DE_TXT_Datensatz.zip"),
     files.txt)
 
 
@@ -3184,13 +3183,14 @@ zip(paste0("output/",
 
 #'## Verpacken der EPUB-Dateien
 
-files.epub <- list.files(pattern = "\\.epub$",
-                         ignore.case = TRUE)
+files.epub <- list.files("EPUB",
+                         pattern = "\\.epub$",
+                         ignore.case = TRUE,
+                         full.names = TRUE)
 
-zip(paste(config$project$short,
-          datestamp,
-          "DE_EPUB_Datensatz.zip",
-          sep = "_"),
+zip(paste0("output/",
+           prefix.files,
+           "_DE_EPUB_Datensatz.zip"),
     files.epub)
 
 
