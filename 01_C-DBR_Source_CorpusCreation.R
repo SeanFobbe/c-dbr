@@ -259,7 +259,7 @@ latexdefs <- c("%===========================\n% Definitionen\n%=================
                paste0("\\newcommand{\\datashort}{",
                       config$project$short,
                       "}"),
-               paste0("\\newcommand{\\softwaretitle}{Source Code for the \\enquote{",
+               paste0("\\newcommand{\\softwaretitle}{Source Code des \\enquote{",
                       config$project$name,
                       "}}"),
                paste0("\\newcommand{\\softwareshort}{",

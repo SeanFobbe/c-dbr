@@ -16,6 +16,7 @@ rmarkdown::render(input = "C-DBR_Source_CorpusCreation.R",
                   output_file = paste0("C-DBR_",
                                        Sys.Date(),
                                        "_CompilationReport.pdf"),
+                  output_dir = "output",
                   envir = new.env())
 
 
@@ -31,4 +32,5 @@ rmarkdown::render(input = "C-DBR_Source_CodebookCreation.R",
                   output_file = paste0("C-DBR_",
                                        Sys.Date(),
                                        "_Codebook.pdf"),
+                  output_dir = "output",
                   envir = new.env())
