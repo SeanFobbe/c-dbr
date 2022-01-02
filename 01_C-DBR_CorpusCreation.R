@@ -589,7 +589,8 @@ download.file("https://www.gesetze-im-internet.de/dtd/1.01/gii-norm.dtd",
 #+ results = 'hide'
 mcmapply(download.file,
          download$links.xml,
-         download$title.xml)
+         paste0("XML/",
+                download$title.xml))
 
 
 
@@ -600,7 +601,8 @@ mcmapply(download.file,
 download[,.N]
 
 #'### Anzahl heruntergeladener Dateien
-files.zip <- list.files(pattern = "\\.zip")
+files.zip <- list.files("XML",
+                        pattern = "\\.zip")
 length(files.zip)
 
 #'### Fehlbetrag
@@ -633,7 +635,8 @@ unlink(files.zip)
 
 #'## XML Dateien auflisten und Dateigrößen speichern
 
-files.xml <- list.files(pattern = "\\.xml",
+files.xml <- list.files("XML",
+                        pattern = "\\.xml",
                         ignore.case = TRUE)
 
 xml.MB <- file.size(files.xml) / 10^6
