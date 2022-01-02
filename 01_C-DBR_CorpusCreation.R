@@ -162,6 +162,8 @@ source("functions/f.heading.transform.R")
 source("functions/f.namechain.R")
 source("functions/f.zero.NA.R")
 
+
+
 #'## Verzeichnis für Analyse-Ergebnisse und Diagramme definieren
 #' Muss mit einem Schrägstrich enden!
 
@@ -241,11 +243,10 @@ print(caption)
 
 #'### Präfix für Output definieren
 
-prefix <- paste0(config$project$short,
+files.prefix <- paste0(config$project$short,
                  "_",
-                 datestamp,
-                 "_")
-print(prefix)
+                 datestamp)
+print(files.prefix)
 
 
 #'### Quanteda-Optionen setzen
@@ -519,7 +520,7 @@ colnames(conctable) <- c("ID",
 
 fwrite(download,
        paste0(dir.analysis,
-              datasetname,
+              config$project$short,
               "_02_Links.csv"),
        na = "NA")
 
@@ -527,9 +528,8 @@ fwrite(download,
 #'## Verzeichnis aller Rechtsakte als CSV speichern
 
 fwrite(conctable,
-       paste0(datasetname,
-              "_",
-              datestamp,
+       paste0("output/",
+              files.prefix,
               "_DE_AlleRechtsakteVerzeichnis.csv"),
        na = "NA")
 
@@ -555,9 +555,8 @@ download[, .N] * 3
 #' Die Document Type Definition (DTD) "definiert den Aufbau des XML-Formats zur Veroeffentlichung der aktuellen Bundesgesetze und Rechtsverordnungen ueber www.gesetze-im-internet.de" (Zitat aus dem Inhalt der Datei).
 
 download.file("https://www.gesetze-im-internet.de/dtd/1.01/gii-norm.dtd",
-              paste0(datasetname,
-                     "_",
-                     datestamp,
+              paste0("output/",
+                     files.prefix,
                      "_DE_XML_DocumentTypeDefinition_v1-01.dtd"))
 
 
