@@ -2224,6 +2224,8 @@ ggplot(data = meta.normen)+
         plot.margin = margin(10, 20, 10, 10)
     )
 
+
+
 #'\newpage
 #+ C-DBR_04_Rechtsakte_Density_Zeichen, fig.height = 6, fig.width = 9
 ggplot(data = meta.rechtsakte)+
@@ -2248,6 +2250,8 @@ ggplot(data = meta.rechtsakte)+
         legend.position = "none",
         plot.margin = margin(10, 20, 10, 10)
     )
+
+
 
 #'\newpage
 #+
@@ -2278,6 +2282,8 @@ ggplot(data = meta.normen)+
     )
 
 
+
+
 #'\newpage
 #+ C-DBR_05_Rechtsakte_Density_Tokens, fig.height = 6, fig.width = 9
 ggplot(data = meta.rechtsakte)+
@@ -2302,6 +2308,9 @@ ggplot(data = meta.rechtsakte)+
         legend.position = "none",
         plot.margin = margin(10, 20, 10, 10)
     )
+
+
+
 
 
 
@@ -2361,6 +2370,9 @@ ggplot(data = meta.rechtsakte)+
 
 
 
+
+
+
 #'\newpage
 #'### Density (Sätze)
 
@@ -2387,6 +2399,8 @@ ggplot(data = meta.normen)+
         legend.position = "none",
         plot.margin = margin(10, 20, 10, 10)
     )
+
+
 
 
 
