@@ -15,11 +15,19 @@ doi.data.version = "???"
 doi.software.concept = "10.5281/zenodo.4072934" # checked
 doi.software.version = "???"
 
+
 # Debugging
 
 debug.toggle = "TRUE"   # Ob Debugging aktiv ist; Möglichkeiten sind "TRUE" oder "FALSE"
 debug.sample = 100      # Die Anzahl der zufällig ausgewählten Rechtsakte, die im Debugging-Modus berücksichtigt werden sollen.
 qa.sample = 100        # Die Anzahl der zufällig ausgewählten Einzelnormen, die zur Überprüfung separat gespeichert werden sollen.
+
+
+# Parallelization
+
+cores.max = "TRUE"  # Ob die maximale Anzahl an logischen Kernen genutzt werden soll; Möglichkeiten sind "TRUE" oder "FALSE"
+cores.no = "16"   # Die Anzahl Rechtenkerne, die verwendet werden soll; wird nur berücksichtigt falls "cores.max" auf "FAlSE" steht
+
 
 # Download
 download.timeout = 600			# Timeout für Downloads
@@ -28,12 +36,11 @@ download.timeout = 600			# Timeout für Downloads
 # Quanteda
 quanteda.tokens_locale = "de_DE" # Locale in denen Tokens analyisert werden
 
+
 # Knitr
 fig.format = [ "pdf", "png" ] 	# Ausgabe-Format für Diagramme
 fig.dpi = 300     	 	# Auflösung für Diagramme
 fig.align = "center"    	# Ausrichtung von Diagrammen im Compilation Report
-
-
 
 
 # Frequenztabellen: Liste zu prüfender Variablen
