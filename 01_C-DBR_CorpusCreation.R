@@ -3198,9 +3198,8 @@ zip(paste0("output/",
 
 #'## Verpacken der Netzwerk-Dateien
 
-zip(paste0(config$project$short,
-           "_",
-           datestamp,
+zip(paste0("output/",
+           prefix.files,
            "_DE_Netzwerke.zip"),
     "netzwerke")
 
@@ -3209,9 +3208,8 @@ zip(paste0(config$project$short,
 
 #'## Verpacken der Analyse-Dateien
 
-zip(paste0(config$project$short,
-           "_",
-           datestamp,
+zip(paste0("output/",
+           prefix.files,
            "_DE_",
            basename(dir.analysis),
            ".zip"),
