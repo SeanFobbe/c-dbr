@@ -97,7 +97,7 @@ source("00_C-DBR_FullCompile.R")
 #'# Vorbereitung
 
 
-#+
+#+ Datumsstempel
 #'## Datumsstempel
 #' Dieser Datumsstempel wird in alle Dateinamen eingefügt. Er wird am Anfang des Skripts gesetzt, für den den Fall, dass die Laufzeit die Datumsbarriere durchbricht.
 
