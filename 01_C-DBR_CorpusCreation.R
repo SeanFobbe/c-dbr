@@ -160,28 +160,32 @@ source("R-fobbe-proto-package/f.dopar.multihashes.R")
 
 
 
-#'## Output aus vorherigen Runs bereinigen
-
-unlink(c("output",
-         "temp",
-         "figures"),
-       recursive = TRUE)
-
-
 
 #'## Verzeichnis für Analyse-Ergebnisse und Diagramme definieren
 #' Muss mit einem Schrägstrich enden!
 
-outputdir <- paste0(getwd(),
-                    "/ANALYSE/") 
+dir.analysis <- paste0(getwd(),
+                    "/analyse/") 
 
-fig.dir <- paste0(getwd(),
-                  "/figures/")
+dir.figures <- paste0(getwd(),
+                  "/diagramme/")
+
+
+
+#'## Output aus vorherigen Runs bereinigen
+
+unlink(c("output",
+         "temp",
+         "figures",
+         "analysis"),
+       recursive = TRUE)
+
+
 
 #'## Verzeichnisse anlegen
 
-dir.create(outputdir)
-dir.create(fig.dir)
+dir.create(dir.analysis)
+dir.create(dir.figures)
 
 dir.create("temp")
 dir.create("output")
@@ -216,7 +220,7 @@ print(config)
 
 #+
 #'### Knitr Optionen setzen
-knitr::opts_chunk$set(fig.path = fig.dir,
+knitr::opts_chunk$set(fig.path = dir.figures,
                       dev = config$fig$format,
                       dpi = config$fig$dpi,
                       fig.align = config$fig$align)
@@ -594,7 +598,7 @@ colnames(conctable) <- c("ID",
 #'## Download Table als CSV speichern
 
 fwrite(download,
-       paste0(outputdir,
+       paste0(dir.analysis,
               datasetname,
               "_02_Links.csv"),
        na = "NA")
@@ -1031,7 +1035,7 @@ idx <- sample(dt.normen[,.N], 300)
 check <- dt.normen[idx]
 
 fwrite(check,
-       paste0(outputdir,
+       paste0(dir.analysis,
               datasetname,
               "_Stichprobe_Normen.csv"),
        na = "NA")
@@ -1663,7 +1667,7 @@ f.fast.freqtable(dt.normen,
                  output.list = FALSE,
                  output.kable = TRUE,
                  output.csv = TRUE,
-                 outputdir = outputdir,
+                 outputdir = dir.analysis,
                  prefix = prefix)
 
 
@@ -1703,7 +1707,7 @@ f.fast.freqtable(dt.rechtsakte,
                  output.list = FALSE,
                  output.kable = TRUE,
                  output.csv = TRUE,
-                 outputdir = outputdir,
+                 outputdir = dir.analysis,
                  prefix = prefix)
 
 
@@ -1732,7 +1736,7 @@ f.fast.freqtable(dt.meta,
                  output.list = FALSE,
                  output.kable = TRUE,
                  output.csv = TRUE,
-                 outputdir = outputdir,
+                 outputdir = dir.analysis,
                  prefix = prefix)
 
 
@@ -2148,7 +2152,7 @@ kable(dt.stats.ling,
 #'### Zusammenfassungen speichern
 
 fwrite(dt.stats.ling,
-       paste0(outputdir,
+       paste0(dir.analysis,
               datasetname,
               "_00_Einzelnormen_KorpusStatistik_ZusammenfassungLinguistisch.csv"),
        na = "NA")
@@ -2225,7 +2229,7 @@ kable(dt.stats.ling,
 #'### Zusammenfassungen speichern
 
 fwrite(dt.stats.ling,
-       paste0(outputdir,
+       paste0(dir.analysis,
               datasetname,
               "_00_Rechtsakte_KorpusStatistik_ZusammenfassungLinguistisch.csv"),
        na = "NA")
@@ -3231,9 +3235,9 @@ zip(paste0(datasetname,
            "_",
            datestamp,
            "_DE_",
-           basename(outputdir),
+           basename(dir.analysis),
            ".zip"),
-    basename(outputdir))
+    basename(dir.analysis))
 
 
 
