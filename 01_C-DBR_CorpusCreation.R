@@ -337,13 +337,15 @@ writeLines(latexdefs,
 
 
 #+
-#'### Anzahl logischer Kerne bestimmen
+#'### Anzahl logischer Kerne festlegen
 
-if(config$cores$max == TRUE){
+if (config$cores$max == TRUE){
     fullCores <- detectCores()
+}
 
-}else{
-    fullCores <- config$cores$number
+
+if (config$cores$max == FALSE){
+    fullCores <- as.integer(config$cores$number)
 }
 
 
