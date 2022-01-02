@@ -966,7 +966,7 @@ dt.normen$version <- as.character(rep(datestamp,
                                       dt.normen[,.N]))
 
 #'### Variable "lizenz" hinzufügen
-dt.normen$lizenz <- as.character(rep(license,
+dt.normen$lizenz <- as.character(rep(config$license$data,
                                      dt.normen[,.N]))
 
 
