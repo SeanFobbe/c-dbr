@@ -121,7 +121,8 @@ print(begin.script)
 
 library(groundhog)    # Strenge Versionskontrolle von R packages
 
-packages <- c("rvest",        # HTML/XML-Extraktion
+packages <- c("zip",          # ZIP Files
+              "rvest",        # HTML/XML-Extraktion
               "xml2",         # Verarbeitung von XML-Format
               "RcppTOML",     # Verarbeitung von TOML-Format
               "knitr",        # Professionelles Reporting
@@ -1573,8 +1574,8 @@ files.xml <- list.files("XML",
 zip(paste0("output/",
           prefix.files,
           "_DE_XML_Datensatz.zip"),
-    files.xml)
-
+    files.xml,
+    mode = "cherry-pick")
 
 
 #'### Anhänge zu XML-Dateien verpacken
@@ -1590,7 +1591,8 @@ if (length(attachments) > 0){
 zip(paste0("output/",
           prefix.files,
           "_DE_XML_Anlagen.zip"),
-    attachments)
+    attachments,
+    mode = "cherry-pick")
 
     }
 
@@ -3142,7 +3144,8 @@ csvnames.zip <- gsub(".csv",
 
 for (i in seq_along(files.csv)){
     zip(csvnames.zip[i],
-        files.csv[i])
+        files.csv[i],
+    mode = "cherry-pick")
 }
 
 unlink(files.csv)
@@ -3159,7 +3162,8 @@ files.pdf <- list.files("PDF",
 zip(paste0("output/",
            prefix.files,
            "_DE_PDF_Datensatz.zip"),
-    files.pdf)
+    files.pdf,
+    mode = "cherry-pick")
 
 
 
@@ -3176,7 +3180,8 @@ files.txt <- list.files("TXT",
 zip(paste0("output/",
            prefix.files,
            "_DE_TXT_Datensatz.zip"),
-    files.txt)
+    files.txt,
+    mode = "cherry-pick")
 
 
 
@@ -3192,7 +3197,8 @@ files.epub <- list.files("EPUB",
 zip(paste0("output/",
            prefix.files,
            "_DE_EPUB_Datensatz.zip"),
-    files.epub)
+    files.epub,
+    mode = "cherry-pick")
 
 
 
@@ -3202,7 +3208,8 @@ zip(paste0("output/",
 zip(paste0("output/",
            prefix.files,
            "_DE_Netzwerke.zip"),
-    "netzwerke")
+    "netzwerke",
+    mode = "cherry-pick")
 
 
 
@@ -3214,7 +3221,8 @@ zip(paste0("output/",
            "_DE_",
            toupper(basename(dir.analysis)),
            ".zip"),
-    basename(dir.analysis))
+    basename(dir.analysis),
+    mode = "cherry-pick")
 
 
 
@@ -3237,7 +3245,8 @@ files.source <- grep("spin",
 zip(paste0("output/",
           prefix.files,
           "_Source_Code.zip"),
-    files.source)
+    files.source,
+    mode = "cherry-pick")
 
 
 
