@@ -3211,7 +3211,7 @@ zip(paste0("output/",
 zip(paste0("output/",
            prefix.files,
            "_DE_",
-           basename(dir.analysis),
+           toupper(basename(dir.analysis)),
            ".zip"),
     basename(dir.analysis))
 
@@ -3250,6 +3250,7 @@ unlink("TXT", recursive = TRUE)
 unlink("EPUB", recursive = TRUE)
 
 unlink("netzwerke", recursive = TRUE)
+unlink("Rplots.pdf", recursive = TRUE)
 
 
 
@@ -3259,8 +3260,10 @@ unlink("netzwerke", recursive = TRUE)
 
 #+
 #'## Liste der ZIP-Archive erstellen
-files.zip <- list.files(pattern = "\\.zip$",
-                        ignore.case = TRUE)
+files.zip <- list.files("output",
+                        pattern = "\\.zip$",
+                        ignore.case = TRUE,
+                        full.names = TRUE)
 
 
 
@@ -3284,10 +3287,9 @@ multihashes$index <- seq_len(multihashes[,.N])
 
 #'## Hashes in CSV-Datei speichern
 fwrite(multihashes,
-       paste(config$project$short,
-             datestamp,
-             "KryptographischeHashes.csv",
-             sep = "_"),
+       paste0("output/",
+              prefix.files,
+              "_KryptographischeHashes.csv"),
        na = "NA")
 
 
