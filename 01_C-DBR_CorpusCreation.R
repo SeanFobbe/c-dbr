@@ -1252,7 +1252,7 @@ dt.meta$doi_version <- rep(config$doi$data$version, dt.meta[,.N])
 dt.meta$version <- as.character(rep(datestamp, dt.meta[,.N]))
 
 #'### Variable "lizenz" hinzufügen
-dt.meta$lizenz <- as.character(rep(license,
+dt.meta$lizenz <- as.character(rep(config$license$data,
                                      dt.meta[,.N]))
 
 
