@@ -620,12 +620,15 @@ print(missing)
 #' XML-Dateien und ihre Anlagen sind einzeln nach Rechtsakten in ZIP-Archiven verpackt. Diese werden nun extrahiert und die ZIP-Archive im Anschluss gelöscht.
 
 #+ results = 'hide'
-files.zip <- list.files(pattern = "\\.zip",
-                        ignore.case = TRUE)
+files.zip <- list.files("XML",
+                        pattern = "\\.zip",
+                        ignore.case = TRUE,
+                        full.names = TRUE)
 
 
 for (file in files.zip){
-    unzip(file)
+    unzip(zipfile = file,
+          exdir = "XML")
     }
 
 
