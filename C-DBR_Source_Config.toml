@@ -1,23 +1,43 @@
-projectname = Corpus des Deutschen Bundesrechts
-projectshort = C-DBR
+# Project
+project.name = "Corpus des Deutschen Bundesrechts"
+project.short = "C-DBR"
 
-license-data = "Creative Commons Zero 1.0 Universal"
-license-code = MIT-0
 
+# License
+license.data = "Creative Commons Zero 1.0 Universal"
+license.code = "MIT-0"
+
+
+# Digital Object Identifier (DOI)
 doi.concept = "10.5281/zenodo.3832111" # checked
 doi.version = "???"
 
 
-[quanteda]
-tokens_locale = "de_DE"
+# Quanteda
+quanteda.tokens_locale = "de_DE" # Locale in denen Tokens analyisert werden
 
-[knitr]
-fig.format = [pdf, png] 	# Ausgabe-Format für Diagramme
+# Knitr
+fig.format = [ "pdf", "png" ] 	# Ausgabe-Format für Diagramme
 fig.dpi = 300     	 	# Auflösung für Diagramme
-fig.align = center    		# Ausrichtung von Diagrammen im Compilation Report
+fig.align = "center"    	# Ausrichtung von Diagrammen im Compilation Report
 
 
-dl.timeout = 600     		# Timeout für Downloads
+# Download
+download.timeout = 600			# Timeout für Downloads
 
+# Frequenztabellen: Liste zu prüfender Variablen
+#' **Hinweis:** Nur diese Variablen werden bei der Erstellung der Frequenztabellen berücksichtigt.
 
-
+freqtable-ignore =  ["periodikum",
+		    "fundstellentyp",
+		    "check_neuf",
+		    "check_aufh",
+		    "check_sonst",
+		    "check_hinweis",
+		    "check_stand",
+		    "gliederungskennzahl",
+		    "ausfertigung_jahr",
+		    "doi_concept",
+		    "doi_version",
+		    "version",	
+		    "lizenz" ]
