@@ -1697,15 +1697,18 @@ f.fast.freqtable(dt.meta,
 #+
 #'## Präfixe erstellen
 
-prefix.normen <- paste0("ANALYSE/",
+prefix.normen <- paste0(basename(dir.analysis),
+                        "_",
                         config$project$short,
                         "_01_Einzelnormen_Frequenztabelle_var-")
 
-prefix.rechtsakte <- paste0("ANALYSE/",
+prefix.rechtsakte <- paste0(basename(dir.analysis),
+                            "_",
                             config$project$short,
                             "_01_Rechtsakte_Frequenztabelle_var-")
 
-prefix.meta <- paste0("ANALYSE/",
+prefix.meta <- paste0(basename(dir.analysis),
+                      "_",
                       config$project$short,
                       "_01_Meta_Frequenztabelle_var-")
 
