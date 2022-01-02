@@ -952,12 +952,12 @@ dt.normen$ausfertigung_jahr <- year(dt.normen$ausfertigung_datum)
 
 
 #'### Variable "doi_concept" hinzufügen
-dt.normen$doi_concept <- rep(doi.concept,
+dt.normen$doi_concept <- rep(config$doi$data$concept,
                              dt.normen[,.N])
 
 
 #'### Variable "doi_version" hinzufügen
-dt.normen$doi_version <- rep(doi.version,
+dt.normen$doi_version <- rep(config$doi$data$version,
                              dt.normen[,.N])
 
 
@@ -1241,11 +1241,11 @@ dt.meta$ausfertigung_jahr <- year(as.IDate(dt.meta$ausfertigung_datum))
 
 
 #'### Variable "doi_concept" hinzufügen
-dt.meta$doi_concept <- rep(doi.concept, dt.meta[,.N])
+dt.meta$doi_concept <- rep(config$doi$data$concept, dt.meta[,.N])
 
 
 #'### Variable "doi_version" hinzufügen
-dt.meta$doi_version <- rep(doi.version, dt.meta[,.N])
+dt.meta$doi_version <- rep(config$doi$data$version, dt.meta[,.N])
 
 
 #'### Variable "version" hinzufügen
