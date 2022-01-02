@@ -640,10 +640,10 @@ unlink(files.zip)
 
 files.xml <- list.files("XML",
                         pattern = "\\.xml",
-                        ignore.case = TRUE)
+                        ignore.case = TRUE,
+                        full.names = TRUE)
 
 xml.MB <- file.size(files.xml) / 10^6
-
 
 
 
