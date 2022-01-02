@@ -107,70 +107,10 @@ rmarkdown::render(input = "C-DBR_Source_CodebookCreation.R",
 
 
 #'\newpage
-#+
-#'# Parameter
-
-#'## Name des Datensatzes
-datasetname <- "C-DBR"
 
 
-#'## DOI des Datensatz-Konzeptes
-doi.concept <- "10.5281/zenodo.3832111" # checked
-
-#'## DOI der konkreten Version
-doi.version <- "10.5281/zenodo.5510458" # checked
-
-
-#'## Lizenz
-license <- "Creative Commons Zero 1.0 Universal"
-
-
-#'## Verzeichnis für Analyse-Ergebnisse
-#' Muss mit einem Schrägstrich enden!
-
-outputdir <- paste0(getwd(),
-                    "/ANALYSE/") 
-
-
-#'## Optionen: Quanteda
-tokens_locale <- "de_DE"
-
-
-#'## Optionen: Knitr
 
 #+
-#'### Ausgabe-Formate
-
-dev <- c("pdf",
-         "png")
-
-#'### DPI für Raster-Grafiken
-dpi <- 300
-
-#'### Ausrichtung von Grafiken im Compilation Report
-fig.align <- "center"
-
-
-
-#'## Frequenztabellen: Liste zu prüfender Variablen
-
-#' **Hinweis:** Nur diese Variablen werden bei der Erstellung der Frequenztabellen berücksichtigt.
-
-vars.freqtable <- c("periodikum",
-                    "fundstellentyp",
-                    "check_neuf",
-                    "check_aufh",
-                    "check_sonst",
-                    "check_hinweis",
-                    "check_stand",
-                    "gliederungskennzahl",
-                    "ausfertigung_jahr",
-                    "doi_concept",
-                    "doi_version",
-                    "version",
-                    "lizenz")
-
-
 #'# Vorbereitung
 
 
@@ -187,16 +127,6 @@ print(datestamp)
 begin.script <- Sys.time()
 print(begin.script)
 
-
-
-#'## Ordner für Analyse-Ergebnisse erstellen
-dir.create(outputdir)
-
-dir.create("Netzwerke")
-dir.create("Netzwerke/Edgelists")
-dir.create("Netzwerke/Adjazenzmatrizen")
-dir.create("Netzwerke/Netzwerkdiagramme")
-dir.create("Netzwerke/GraphML")
 
 
 #+
@@ -226,11 +156,40 @@ groundhog.library(pkg = packages,
 
 
 
+#'## Konfiguration laden
+
+config <- parseTOML("C-DBR_Source_Config.toml")
+
+
 
 #'## Zusätzliche Funktionen einlesen
 #' **Hinweis:** Die hieraus verwendeten Funktionen werden jeweils vor der ersten Benutzung in vollem Umfang angezeigt um den Lesefluss zu verbessern.
 
 source("General_Source_Functions.R")
+
+
+
+#'## Verzeichnis für Analyse-Ergebnisse definieren
+#' Muss mit einem Schrägstrich enden!
+
+outputdir <- paste0(getwd(),
+                    "/ANALYSE/") 
+
+
+
+
+
+#'## Ordner für Analyse-Ergebnisse erstellen
+dir.create(outputdir)
+
+dir.create("Netzwerke")
+dir.create("Netzwerke/Edgelists")
+dir.create("Netzwerke/Adjazenzmatrizen")
+dir.create("Netzwerke/Netzwerkdiagramme")
+dir.create("Netzwerke/GraphML")
+
+
+
 
 
 #'## Quanteda-Optionen setzen
