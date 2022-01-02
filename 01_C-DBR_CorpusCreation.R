@@ -1436,7 +1436,7 @@ f.network.analysis <- function(xml.name){
                        "_",
                        gsub("\\.xml",
                             "",
-                            xml.name))
+                            basename(xml.name)))
 
     fwrite(edgelist,
            paste0("netzwerke/Edgelists/",
