@@ -12,7 +12,7 @@ groundhog.library(pkg = "rmarkdown",
 
 #+ eval = FALSE
 
-rmarkdown::render(input = "C-DBR_CorpusCreation.R",
+rmarkdown::render(input = "01_C-DBR_CorpusCreation.R",
                   output_file = paste0("C-DBR_",
                                        Sys.Date(),
                                        "_CompilationReport.pdf"),
@@ -28,7 +28,7 @@ rmarkdown::render(input = "C-DBR_CorpusCreation.R",
 
 #+ eval = FALSE
 
-rmarkdown::render(input = "C-DBR_CodebookCreation.R",
+rmarkdown::render(input = "02_C-DBR_CodebookCreation.R",
                   output_file = paste0("C-DBR_",
                                        Sys.Date(),
                                        "_Codebook.pdf"),
