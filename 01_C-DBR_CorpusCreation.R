@@ -1449,7 +1449,7 @@ f.network.analysis <- function(xml.name){
                            repel = TRUE)+
             theme_void()+
             labs(
-                title = paste(datasetname,
+                title = paste(config$project$short,
                               "| Version",
                               datestamp,
                               "| Struktur des",
@@ -1641,7 +1641,7 @@ print(vars.freqtable.rechtsakte)
 
 #'## Frequenztabellen erstellen
 
-prefix <- paste0(datasetname,
+prefix <- paste0(config$project$short,
                  "_01_Rechtsakte_Frequenztabelle_var-")
 
 
@@ -1670,7 +1670,7 @@ print(vars.freqtable.rechtsakte)
 
 #'## Frequenztabellen erstellen
 
-prefix <- paste0(datasetname,
+prefix <- paste0(config$project$short,
                  "_01_Meta_Frequenztabelle_var-")
 
 
