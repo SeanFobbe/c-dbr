@@ -239,6 +239,14 @@ caption <- paste("Fobbe | DOI:",
 print(caption)
 
 
+#'## Präfix für Output definieren
+
+prefix <- paste0(config$project$short,
+                 "_",
+                 datestamp,
+                 "_")
+print(prefix)
+
 
 #'## Quanteda-Optionen setzen
 quanteda_options(tokens_locale = config$quanteda$tokens_locale)
