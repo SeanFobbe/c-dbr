@@ -69,7 +69,7 @@ knitr::opts_chunk$set(echo = TRUE,
 
 #+ eval = FALSE
 
-source("00_C-DBR_FullCompile.R")
+#source("00_C-DBR_FullCompile.R")
 
 
 
@@ -126,6 +126,7 @@ packages <- c("rvest",        # HTML/XML-Extraktion
               "RcppTOML",     # Verarbeitung von TOML-Format
               "knitr",        # Professionelles Reporting
               "kableExtra",   # Verbesserte Kable Tabellen
+              "magick",       # Verarbeitung von Bild-Dateien
               "pdftools",     # Extrahieren von PDF-Dateien
               "parallel",     # Parallelisierung
               "doParallel",   # Parallelisierung
