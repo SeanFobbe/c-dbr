@@ -129,6 +129,9 @@ print(begin.script)
 
 
 
+
+
+
 #+
 #'## Packages Laden
 
@@ -163,27 +166,31 @@ source("General_Source_Functions.R")
 
 
 
-#'## Konfiguration einlesen und anzeigen
 
-config <- parseTOML("C-DBR_Source_Config.toml")
-print(config)
+#'## Output aus vorherigen Runs bereinigen
+
+unlink(c("output",
+         "figures"),
+       recursive = TRUE)
 
 
 
-
-
-#'## Verzeichnis für Analyse-Ergebnisse definieren
+#'## Verzeichnis für Analyse-Ergebnisse und Diagramme definieren
 #' Muss mit einem Schrägstrich enden!
 
 outputdir <- paste0(getwd(),
                     "/ANALYSE/") 
 
+fig.dir <- paste0(getwd(),
+                  "/figures/")
 
+#'## Verzeichnisse anlegen
 
-
-
-#'## Ordner für Analyse-Ergebnisse erstellen
 dir.create(outputdir)
+dir.create(fig.dir)
+
+dir.create("output")
+dir.create("data")
 
 dir.create("Netzwerke")
 dir.create("Netzwerke/Edgelists")
@@ -193,22 +200,52 @@ dir.create("Netzwerke/GraphML")
 
 
 
+#'## Vollzitate statistischer Software schreiben
+knitr::write_bib(c(.packages()),
+                 "data/packages.bib")
+
+
+
+
+#'## Konfiguration
+
+#+
+#'### Konfiguration einlesen
+
+config <- parseTOML("C-DBR_Source_Config.toml")
+
+#'### Konfiguration anzeigen
+print(config)
+
+
+
+#+
+#'### Knitr Optionen setzen
+knitr::opts_chunk$set(fig.path = fig.dir,
+                      dev = config$fig$format,
+                      dpi = config$fig$dpi,
+                      fig.align = config$fig$align)
+
+
+#'### Download Timeout setzen
+
+options(timeout = config$download$timeout)
+
+
+
+#'### Quellenangabe für Diagramme
+
+caption <- paste("Fobbe | DOI:",
+                 config$doi$version)
+
 
 
 #'## Quanteda-Optionen setzen
-quanteda_options(tokens_locale = tokens_locale)
+quanteda_options(tokens_locale = config$quanteda$tokens_locale)
 
 
-#'## Knitr Optionen setzen
-knitr::opts_chunk$set(fig.path = outputdir,
-                      dev = dev,
-                      dpi = dpi,
-                      fig.align = fig.align)
 
 
-#'## Vollzitate statistischer Software
-knitr::write_bib(c(.packages()),
-                 "packages.bib")
 
 
 #'## Parallelisierung aktivieren
@@ -228,6 +265,10 @@ quanteda_options(threads = fullCores)
 
 #'### Data.table
 setDTthreads(threads = fullCores)  
+
+
+
+
 
 
 
