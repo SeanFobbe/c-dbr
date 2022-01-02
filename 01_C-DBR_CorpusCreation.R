@@ -985,7 +985,7 @@ check <- dt.normen[idx]
 
 fwrite(check,
        paste0(dir.analysis,
-              prefix,
+              files.prefix,
               "_Stichprobe_Normen.csv"),
        na = "NA")
 
@@ -1553,36 +1553,37 @@ files.xml[grep("error",
 #+
 #'### XML-Dateien definieren
 
-files.xml <- list.files(pattern = "\\.xml")
+files.xml <- list.files("XML",
+                        pattern = "\\.xml",
+                        full.names = TRUE)
 
 
 #+
 #'### XML-Dateien verpacken
 
-zip(paste(datasetname,
-          datestamp,
-          "DE_XML_Datensatz.zip",
-          sep = "_"),
+zip(paste0("output/",
+          files.prefix,
+          "_DE_XML_Datensatz.zip"),
     files.xml)
-
-unlink(files.xml)
-
 
 
 
 #'### Anhänge zu XML-Dateien verpacken
 
-attachments <- list.files(pattern="(\\.jpg)|(\\.gif)|(\\.pdf)|(\\.png)",
-                          ignore.case = TRUE)
+attachments <- list.files("XML",
+                          pattern = "(\\.jpg)|(\\.gif)|(\\.pdf)|(\\.png)",
+                          ignore.case = TRUE,
+                          full.names = TRUE)
 
-zip(paste(datasetname,
-          datestamp,
-          "DE_XML_Anlagen.zip",
-          sep = "_"),
+
+if (length(attachments) > 0){
+
+zip(paste0("output/",
+          files.prefix,
+          "_DE_XML_Anlagen.zip"),
     attachments)
 
-
-unlink(attachments)
+    }
 
 
 
@@ -3209,6 +3210,18 @@ zip(paste(datasetname,
            "Source_Code.zip",
            sep = "_"),
     files.source)
+
+
+
+#'# Aufräumen
+
+
+
+#'### Rohe XML-Dateien und Anhänge löschen
+
+unlink("XML",
+       recursive = TRUE)
+
 
 
 
