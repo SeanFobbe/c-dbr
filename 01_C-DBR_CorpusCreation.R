@@ -976,13 +976,16 @@ dt.normen$lizenz <- as.character(rep(config$license$data,
 
 #'## Stichprobe für Qualitätsprüfung ziehen
 
-idx <- sample(dt.normen[,.N], 300)
+print(config$qa$sample)
+
+idx <- sample(dt.normen[,.N],
+              config$qa$sample)
 
 check <- dt.normen[idx]
 
 fwrite(check,
        paste0(dir.analysis,
-              datasetname,
+              prefix,
               "_Stichprobe_Normen.csv"),
        na = "NA")
 
