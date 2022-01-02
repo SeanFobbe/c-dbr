@@ -211,7 +211,6 @@ knitr::write_bib(c(.packages()),
 
 #+
 #'### Konfiguration einlesen
-
 config <- parseTOML("C-DBR_Source_Config.toml")
 
 #'### Konfiguration anzeigen
@@ -228,7 +227,6 @@ knitr::opts_chunk$set(fig.path = fig.dir,
 
 
 #'### Download Timeout setzen
-
 options(timeout = config$download$timeout)
 
 
@@ -242,6 +240,71 @@ caption <- paste("Fobbe | DOI:",
 
 #'## Quanteda-Optionen setzen
 quanteda_options(tokens_locale = config$quanteda$tokens_locale)
+
+
+
+
+#'## LaTeX Konfiguration
+
+#+
+#'### LaTeX Parameter definieren
+
+latexdefs <- c("%===========================\n% Definitionen\n%===========================",
+               "\n% NOTE: Diese Datei wurde während dem Kompilierungs-Prozess automatisch erstellt.\n",
+               "\n%-----Version-----",
+               paste0("\\newcommand{\\version}{",
+                      datestamp,
+                      "}"),
+               "\n%-----Titles-----",
+               paste0("\\newcommand{\\datatitle}{",
+                      config$datatitle,
+                      "}"),
+               paste0("\\newcommand{\\datashort}{",
+                      config$datashort,
+                      "}"),
+               paste0("\\newcommand{\\softwaretitle}{Source Code for the \\enquote{",
+                      config$datatitle,
+                      "}}"),
+               paste0("\\newcommand{\\softwareshort}{",
+                      config$datashort,
+                      "-Source}"),
+               "\n%-----Data DOIs-----",
+               paste0("\\newcommand{\\dataconceptdoi}{",
+                      config$doi.data.concept,
+                      "}"),
+               paste0("\\newcommand{\\dataversiondoi}{",
+                      config$doi.data.version,
+                      "}"),
+               paste0("\\newcommand{\\dataconcepturldoi}{https://doi.org/",
+                      config$doi.data.concept,
+                      "}"),
+               paste0("\\newcommand{\\dataversionurldoi}{https://doi.org/",
+                      config$doi.data.version,
+                      "}"),
+               "\n%-----Software DOIs-----",
+               paste0("\\newcommand{\\softwareconceptdoi}{",
+                      config$doi.software.concept,
+                      "}"),
+               paste0("\\newcommand{\\softwareversiondoi}{",
+                      config$doi.software.version,
+                      "}"),
+
+               paste0("\\newcommand{\\softwareconcepturldoi}{https://doi.org/",
+                      config$doi.software.concept,
+                      "}"),
+               paste0("\\newcommand{\\softwareversionurldoi}{https://doi.org/",
+                      config$doi.software.version,
+                      "}"))
+
+
+
+#'\newpage
+#'### LaTeX Parameter schreiben
+
+writeLines(latexdefs,
+           paste0("tex/",
+                  config$project$short,
+                  "_Source_TEX_Definitions.tex"))
 
 
 
