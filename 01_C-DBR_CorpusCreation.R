@@ -1455,9 +1455,7 @@ f.network.analysis <- function(xml.name){
                            repel = TRUE)+
             theme_void()+
             labs(
-                title = paste(config$project$short,
-                              "| Version",
-                              datestamp,
+                title = paste(prefix.figuretitle,
                               "| Struktur des",
                               jurabk),
                 caption = caption
