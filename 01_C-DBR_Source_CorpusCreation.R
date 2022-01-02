@@ -69,26 +69,13 @@ knitr::opts_chunk$set(echo = TRUE,
 
 #+ eval = FALSE
 
-rmarkdown::render(input = "C-DBR_Source_CorpusCreation.R",
-                  output_file = paste0("C-DBR_",
-                                       Sys.Date(),
-                                       "_CompilationReport.pdf"),
-                  envir = new.env())
+source("00_C-DBR_FullCompile.R")
 
 
 
-#'### Codebook
-#' Um das **Codebook** zu kompilieren und einen PDF-Bericht zu erstellen, führen Sie bitte im Anschluss an die Kompilierung des Datensatzes (!) untenstehenden Befehl mit R aus.
-#'
-#' Bei der Prüfung der GPG-Signatur wird ein Fehler auftreten und im Codebook dokumentiert, weil die Daten nicht mit meiner Original-Signatur versehen sind. Dieser Fehler hat jedoch keine Auswirkungen auf die Funktionalität und hindert die Kompilierung nicht.
 
-#+ eval = FALSE
 
-rmarkdown::render(input = "C-DBR_Source_CodebookCreation.R",
-                  output_file = paste0("C-DBR_",
-                                       Sys.Date(),
-                                       "_Codebook.pdf"),
-                  envir = new.env())
+
 
 #'\newpage
 #+
@@ -143,6 +130,7 @@ packages <- c("rvest",        # HTML/XML-Extraktion
               "knitr",        # Professionelles Reporting
               "kableExtra",   # Verbesserte Kable Tabellen
               "pdftools",     # Extrahieren von PDF-Dateien
+              "parallel",     # Parallelisierung
               "doParallel",   # Parallelisierung
               "ggplot2",      # Fortgeschrittene Datenvisualisierung
               "data.table",   # Fortgeschrittene Datenverarbeitung
