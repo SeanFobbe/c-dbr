@@ -266,7 +266,7 @@ quanteda_options(tokens_locale = config$quanteda$tokens_locale)
 #'### LaTeX Parameter definieren
 
 latexdefs <- c("%===========================\n% Definitionen\n%===========================",
-               "\n% NOTE: Diese Datei wurde während dem Kompilierungs-Prozesses automatisch erstellt.\n",
+               "\n% NOTE: Diese Datei wurde während des Kompilierungs-Prozesses automatisch erstellt.\n",
                "\n%-----Autor-----",
                paste0("\\newcommand{\\projectauthor}{",
                       config$project$author,
