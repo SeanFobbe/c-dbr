@@ -533,6 +533,8 @@ fwrite(download,
        na = "NA")
 
 
+
+
 #'## Verzeichnis aller Rechtsakte als CSV speichern
 
 fwrite(conctable,
@@ -542,9 +544,16 @@ fwrite(conctable,
        na = "NA")
 
 
+
+
 #'## Debugging-Modus: Anzahl der heruntergeladenen Dateien reduzieren
 
-download <- download[sample(.N, config$debug$sample)]
+if (config$debug$toggle == TRUE){
+
+    download <- download[sample(download[, .N], config$debug$sample)]
+
+}
+
 
 
 #'## Anzahl herunterzuladender Dateien
