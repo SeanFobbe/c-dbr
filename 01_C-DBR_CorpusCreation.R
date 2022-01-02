@@ -1264,9 +1264,6 @@ dt.meta$lizenz <- as.character(rep(config$license$data,
 
 
 
-
-
-
 #'## Netzwerk-Analyse (experimentell)
 
 #+
@@ -1496,7 +1493,8 @@ f.network.analysis <- function(xml.name){
 
 #'### Netzwerk-Analyse durchführen
 
-files.xml <- list.files(pattern = "\\.xml$")
+files.xml <- list.files("XML",
+                        pattern = "\\.xml$")
 
 errorfiles <- c("BJNR008810961.xml",
                 "BJNR010599989.xml",
@@ -1511,6 +1509,9 @@ errorfiles <- c("BJNR008810961.xml",
                 "BJNR364800009.xml")
 
 files.xml <- setdiff(files.xml, errorfiles)
+
+files.xml <- paste0("XML/",
+                    files.xml)
 
 length(files.xml)
 
