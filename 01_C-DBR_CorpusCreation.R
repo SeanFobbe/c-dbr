@@ -232,7 +232,7 @@ options(timeout = config$download$timeout)
 
 
 
-#'### Quellenangabe für Diagramme
+#'## Quellenangabe für Diagramme definieren
 
 caption <- paste("Fobbe | DOI:",
                  config$doi$data$version)
