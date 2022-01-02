@@ -2932,9 +2932,20 @@ print(missing)
 
 #'# Dateigrößen analysieren
 
-files.txt <- list.files(pattern = "\\.txt$", ignore.case = TRUE)
-files.pdf <- list.files(pattern = "\\.pdf$", ignore.case = TRUE)
-files.epub <- list.files(pattern = "\\.epub$", ignore.case = TRUE)
+files.txt <- list.files("TXT",
+                        pattern = "\\.txt$",
+                        ignore.case = TRUE,
+                        full.names = TRUE)
+
+files.pdf <- list.files("PDF",
+                        pattern = "\\.pdf$",
+                        ignore.case = TRUE,
+                        full.names = TRUE)
+
+files.epub <- list.files("EPUB",
+                         pattern = "\\.epub$",
+                         ignore.case = TRUE,
+                         full.names = TRUE)
 
 
 txt.MB <- file.size(files.txt) / 10^6
