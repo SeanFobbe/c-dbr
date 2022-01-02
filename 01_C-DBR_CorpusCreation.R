@@ -1660,7 +1660,7 @@ unlink(attachments)
 print(f.fast.freqtable)
 
 #'## Liste zu prüfender Variablen
-print(vars.freqtable)
+print(config$freqtable$ignore)
 
 
 #'## Frequenztabellen erstellen
@@ -1690,7 +1690,7 @@ varremove <- c("gliederungskennzahl")
 
 vars.freqtable.rechtsakte <- grep(paste(varremove,
                                         collapse = "|"),
-                               vars.freqtable,
+                               config$freqtable$ignore,
                                invert = TRUE,
                                value = TRUE)
 
