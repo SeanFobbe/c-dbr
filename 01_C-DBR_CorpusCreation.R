@@ -3157,7 +3157,7 @@ files.pdf <- list.files("PDF",
 
 zip(paste0("output/",
            prefix.files,
-           "DE_PDF_Datensatz.zip"),
+           "_DE_PDF_Datensatz.zip"),
     files.pdf)
 
 
@@ -3167,13 +3167,15 @@ zip(paste0("output/",
 
 #'## Verpacken der TXT-Dateien
 
-files.txt <- list.files(pattern = "\\.txt$",
-                        ignore.case = TRUE)
+files.txt <- list.files("TXT",
+                        pattern = "\\.txt$",
+                        ignore.case = TRUE,
+                        full.names = TRUE)
 
-zip(paste(config$project$short,
-          datestamp,
-          "DE_TXT_Datensatz.zip",
-          sep = "_"),
+zip(paste0("output/",
+           prefix.files,
+           "_DE_TXT_Datensatz.zip",
+           sep = "_"),
     files.txt)
 
 
