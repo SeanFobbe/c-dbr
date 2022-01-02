@@ -2807,9 +2807,6 @@ fwrite(dt.meta,
 
 
 
-
-
-
 #'# Download der PDF-Dateien
 
 #+
@@ -2818,7 +2815,8 @@ fwrite(dt.meta,
 #+ results = 'hide'
 mcmapply(download.file,
          download$links.pdf,
-         download$title.pdf)
+         paste0("PDF/",
+                download$title.pdf))
 
 
 #'## Download-Ergebnis
@@ -2828,7 +2826,8 @@ mcmapply(download.file,
 download[,.N]
 
 #'### Anzahl heruntergeladener Dateien
-files.pdf <- list.files(pattern = "\\.pdf")
+files.pdf <- list.files("PDF",
+                        pattern = "\\.pdf")
 length(files.pdf)
 
 #'### Fehlbetrag
@@ -2847,8 +2846,10 @@ print(missing)
 #'# TXT-Dateien erstellen
 #' An dieser Stelle wird der reine Text aus den PDF-Dateien extrahiert und ein zusätzliches Datei-Format (TXT) generiert. TXT-Dateien sind besonders für quantitative Analysten ohne XML-Kenntnisse ein lohnenswerter Einstieg und verringern die Hürde für die Arbeit mit dem Korpus.
 
-files.pdf <- list.files(pattern = "\\.pdf",
-                        ignore.case = TRUE)
+files.pdf <- list.files("PDF",
+                        pattern = "\\.pdf",
+                        ignore.case = TRUE,
+                        full.names = TRUE)
 
 
 #'## Anzahl zu extrahierender Dateien
@@ -2873,6 +2874,15 @@ print(f.dopar.pdfextract)
 #+ results = "hide"
 f.dopar.pdfextract(files.pdf)
 
+
+#'## TXT-Dateien in separaten Ordner verschieben
+
+files.txt <- list.files("PDF",
+                        pattern = "\\.txt",
+                        ignore.case = TRUE,
+                        full.names = TRUE)
+
+file.rename()
 
 
 #'# Download der EPUB-Dateien
