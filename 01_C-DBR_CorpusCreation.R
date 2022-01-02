@@ -339,7 +339,15 @@ writeLines(latexdefs,
 #+
 #'### Anzahl logischer Kerne bestimmen
 
-fullCores <- detectCores()
+if(config$cores$max == TRUE){
+    fullCores <- detectCores()
+
+}else{
+    fullCores <- config$cores$number
+}
+
+
+
 print(fullCores)
 
 #'### Quanteda
