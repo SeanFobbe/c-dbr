@@ -177,8 +177,8 @@ dir.figures <- paste0(getwd(),
 
 unlink(c("output",
          "temp",
-         "figures",
-         "analysis"),
+         "diagramme",
+         "analyse"),
        recursive = TRUE)
 
 
@@ -193,11 +193,11 @@ dir.create("output")
 
 
 
-dir.create("Netzwerke")
-dir.create("Netzwerke/Edgelists")
-dir.create("Netzwerke/Adjazenzmatrizen")
-dir.create("Netzwerke/Netzwerkdiagramme")
-dir.create("Netzwerke/GraphML")
+dir.create("netzwerke")
+dir.create("netzwerke/Edgelists")
+dir.create("netzwerke/Adjazenzmatrizen")
+dir.create("netzwerke/Netzwerkdiagramme")
+dir.create("netzwerke/GraphML")
 
 
 
@@ -1483,18 +1483,18 @@ f.network.analysis <- function(xml.name){
                             xml.name))
 
     fwrite(edgelist,
-           paste0("Netzwerke/Edgelists/",
+           paste0("netzwerke/Edgelists/",
                   filename,
                   "_Edgelist.csv"))
 
     
     fwrite(M.adjacency,
-           paste0("Netzwerke/Adjazenzmatrizen/",
+           paste0("netzwerke/Adjazenzmatrizen/",
                   filename,
                   "_AdjazenzMatrix.csv"))
 
     write_graph(g,
-                file = paste0("Netzwerke/GraphML/",
+                file = paste0("netzwerke/GraphML/",
                               filename,
                               ".graphml"),
                 format = "graphml")
@@ -1526,7 +1526,7 @@ f.network.analysis <- function(xml.name){
 
         ## may conflict with markdown save
         ggsave(
-            filename = paste0("Netzwerke/Netzwerkdiagramme/",
+            filename = paste0("netzwerke/Netzwerkdiagramme/",
                               filename,
                               "_NetzwerkDiagramm.pdf"),
             plot = networkplot,
@@ -3224,9 +3224,9 @@ zip(paste0(datasetname,
            "_",
            datestamp,
            "_DE_Netzwerke.zip"),
-    "Netzwerke")
+    "netzwerke")
 
-unlink("Netzwerke",
+unlink("netzwerke",
        recursive = TRUE)
 
 
