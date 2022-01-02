@@ -1770,9 +1770,7 @@ ggplot(data = freqtable)+
     coord_flip()+
     theme_bw()+
     labs(
-        title = paste(config$project$short,
-                      "| Version",
-                      datestamp,
+        title = paste(prefix.figuretitle,
                       "| Einzelnormen je Periodikum"),
         caption = caption,
         x = "Periodikum",
@@ -1804,9 +1802,7 @@ ggplot(data = freqtable) +
     coord_flip()+
     theme_bw()+
     labs(
-        title = paste(config$project$short,
-                      "| Version",
-                      datestamp,
+        title = paste(prefix.figuretitle,
                       "| Rechtsakte mit Inhalt je Periodikum"),
         caption = caption,
         x = "Periodikum",
@@ -1839,9 +1835,7 @@ ggplot(data = freqtable) +
     coord_flip()+
     theme_bw() +
     labs(
-        title = paste(config$project$short,
-                      "| Version",
-                      datestamp,
+        title = paste(prefix.figuretitle,
                       "| Rechtsakte nach Metadaten je Periodikum"),
         caption = caption,
         x = "Periodikum",
@@ -1876,9 +1870,7 @@ ggplot(data = freqtable) +
              fill = "black")+
     theme_bw()+
     labs(
-        title = paste(config$project$short,
-                      "| Version",
-                      datestamp,
+        title = paste(prefix.figuretitle,
                       "| Einzelnormen je Ausfertigungsjahr"),
         caption = caption,
         x = "Ausfertigungsjahr",
@@ -1908,9 +1900,7 @@ ggplot(data = freqtable) +
              fill = "black") +
     theme_bw()+
     labs(
-        title = paste(config$project$short,
-                      "| Version",
-                      datestamp,
+        title = paste(prefix.figuretitle,
                       "| Rechtsakte mit Inhalt je Ausfertigungsjahr"),
         caption = caption,
         x = "Ausfertigungsjahr",
@@ -1943,9 +1933,7 @@ ggplot(data = freqtable) +
              fill = "black") +
     theme_bw()+
     labs(
-        title = paste(config$project$short,
-                      "| Version",
-                      datestamp,
+        title = paste(prefix.figuretitle,
                       "| Rechtsakte nach Metadaten je Ausfertigungsjahr"),
         caption = caption,
         x = "Ausfertigungsjahr",
@@ -2214,9 +2202,7 @@ ggplot(data = meta.normen)+
     coord_cartesian(xlim = c(1, 10^6))+
     theme_bw()+
     labs(
-        title = paste(config$project$short,
-                      "| Version",
-                      datestamp,
+        title = paste(prefix.figuretitle,
                       "| Verteilung der Zeichen je Norm"),
         caption = caption,
         x = "Zeichen",
@@ -2241,9 +2227,7 @@ ggplot(data = meta.rechtsakte)+
     coord_cartesian(xlim = c(1, 10^6))+
     theme_bw()+
     labs(
-        title = paste(config$project$short,
-                      "| Version",
-                      datestamp,
+        title = paste(prefix.figuretitle,
                       "| Verteilung der Zeichen je Rechtsakt"),
         caption = caption,
         x = "Zeichen",
@@ -2271,9 +2255,7 @@ ggplot(data = meta.normen)+
     coord_cartesian(xlim = c(1, 10^6))+
     theme_bw()+
     labs(
-        title = paste(config$project$short,
-                      "| Version",
-                      datestamp,
+        title = paste(prefix.figuretitle,
                       "| Verteilung der Tokens je Norm"),
         caption = caption,
         x = "Tokens",
@@ -2299,9 +2281,7 @@ ggplot(data = meta.rechtsakte)+
     coord_cartesian(xlim = c(1, 10^6))+
     theme_bw() +
     labs(
-        title = paste(config$project$short,
-                      "| Version",
-                      datestamp,
+        title = paste(prefix.figuretitle,
                       "| Verteilung der Tokens je Rechtsakt"),
         caption = caption,
         x = "Tokens",
@@ -2330,9 +2310,7 @@ ggplot(data = meta.normen)+
     coord_cartesian(xlim = c(1, 10^6))+
     theme_bw()+
     labs(
-        title = paste(config$project$short,
-                      "| Version",
-                      datestamp,
+        title = paste(prefix.figuretitle,
                       "| Verteilung der Typen je Norm"),
         caption = caption,
         x = "Typen",
@@ -2359,9 +2337,7 @@ ggplot(data = meta.rechtsakte)+
     coord_cartesian(xlim = c(1, 10^6))+
     theme_bw()+
     labs(
-        title = paste(config$project$short,
-                      "| Version",
-                      datestamp,
+        title = paste(prefix.figuretitle,
                       "| Verteilung der Typen je Rechtsakt"),
         caption = caption,
         x = "Typen",
@@ -2390,9 +2366,7 @@ ggplot(data = meta.normen)+
     coord_cartesian(xlim = c(1, 10^6))+
     theme_bw()+
     labs(
-        title = paste(config$project$short,
-                      "| Version",
-                      datestamp,
+        title = paste(prefix.figuretitle,
                       "| Verteilung der Sätze je Norm"),
         caption = caption,
         x = "Sätze",
@@ -2419,9 +2393,7 @@ ggplot(data = meta.rechtsakte)+
     coord_cartesian(xlim = c(1, 10^6))+ 
     theme_bw()+
     labs(
-        title = paste(config$project$short,
-                      "| Version",
-                      datestamp,
+        title = paste(prefix.figuretitle,
                       "| Verteilung der Sätze je Rechtsakt"),
         caption = caption,
         x = "Sätze",
@@ -2981,9 +2953,7 @@ ggplot(data = dt.plot,
     annotation_logticks(sides = "b")+
     theme_bw()+
     labs(
-        title = paste(config$project$short,
-                      "| Version",
-                      datestamp,
+        title = paste(prefix.figuretitle,
                       "| Verteilung der Dateigrößen (PDF)"),
         caption = caption,
         x = "Dateigröße in MB",
@@ -3013,9 +2983,7 @@ ggplot(data = dt.plot,
     annotation_logticks(sides = "b")+
     theme_bw()+
     labs(
-        title = paste(config$project$short,
-                      "| Version",
-                      datestamp,
+        title = paste(prefix.figuretitle,
                       "| Verteilung der Dateigrößen (EPUB)"),
         caption = caption,
         x = "Dateigröße in MB",
@@ -3046,9 +3014,7 @@ ggplot(data = dt.plot,
     annotation_logticks(sides = "b")+
     theme_bw()+
     labs(
-        title = paste(config$project$short,
-                      "| Version",
-                      datestamp,
+        title = paste(prefix.figuretitle,
                       "| Verteilung der Dateigrößen (XML)"),
         caption = caption,
         x = "Dateigröße in MB",
@@ -3079,9 +3045,7 @@ ggplot(data = dt.plot,
     annotation_logticks(sides = "b")+
     theme_bw()+
     labs(
-        title = paste(config$project$short,
-                      "| Version",
-                      datestamp,
+        title = paste(prefix.figuretitle,
                       "| Verteilung der Dateigrößen (TXT)"),
         caption = caption,
         x = "Dateigröße in MB",
