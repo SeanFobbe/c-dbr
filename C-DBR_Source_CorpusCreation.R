@@ -205,7 +205,8 @@ dir.create("Netzwerke/GraphML")
 library(groundhog)    # Strenge Versionskontrolle von R packages
 
 packages <- c("rvest",        # HTML/XML-Extraktion
-              "xml2",         # Arbeit mit XML-Format
+              "xml2",         # Verarbeitung von XML-Format
+              "RcppTOML",     # Verarbeitung von TOML-Format
               "knitr",        # Professionelles Reporting
               "kableExtra",   # Verbesserte Kable Tabellen
               "pdftools",     # Extrahieren von PDF-Dateien
@@ -218,6 +219,7 @@ packages <- c("rvest",        # HTML/XML-Extraktion
               "igraph",       # Analyse von Graphen
               "ggraph",       # Analyse von Graphen
               "qgraph")       # Analyse von Graphen
+
 
 groundhog.library(pkg = packages,
                   date = "2021-02-20")
