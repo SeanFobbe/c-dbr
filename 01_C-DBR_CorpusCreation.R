@@ -2723,8 +2723,9 @@ csvname.normen.gesamt <- paste(prefix.files,
 #'### Datensatz speichern
 
 fwrite(dt.normen,
-       csvname.normen.gesamt,
-       na = "NA") 
+       paste0("output/",
+              csvname.normen.gesamt),
+       na = "NA")
 
 
 #+
@@ -2739,7 +2740,8 @@ csvname.normen.meta <- paste(prefix.files,
 #'### Datensatz speichern
 
 fwrite(meta.normen,
-       csvname.normen.meta,
+       paste0("output/",
+              csvname.normen.meta),
        na = "NA") 
 
 
@@ -2750,15 +2752,14 @@ fwrite(meta.normen,
 #+
 #'### Name für CSV definieren
 
-csvname.rechtsakte.gesamt <- paste(config$project$short,
-                                   datestamp,
-                                   "DE_CSV_Rechtsakte_Datensatz.csv",
-                                   sep = "_")
+csvname.rechtsakte.gesamt <- paste(prefix.files,
+                                   "DE_CSV_Rechtsakte_Datensatz.csv")
 
 #'### Datensatz speichern
 
 fwrite(dt.rechtsakte,
-       csvname.rechtsakte.gesamt,
+       paste0("output/",
+              csvname.rechtsakte.gesamt),
        na = "NA") 
 
 
@@ -2768,16 +2769,15 @@ fwrite(dt.rechtsakte,
 #+
 #'### Name für CSV definieren
 
-csvname.rechtsakte.meta <- paste(config$project$short,
-                                 datestamp,
-                                 "DE_CSV_Rechtsakte_Metadaten.csv",
-                                 sep = "_")
+csvname.rechtsakte.meta <- paste(prefix.files,
+                                 "DE_CSV_Rechtsakte_Metadaten.csv")
 
 
 #'### Datensatz speichern
 
 fwrite(meta.rechtsakte,
-       csvname.rechtsakte.meta,
+       paste0("output/",
+              csvname.rechtsakte.meta),
        na = "NA") 
 
 
