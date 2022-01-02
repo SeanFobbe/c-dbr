@@ -1698,15 +1698,15 @@ f.fast.freqtable(dt.meta,
 #'## Präfixe erstellen
 
 prefix.normen <- paste0("ANALYSE/",
-                        datasetname,
+                        config$project$short,
                         "_01_Einzelnormen_Frequenztabelle_var-")
 
 prefix.rechtsakte <- paste0("ANALYSE/",
-                            datasetname,
+                            config$project$short,
                             "_01_Rechtsakte_Frequenztabelle_var-")
 
 prefix.meta <- paste0("ANALYSE/",
-                      datasetname,
+                      config$project$short,
                       "_01_Meta_Frequenztabelle_var-")
 
 
@@ -1761,7 +1761,7 @@ ggplot(data = freqtable)+
     coord_flip()+
     theme_bw()+
     labs(
-        title = paste(datasetname,
+        title = paste(config$project$short,
                       "| Version",
                       datestamp,
                       "| Einzelnormen je Periodikum"),
@@ -1795,7 +1795,7 @@ ggplot(data = freqtable) +
     coord_flip()+
     theme_bw()+
     labs(
-        title = paste(datasetname,
+        title = paste(config$project$short,
                       "| Version",
                       datestamp,
                       "| Rechtsakte mit Inhalt je Periodikum"),
@@ -1830,7 +1830,7 @@ ggplot(data = freqtable) +
     coord_flip()+
     theme_bw() +
     labs(
-        title = paste(datasetname,
+        title = paste(config$project$short,
                       "| Version",
                       datestamp,
                       "| Rechtsakte nach Metadaten je Periodikum"),
@@ -1867,7 +1867,7 @@ ggplot(data = freqtable) +
              fill = "black")+
     theme_bw()+
     labs(
-        title = paste(datasetname,
+        title = paste(config$project$short,
                       "| Version",
                       datestamp,
                       "| Einzelnormen je Ausfertigungsjahr"),
@@ -1899,7 +1899,7 @@ ggplot(data = freqtable) +
              fill = "black") +
     theme_bw()+
     labs(
-        title = paste(datasetname,
+        title = paste(config$project$short,
                       "| Version",
                       datestamp,
                       "| Rechtsakte mit Inhalt je Ausfertigungsjahr"),
@@ -1934,7 +1934,7 @@ ggplot(data = freqtable) +
              fill = "black") +
     theme_bw()+
     labs(
-        title = paste(datasetname,
+        title = paste(config$project$short,
                       "| Version",
                       datestamp,
                       "| Rechtsakte nach Metadaten je Ausfertigungsjahr"),
@@ -2098,7 +2098,7 @@ kable(dt.stats.ling,
 
 fwrite(dt.stats.ling,
        paste0(dir.analysis,
-              datasetname,
+              config$project$short,
               "_00_Einzelnormen_KorpusStatistik_ZusammenfassungLinguistisch.csv"),
        na = "NA")
 
@@ -2175,7 +2175,7 @@ kable(dt.stats.ling,
 
 fwrite(dt.stats.ling,
        paste0(dir.analysis,
-              datasetname,
+              config$project$short,
               "_00_Rechtsakte_KorpusStatistik_ZusammenfassungLinguistisch.csv"),
        na = "NA")
 
@@ -2205,7 +2205,7 @@ ggplot(data = meta.normen)+
     coord_cartesian(xlim = c(1, 10^6))+
     theme_bw()+
     labs(
-        title = paste(datasetname,
+        title = paste(config$project$short,
                       "| Version",
                       datestamp,
                       "| Verteilung der Zeichen je Norm"),
@@ -2232,7 +2232,7 @@ ggplot(data = meta.rechtsakte)+
     coord_cartesian(xlim = c(1, 10^6))+
     theme_bw()+
     labs(
-        title = paste(datasetname,
+        title = paste(config$project$short,
                       "| Version",
                       datestamp,
                       "| Verteilung der Zeichen je Rechtsakt"),
@@ -2262,7 +2262,7 @@ ggplot(data = meta.normen)+
     coord_cartesian(xlim = c(1, 10^6))+
     theme_bw()+
     labs(
-        title = paste(datasetname,
+        title = paste(config$project$short,
                       "| Version",
                       datestamp,
                       "| Verteilung der Tokens je Norm"),
@@ -2290,7 +2290,7 @@ ggplot(data = meta.rechtsakte)+
     coord_cartesian(xlim = c(1, 10^6))+
     theme_bw() +
     labs(
-        title = paste(datasetname,
+        title = paste(config$project$short,
                       "| Version",
                       datestamp,
                       "| Verteilung der Tokens je Rechtsakt"),
@@ -2321,7 +2321,7 @@ ggplot(data = meta.normen)+
     coord_cartesian(xlim = c(1, 10^6))+
     theme_bw()+
     labs(
-        title = paste(datasetname,
+        title = paste(config$project$short,
                       "| Version",
                       datestamp,
                       "| Verteilung der Typen je Norm"),
@@ -2350,7 +2350,7 @@ ggplot(data = meta.rechtsakte)+
     coord_cartesian(xlim = c(1, 10^6))+
     theme_bw()+
     labs(
-        title = paste(datasetname,
+        title = paste(config$project$short,
                       "| Version",
                       datestamp,
                       "| Verteilung der Typen je Rechtsakt"),
@@ -2381,7 +2381,7 @@ ggplot(data = meta.normen)+
     coord_cartesian(xlim = c(1, 10^6))+
     theme_bw()+
     labs(
-        title = paste(datasetname,
+        title = paste(config$project$short,
                       "| Version",
                       datestamp,
                       "| Verteilung der Sätze je Norm"),
@@ -2410,7 +2410,7 @@ ggplot(data = meta.rechtsakte)+
     coord_cartesian(xlim = c(1, 10^6))+ 
     theme_bw()+
     labs(
-        title = paste(datasetname,
+        title = paste(config$project$short,
                       "| Version",
                       datestamp,
                       "| Verteilung der Sätze je Rechtsakt"),
@@ -2714,7 +2714,7 @@ names(dt.meta)
 #+
 #'### Name für CSV definieren
 
-csvname.normen.gesamt <- paste(datasetname,
+csvname.normen.gesamt <- paste(config$project$short,
                                datestamp,
                                "DE_CSV_Einzelnormen_Datensatz.csv",
                                sep = "_")
@@ -2732,7 +2732,7 @@ fwrite(dt.normen,
 #+
 #'### Name für CSV definieren
 
-csvname.normen.meta <- paste(datasetname,
+csvname.normen.meta <- paste(config$project$short,
                              datestamp,
                              "DE_CSV_Einzelnormen_Metadaten.csv",
                              sep = "_")
@@ -2751,7 +2751,7 @@ fwrite(meta.normen,
 #+
 #'### Name für CSV definieren
 
-csvname.rechtsakte.gesamt <- paste(datasetname,
+csvname.rechtsakte.gesamt <- paste(config$project$short,
                                    datestamp,
                                    "DE_CSV_Rechtsakte_Datensatz.csv",
                                    sep = "_")
@@ -2769,7 +2769,7 @@ fwrite(dt.rechtsakte,
 #+
 #'### Name für CSV definieren
 
-csvname.rechtsakte.meta <- paste(datasetname,
+csvname.rechtsakte.meta <- paste(config$project$short,
                                  datestamp,
                                  "DE_CSV_Rechtsakte_Metadaten.csv",
                                  sep = "_")
@@ -2791,7 +2791,7 @@ fwrite(meta.rechtsakte,
 #+
 #'### Name für CSV definieren
 
-csvname.meta <- paste(datasetname,
+csvname.meta <- paste(config$project$short,
                       datestamp,
                       "DE_CSV_MetadatenXML.csv",
                       sep = "_")
@@ -2972,7 +2972,7 @@ ggplot(data = dt.plot,
     annotation_logticks(sides = "b")+
     theme_bw()+
     labs(
-        title = paste(datasetname,
+        title = paste(config$project$short,
                       "| Version",
                       datestamp,
                       "| Verteilung der Dateigrößen (PDF)"),
@@ -3004,7 +3004,7 @@ ggplot(data = dt.plot,
     annotation_logticks(sides = "b")+
     theme_bw()+
     labs(
-        title = paste(datasetname,
+        title = paste(config$project$short,
                       "| Version",
                       datestamp,
                       "| Verteilung der Dateigrößen (EPUB)"),
@@ -3037,7 +3037,7 @@ ggplot(data = dt.plot,
     annotation_logticks(sides = "b")+
     theme_bw()+
     labs(
-        title = paste(datasetname,
+        title = paste(config$project$short,
                       "| Version",
                       datestamp,
                       "| Verteilung der Dateigrößen (XML)"),
@@ -3070,7 +3070,7 @@ ggplot(data = dt.plot,
     annotation_logticks(sides = "b")+
     theme_bw()+
     labs(
-        title = paste(datasetname,
+        title = paste(config$project$short,
                       "| Version",
                       datestamp,
                       "| Verteilung der Dateigrößen (TXT)"),
@@ -3122,7 +3122,7 @@ unlink(files.csv)
 files.pdf <- list.files(pattern = "\\.pdf$",
                          ignore.case = TRUE)
 
-zip(paste(datasetname,
+zip(paste(config$project$short,
           datestamp,
           "DE_PDF_Datensatz.zip",
           sep = "_"),
@@ -3138,7 +3138,7 @@ zip(paste(datasetname,
 files.txt <- list.files(pattern = "\\.txt$",
                         ignore.case = TRUE)
 
-zip(paste(datasetname,
+zip(paste(config$project$short,
           datestamp,
           "DE_TXT_Datensatz.zip",
           sep = "_"),
@@ -3153,7 +3153,7 @@ zip(paste(datasetname,
 files.epub <- list.files(pattern = "\\.epub$",
                          ignore.case = TRUE)
 
-zip(paste(datasetname,
+zip(paste(config$project$short,
           datestamp,
           "DE_EPUB_Datensatz.zip",
           sep = "_"),
@@ -3164,7 +3164,7 @@ zip(paste(datasetname,
 
 #'## Verpacken der Netzwerk-Dateien
 
-zip(paste0(datasetname,
+zip(paste0(config$project$short,
            "_",
            datestamp,
            "_DE_Netzwerke.zip"),
@@ -3175,7 +3175,7 @@ zip(paste0(datasetname,
 
 #'## Verpacken der Analyse-Dateien
 
-zip(paste0(datasetname,
+zip(paste0(config$project$short,
            "_",
            datestamp,
            "_DE_",
@@ -3198,7 +3198,7 @@ files.source <- grep("spin",
                      ignore.case = TRUE,
                      invert = TRUE)
 
-zip(paste(datasetname,
+zip(paste(config$project$short,
            datestamp,
            "Source_Code.zip",
            sep = "_"),
@@ -3250,7 +3250,7 @@ multihashes$index <- seq_len(multihashes[,.N])
 
 #'## Hashes in CSV-Datei speichern
 fwrite(multihashes,
-       paste(datasetname,
+       paste(config$project$short,
              datestamp,
              "KryptographischeHashes.csv",
              sep = "_"),
