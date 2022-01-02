@@ -11,8 +11,8 @@
 #'    number_sections: true
 #'    pandoc_args: --listings
 #'    includes:
-#'      in_header: General_Source_TEX_Preamble_DE.tex
-#'      before_body: [C-DBR_Source_TEX_Definitions.tex,C-DBR_Source_TEX_CompilationTitle.tex]
+#'      in_header: tex/General_Source_TEX_Preamble_DE.tex
+#'      before_body: [tex/C-DBR_Source_TEX_Definitions.tex,tex/C-DBR_Source_TEX_CompilationTitle.tex]
 #'bibliography: packages.bib
 #'nocite: '@*'
 #'---
