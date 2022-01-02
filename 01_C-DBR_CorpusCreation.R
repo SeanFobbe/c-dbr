@@ -158,9 +158,9 @@ source("R-fobbe-proto-package/f.dopar.pagenums.R")
 source("R-fobbe-proto-package/f.dopar.pdfextract.R")
 source("R-fobbe-proto-package/f.dopar.multihashes.R")
 
-
-
-
+source("functions/f.heading.transform.R")
+source("functions/f.namechain.R")
+source("functions/f.zero.NA.R")
 
 #'## Verzeichnis für Analyse-Ergebnisse und Diagramme definieren
 #' Muss mit einem Schrägstrich enden!
@@ -338,95 +338,6 @@ quanteda_options(threads = fullCores)
 
 #'### Data.table
 setDTthreads(threads = fullCores)  
-
-
-
-
-
-
-
-
-
-#'# Funktionen definieren
-
-
-#+
-#'## Transformation von Gliederungs-Metadaten
-#' Wird bei der Umwandlung der Metadaten aus dem XML-Format benötigt. Konkret werden hierdurch Werte die nur einmal pro Abschnitt (z.B. Gliederungsüberschriften) hochgerechnet, damit jede Norm die ihr zugehörigen Abschnitts-Metadaten zugewiesen erhält.
-
-
-f.heading.transform <- function(inputvec){
-    
-    rep.text <- c("NA", inputvec[is.na(inputvec) == FALSE])
-    
-    which <- c(1, which(is.na(inputvec) == FALSE), length(inputvec) + 1)
-    
-    rep.count <- diff(which)
-    
-    rep <- data.table(rep.text,
-                      rep.count)
-    
-    replist <- vector("list",
-                      rep[,.N])
-    
-    for (i in 1:rep[,.N]){
-        
-        replist[[i]]<- rep(rep.text[i],
-                           rep.count[i])
-        
-    }
-    
-    outvec <- unlist(replist)
-    return(outvec)    
-}
-
-
-
-
-#'## NA in leere Listen-Elemente einsetzen
-
-f.zero.NA <- function(x) if (length(x) == 0){
-                             NA_character_
-                         }else{
-                             paste(x, collapse = " ")}
-
-
-#'## Erstellen von Titel- und Bezeichnungshierarchien
-#' Diese Funktion nimmt die für jedes Gesetz bereitgestellten Gliederungskennzahlen, bricht diese in ihre Bestandteile herunter und definiert für jede Gliederungskennzahl die volle Hierarchie an Titeln bzw. Gliederungsbezeichnungen.
-#'
-#' Beispiel Titelhierarchie: Recht der Schuldverhältnisse | Einzelne Schuldverhältnisse | Mietvertrag, Pachtvertrag | Mietverhältnisse über Wohnraum | Beendigung des Mietverhältnisses | Werkwohnungen
-#'
-#' Beispiel Bezeichnungshierarchie: Buch 2 | Abschnitt 8 | Titel 5 | Untertitel 2 | Kapitel 5 | Unterkapitel 4
-
-
-f.namechain <- function(kennzahl,
-                        titel,
-                        bez){
-
-    out.list <- vector("list", length(kennzahl))
-    
-    for (i in seq_along(kennzahl)){
-        
-        einzelzahl <- kennzahl[i]
-        
-        breaks <- seq_len(nchar(einzelzahl) / 3 ) * 3
-
-        chain <- unname(mapply(substr, einzelzahl, 1, breaks))
-
-        titelchain <- paste(titel[match(chain, kennzahl)], collapse = " | ")
-
-        bezchain <- paste(bez[match(chain, kennzahl)], collapse = " | ")
-
-        out.list[[i]] <- data.table(einzelzahl,
-                                    titelchain,
-                                    bezchain)
-    }
-    
-    out.vec <- rbindlist(out.list)
-    
-    return(out.vec)
-    
-}
 
 
 
