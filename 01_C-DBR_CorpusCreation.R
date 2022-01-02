@@ -267,6 +267,10 @@ quanteda_options(tokens_locale = config$quanteda$tokens_locale)
 
 latexdefs <- c("%===========================\n% Definitionen\n%===========================",
                "\n% NOTE: Diese Datei wurde während dem Kompilierungs-Prozesses automatisch erstellt.\n",
+               "\n%-----Autor-----",
+               paste0("\\newcommand{\\projectauthor}{",
+                      config$project$author,
+                      "}"),
                "\n%-----Version-----",
                paste0("\\newcommand{\\version}{",
                       datestamp,
