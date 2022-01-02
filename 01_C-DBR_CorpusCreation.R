@@ -3155,8 +3155,9 @@ files.pdf <- list.files("PDF",
                         ignore.case = TRUE,
                         full.names = TRUE)
 
-zip(paste0(prefix.files
-          "DE_PDF_Datensatz.zip"),
+zip(paste0("output/",
+           prefix.files,
+           "DE_PDF_Datensatz.zip"),
     files.pdf)
 
 
