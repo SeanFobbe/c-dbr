@@ -3134,7 +3134,7 @@ zip(paste(datasetname,
           sep = "_"),
     files.pdf)
 
-unlink(files.pdf)
+
 
 
 
@@ -3150,7 +3150,7 @@ zip(paste(datasetname,
           sep = "_"),
     files.txt)
 
-unlink(files.txt)
+
 
 
 
@@ -3165,7 +3165,7 @@ zip(paste(datasetname,
           sep = "_"),
     files.epub)
 
-unlink(files.epub)
+
 
 
 #'## Verpacken der Netzwerk-Dateien
@@ -3176,8 +3176,7 @@ zip(paste0(datasetname,
            "_DE_Netzwerke.zip"),
     "netzwerke")
 
-unlink("netzwerke",
-       recursive = TRUE)
+
 
 
 #'## Verpacken der Analyse-Dateien
@@ -3214,15 +3213,15 @@ zip(paste(datasetname,
 
 
 #'# Aufräumen
+#' An dieser Stelle werden die Ordner mit den Roh-Dateien gelöscht.
 
 
+unlink("XML", recursive = TRUE)
+unlink("PDF", recursive = TRUE)
+unlink("TXT", recursive = TRUE)
+unlink("EPUB", recursive = TRUE)
 
-#'### Rohe XML-Dateien und Anhänge löschen
-
-unlink("XML",
-       recursive = TRUE)
-
-
+unlink("netzwerke", recursive = TRUE)
 
 
 
