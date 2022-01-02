@@ -2970,7 +2970,7 @@ sum(xml.MB)
 sum(txt.MB)
 
 
-#'### Korpus-Objekte in RAM (MB)
+#'### Objekte in RAM (MB)
 
 print(object.size(dt.normen),
       standard = "SI",
