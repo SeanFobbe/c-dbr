@@ -3220,7 +3220,10 @@ zip(paste0("output/",
 
 #'## Verpacken der Source-Dateien
 
-files.source <- c(list.files(pattern = "Source"),
+files.source <- c(list.files(pattern = "\\.R|\\.toml"),
+                  "R-fobbe-proto-package",
+                  "functions",
+                  "tex",
                   "buttons")
 
 
@@ -3230,10 +3233,9 @@ files.source <- grep("spin",
                      ignore.case = TRUE,
                      invert = TRUE)
 
-zip(paste(config$project$short,
-           datestamp,
-           "Source_Code.zip",
-           sep = "_"),
+zip(paste0("output/",
+          prefix.files,
+          "_Source_Code.zip"),
     files.source)
 
 
