@@ -73,10 +73,6 @@ source("00_C-DBR_FullCompile.R")
 
 
 
-
-
-
-
 #'\newpage
 #+
 #'## Systemanforderungen
@@ -119,7 +115,7 @@ print(begin.script)
 
 
 
-#+
+#+ Packages
 #'## Packages Laden
 #' Das package *groundhog* nimmt eine strenge Versionskontrolle von R packages vor, indem es nur solche Versionen lädt, die an einem bestimmten Stichtag auf CRAN verfügbar waren. Diese werden in einer separaten library gesichert. Falls entsprechende Versionen nicht vorhanden sind, nimmt es eine automatische Installation derselben vor.
 
