@@ -191,6 +191,7 @@ dir.create(fig.dir)
 
 dir.create("output")
 dir.create("data")
+dir.create("temp")
 
 dir.create("Netzwerke")
 dir.create("Netzwerke/Edgelists")
@@ -202,7 +203,7 @@ dir.create("Netzwerke/GraphML")
 
 #'## Vollzitate statistischer Software schreiben
 knitr::write_bib(c(.packages()),
-                 "data/packages.bib")
+                 "temp/packages.bib")
 
 
 
@@ -270,30 +271,30 @@ latexdefs <- c("%===========================\n% Definitionen\n%=================
                       "-Source}"),
                "\n%-----Data DOIs-----",
                paste0("\\newcommand{\\dataconceptdoi}{",
-                      config$doi.data.concept,
+                      config$doi$data$concept,
                       "}"),
                paste0("\\newcommand{\\dataversiondoi}{",
-                      config$doi.data.version,
+                      config$doi$data$version,
                       "}"),
                paste0("\\newcommand{\\dataconcepturldoi}{https://doi.org/",
-                      config$doi.data.concept,
+                      config$doi$data$concept,
                       "}"),
                paste0("\\newcommand{\\dataversionurldoi}{https://doi.org/",
-                      config$doi.data.version,
+                      config$doi$data$version,
                       "}"),
                "\n%-----Software DOIs-----",
                paste0("\\newcommand{\\softwareconceptdoi}{",
-                      config$doi.software.concept,
+                      config$doi$software$concept,
                       "}"),
                paste0("\\newcommand{\\softwareversiondoi}{",
-                      config$doi.software.version,
+                      config$doi$software$version,
                       "}"),
 
                paste0("\\newcommand{\\softwareconcepturldoi}{https://doi.org/",
-                      config$doi.software.concept,
+                      config$doi$software$concept,
                       "}"),
                paste0("\\newcommand{\\softwareversionurldoi}{https://doi.org/",
-                      config$doi.software.version,
+                      config$doi$software$version,
                       "}"))
 
 
@@ -302,7 +303,7 @@ latexdefs <- c("%===========================\n% Definitionen\n%=================
 #'### LaTeX Parameter schreiben
 
 writeLines(latexdefs,
-           paste0("tex/",
+           paste0("temp/",
                   config$project$short,
                   "_Source_TEX_Definitions.tex"))
 
