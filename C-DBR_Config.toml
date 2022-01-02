@@ -1,7 +1,7 @@
 # Project
 project.name = "Corpus des Deutschen Bundesrechts"
 project.short = "C-DBR"
-
+project.author = "Seán Fobbe"
 
 # License
 license.data = "Creative Commons Zero 1.0 Universal"
