@@ -2882,7 +2882,14 @@ files.txt <- list.files("PDF",
                         ignore.case = TRUE,
                         full.names = TRUE)
 
-file.rename()
+files.txt.destination <- gsub("PDF/",
+                              "TXT/",
+                              files.txt)
+
+file.rename(files.txt,
+            files.txt.destination)
+
+
 
 
 #'# Download der EPUB-Dateien
@@ -2893,7 +2900,10 @@ file.rename()
 #+ results = 'hide'
 mcmapply(download.file,
          download$links.epub,
-         download$title.epub)
+         paste0("EPUB/",
+                download$title.epub))
+
+
 
 
 #'## Download-Ergebnis
@@ -2903,7 +2913,8 @@ mcmapply(download.file,
 download[,.N]
 
 #'### Anzahl heruntergeladener Dateien
-files.epub <- list.files(pattern = "\\.epub")
+files.epub <- list.files("EPUB",
+                         pattern = "\\.epub")
 length(files.epub)
 
 #'### Fehlbetrag
@@ -2913,6 +2924,8 @@ print(N.missing)
 #'### Fehlende Dateien
 missing <- setdiff(download$title.epub, files.epub)
 print(missing)
+
+
 
 
 
