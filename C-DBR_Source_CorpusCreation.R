@@ -1450,8 +1450,7 @@ f.network.analysis <- function(xml.name){
                               datestamp,
                               "| Struktur des",
                               jurabk),
-                caption = paste("DOI:",
-                                doi.version)
+                caption = caption
             )+
             theme(
                 plot.title = element_text(size = 50,
@@ -1757,9 +1756,7 @@ ggplot(data = freqtable)+
                       "| Version",
                       datestamp,
                       "| Einzelnormen je Periodikum"),
-        caption = paste("DOI:",
-                        doi.version,
-                        "| S. Fobbe"),
+        caption = caption,
         x = "Periodikum",
         y = "Einzelnormen"
     )+
@@ -1793,9 +1790,7 @@ ggplot(data = freqtable) +
                       "| Version",
                       datestamp,
                       "| Rechtsakte mit Inhalt je Periodikum"),
-        caption = paste("DOI:",
-                        doi.version,
-                        "| S. Fobbe"),
+        caption = caption,
         x = "Periodikum",
         y = "Rechtsakte"
     )+
@@ -1830,9 +1825,7 @@ ggplot(data = freqtable) +
                       "| Version",
                       datestamp,
                       "| Rechtsakte nach Metadaten je Periodikum"),
-        caption = paste("DOI:",
-                        doi.version,
-                        "| S. Fobbe"),
+        caption = caption,
         x = "Periodikum",
         y = "Rechtsakte"
     )+
@@ -1869,9 +1862,7 @@ ggplot(data = freqtable) +
                       "| Version",
                       datestamp,
                       "| Einzelnormen je Ausfertigungsjahr"),
-        caption = paste("DOI:",
-                        doi.version,
-                        "| S. Fobbe"),
+        caption = caption,
         x = "Ausfertigungsjahr",
         y = "Einzelnormen"
     )+
@@ -1903,9 +1894,7 @@ ggplot(data = freqtable) +
                       "| Version",
                       datestamp,
                       "| Rechtsakte mit Inhalt je Ausfertigungsjahr"),
-        caption = paste("DOI:",
-                        doi.version,
-                        "| S. Fobbe"),
+        caption = caption,
         x = "Ausfertigungsjahr",
         y = "Rechtsakte"
     )+
@@ -1940,9 +1929,7 @@ ggplot(data = freqtable) +
                       "| Version",
                       datestamp,
                       "| Rechtsakte nach Metadaten je Ausfertigungsjahr"),
-        caption = paste("DOI:",
-                        doi.version,
-                        "| S. Fobbe"),
+        caption = caption,
         x = "Ausfertigungsjahr",
         y = "Rechtsakte"
     )+
@@ -2213,9 +2200,7 @@ ggplot(data = meta.normen)+
                       "| Version",
                       datestamp,
                       "| Verteilung der Zeichen je Norm"),
-        caption = paste("DOI:",
-                        doi.version,
-                        "| S. Fobbe"),
+        caption = caption,
         x = "Zeichen",
         y = "Dichte"
     )+
@@ -2242,9 +2227,7 @@ ggplot(data = meta.rechtsakte)+
                       "| Version",
                       datestamp,
                       "| Verteilung der Zeichen je Rechtsakt"),
-        caption = paste("DOI:",
-                        doi.version,
-                        "| S. Fobbe"),
+        caption = caption,
         x = "Zeichen",
         y = "Dichte"
     )+
@@ -2274,9 +2257,7 @@ ggplot(data = meta.normen)+
                       "| Version",
                       datestamp,
                       "| Verteilung der Tokens je Norm"),
-        caption = paste("DOI:",
-                        doi.version,
-                        "| S. Fobbe"),
+        caption = caption,
         x = "Tokens",
         y = "Dichte"
     )+
@@ -2304,9 +2285,7 @@ ggplot(data = meta.rechtsakte)+
                       "| Version",
                       datestamp,
                       "| Verteilung der Tokens je Rechtsakt"),
-        caption = paste("DOI:",
-                        doi.version,
-                        "| S. Fobbe"),
+        caption = caption,
         x = "Tokens",
         y = "Dichte"
     )+
@@ -2337,9 +2316,7 @@ ggplot(data = meta.normen)+
                       "| Version",
                       datestamp,
                       "| Verteilung der Typen je Norm"),
-        caption = paste("DOI:",
-                        doi.version,
-                        "| S. Fobbe"),
+        caption = caption,
         x = "Typen",
         y = "Dichte"
     )+
@@ -2368,9 +2345,7 @@ ggplot(data = meta.rechtsakte)+
                       "| Version",
                       datestamp,
                       "| Verteilung der Typen je Rechtsakt"),
-        caption = paste("DOI:",
-                        doi.version,
-                        "| S. Fobbe"),
+        caption = caption,
         x = "Typen",
         y = "Dichte"
     )+
@@ -2401,9 +2376,7 @@ ggplot(data = meta.normen)+
                       "| Version",
                       datestamp,
                       "| Verteilung der Sätze je Norm"),
-        caption = paste("DOI:",
-                        doi.version,
-                        "| S. Fobbe"),
+        caption = caption,
         x = "Sätze",
         y = "Dichte"
     )+
@@ -2432,9 +2405,7 @@ ggplot(data = meta.rechtsakte)+
                       "| Version",
                       datestamp,
                       "| Verteilung der Sätze je Rechtsakt"),
-        caption = paste("DOI:",
-                        doi.version,
-                        "| S. Fobbe"),
+        caption = caption,
         x = "Sätze",
         y = "Dichte"
     )+
@@ -2996,9 +2967,7 @@ ggplot(data = dt.plot,
                       "| Version",
                       datestamp,
                       "| Verteilung der Dateigrößen (PDF)"),
-        caption = paste("DOI:",
-                        doi.version,
-                        "| S. Fobbe"),
+        caption = caption,
         x = "Dateigröße in MB",
         y = "Dichte"
     )+
@@ -3030,9 +2999,7 @@ ggplot(data = dt.plot,
                       "| Version",
                       datestamp,
                       "| Verteilung der Dateigrößen (EPUB)"),
-        caption = paste("DOI:",
-                        doi.version,
-                        "| S. Fobbe"),
+        caption = caption,
         x = "Dateigröße in MB",
         y = "Dichte"
     )+
@@ -3065,9 +3032,7 @@ ggplot(data = dt.plot,
                       "| Version",
                       datestamp,
                       "| Verteilung der Dateigrößen (XML)"),
-        caption = paste("DOI:",
-                        doi.version,
-                        "| S. Fobbe"),
+        caption = caption,
         x = "Dateigröße in MB",
         y = "Dichte"
     )+
@@ -3100,9 +3065,7 @@ ggplot(data = dt.plot,
                       "| Version",
                       datestamp,
                       "| Verteilung der Dateigrößen (TXT)"),
-        caption = paste("DOI:",
-                        doi.version,
-                        "| S. Fobbe"),
+        caption = caption,
         x = "Dateigröße in MB",
         y = "Dichte"
     )+
