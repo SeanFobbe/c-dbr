@@ -1653,7 +1653,7 @@ begin.netanalysis <- Sys.time()
 #'  Parallele Berechnung funktioniert nicht mit errorfiles; sequentielle Berechnung schon
 
 plan("multicore",
-     workers = 8)
+     workers = fullCores)
 
 #plan("sequential")
 
