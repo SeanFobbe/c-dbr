@@ -163,6 +163,7 @@ source("functions/f.namechain.R")
 source("functions/f.zero.NA.R")
 source("functions/f.multihashes.R")
 source("functions/f.future_multihashes.R")
+source("functions/f.future_pdf_to_txt.R")
 
 
 #'## Verzeichnis für Analyse-Ergebnisse und Diagramme definieren
@@ -2947,11 +2948,15 @@ fwrite(dt.meta,
 #+
 #'## Download durchführen
 
+
+plan("multicore",
+     workers = fullCores)
+
 #+ results = 'hide'
-mcmapply(download.file,
-         download$links.pdf,
-         paste0("PDF/",
-                download$title.pdf))
+future_mapply(download.file,
+              download$links.pdf,
+              paste0("PDF/",
+                     download$title.pdf))
 
 
 #'## Download-Ergebnis
@@ -2991,13 +2996,6 @@ files.pdf <- list.files("PDF",
 length(files.pdf)
 
 
-#'## Funktion anzeigen: f.dopar.pagenums
-#+ results = "asis"
-print(f.dopar.pagenums)
-
-
-#'## Anzahl zu extrahierender Seiten
-sum(f.dopar.pagenums(files.pdf))
 
 
 #'## Funktion anzeigen: f.dopar.pdfextract
@@ -3008,6 +3006,9 @@ print(f.dopar.pdfextract)
 #'## Text Extrahieren
 #+ results = "hide"
 f.dopar.pdfextract(files.pdf)
+
+
+
 
 
 #'## TXT-Dateien in separaten Ordner verschieben
