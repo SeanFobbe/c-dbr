@@ -165,6 +165,7 @@ source("functions/f.multihashes.R")
 source("functions/f.future_multihashes.R")
 source("functions/f.pdf_to_txt.R")
 source("functions/f.future_pdf_to_txt.R")
+source("functions/f.future_lingsummarize.R")
 
 
 #'## Verzeichnis für Analyse-Ergebnisse und Diagramme definieren
@@ -2105,19 +2106,25 @@ ggplot(data = freqtable) +
 
 
 #+
-#'### Funktion anzeigen:  f.summarize.iterator
-print(f.lingsummarize.iterator)
+#'### Funktion anzeigen:  future_lingsummarize
+print(future_lingsummarize)
 
 
 
 #'### Berechnung durchführen
-lingstats.normen.raw <- f.lingsummarize.iterator(dt.normen,
-                                                 threads = fullCores,
-                                                 chunksize = 1)
+#lingstats.normen.raw <- f.lingsummarize.iterator(dt.normen,
+#                                                 threads = fullCores,
+#                                                 chunksize = 1)#
 
-lingstats.rechtsakte.raw <- f.lingsummarize.iterator(dt.rechtsakte,
-                                                     threads = fullCores,
-                                                     chunksize = 1)
+#lingstats.rechtsakte.raw <- f.lingsummarize.iterator(dt.rechtsakte,
+#                                                     threads = fullCores,
+#                                                     chunksize = 1)
+
+lingstats.normen.raw <- future_lingsummarize(dt.normen)
+
+lingstats.rechtsakte.raw <- future_lingsummarize(dt.rechtsakte)
+
+
 
 
 #'## Variablen-Namen anpassen
