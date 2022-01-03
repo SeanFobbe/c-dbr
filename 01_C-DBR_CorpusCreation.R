@@ -1653,9 +1653,9 @@ begin.netanalysis <- Sys.time()
 #'  Parallele Berechnung funktioniert nicht mit errorfiles; sequentielle Berechnung schon
 
 plan("multicore",
-     workers = fullCores)
+     workers = 8)
 
-plan("sequential")
+#plan("sequential")
 
 
 #'### XML Parsen
