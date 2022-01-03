@@ -159,7 +159,7 @@ groundhog.library(pkg = packages,
 
 source("R-fobbe-proto-package/f.linkextract.R")
 source("R-fobbe-proto-package/f.fast.freqtable.R")
-source("R-fobbe-proto-package/f.lingsummarize.iterator.R")
+#source("R-fobbe-proto-package/f.lingsummarize.iterator.R")
 #source("R-fobbe-proto-package/f.dopar.pagenums.R")
 #source("R-fobbe-proto-package/f.dopar.pdfextract.R")
 #source("R-fobbe-proto-package/f.dopar.multihashes.R")
@@ -398,12 +398,12 @@ links.xml <- xml_text(links)
 #'## Debugging-Modus: Ausgewertete Links reduzieren
 
 
-if (config$debug$toggle == TRUE){
+#if (config$debug$toggle == TRUE){
 
-    links.xml <- links.xml[sample(length(links.xml),
-                                  config$debug$sample)]
+#    links.xml <- links.xml[sample(length(links.xml),
+#                                  config$debug$sample)]
 
-}
+#}
 
 
 
@@ -600,11 +600,11 @@ fwrite(conctable,
 
 #'## Debugging-Modus: Anzahl der heruntergeladenen Dateien reduzieren
 
-#if (config$debug$toggle == TRUE){
+if (config$debug$toggle == TRUE){
 
-#    download <- download[sample(download[, .N], config$debug$sample)]
+    download <- download[sample(download[, .N], config$debug$sample)]
 
-#}
+}
 
 
 
