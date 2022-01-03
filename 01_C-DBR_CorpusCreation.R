@@ -1097,28 +1097,39 @@ setnames(dt.rechtsakte,
 #'## Datensatz erstellen: XML-Metadaten
 #' An dieser Stelle werden Metadaten für alle Rechtsakte von "Gesetze im Internet" erhoben, unabhängig davon ob die Rechtsakte Text enthalten oder nur mit Überschrift nachgewiesen sind.
 
-#+
-#'### Beginn XML Parsing
-begin.parse <- Sys.time()
+
+#'### Funktion für XML-Parsing definieren
 
 
-#'### Fork Cluster starten
+xmlparse.meta <- function(file.xml){
 
-cl <- makeForkCluster(fullCores)
-registerDoParallel(cl)
+    ## XML als Character-Vektor einlesen
+    xml.char <- readChar(file.xml,
+                         file.info(file.xml)$size)
 
+    ## Leerzeichen einfügen
+    xml.char <- gsub(">", "> ", xml.char)
+    xml.char <- gsub("<", " <", xml.char)
+    xml.char <- sub(" <", "<", xml.char)
 
-#'### XML Parsen
+    ## XML-Struktur lesen
+    XML <- read_xml(xml.char)
 
-#+ Metadaten-Parse
-limit <- length(files.xml)
-
-out <- foreach(z = 1:limit, .errorhandling = 'pass') %dopar% {
-
-    XML <- read_xml(files.xml[z])
+    ## Schleife vorbereiten
     nodes <- xml_nodes(XML, xpath = "//norm//metadaten")
     scope <- 1:length(nodes)
 
+
+    ## Metadaten extrahieren
+
+    varlist <- c("jurabk",
+                 "amtabk",
+                 "ausfertigung-datum",
+                 "periodikum",
+                 "zitstelle",
+                 "langue",
+                 "kurzue")
+    
     meta <- vector("list", length(varlist))
     
     for (i in 1:length(varlist)){
@@ -1131,7 +1142,7 @@ out <- foreach(z = 1:limit, .errorhandling = 'pass') %dopar% {
     
     meta$fundstellentyp <- xml_node(XML, "fundstelle") %>% xml_attr(attr = "typ")
     
-    meta$doc_id <- files.xml[z]
+    meta$doc_id <- file.xml
     
     meta$builddate_original <- xml_attr(XML, attr = "builddate")
 
@@ -1170,7 +1181,8 @@ out <- foreach(z = 1:limit, .errorhandling = 'pass') %dopar% {
                  "V1",
                  "standtyp")
 
-        dt.check <- transpose(dt.check, make.names = "standtyp")
+        dt.check <- transpose(dt.check,
+                              make.names = "standtyp")
 
         setnames(dt.check,
                  names(dt.check),
@@ -1187,6 +1199,26 @@ out <- foreach(z = 1:limit, .errorhandling = 'pass') %dopar% {
     return(meta)
     
 }
+
+
+#+
+#'### Beginn XML Parsing
+begin.parse <- Sys.time()
+
+
+#'### Fork Cluster starten
+
+cl <- makeForkCluster(fullCores)
+registerDoParallel(cl)
+
+
+#'### XML Parsen
+
+#+ Metadaten-Parse
+limit <- length(files.xml)
+
+out <- foreach(z = 1:limit, .errorhandling = 'pass') %dopar% {
+
 
 
 #'### Fork Cluster beenden
