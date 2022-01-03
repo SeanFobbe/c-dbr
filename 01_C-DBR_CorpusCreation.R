@@ -868,28 +868,12 @@ xmlparse.einzelnormen <- function(file.xml){
 }
 
 
-    tryCatch({
-        read_html(URL) %>%
-            html_nodes("a")%>%
-            html_attr('href')},
-        error = function(cond) {
-            return(NA)}
-        )
-
 
 #+ Einzelnormen-Parse
 
-
-,
-                     future.chunk.size = 200
-
-
-
-
 plan("multicore",
-     workers = 14)
+     workers = fullCores)
 
-plan("sequential")
 
 
 #+
@@ -901,9 +885,6 @@ begin.parse <- Sys.time()
 
 out <- future_lapply(files.xml,
                      xmlparse.einzelnormen)
-
-
-#xmlparse.einzelnormen(files.xml[55])
 
 
 #'### Liste in Data Table umwandeln
@@ -918,7 +899,6 @@ end.parse <- Sys.time()
 #'### Dauer XML Parsing
 end.parse - begin.parse
 
-str(dt.normen)
 
 
 
