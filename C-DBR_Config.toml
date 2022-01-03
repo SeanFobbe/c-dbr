@@ -20,7 +20,7 @@ doi.software.version = "???"
 
 debug.toggle = true   # Ob Debugging aktiv ist; Möglichkeiten sind "TRUE" oder "FALSE"
 debug.sample = 300      # Die Anzahl der zufällig ausgewählten Rechtsakte, die im Debugging-Modus berücksichtigt werden sollen.
-qa.sample = 100        # Die Anzahl der zufällig ausgewählten Einzelnormen, die zur Überprüfung separat gespeichert werden sollen.
+qa.sample = 50        # Die Anzahl der zufällig ausgewählten Einzelnormen, die zur Überprüfung separat gespeichert werden sollen.
 
 
 # Parallelization
@@ -28,16 +28,16 @@ qa.sample = 100        # Die Anzahl der zufällig ausgewählten Einzelnormen, di
 cores.max = false  # Ob die maximale Anzahl an logischen Kernen genutzt werden soll; Möglichkeiten sind "TRUE" oder "FALSE"
 cores.number = 8   # Die Anzahl Rechtenkerne, die verwendet werden soll; wird nur berücksichtigt falls "cores.max" auf "FAlSE" steht
 
-parallel.htmlLandingPages = true
-parallel.downloadXML = true
-parallel.parseEinzelnormen = true
-parallel.parseMeta = true
-parallel.parseNetworks = true
-parallel.lingsummarize = true
-parallel.downloadPDF = true
-parallel.extractPDF = true
-parallel.downloadEPUB = true
-parallel.multihashes = true
+parallel.htmlLandingPages = false
+parallel.downloadXML = false
+parallel.parseEinzelnormen = false
+parallel.parseMeta = false
+parallel.parseNetworks = false
+parallel.lingsummarize = false
+parallel.downloadPDF = false
+parallel.extractPDF = false
+parallel.downloadEPUB = false
+parallel.multihashes = false
 
 
 
