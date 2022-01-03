@@ -1404,6 +1404,40 @@ f.kennzahlen.edgelist <- function(kennzahl, name){
 }
 
 
+f.split.gliederungseinheit <- function(gliederungseinheit){
+
+    kennzahl <- xml_nodes(gliederungseinheit, xpath = "gliederungskennzahl") %>% xml_text()
+    
+    bez <- xml_nodes(gliederungseinheit, xpath = "gliederungsbez") %>% xml_text()
+
+    # Newlines, damit Umbrüche in Diagrammen funktionieren
+    bez <- gsub(" +",
+                "\n",
+                bez)
+
+    titel <- gsub(" +",
+                  "\n",
+                  titel)
+    
+    titel <- xml_nodes(gliederungseinheit, xpath = "gliederungstitel") %>% xml_text()
+    
+    if(length(titel) == 0){
+        titel <- NA
+    }
+
+    dt <- data.table(kennzahl,
+                     bez,
+                     titel)
+    return(dt)
+    
+}
+
+
+xml.name <- "XML/BJNR002089971.xml" # problem
+xml.name <- "XML/BJNR001950896.xml" # BGB
+
+
+
 #'### Funktion definieren: f.network.analysis
 #' f.network.analysis benötigt  f.kennzahlen.search, f.kennzahlen.collapse und f.kennzahlen.edgelist.
 
@@ -1415,33 +1449,37 @@ f.network.analysis <- function(xml.name,
     message(xml.name)
     XML <- read_xml(xml.name)
 
-    kennzahl <- xml_nodes(XML, xpath = "//norm//gliederungskennzahl") %>% xml_text()
-    kennzahl <- make.unique(kennzahl)
-    bez <- xml_nodes(XML, xpath = "//norm//gliederungsbez") %>% xml_text()
-    titel <- xml_nodes(XML, xpath = "//norm//gliederungstitel") %>% xml_text()
+    ## Gliederungseinheiten extrahieren
+    gliederungseinheit <- xml_nodes(XML, xpath = "//norm//gliederungseinheit")
 
-    bez <- gsub(" +",
-                "\n",
-                bez)
+    ## Gliederungseinheit splitten
+    gliederungseinheit.split <- lapply(gliederungseinheit,
+                                       f.split.gliederungseinheit)
+    gliederungseinheit.split <- rbindlist(gliederungseinheit.split)
 
-    titel <- gsub(" +",
-                  "\n",
-                  titel)
+    gliederungseinheit.split <- unique(gliederungseinheit.split, by = "kennzahl")
     
 
+    ## Abkürzung extrahieren
     jurabk <- xml_node(XML, xpath = "//norm//jurabk") %>% xml_text()
 
+    if (length(jurabk) == 0){
+        jurabk <- "NA"
+        }
+    
+    ## Titel als Label priorieren, sonst Bezeichnung einsetzen
+    node.labels0 <- ifelse(gliederungseinheit.split$titel != "",
+                           gliederungseinheit.split$titel,
+                           gliederungseinheit.split$bez)
 
-    node.labels0 <- ifelse(titel != "",
-                           titel,
-                           bez)
-
+    ## Rechtsakt als Quelle des Netzwerks einfügen
     node.labels <- c(jurabk,
                      node.labels0)
 
-
-    edgelist <- f.kennzahlen.edgelist(kennzahl,
-                                      jurabk)
+    
+    ## Edgelist erstellen
+    edgelist <- f.kennzahlen.edgelist(kennzahl = gliederungseinheit.split$kennzahl,
+                                      name = jurabk)
 
 
 
@@ -1571,9 +1609,7 @@ length(files.xml)
 #xml.name <- files.xml[205]
 
 xml.name <- "XML/BJNR002089971.xml" # problem
-xml.name <- "XML/BJNR002089971.xml"
-
-https://www.gesetze-im-internet.de/bgb/BJNR001950896.epub
+xml.name <- "XML/BJNR001950896.xml" # BGB
 
 #+
 #'### Beginn Network Analysis
