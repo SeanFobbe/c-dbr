@@ -138,13 +138,14 @@ packages <- c("zip",          # ZIP Files
               "openssl",      # Kryptographische Signaturen
               "igraph",       # Analyse von Graphen
               "ggraph",       # Analyse von Graphen
-              "qgraph",
-              "future",
-              "future.apply")       # Analyse von Graphen
+              "qgraph",       # Analyse von Graphen
+              "future",       # Parallelsirung
+              "future.apply") # Parallelisierung
 
 
 #lapply(packages, library, character.only = TRUE)
 
+#+ results = 'hide'
 groundhog.library(pkg = packages,
                   date = "2021-02-20")
                  
