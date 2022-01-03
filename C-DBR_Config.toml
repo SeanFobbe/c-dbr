@@ -25,8 +25,8 @@ qa.sample = 100        # Die Anzahl der zufällig ausgewählten Einzelnormen, di
 
 # Parallelization
 
-cores.max = "TRUE"  # Ob die maximale Anzahl an logischen Kernen genutzt werden soll; Möglichkeiten sind "TRUE" oder "FALSE"
-cores.number = 16   # Die Anzahl Rechtenkerne, die verwendet werden soll; wird nur berücksichtigt falls "cores.max" auf "FAlSE" steht
+cores.max = "FALSE"  # Ob die maximale Anzahl an logischen Kernen genutzt werden soll; Möglichkeiten sind "TRUE" oder "FALSE"
+cores.number = 8   # Die Anzahl Rechtenkerne, die verwendet werden soll; wird nur berücksichtigt falls "cores.max" auf "FAlSE" steht
 
 
 # Download
