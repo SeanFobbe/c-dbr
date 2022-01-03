@@ -1,8 +1,9 @@
-library(groundhog)    # Strenge Versionskontrolle von R packages
+#library(groundhog)    # Strenge Versionskontrolle von R packages
 
-groundhog.library(pkg = "rmarkdown",
-                  date = "2021-02-20")
+#groundhog.library(pkg = "rmarkdown",
+#                  date = "2021-02-20")
 
+library(rmarkdown)
 
 
 #+
