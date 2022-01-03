@@ -395,6 +395,18 @@ links <- xml_nodes(XML,
 links.xml <- xml_text(links)
 
 
+#'## Debugging-Modus: Ausgewertete Links reduzieren
+
+
+if (config$debug$toggle == TRUE){
+
+    links.xml <- links.xml[sample(length(links.xml), config$debug$sample)]
+
+}
+
+
+
+
 #'## Links zu HTML Landing Pages generieren
 
 links.html <- gsub("/xml.zip",
@@ -576,11 +588,11 @@ fwrite(conctable,
 
 #'## Debugging-Modus: Anzahl der heruntergeladenen Dateien reduzieren
 
-if (config$debug$toggle == TRUE){
+#if (config$debug$toggle == TRUE){
 
-    download <- download[sample(download[, .N], config$debug$sample)]
+#    download <- download[sample(download[, .N], config$debug$sample)]
 
-}
+#}
 
 
 
