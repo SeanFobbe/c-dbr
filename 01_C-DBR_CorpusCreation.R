@@ -1469,7 +1469,7 @@ f.network.analysis <- function(xml.name){
     M.adjacency <- as.matrix(get.adjacency(g,
                                            edges = F))
 
-    filename <- paste0(gsub(" +",
+    filename <- paste0(gsub("( +)|(/)",
                             "-",
                             jurabk),
                        "_",
@@ -1566,7 +1566,45 @@ length(files.xml)
 
 
 
-### Parallele Berechnung funktioniert nicht mit errorfiles
+
+#+
+#'### Beginn Network Analysis
+begin.netanalysis <- Sys.time()
+
+
+#'### Parallelisierung definieren
+#'  Parallele Berechnung funktioniert nicht mit errorfiles; sequentielle Berechnung schon
+
+plan("multicore",
+     workers = fullCores)
+
+
+
+#'### XML Parsen
+
+out.netanalysis <- future_lapply(files.xml[1000],
+                                 f.network.analysis,
+                                 future.seed = TRUE)
+
+
+#'### XML-Dateien bei denen Fehler auftreten
+
+files.xml[grep("error",
+               out.netanalysis)]
+
+
+#'### Ende XML Parsing
+end.netanalysis <- Sys.time()
+
+#'### Dauer XML Parsing
+end.netanalysis - begin.netanalysis
+
+
+
+
+
+
+###
 cl <- makeForkCluster(fullCores)
 registerDoParallel(cl)
 
