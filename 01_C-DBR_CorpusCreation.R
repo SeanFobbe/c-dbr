@@ -161,7 +161,8 @@ source("R-fobbe-proto-package/f.dopar.multihashes.R")
 source("functions/f.heading.transform.R")
 source("functions/f.namechain.R")
 source("functions/f.zero.NA.R")
-
+source("functions/f.multihashes.R")
+source("functions/f.future_multihashes.R")
 
 
 #'## Verzeichnis für Analyse-Ergebnisse und Diagramme definieren
