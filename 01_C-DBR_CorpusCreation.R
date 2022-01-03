@@ -1108,17 +1108,8 @@ setnames(dt.rechtsakte,
 
 xmlparse.meta <- function(file.xml){
 
-    ## XML als Character-Vektor einlesen
-    xml.char <- readChar(file.xml,
-                         file.info(file.xml)$size)
-
-    ## Leerzeichen einfügen
-    xml.char <- gsub(">", "> ", xml.char)
-    xml.char <- gsub("<", " <", xml.char)
-    xml.char <- sub(" <", "<", xml.char)
-
     ## XML-Struktur lesen
-    XML <- read_xml(xml.char)
+    XML <- read_xml(file.xml)
 
     ## Schleife vorbereiten
     nodes <- xml_nodes(XML, xpath = "//norm//metadaten")
