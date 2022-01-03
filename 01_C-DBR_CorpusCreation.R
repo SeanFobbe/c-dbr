@@ -3423,7 +3423,7 @@ files.zip <- list.files("output",
 
 #'## Funktion anzeigen: f.dopar.multihashes
 #+ results = "asis"
-print(f.dopar.multihashes)
+print(future_multihashes)
 
 
 #'## Hashes berechnen
