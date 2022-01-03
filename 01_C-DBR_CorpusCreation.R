@@ -389,7 +389,7 @@ XML <- read_xml(URL)
 
 #'## Links zu XML-Dateien aus XML-Inhaltsverzeichnis extrahieren
 
-links <- xml_nodes(XML,
+links <- html_elements(XML,
                    "link")
 
 links.xml <- xml_text(links)
@@ -421,7 +421,21 @@ print(f.linkextract)
 
 #'## Links aus HTML Landing Pages extrahieren
 
-plan("sequential")
+
+if(parallel.htmlLandingPages == TRUE){
+
+    plan("multicore",
+         workers = config$cores$number)
+}else{
+
+    plan("sequential")
+
+     }
+
+
+
+
+
 
 links.list <- future_lapply(links.html,
                             f.linkextract)
@@ -450,7 +464,7 @@ filenames.epub <- grep (".epub$",
 #' 
 #' **Hinweis:** Es gibt zwei Rechtsakte mit dem Namen "Allgemeine Eisenbahngesetz", obwohl es sich um zwei unterschiedliche Rechtsakte handelt. Die beiden Rechtsakte werden daher um ihr jeweiliges Ausfertigungsjahr ergänzt um die Dateinamen einzigartig zu machen.
 
-longtitle.raw <- xml_nodes(XML, "title") %>% xml_text()
+longtitle.raw <- html_elements(XML, "title") %>% xml_text()
 
 
 #'### Namen bereinigen und kürzen
@@ -719,7 +733,7 @@ xmlparse.einzelnormen <- function(file.xml){
     XML <- read_xml(xml.char)
 
     ## Schleife vorbereiten
-    nodes <- xml_nodes(XML, xpath = "//norm")
+    nodes <- html_elements(XML, xpath = "//norm")
     scope <- seq_along(nodes)
     
     ## Inhaltsdaten extrahieren
@@ -731,19 +745,19 @@ xmlparse.einzelnormen <- function(file.xml){
     
     for (i in scope){
         
-        text.temp[[i]] <- xml_nodes(nodes[i],
+        text.temp[[i]] <- html_elements(nodes[i],
                                     xpath = "textdaten//text//Content")  %>% xml_text(trim = TRUE)
         
-        enbez.temp[[i]] <- xml_nodes(nodes[i],
+        enbez.temp[[i]] <- html_elements(nodes[i],
                                      xpath = "metadaten//enbez")  %>% xml_text(trim = TRUE)
         
-        g.kennzahl.temp[[i]] <- xml_nodes(nodes[i],
+        g.kennzahl.temp[[i]] <- html_elements(nodes[i],
                                           xpath = "metadaten//gliederungseinheit//gliederungskennzahl") %>% xml_text(trim = TRUE)
         
-        g.bez.temp[[i]] <- xml_nodes(nodes[i],
+        g.bez.temp[[i]] <- html_elements(nodes[i],
                                      xpath = "metadaten//gliederungseinheit//gliederungsbez")  %>% xml_text(trim = TRUE)
         
-        g.titel.temp[[i]] <- xml_nodes(nodes[i],
+        g.titel.temp[[i]] <- html_elements(nodes[i],
                                        xpath = "metadaten//gliederungseinheit//gliederungstitel")  %>% xml_text(trim = TRUE)
         
     }
@@ -762,9 +776,9 @@ xmlparse.einzelnormen <- function(file.xml){
 
 
     ## Grundlage für Ketten extrahieren
-    g.kennzahl.vec <- xml_nodes(XML, xpath = "//norm//gliederungskennzahl") %>% xml_text(trim = TRUE)
-    g.bez.vec <- xml_nodes(XML, xpath = "//norm//gliederungsbez") %>% xml_text(trim = TRUE)
-    g.titel.vec <- xml_nodes(XML, xpath = "//norm//gliederungstitel") %>% xml_text(trim = TRUE)
+    g.kennzahl.vec <- html_elements(XML, xpath = "//norm//gliederungskennzahl") %>% xml_text(trim = TRUE)
+    g.bez.vec <- html_elements(XML, xpath = "//norm//gliederungsbez") %>% xml_text(trim = TRUE)
+    g.titel.vec <- html_elements(XML, xpath = "//norm//gliederungstitel") %>% xml_text(trim = TRUE)
 
     ## Ketten anhand von Gliederungskennzahlen erstellen
     chain.dt <- f.namechain(g.kennzahl.vec,
@@ -828,9 +842,9 @@ xmlparse.einzelnormen <- function(file.xml){
     
 
     ## Standangaben extrahieren
-    standtyp <- xml_nodes(XML, "standtyp") %>% xml_text(trim = TRUE)
-    standkommentar <- xml_nodes(XML, "standkommentar") %>% xml_text(trim = TRUE)
-    standcheck <- xml_nodes(XML, "standangabe") %>% xml_attr(attr = "checked")
+    standtyp <- html_elements(XML, "standtyp") %>% xml_text(trim = TRUE)
+    standkommentar <- html_elements(XML, "standkommentar") %>% xml_text(trim = TRUE)
+    standcheck <- html_elements(XML, "standangabe") %>% xml_attr(attr = "checked")
 
     dt.stand <- data.table(standtyp,
                            standkommentar,
@@ -1140,7 +1154,7 @@ xmlparse.meta <- function(file.xml){
     XML <- read_xml(file.xml)
 
     ## Schleife vorbereiten
-    nodes <- xml_nodes(XML, xpath = "//norm//metadaten")
+    nodes <- html_elements(XML, xpath = "//norm//metadaten")
     scope <- 1:length(nodes)
 
 
@@ -1171,9 +1185,9 @@ xmlparse.meta <- function(file.xml){
     meta$builddate_original <- xml_attr(XML, attr = "builddate")
 
     ## Standangaben extrahieren
-    standtyp <- xml_nodes(XML, "standtyp") %>% xml_text(trim = TRUE)
-    standkommentar <- xml_nodes(XML, "standkommentar") %>% xml_text(trim = TRUE)
-    standcheck <- xml_nodes(XML, "standangabe") %>% xml_attr(attr = "checked")
+    standtyp <- html_elements(XML, "standtyp") %>% xml_text(trim = TRUE)
+    standkommentar <- html_elements(XML, "standkommentar") %>% xml_text(trim = TRUE)
+    standcheck <- html_elements(XML, "standangabe") %>% xml_attr(attr = "checked")
 
     dt.stand <- data.table(standtyp,
                            standkommentar,
@@ -1434,16 +1448,16 @@ f.kennzahlen.edgelist <- function(kennzahl, name){
 
 f.split.gliederungseinheit <- function(gliederungseinheit){
 
-    kennzahl <- xml_nodes(gliederungseinheit, xpath = "gliederungskennzahl") %>% xml_text()
+    kennzahl <- html_elements(gliederungseinheit, xpath = "gliederungskennzahl") %>% xml_text()
     
-    bez <- xml_nodes(gliederungseinheit, xpath = "gliederungsbez") %>% xml_text()
+    bez <- html_elements(gliederungseinheit, xpath = "gliederungsbez") %>% xml_text()
 
                                         # Newlines, damit Umbrüche in Diagrammen funktionieren
     bez <- gsub(" +",
                 "\n",
                 bez)
     
-    titel <- xml_nodes(gliederungseinheit, xpath = "gliederungstitel") %>% xml_text()
+    titel <- html_elements(gliederungseinheit, xpath = "gliederungstitel") %>% xml_text()
 
     titel <- gsub(" +",
                   "\n",
@@ -1482,7 +1496,7 @@ f.network.analysis <- function(xml.name,
     XML <- read_xml(xml.name)
 
     ## Gliederungseinheiten extrahieren
-    gliederungseinheit <- xml_nodes(XML, xpath = "//norm//gliederungseinheit")
+    gliederungseinheit <- html_elements(XML, xpath = "//norm//gliederungseinheit")
 
     ## Gliederungseinheit splitten
     gliederungseinheit.split <- lapply(gliederungseinheit,
