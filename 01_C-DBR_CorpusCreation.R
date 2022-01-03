@@ -1736,6 +1736,7 @@ if(config$parallel$parseNetworks == TRUE){
 
 #'### XML Parsen
 
+#+ results = 'hide'
 out.netanalysis <- future_lapply(files.xml,
                                  f.network.analysis,
                                  prefix.figuretitle = prefix.figuretitle,
