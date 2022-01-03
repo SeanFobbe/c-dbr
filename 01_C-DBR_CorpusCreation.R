@@ -398,7 +398,7 @@ print(f.linkextract)
 
 #'## Links aus HTML Landing Pages extrahieren
 
-plan("multisession",
+plan("multicore",
      workers = 4)
 
 links.list <- future_lapply(links.html,
@@ -605,11 +605,14 @@ download.file("https://www.gesetze-im-internet.de/dtd/1.01/gii-norm.dtd",
 
 #'## Download der XML-Dateien
 
+plan("multicore",
+     workers = fullCores)
+
 #+ results = 'hide'
-mcmapply(download.file,
-         download$links.xml,
-         paste0("XML/",
-                download$title.xml))
+future_mapply(download.file,
+              download$links.xml,
+              paste0("XML/",
+                     download$title.xml))
 
 
 
