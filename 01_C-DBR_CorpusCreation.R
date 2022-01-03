@@ -129,8 +129,8 @@ packages <- c("zip",          # ZIP Files
               "kableExtra",   # Verbesserte Kable Tabellen
               "magick",       # Verarbeitung von Bild-Dateien
               "pdftools",     # Extrahieren von PDF-Dateien
-              "parallel",     # Parallelisierung
-              "doParallel",   # Parallelisierung
+#              "parallel",     # Parallelisierung
+#              "doParallel",   # Parallelisierung
               "ggplot2",      # Fortgeschrittene Datenvisualisierung
               "data.table",   # Fortgeschrittene Datenverarbeitung
               "quanteda",     # Fortgeschrittene Computerlinguistik
@@ -138,7 +138,9 @@ packages <- c("zip",          # ZIP Files
               "openssl",      # Kryptographische Signaturen
               "igraph",       # Analyse von Graphen
               "ggraph",       # Analyse von Graphen
-              "qgraph")       # Analyse von Graphen
+              "qgraph",
+              "future",
+              "future.apply")       # Analyse von Graphen
 
 
 groundhog.library(pkg = packages,
@@ -396,8 +398,13 @@ print(f.linkextract)
 
 #'## Links aus HTML Landing Pages extrahieren
 
-links.list <- lapply(links.html,
-                     f.linkextract)
+plan("multisession",
+     workers = 4)
+
+links.list <- future_lapply(links.html,
+                            f.linkextract)
+
+
 
 
 links.raw <- unlist(links.list)
