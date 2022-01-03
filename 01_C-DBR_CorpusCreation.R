@@ -407,8 +407,7 @@ print(f.linkextract)
 
 #'## Links aus HTML Landing Pages extrahieren
 
-plan("multicore",
-     workers = 4)
+plan("sequential"))
 
 links.list <- future_lapply(links.html,
                             f.linkextract)
