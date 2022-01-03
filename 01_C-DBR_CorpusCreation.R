@@ -1035,9 +1035,15 @@ fwrite(check,
 #'### Variablen definieren
 #' Zunächt der vordefinierte Satz an Metadaten.
 
-varlist.r1 <- gsub("ausfertigung-datum",
-                   "ausfertigung_datum",
-                   varlist)
+varlist.r1 <- c("jurabk",
+             "amtabk",
+             "ausfertigung_datum",
+             "periodikum",
+             "zitstelle",
+             "langue",
+             "kurzue")
+
+
 
 #' Die Stand-Variablen haben immer auch ein Pendant das mit "check_" beginnt.
 
