@@ -18,8 +18,8 @@ doi.software.version = "???"
 
 # Debugging
 
-debug.toggle = "FALSE"   # Ob Debugging aktiv ist; Möglichkeiten sind "TRUE" oder "FALSE"
-debug.sample = 100      # Die Anzahl der zufällig ausgewählten Rechtsakte, die im Debugging-Modus berücksichtigt werden sollen.
+debug.toggle = "TRUE"   # Ob Debugging aktiv ist; Möglichkeiten sind "TRUE" oder "FALSE"
+debug.sample = 300      # Die Anzahl der zufällig ausgewählten Rechtsakte, die im Debugging-Modus berücksichtigt werden sollen.
 qa.sample = 100        # Die Anzahl der zufällig ausgewählten Einzelnormen, die zur Überprüfung separat gespeichert werden sollen.
 
 
