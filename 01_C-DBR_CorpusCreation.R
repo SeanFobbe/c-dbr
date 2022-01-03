@@ -1754,8 +1754,9 @@ zip(paste0("output/",
 #+
 #'## Funktion anzeigen: f.fast.freqtable
 
-#+ results = "asis"
 print(f.fast.freqtable)
+
+
 
 #'## Liste zu prüfender Variablen
 print(config$freqtable$ignore)
