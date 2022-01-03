@@ -400,7 +400,8 @@ links.xml <- xml_text(links)
 
 if (config$debug$toggle == TRUE){
 
-    links.xml <- links.xml[sample(length(links.xml), config$debug$sample)]
+    links.xml <- links.xml[sample(length(links.xml),
+                                  config$debug$sample)]
 
 }
 
