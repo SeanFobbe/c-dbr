@@ -1693,8 +1693,8 @@ errorfiles <- c("BJNR008810961.xml",
 
 files.xml <- setdiff(files.xml, errorfiles)
 
-files.xml <- paste0("XML/",
-                    files.xml)
+files.xml <- file.path("XML",
+                       files.xml)
 
 length(files.xml)
 
