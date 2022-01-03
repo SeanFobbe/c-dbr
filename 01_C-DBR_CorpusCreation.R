@@ -415,6 +415,8 @@ links.html <- gsub("/xml.zip",
                    links.xml)
 
 
+
+
 #'## Funktion anzeigen: f.linkextract
 print(f.linkextract)
 
@@ -422,10 +424,11 @@ print(f.linkextract)
 #'## Links aus HTML Landing Pages extrahieren
 
 
-if(parallel.htmlLandingPages == TRUE){
+if(config$parallel$htmlLandingPages == TRUE){
 
     plan("multicore",
          workers = config$cores$number)
+    
 }else{
 
     plan("sequential")
@@ -433,14 +436,8 @@ if(parallel.htmlLandingPages == TRUE){
      }
 
 
-
-
-
-
 links.list <- future_lapply(links.html,
                             f.linkextract)
-
-
 
 
 links.raw <- unlist(links.list)
@@ -641,8 +638,18 @@ download.file("https://www.gesetze-im-internet.de/dtd/1.01/gii-norm.dtd",
 
 #'## Download der XML-Dateien
 
-plan("multicore",
-     workers = fullCores)
+
+if(config$parallel$downloadXML == TRUE){
+
+    plan("multicore",
+         workers = fullCores)
+    
+}else{
+
+    plan("sequential")
+
+     }
+
 
 #+ results = 'hide'
 future_mapply(download.file,
