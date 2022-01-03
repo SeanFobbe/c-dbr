@@ -1504,8 +1504,8 @@ f.split.gliederungseinheit <- function(gliederungseinheit){
 #xml.name <- "XML/BJNR001950896.xml" # BGB
 
 
-xml.name <- "XML/BJNR335610017.xml" # problem
-f.network.analysis(xml.name)
+#xml.name <- "XML/BJNR335610017.xml" # problem
+#f.network.analysis(xml.name)
 
 
 
