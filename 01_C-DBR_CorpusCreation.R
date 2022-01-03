@@ -899,7 +899,7 @@ begin.parse <- Sys.time()
 
 #'### XML Parsen
 
-out <- future_lapply(files.xml[1:3000],
+out <- future_lapply(files.xml,
                      xmlparse.einzelnormen)
 
 
