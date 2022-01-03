@@ -888,12 +888,12 @@ plan("multicore",
 
 #'### XML Parsen
 
-out <- future_lapply(files.xml,
-                     xmlparse.einzelnormen)
+out.einzelnormen <- future_lapply(files.xml,
+                                  xmlparse.einzelnormen)
 
 
 #'### Liste in Data Table umwandeln
-dt.normen <- rbindlist(out,
+dt.normen <- rbindlist(out.einzelnormen,
                        use.names = TRUE,
                        fill = TRUE)
 
@@ -1214,13 +1214,13 @@ plan("multicore",
 
 #'### XML Parsen
 
-out <- future_lapply(files.xml,
+out.meta <- future_lapply(files.xml,
                      xmlparse.meta)
 
 
 
 #'### Liste in Data Table umwandeln
-dt.meta <- rbindlist(out,
+dt.meta <- rbindlist(out.meta,
                      use.names = TRUE,
                      fill = TRUE)
 
