@@ -3025,7 +3025,7 @@ length(files.pdf)
 
 
 #'## Funktion anzeigen: future_pdf_to_txt
-#+ results = "asis"
+
 print(future_pdf_to_txt)
 
 
@@ -3447,7 +3447,7 @@ files.zip <- list.files("output",
 
 
 #'## Funktion anzeigen: future_multihashes
-#+ results = "asis"
+
 print(future_multihashes)
 
 
