@@ -143,7 +143,7 @@ packages <- c("zip",          # ZIP Files
               "future.apply") # Parallelisierung
 
 
-#lapply(packages, library, character.only = TRUE)
+lapply(packages, library, character.only = TRUE)
 
 #+ results = 'hide'
 #groundhog.library(pkg = packages,
