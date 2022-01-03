@@ -163,6 +163,7 @@ source("functions/f.namechain.R")
 source("functions/f.zero.NA.R")
 source("functions/f.multihashes.R")
 source("functions/f.future_multihashes.R")
+source("functions/f.pdf_to_txt.R")
 source("functions/f.future_pdf_to_txt.R")
 
 
@@ -3000,12 +3001,19 @@ length(files.pdf)
 
 #'## Funktion anzeigen: f.dopar.pdfextract
 #+ results = "asis"
-print(f.future_pdf_to_txt.R)
+print(future_pdf_to_txt)
+
+
 
 
 #'## Text Extrahieren
 #+ results = "hide"
-f.future_pdf_to_txt.R(files.pdf)
+
+
+plan("multicore",
+     workers = fullCores)
+
+future_pdf_to_txt(files.pdf)
 
 
 
