@@ -427,7 +427,7 @@ print(f.linkextract)
 if(config$parallel$htmlLandingPages == TRUE){
 
     plan("multicore",
-         workers = config$cores$number)
+         workers = fullCores)
     
 }else{
 
