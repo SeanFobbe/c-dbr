@@ -1684,31 +1684,6 @@ end.netanalysis - begin.netanalysis
 
 
 
-###
-cl <- makeForkCluster(fullCores)
-registerDoParallel(cl)
-
-### Sequentielle Berechnung funktioniert auch mit errorfiles
-#registerDoSEQ(cl)
-
-out <- foreach(file = files.xml,
-               .errorhandling = 'pass') %dopar% {
-
-    f.network.analysis(file)
-
-}
-
-stopCluster(cl)
-
-
-#'### XML-Dateien bei denen Fehler auftreten
-
-files.xml[grep("error",
-               out)]
-
-
-
-
 
 
 
