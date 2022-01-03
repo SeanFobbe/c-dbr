@@ -871,14 +871,19 @@ xmlparse.einzelnormen <- function(file.xml){
 
 #+ Einzelnormen-Parse
 
-plan("multicore",
-     workers = fullCores)
 
 
 
 #+
 #'### Beginn XML Parsing
 begin.parse <- Sys.time()
+
+
+#'### Parallelisierung definieren
+
+plan("multicore",
+     workers = fullCores)
+
 
 
 #'### XML Parsen
@@ -1201,40 +1206,43 @@ xmlparse.meta <- function(file.xml){
 }
 
 
+
+
+
 #+
 #'### Beginn XML Parsing
 begin.parse <- Sys.time()
 
 
-#'### Fork Cluster starten
+#'### Parallelisierung definieren
 
-cl <- makeForkCluster(fullCores)
-registerDoParallel(cl)
+plan("multicore",
+     workers = fullCores)
+
 
 
 #'### XML Parsen
 
-#+ Metadaten-Parse
-limit <- length(files.xml)
-
-out <- foreach(z = 1:limit, .errorhandling = 'pass') %dopar% {
+out <- future_lapply(files.xml,
+                     xmlparse.meta)
 
 
+#xmlparse.meta(files.xml[5])
 
-#'### Fork Cluster beenden
-stopCluster(cl)
+
+
 
 #'### Liste in Data Table umwandeln
 dt.meta <- rbindlist(out,
                      use.names = TRUE,
                      fill = TRUE)
 
+
 #'### Ende XML Parsing
 end.parse <- Sys.time()
 
 #'### Dauer XML Parsing
 end.parse - begin.parse
-
 
 
 
