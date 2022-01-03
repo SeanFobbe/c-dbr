@@ -688,28 +688,15 @@ varlist <- c("jurabk",
 #'
 #' Ohne diesen Schritt können Ergebnisse so aussehen: "Zollkodex,d)alle Verfahren"
 
-#+
-#'### Beginn XML Parsing
-begin.parse <- Sys.time()
+
+#'### Funktion für XML-Parsing definieren
 
 
-#'### Fork Cluster starten
+xmlparse.einzelnormen <- function(file.xml){
 
-cl <- makeForkCluster(fullCores)
-registerDoParallel(cl)
-
-
-
-#'### XML Parsen
-
-#+ Einzelnormen-Parse
-limit <- length(files.xml)
-
-out <- foreach(z = 1:limit, .errorhandling = 'pass') %dopar% {
-    
     ## XML als Character-Vektor einlesen
-    xml.char <- readChar(files.xml[z],
-                         file.info(files.xml[z])$size)
+    xml.char <- readChar(file.xml,
+                         file.info(file.xml)$size)
 
     ## Leerzeichen einfügen
     xml.char <- gsub(">", "> ", xml.char)
@@ -774,10 +761,10 @@ out <- foreach(z = 1:limit, .errorhandling = 'pass') %dopar% {
 
     ## Ketten einfügen
     titelkette <- chain.dt$titelchain[match(gliederungskennzahl,
-                                   chain.dt$einzelzahl)]
+                                            chain.dt$einzelzahl)]
 
     bezkette <- chain.dt$bezchain[match(gliederungskennzahl,
-                                   chain.dt$einzelzahl)]
+                                        chain.dt$einzelzahl)]
 
 
     ## Build Date extrahieren
@@ -814,7 +801,7 @@ out <- foreach(z = 1:limit, .errorhandling = 'pass') %dopar% {
                                content.out[,.N])
 
 
-    meta$dateiname <- rep(files.xml[z],
+    meta$dateiname <- rep(basename(file.xml),
                           content.out[,.N])
     
 
@@ -881,8 +868,24 @@ out <- foreach(z = 1:limit, .errorhandling = 'pass') %dopar% {
 }
 
 
-#'### Cluster beenden
-stopCluster(cl)
+
+#+ Einzelnormen-Parse
+
+
+
+#+
+#'### Beginn XML Parsing
+begin.parse <- Sys.time()
+
+
+#'### XML Parsen
+
+plan("multicore",
+     workers = fullCores)
+
+out <- future_lapply(files.xml,
+                     xmlparse.einzelnormen)
+
 
 
 #'### Liste in Data Table umwandeln
