@@ -3568,7 +3568,9 @@ if(config$parallel$multihashes == TRUE){
 
 multihashes <- future_multihashes(files.zip)
 
-
+setnames(multihashes,
+         old = "x",
+         new = "filename")
 
 
 #'## In Data Table umwandeln
