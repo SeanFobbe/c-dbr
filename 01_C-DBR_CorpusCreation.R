@@ -669,16 +669,6 @@ xml.MB <- file.size(files.xml) / 10^6
 
 
 
-#'## Zu extrahierende Metadaten-Variablen definieren
-
-varlist <- c("jurabk",
-             "amtabk",
-             "ausfertigung-datum",
-             "periodikum",
-             "zitstelle",
-             "langue",
-             "kurzue")
-
 
 
 #'## Korpus erstellen: Einzelnormen
@@ -693,7 +683,7 @@ varlist <- c("jurabk",
 
 
 xmlparse.einzelnormen <- function(file.xml){
-
+    
     ## XML als Character-Vektor einlesen
     xml.char <- readChar(file.xml,
                          file.info(file.xml)$size)
@@ -783,7 +773,17 @@ xmlparse.einzelnormen <- function(file.xml){
     content.out <- content.out[text != ""]                                                 
     
     
-    ## Allgemeine Metadaten extrahieren   
+    ## Allgemeine Metadaten extrahieren
+
+    varlist <- c("jurabk",
+                 "amtabk",
+                 "ausfertigung-datum",
+                 "periodikum",
+                 "zitstelle",
+                 "langue",
+                 "kurzue")
+
+    
     meta <- vector("list", length(varlist))
     
     for (i in 1:length(varlist)){
@@ -868,9 +868,28 @@ xmlparse.einzelnormen <- function(file.xml){
 }
 
 
+    tryCatch({
+        read_html(URL) %>%
+            html_nodes("a")%>%
+            html_attr('href')},
+        error = function(cond) {
+            return(NA)}
+        )
+
 
 #+ Einzelnormen-Parse
 
+
+,
+                     future.chunk.size = 200
+
+
+
+
+plan("multicore",
+     workers = 14)
+
+plan("sequential")
 
 
 #+
@@ -880,12 +899,11 @@ begin.parse <- Sys.time()
 
 #'### XML Parsen
 
-plan("multicore",
-     workers = fullCores)
-
-out <- future_lapply(files.xml,
+out <- future_lapply(files.xml[1:100],
                      xmlparse.einzelnormen)
 
+
+#xmlparse.einzelnormen(files.xml[55])
 
 
 #'### Liste in Data Table umwandeln
@@ -900,7 +918,7 @@ end.parse <- Sys.time()
 #'### Dauer XML Parsing
 end.parse - begin.parse
 
-
+str(dt.normen)
 
 
 
