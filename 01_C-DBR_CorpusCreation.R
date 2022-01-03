@@ -154,9 +154,9 @@ groundhog.library(pkg = packages,
 source("R-fobbe-proto-package/f.linkextract.R")
 source("R-fobbe-proto-package/f.fast.freqtable.R")
 source("R-fobbe-proto-package/f.lingsummarize.iterator.R")
-source("R-fobbe-proto-package/f.dopar.pagenums.R")
-source("R-fobbe-proto-package/f.dopar.pdfextract.R")
-source("R-fobbe-proto-package/f.dopar.multihashes.R")
+#source("R-fobbe-proto-package/f.dopar.pagenums.R")
+#source("R-fobbe-proto-package/f.dopar.pdfextract.R")
+#source("R-fobbe-proto-package/f.dopar.multihashes.R")
 
 source("functions/f.heading.transform.R")
 source("functions/f.namechain.R")
@@ -2120,6 +2120,12 @@ print(future_lingsummarize)
 #                                                     threads = fullCores,
 #                                                     chunksize = 1)
 
+
+plan("multicore",
+     workers = fullCores)
+
+
+
 lingstats.normen.raw <- future_lingsummarize(dt.normen)
 
 lingstats.rechtsakte.raw <- future_lingsummarize(dt.rechtsakte)
@@ -3006,7 +3012,7 @@ length(files.pdf)
 
 
 
-#'## Funktion anzeigen: f.dopar.pdfextract
+#'## Funktion anzeigen: future_pdf_to_txt
 #+ results = "asis"
 print(future_pdf_to_txt)
 
@@ -3428,17 +3434,18 @@ files.zip <- list.files("output",
 
 
 
-#'## Funktion anzeigen: f.dopar.multihashes
+#'## Funktion anzeigen: future_multihashes
 #+ results = "asis"
 print(future_multihashes)
 
 
 #'## Hashes berechnen
-multihashes <- f.dopar.multihashes(files.zip)
+multihashes <- future_multihashes(files.zip)
 
 
 #'## In Data Table umwandeln
 setDT(multihashes)
+
 
 
 
