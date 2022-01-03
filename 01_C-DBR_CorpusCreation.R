@@ -654,8 +654,8 @@ if(config$parallel$downloadXML == TRUE){
 #+ results = 'hide'
 future_mapply(download.file,
               download$links.xml,
-              paste0("XML/",
-                     download$title.xml))
+              file.path("XML",
+                        download$title.xml))
 
 
 
@@ -3060,8 +3060,8 @@ if(config$parallel$downloadPDF == TRUE){
 #+ results = 'hide'
 future_mapply(download.file,
               download$links.pdf,
-              paste0("PDF/",
-                     download$title.pdf))
+              file.path("PDF",
+                        download$title.pdf))
 
 
 #'## Download-Ergebnis
@@ -3173,8 +3173,8 @@ if(config$parallel$downloadEPUB == TRUE){
 #+ results = 'hide'
 future_mapply(download.file,
               download$links.epub,
-              paste0("EPUB/",
-                     download$title.epub))
+              file.path("EPUB",
+                        download$title.epub))
 
 
 
