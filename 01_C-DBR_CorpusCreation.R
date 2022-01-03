@@ -1408,8 +1408,11 @@ f.kennzahlen.edgelist <- function(kennzahl, name){
 #' f.network.analysis benötigt  f.kennzahlen.search, f.kennzahlen.collapse und f.kennzahlen.edgelist.
 
 
-f.network.analysis <- function(xml.name){
+f.network.analysis <- function(xml.name,
+                               prefix.figuretitle,
+                               caption){
 
+    message(xml.name)
     XML <- read_xml(xml.name)
 
     kennzahl <- xml_nodes(XML, xpath = "//norm//gliederungskennzahl") %>% xml_text()
@@ -1432,8 +1435,6 @@ f.network.analysis <- function(xml.name){
     node.labels0 <- ifelse(titel != "",
                            titel,
                            bez)
-
-
 
     node.labels <- c(jurabk,
                      node.labels0)
@@ -1554,7 +1555,8 @@ errorfiles <- c("BJNR008810961.xml",
                 "BJNR203220978.xml",
                 "BJNR277700013.xml",
                 "BJNR284600017.xml",
-                "BJNR364800009.xml")
+                "BJNR364800009.xml",
+                "BJNR000939960.xml")
 
 files.xml <- setdiff(files.xml, errorfiles)
 
@@ -1564,8 +1566,14 @@ files.xml <- paste0("XML/",
 length(files.xml)
 
 
+#https://www.gesetze-im-internet.de/bgb/BJNR001950896.epub
 
+#xml.name <- files.xml[205]
 
+xml.name <- "XML/BJNR002089971.xml" # problem
+xml.name <- "XML/BJNR002089971.xml"
+
+https://www.gesetze-im-internet.de/bgb/BJNR001950896.epub
 
 #+
 #'### Beginn Network Analysis
@@ -1578,12 +1586,15 @@ begin.netanalysis <- Sys.time()
 plan("multicore",
      workers = fullCores)
 
+plan("sequential")
 
 
 #'### XML Parsen
 
-out.netanalysis <- future_lapply(files.xml[1000],
+out.netanalysis <- future_lapply(files.xml,
                                  f.network.analysis,
+                                 prefix.figuretitle = prefix.figuretitle,
+                                 caption = caption,
                                  future.seed = TRUE)
 
 
