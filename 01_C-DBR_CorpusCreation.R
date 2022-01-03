@@ -145,7 +145,7 @@ packages <- c("zip",          # ZIP Files
 
 #lapply(packages, library, character.only = TRUE)
 
-groundhog.library(package = packages,
+groundhog.library(pkg = packages,
                   date = "2021-02-20")
                  
 
