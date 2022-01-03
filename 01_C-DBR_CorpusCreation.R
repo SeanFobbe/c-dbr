@@ -924,8 +924,17 @@ begin.parse <- Sys.time()
 
 #'### Parallelisierung definieren
 
-plan("multicore",
-     workers = fullCores)
+if(config$parallel$parseEinzelnormen == TRUE){
+
+    plan("multicore",
+         workers = fullCores)
+    
+}else{
+
+    plan("sequential")
+
+     }
+
 
 
 
@@ -1256,8 +1265,17 @@ begin.parse <- Sys.time()
 
 #'### Parallelisierung definieren
 
-plan("multicore",
-     workers = fullCores)
+if(config$parallel$parseMeta == TRUE){
+
+    plan("multicore",
+         workers = fullCores)
+    
+}else{
+
+    plan("sequential")
+
+     }
+
 
 
 
@@ -1701,10 +1719,19 @@ begin.netanalysis <- Sys.time()
 #'### Parallelisierung definieren
 #'  Parallele Berechnung funktioniert nicht mit errorfiles; sequentielle Berechnung schon
 
-plan("multicore",
-     workers = fullCores)
 
-#plan("sequential")
+
+if(config$parallel$parseNetworks == TRUE){
+
+    plan("multicore",
+         workers = fullCores)
+    
+}else{
+
+    plan("sequential")
+
+     }
+
 
 
 #'### XML Parsen
@@ -2167,9 +2194,16 @@ print(future_lingsummarize)
 #                                                     chunksize = 1)
 
 
-plan("multicore",
-     workers = fullCores)
+if(config$parallel$lingsummarize == TRUE){
 
+    plan("multicore",
+         workers = fullCores)
+    
+}else{
+
+    plan("sequential")
+
+     }
 
 
 lingstats.normen.raw <- future_lingsummarize(dt.normen)
@@ -3009,8 +3043,18 @@ fwrite(dt.meta,
 #'## Download durchführen
 
 
-plan("multicore",
-     workers = fullCores)
+if(config$parallel$downloadPDF == TRUE){
+
+    plan("multicore",
+         workers = fullCores)
+    
+}else{
+
+    plan("sequential")
+
+     }
+
+
 
 #+ results = 'hide'
 future_mapply(download.file,
@@ -3069,8 +3113,18 @@ print(future_pdf_to_txt)
 #+ results = "hide"
 
 
-plan("multicore",
-     workers = fullCores)
+if(config$parallel$extractPDF == TRUE){
+
+    plan("multicore",
+         workers = fullCores)
+    
+}else{
+
+    plan("sequential")
+
+     }
+
+
 
 future_pdf_to_txt(files.pdf)
 
@@ -3100,8 +3154,20 @@ file.rename(files.txt,
 #+
 #'## Download durchführen
 
-plan("multicore",
-     workers = fullCores)
+
+
+if(config$parallel$downloadEPUB == TRUE){
+
+    plan("multicore",
+         workers = fullCores)
+    
+}else{
+
+    plan("sequential")
+
+     }
+
+
 
 #+ results = 'hide'
 future_mapply(download.file,
@@ -3486,7 +3552,23 @@ print(future_multihashes)
 
 
 #'## Hashes berechnen
+
+
+if(config$parallel$multihashes == TRUE){
+
+    plan("multicore",
+         workers = fullCores)
+    
+}else{
+
+    plan("sequential")
+
+     }
+
+
 multihashes <- future_multihashes(files.zip)
+
+
 
 
 #'## In Data Table umwandeln
