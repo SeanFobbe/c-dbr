@@ -912,7 +912,7 @@ xmlparse.einzelnormen <- function(file.xml){
 
 
 
-#+ Einzelnormen-Parse
+
 
 
 
@@ -940,6 +940,7 @@ if(config$parallel$parseEinzelnormen == TRUE){
 
 #'### XML Parsen
 
+#+ Einzelnormen-Parse
 out.einzelnormen <- future_lapply(files.xml,
                                   xmlparse.einzelnormen)
 
@@ -1281,6 +1282,7 @@ if(config$parallel$parseMeta == TRUE){
 
 #'### XML Parsen
 
+#+ XMLmeta-parse
 out.meta <- future_lapply(files.xml,
                      xmlparse.meta)
 
@@ -1736,7 +1738,7 @@ if(config$parallel$parseNetworks == TRUE){
 
 #'### XML Parsen
 
-#+ results = 'hide'
+#+ netanalysis, results = 'hide'
 out.netanalysis <- future_lapply(files.xml,
                                  f.network.analysis,
                                  prefix.figuretitle = prefix.figuretitle,
@@ -2207,6 +2209,7 @@ if(config$parallel$lingsummarize == TRUE){
      }
 
 
+#+ lingsummarize
 lingstats.normen.raw <- future_lingsummarize(dt.normen)
 
 lingstats.rechtsakte.raw <- future_lingsummarize(dt.rechtsakte)
