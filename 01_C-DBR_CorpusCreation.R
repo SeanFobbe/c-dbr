@@ -3000,12 +3000,12 @@ length(files.pdf)
 
 #'## Funktion anzeigen: f.dopar.pdfextract
 #+ results = "asis"
-print(f.dopar.pdfextract)
+print(f.future_pdf_to_txt.R)
 
 
 #'## Text Extrahieren
 #+ results = "hide"
-f.dopar.pdfextract(files.pdf)
+f.future_pdf_to_txt.R(files.pdf)
 
 
 
@@ -3033,11 +3033,14 @@ file.rename(files.txt,
 #+
 #'## Download durchführen
 
+plan("multicore",
+     workers = fullCores)
+
 #+ results = 'hide'
-mcmapply(download.file,
-         download$links.epub,
-         paste0("EPUB/",
-                download$title.epub))
+future_mapply(download.file,
+              download$links.epub,
+              paste0("EPUB/",
+                     download$title.epub))
 
 
 
