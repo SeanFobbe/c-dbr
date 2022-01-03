@@ -202,7 +202,7 @@ dir.create("netzwerke/Edgelists")
 dir.create("netzwerke/Adjazenzmatrizen")
 dir.create("netzwerke/Netzwerkdiagramme")
 dir.create("netzwerke/GraphML")
-
+dir.create("netzwerke/Gliederungstabellen")
 
 
 #'## Vollzitate statistischer Software schreiben
@@ -1410,16 +1410,16 @@ f.split.gliederungseinheit <- function(gliederungseinheit){
     
     bez <- xml_nodes(gliederungseinheit, xpath = "gliederungsbez") %>% xml_text()
 
-    # Newlines, damit Umbrüche in Diagrammen funktionieren
+                                        # Newlines, damit Umbrüche in Diagrammen funktionieren
     bez <- gsub(" +",
                 "\n",
                 bez)
+    
+    titel <- xml_nodes(gliederungseinheit, xpath = "gliederungstitel") %>% xml_text()
 
     titel <- gsub(" +",
                   "\n",
                   titel)
-    
-    titel <- xml_nodes(gliederungseinheit, xpath = "gliederungstitel") %>% xml_text()
     
     if(length(titel) == 0){
         titel <- NA
@@ -1482,9 +1482,8 @@ f.network.analysis <- function(xml.name,
                                       name = jurabk)
 
 
-
-    nodes.df <- data.table(kennzahl,
-                           titel)
+    ## Node Labels definieren
+    nodes.df <-gliederungseinheit.split[,.(kennzahl, titel)]
 
     addname <- data.table(jurabk,
                           jurabk)
@@ -1498,16 +1497,18 @@ f.network.analysis <- function(xml.name,
     setnames(nodes.df, new = c("kennzahl",
                                "label"))
 
-
+    
+    ## Graph aus Edgelist erstellen
     g  <- graph.data.frame(edgelist,
                            directed = TRUE,
                            vertices = nodes.df)
 
 
-
+    ## Adjazenz-Matrix erstellen
     M.adjacency <- as.matrix(get.adjacency(g,
                                            edges = F))
 
+    ## Dateiname definieren
     filename <- paste0(gsub("( +)|(/)",
                             "-",
                             jurabk),
@@ -1516,23 +1517,34 @@ f.network.analysis <- function(xml.name,
                             "",
                             basename(xml.name)))
 
+    ## Gliederungstabelle speichern
+    fwrite(gliederungseinheit.split,
+           paste0("netzwerke/Gliederungstabellen/",
+                  filename,
+                  "_Gliederungstabelle.csv"))
+    
+    ## Edgelist speichern
     fwrite(edgelist,
            paste0("netzwerke/Edgelists/",
                   filename,
                   "_Edgelist.csv"))
 
-    
+
+    ## Adjazenz-Matrix speichern
     fwrite(M.adjacency,
            paste0("netzwerke/Adjazenzmatrizen/",
                   filename,
                   "_AdjazenzMatrix.csv"))
 
+    ## GraphML speichern
     write_graph(g,
                 file = paste0("netzwerke/GraphML/",
                               filename,
                               ".graphml"),
                 format = "graphml")
 
+    
+    ## Diagramm erstellen und speichern
     if (length(V(g)) > 1){
         
         networkplot <- ggraph(g,
