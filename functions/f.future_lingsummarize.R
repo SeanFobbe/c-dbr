@@ -11,10 +11,43 @@ library(future.apply)
 
 
 
-future_lingsummarize <- function(dt,
-                                 threads = detectCores(),
-                                 chunksize = 1){
+lingsummarize <- function(dt){
 
+    corpus <- corpus(dt)
+    
+    tokens <- tokens(corpus,
+                     what = "word",
+                     remove_punct = FALSE,
+                     remove_symbols = FALSE,
+                     remove_numbers = FALSE,
+                     remove_url = FALSE,
+                     remove_separators = TRUE,
+                     split_hyphens = FALSE,
+                     include_docvars = FALSE,
+                     padding = FALSE
+                     )
+    
+    ntokens <- unname(ntoken(tokens))
+    ntypes  <- unname(ntype(tokens))
+    nsentences <- unname(nsentence(corpus))
+
+    out <- data.table(ntokens,
+                      ntypes,
+                      nsentences)
+    
+    return(out)
+
+    
+}
+
+
+
+
+
+
+future_lingsummarize <- function(dt,
+                                 chunksperworker = 1,
+                                 chunksize = NULL){
 
     begin.dopar <- Sys.time()
 
@@ -22,11 +55,7 @@ future_lingsummarize <- function(dt,
     
     nchars <- dt[, lapply(.(text), nchar)]
     
-    print(paste0("Parallel processing using ",
-                 threads,
-                 " threads. Begin at ",
-                 begin.dopar,
-                 ". Processing ",
+    print(paste0("Processing ",
                  dt[,.N],
                  " documents with a total length of ",
                  sum(nchars),
@@ -35,50 +64,22 @@ future_lingsummarize <- function(dt,
     
     ord <- order(-nchars)
     dt <- dt[ord]
-    
-    cl <- makeForkCluster(threads)
-    registerDoParallel(cl)
-    
 
-    itx <- iter(dt["nchars" > 0],
-                by = "row",
-                chunksize = chunksize)
+    raw.list <- split(dt, seq(nrow(dt)))
     
-    result.list <- foreach(i = itx,
-                           .errorhandling = 'pass') %dopar% {
-
-                               corpus <- corpus(i)
-                               
-                               tokens <- tokens(corpus,
-                                                what = "word",
-                                                remove_punct = FALSE,
-                                                remove_symbols = FALSE,
-                                                remove_numbers = FALSE,
-                                                remove_url = FALSE,
-                                                remove_separators = TRUE,
-                                                split_hyphens = FALSE,
-                                                include_docvars = FALSE,
-                                                padding = FALSE
-                                                )
-                               
-                               ntokens <- unname(ntoken(tokens))
-                               ntypes  <- unname(ntype(tokens))
-                               nsentences <- unname(nsentence(corpus))
-
-                               temp <- data.table(ntokens,
-                                                  ntypes,
-                                                  nsentences)
-                               
-                               return(temp)
-                           }
+    result.list <- future_lapply(raw.list,
+                                 lingsummarize,
+                                 future.seed = TRUE,
+                                 future.scheduling = chunksperworker,
+                                 future.chunk.size = chunksize)
     
-    stopCluster(cl)
+    result.dt <- rbindlist(result.list)
 
+    
 
     end.dopar <- Sys.time()
     duration.dopar <- end.dopar - begin.dopar
 
-    result.dt <- rbindlist(result.list)
 
     summary.corpus <- cbind(nchars[ord],
                             result.dt)
