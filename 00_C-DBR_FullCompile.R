@@ -10,8 +10,6 @@ groundhog.library(pkg = "rmarkdown",
 #' 
 #' Um den **vollständigen Datensatz** zu kompilieren und einen PDF-Bericht zu erstellen, kopieren Sie bitte alle im Source-Archiv bereitgestellten Dateien in einen leeren Ordner und führen mit R diesen Befehl aus:
 
-#+ eval = FALSE
-
 rmarkdown::render(input = "01_C-DBR_CorpusCreation.R",
                   envir = new.env(),
                   output_file = paste0("C-DBR_",
@@ -27,7 +25,6 @@ rmarkdown::render(input = "01_C-DBR_CorpusCreation.R",
 #'
 #' Bei der Prüfung der GPG-Signatur wird ein Fehler auftreten und im Codebook dokumentiert, weil die Daten nicht mit meiner Original-Signatur versehen sind. Dieser Fehler hat jedoch keine Auswirkungen auf die Funktionalität und hindert die Kompilierung nicht.
 
-#+ eval = FALSE
 
 rmarkdown::render(input = "02_C-DBR_CodebookCreation.R",
                   envir = new.env(),
