@@ -18,7 +18,7 @@ doi.software.version = "???"
 
 # Debugging
 
-debug.toggle = true   # Ob Debugging aktiv ist; Möglichkeiten sind "TRUE" oder "FALSE"
+debug.toggle = false   # Ob Debugging aktiv ist; Möglichkeiten sind "TRUE" oder "FALSE"
 debug.sample = 500      # Die Anzahl der zufällig ausgewählten Rechtsakte, die im Debugging-Modus berücksichtigt werden sollen.
 qa.sample = 50        # Die Anzahl der zufällig ausgewählten Einzelnormen, die zur Überprüfung separat gespeichert werden sollen.
 
@@ -37,7 +37,7 @@ parallel.lingsummarize = false
 parallel.downloadPDF = true
 parallel.extractPDF = true
 parallel.downloadEPUB = true
-parallel.multihashes = false
+parallel.multihashes = true
 
 
 
