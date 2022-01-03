@@ -1227,10 +1227,6 @@ out <- future_lapply(files.xml,
                      xmlparse.meta)
 
 
-#xmlparse.meta(files.xml[5])
-
-
-
 
 #'### Liste in Data Table umwandeln
 dt.meta <- rbindlist(out,
