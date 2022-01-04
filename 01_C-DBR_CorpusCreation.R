@@ -129,7 +129,7 @@ packages <- c("zip",          # ZIP Files
               "kableExtra",   # Verbesserte Kable Tabellen
               "magick",       # Verarbeitung von Bild-Dateien
               "pdftools",     # Extrahieren von PDF-Dateien
-#              "parallel",     # Parallelisierung
+              "parallel",     # Parallelisierung
 #              "doParallel",   # Parallelisierung
               "ggplot2",      # Fortgeschrittene Datenvisualisierung
               "data.table",   # Fortgeschrittene Datenverarbeitung
@@ -437,7 +437,7 @@ if(config$parallel$htmlLandingPages == TRUE){
 
     plan("sequential")
 
-     }
+}
 
 
 links.list <- future_lapply(links.html,
@@ -688,8 +688,7 @@ print(missing)
 
 #+ results = 'hide'
 files.zip <- list.files(pattern = "\\.zip",
-                        ignore.case = TRUE,
-                        full.names = TRUE)
+                        ignore.case = TRUE)
 
 
 for (file in files.zip){
@@ -704,8 +703,7 @@ unlink(files.zip)
 #'## XML Dateien auflisten und Dateigrößen speichern
 
 files.xml <- list.files(pattern = "\\.xml",
-                        ignore.case = TRUE,
-                        full.names = TRUE)
+                        ignore.case = TRUE)
 
 xml.MB <- file.size(files.xml) / 10^6
 
@@ -1768,8 +1766,7 @@ end.netanalysis - begin.netanalysis
 #+
 #'### XML-Dateien definieren
 
-files.xml <- list.files(pattern = "\\.xml",
-                        full.names = TRUE)
+files.xml <- list.files(pattern = "\\.xml")
 
 
 #+
@@ -1785,8 +1782,7 @@ zip(paste0("output/",
 #'### Anhänge zu XML-Dateien verpacken
 
 attachments <- list.files(pattern = "(\\.jpg)|(\\.gif)|(\\.pdf)|(\\.png)",
-                          ignore.case = TRUE,
-                          full.names = TRUE)
+                          ignore.case = TRUE)
 
 
 if (length(attachments) > 0){
@@ -3085,10 +3081,8 @@ print(missing)
 #'# TXT-Dateien erstellen
 #' An dieser Stelle wird der reine Text aus den PDF-Dateien extrahiert und ein zusätzliches Datei-Format (TXT) generiert. TXT-Dateien sind besonders für quantitative Analysten ohne XML-Kenntnisse ein lohnenswerter Einstieg und verringern die Hürde für die Arbeit mit dem Korpus.
 
-files.pdf <- list.files("PDF",
-                        pattern = "\\.pdf",
-                        ignore.case = TRUE,
-                        full.names = TRUE)
+files.pdf <- list.files(pattern = "\\.pdf",
+                        ignore.case = TRUE)
 
 
 #'## Anzahl zu extrahierender Dateien
@@ -3125,21 +3119,6 @@ future_pdf_to_txt(files.pdf)
 
 
 
-
-
-#'## TXT-Dateien in separaten Ordner verschieben
-
-files.txt <- list.files("PDF",
-                        pattern = "\\.txt",
-                        ignore.case = TRUE,
-                        full.names = TRUE)
-
-files.txt.destination <- gsub("PDF/",
-                              "TXT/",
-                              files.txt)
-
-file.rename(files.txt,
-            files.txt.destination)
 
 
 
@@ -3197,20 +3176,14 @@ print(missing)
 
 #'# Dateigrößen analysieren
 
-files.txt <- list.files("TXT",
-                        pattern = "\\.txt$",
-                        ignore.case = TRUE,
-                        full.names = TRUE)
+files.txt <- list.files(pattern = "\\.txt$",
+                        ignore.case = TRUE)
 
-files.pdf <- list.files("PDF",
-                        pattern = "\\.pdf$",
-                        ignore.case = TRUE,
-                        full.names = TRUE)
+files.pdf <- list.files(pattern = "\\.pdf$",
+                        ignore.case = TRUE)
 
-files.epub <- list.files("EPUB",
-                         pattern = "\\.epub$",
-                         ignore.case = TRUE,
-                         full.names = TRUE)
+files.epub <- list.files(pattern = "\\.epub$",
+                         ignore.case = TRUE)
 
 
 txt.MB <- file.size(files.txt) / 10^6
@@ -3417,8 +3390,7 @@ unlink(files.csv)
 #'## Verpacken der PDF-Dateien
 
 files.pdf <- list.files(pattern = "\\.pdf$",
-                        ignore.case = TRUE,
-                        full.names = TRUE)
+                        ignore.case = TRUE)
 
 zip(paste0("output/",
            prefix.files,
@@ -3434,8 +3406,7 @@ zip(paste0("output/",
 #'## Verpacken der TXT-Dateien
 
 files.txt <- list.files(pattern = "\\.txt$",
-                        ignore.case = TRUE,
-                        full.names = TRUE)
+                        ignore.case = TRUE)
 
 zip(paste0("output/",
            prefix.files,
@@ -3450,8 +3421,7 @@ zip(paste0("output/",
 #'## Verpacken der EPUB-Dateien
 
 files.epub <- list.files(pattern = "\\.epub$",
-                         ignore.case = TRUE,
-                         full.names = TRUE)
+                         ignore.case = TRUE)
 
 zip(paste0("output/",
            prefix.files,
@@ -3528,10 +3498,8 @@ unlink("Rplots.pdf", recursive = TRUE)
 
 #+
 #'## Liste der ZIP-Archive erstellen
-files.zip <- list.files("output",
-                        pattern = "\\.zip$",
-                        ignore.case = TRUE,
-                        full.names = TRUE)
+files.zip <- list.files(pattern = "\\.zip$",
+                        ignore.case = TRUE)
 
 
 
