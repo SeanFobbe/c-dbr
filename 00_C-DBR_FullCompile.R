@@ -5,8 +5,22 @@
 
 library(rmarkdown)
 
+
+
+#'# Aufräumen
+
 files.delete <- list.files(pattern = "\\.spin\\.")
 unlink(files.delete)
+
+files.delete <- list.files(pattern = "\\.zip|\\.xml|\\.jpe?g|\\.png|\\.gif|\\.pdf|\\.epub|\\.bib|\\.csv|\\.dtd",
+                           ignore.case = TRUE)
+
+unlink(files.delete)
+
+unlink("output", recursive = TRUE)
+unlink("analyse", recursive = TRUE)
+unlink("ANALYSE", recursive = TRUE)
+unlink("temp", recursive = TRUE)
 
 
 #+
