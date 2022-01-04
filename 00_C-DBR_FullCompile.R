@@ -5,6 +5,9 @@
 
 library(rmarkdown)
 
+files.delete <- list.files(pattern = "\\.spin\\.")
+unlink(files.delete)
+
 
 #+
 #'### Datensatz 
