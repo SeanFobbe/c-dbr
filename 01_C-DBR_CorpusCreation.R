@@ -657,8 +657,7 @@ if(config$parallel$downloadXML == TRUE){
 #+ results = 'hide'
 future_mapply(download.file,
               download$links.xml,
-              file.path("XML",
-                        download$title.xml))
+              download$title.xml)
 
 
 
@@ -669,8 +668,7 @@ future_mapply(download.file,
 download[,.N]
 
 #'### Anzahl heruntergeladener Dateien
-files.zip <- list.files("XML",
-                        pattern = "\\.zip")
+files.zip <- list.files(pattern = "\\.zip")
 length(files.zip)
 
 #'### Fehlbetrag
@@ -3066,8 +3064,7 @@ if(config$parallel$downloadPDF == TRUE){
 #+ results = 'hide'
 future_mapply(download.file,
               download$links.pdf,
-              file.path("PDF",
-                        download$title.pdf))
+              download$title.pdf)
 
 
 #'## Download-Ergebnis
@@ -3077,8 +3074,7 @@ future_mapply(download.file,
 download[,.N]
 
 #'### Anzahl heruntergeladener Dateien
-files.pdf <- list.files("PDF",
-                        pattern = "\\.pdf")
+files.pdf <- list.files(pattern = "\\.pdf")
 length(files.pdf)
 
 #'### Fehlbetrag
@@ -3179,8 +3175,7 @@ if(config$parallel$downloadEPUB == TRUE){
 #+ results = 'hide'
 future_mapply(download.file,
               download$links.epub,
-              file.path("EPUB",
-                        download$title.epub))
+              download$title.epub)
 
 
 
@@ -3192,8 +3187,7 @@ future_mapply(download.file,
 download[,.N]
 
 #'### Anzahl heruntergeladener Dateien
-files.epub <- list.files("EPUB",
-                         pattern = "\\.epub")
+files.epub <- list.files(pattern = "\\.epub")
 length(files.epub)
 
 #'### Fehlbetrag
