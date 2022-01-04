@@ -965,6 +965,8 @@ end.parse - begin.parse
 
 
 
+
+
 #'### Variable "doc_id" erstellen
 #' Eine einzigartige doc_id wird benötigt um z.B. einen Quanteda-Korpus erstellen zu können. Diese wird aus dem Dateinamen zusammen mit einer Kollisionsnummer gebildet.
 
