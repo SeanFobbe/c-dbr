@@ -1,16 +1,28 @@
 library(rmarkdown)
 
+
+#'# Aufräumen
+
 files.delete <- list.files(pattern = "\\.spin\\.")
 unlink(files.delete)
 
-files.delete <- list.files(pattern = "\\.zip|\\.xml|\\.jpe?g|\\.png|\\.gif|\\.pdf|\\.epub",
+files.delete <- list.files(pattern = "\\.zip|\\.xml|\\.jpe?g|\\.png|\\.gif|\\.pdf|\\.epub|\\.bib",
                            ignore.case = TRUE)
 
 unlink(files.delete)
 
+unlink("output", recursive = TRUE)
+unlink("analyse", recursive = TRUE)
+unlink("temp", recursive = TRUE)
+
+
+#'# Ordner erstellen
+
+dir.create("output")
+
 
 #+
-#'### Datensatz 
+#'# Datensatz 
 #' 
 #' Um den **vollständigen Datensatz** zu kompilieren und einen PDF-Bericht zu erstellen, kopieren Sie bitte alle im Source-Archiv bereitgestellten Dateien in einen leeren Ordner und führen mit R diesen Befehl aus:
 
@@ -26,7 +38,7 @@ rmarkdown::render(input = "01_C-DBR_CorpusCreation.R",
 
 
 
-#'### Codebook
+#'# Codebook
 #' Um das **Codebook** zu kompilieren und einen PDF-Bericht zu erstellen, führen Sie bitte im Anschluss an die Kompilierung des Datensatzes (!) untenstehenden Befehl mit R aus.
 #'
 #' Bei der Prüfung der GPG-Signatur wird ein Fehler auftreten und im Codebook dokumentiert, weil die Daten nicht mit meiner Original-Signatur versehen sind. Dieser Fehler hat jedoch keine Auswirkungen auf die Funktionalität und hindert die Kompilierung nicht.
