@@ -13,6 +13,8 @@ EPUB/
 *.zip
 *.xml
 *.jpg
+*.JPG
+*.JPEG
 *.jpeg
 *.gif
 *.pdf
