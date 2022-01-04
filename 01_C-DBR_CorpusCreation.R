@@ -1752,11 +1752,31 @@ if(config$parallel$parseNetworks == TRUE){
 
 
 
+f.network.analysis.robust <- function(xml.name,
+                                      prefix.figuretitle,
+                                      caption){
+
+    tryCatch({f.network.analysis(xml.name,
+                                 prefix.figuretitle,
+                                 caption)},
+             error = function(cond) {
+                 return(NA)}
+             )
+
+}
+
+
+#f.network.analysis.robust(files.xml[35],
+#                          prefix.figuretitle = prefix.figuretitle,
+#                          caption = caption)
+
+
+
 #'### XML Parsen
 
 #+ netanalysis, results = 'hide'
 out.netanalysis <- future_lapply(files.xml,
-                                 f.network.analysis,
+                                 f.network.analysis.robust,
                                  prefix.figuretitle = prefix.figuretitle,
                                  caption = caption,
                                  future.seed = TRUE)
