@@ -150,9 +150,9 @@ source("R-fobbe-proto-package/f.dopar.pagenums.R")
 source("R-fobbe-proto-package/f.dopar.pdfextract.R")
 source("R-fobbe-proto-package/f.dopar.multihashes.R")
 
-source("functions/f.heading.transform.R")
-source("functions/f.namechain.R")
-source("functions/f.zero.NA.R")
+#source("functions/f.heading.transform.R")
+#source("functions/f.namechain.R")
+#source("functions/f.zero.NA.R")
 
 
 
