@@ -318,7 +318,7 @@ latexdefs <- c("%===========================\n% Definitionen\n%=================
 
 
 #'\newpage
-#'### LaTeX Parameter schreiben
+#'### LaTeX Parameter in Datei schreiben
 
 writeLines(latexdefs,
            paste0("temp/",
