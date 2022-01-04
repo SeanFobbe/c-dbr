@@ -918,7 +918,7 @@ xmlparse.einzelnormen.robust <- function(file.xml){
     }
 
 
-xmlparse.einzelnormen.robust(files.xml[1])
+xmlparse.einzelnormen.robust(files.xml[10])
 
 
 
@@ -947,7 +947,7 @@ if(config$parallel$parseEinzelnormen == TRUE){
 
 #+ Einzelnormen-Parse
 out.einzelnormen <- future_lapply(files.xml,
-                                  xmlparse.einzelnormen)
+                                  xmlparse.einzelnormen.robust)
 
 
 #'### Liste in Data Table umwandeln
