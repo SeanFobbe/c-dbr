@@ -1801,9 +1801,6 @@ end.netanalysis - begin.netanalysis
 
 
 
-
-
-
 #'## Wiederverpacken der XML-Dateien
 #' Wiederverpacken der gesammelten XML-Dateien in ein einziges Archiv. Wiederverpacken der Anlagen in ein separates Archiv. Die Roh-Daten werden im Anschluss  jeweils gelöscht.
 
