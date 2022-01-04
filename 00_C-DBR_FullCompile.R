@@ -6,13 +6,14 @@ library(rmarkdown)
 files.delete <- list.files(pattern = "\\.spin\\.")
 unlink(files.delete)
 
-files.delete <- list.files(pattern = "\\.zip|\\.xml|\\.jpe?g|\\.png|\\.gif|\\.pdf|\\.epub|\\.bib",
+files.delete <- list.files(pattern = "\\.zip|\\.xml|\\.jpe?g|\\.png|\\.gif|\\.pdf|\\.epub|\\.bib|\\.csv|\\.dtd",
                            ignore.case = TRUE)
 
 unlink(files.delete)
 
 unlink("output", recursive = TRUE)
 unlink("analyse", recursive = TRUE)
+unlink("ANALYSE", recursive = TRUE)
 unlink("temp", recursive = TRUE)
 
 
@@ -32,8 +33,7 @@ rmarkdown::render(input = "01_C-DBR_CorpusCreation.R",
                   envir = new.env(),
                   output_file = paste0("C-DBR_",
                                        Sys.Date(),
-                                       "_CompilationReport.pdf"),
-                  output_dir = "output")
+                                       "_CompilationReport.pdf"))
 
 
 
