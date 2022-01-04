@@ -3513,7 +3513,7 @@ zip(paste0(prefix.files,
 #'# Roh-Dateien löschen
 
 
-files.delete <- list.files(pattern = "\\.zip|\\.xml|\\.jpe?g|\\.png|\\.gif|\\.pdf|\\.epub",
+files.delete <- list.files(pattern = "\\.xml|\\.jpe?g|\\.png|\\.gif|\\.pdf|\\.txt|\\.epub",
                            ignore.case = TRUE)
 
 
