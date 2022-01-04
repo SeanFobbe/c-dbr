@@ -3,6 +3,11 @@ library(rmarkdown)
 files.delete <- list.files(pattern = "\\.spin\\.")
 unlink(files.delete)
 
+files.delete <- list.files(pattern = "\\.zip|\\.xml|\\.jpe?g|\\.png|\\.gif|\\.pdf|\\.epub",
+                           ignore.case = TRUE)
+
+unlink(files.delete)
+
 
 #+
 #'### Datensatz 
