@@ -3510,16 +3510,18 @@ zip(paste0(prefix.files,
 
 
 
-#'# Aufräumen
-#' An dieser Stelle werden die  Roh-Dateien gelöscht.
+#'# Roh-Dateien löschen
 
 
 files.delete <- list.files(pattern = "\\.zip|\\.xml|\\.jpe?g|\\.png|\\.gif|\\.pdf|\\.epub",
                            ignore.case = TRUE)
 
 
+unlink(files.delete)
 unlink("netzwerke", recursive = TRUE)
 unlink("Rplots.pdf", recursive = TRUE)
+
+
 
 
 
@@ -3556,15 +3558,15 @@ if(config$parallel$multihashes == TRUE){
 
 multihashes <- future_multihashes(files.zip)
 
-setnames(multihashes,
-         old = "x",
-         new = "filename")
+
 
 
 #'## In Data Table umwandeln
 setDT(multihashes)
 
-
+setnames(multihashes,
+         old = "x",
+         new = "filename")
 
 
 #'## Index hinzufügen
@@ -3611,6 +3613,10 @@ kable(multihashes[,.(index,sha3.512)],
       booktabs = TRUE,
       longtable = TRUE)
 
+
+
+
+#'# Aufräumen
 
 
 
