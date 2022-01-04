@@ -1820,6 +1820,9 @@ zip(paste0(prefix.files,
     mode = "cherry-pick")
 
 
+unlink(files.xml)
+
+
 #'### Anhänge zu XML-Dateien verpacken
 
 attachments <- list.files(pattern = "(\\.jpg)|(\\.gif)|(\\.pdf)|(\\.png)",
