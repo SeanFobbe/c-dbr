@@ -367,7 +367,7 @@ if (config$cores$max == FALSE){
 print(fullCores)
 
 #'### Quanteda
-quanteda_options(threads = fullCores) 
+quanteda_options(threads = 1) 
 
 #'### Data.table
 setDTthreads(threads = fullCores)  
