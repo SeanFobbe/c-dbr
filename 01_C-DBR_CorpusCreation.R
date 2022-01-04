@@ -1772,8 +1772,7 @@ files.xml <- list.files(pattern = "\\.xml")
 #+
 #'### XML-Dateien verpacken
 
-zip(paste0("output/",
-          prefix.files,
+zip(paste0(prefix.files,
           "_DE_XML_Datensatz.zip"),
     files.xml,
     mode = "cherry-pick")
@@ -1787,8 +1786,7 @@ attachments <- list.files(pattern = "(\\.jpg)|(\\.gif)|(\\.pdf)|(\\.png)",
 
 if (length(attachments) > 0){
 
-zip(paste0("output/",
-          prefix.files,
+zip(paste0(prefix.files,
           "_DE_XML_Anlagen.zip"),
     attachments,
     mode = "cherry-pick")
@@ -2946,8 +2944,7 @@ csvname.normen.gesamt <- paste0(prefix.files,
 #'### Datensatz speichern
 
 fwrite(dt.normen,
-       paste0("output/",
-              csvname.normen.gesamt),
+       paste0(csvname.normen.gesamt),
        na = "NA")
 
 
@@ -2963,8 +2960,7 @@ csvname.normen.meta <- paste0(prefix.files,
 #'### Datensatz speichern
 
 fwrite(meta.normen,
-       paste0("output/",
-              csvname.normen.meta),
+       paste0(csvname.normen.meta),
        na = "NA") 
 
 
@@ -2981,8 +2977,7 @@ csvname.rechtsakte.gesamt <- paste0(prefix.files,
 #'### Datensatz speichern
 
 fwrite(dt.rechtsakte,
-       paste0("output/",
-              csvname.rechtsakte.gesamt),
+       paste0(csvname.rechtsakte.gesamt),
        na = "NA") 
 
 
@@ -2999,8 +2994,7 @@ csvname.rechtsakte.meta <- paste0(prefix.files,
 #'### Datensatz speichern
 
 fwrite(meta.rechtsakte,
-       paste0("output/",
-              csvname.rechtsakte.meta),
+       paste0(csvname.rechtsakte.meta),
        na = "NA") 
 
 
@@ -3020,8 +3014,7 @@ csvname.meta <- paste0(prefix.files,
 #'### Datensatz speichern
 
 fwrite(dt.meta,
-       paste0("output/",
-              csvname.meta),
+       paste0(csvname.meta),
        na = "NA")
 
 
