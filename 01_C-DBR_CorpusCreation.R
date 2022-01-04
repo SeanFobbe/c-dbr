@@ -1835,7 +1835,7 @@ zip(paste0(prefix.files,
 
     }
 
-
+unlink(attachments)
 
 
 
