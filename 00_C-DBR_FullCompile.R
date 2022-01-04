@@ -1,8 +1,7 @@
-library(groundhog)    # Strenge Versionskontrolle von R packages
+library(rmarkdown)
 
-groundhog.library(pkg = "rmarkdown",
-                  date = "2021-02-20")
-
+files.delete <- list.files(pattern = "\\.spin\\.")
+unlink(files.delete)
 
 
 #+
