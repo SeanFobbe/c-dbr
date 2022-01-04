@@ -686,15 +686,13 @@ print(missing)
 #' XML-Dateien und ihre Anlagen sind einzeln nach Rechtsakten in ZIP-Archiven verpackt. Diese werden nun extrahiert und die ZIP-Archive im Anschluss gelöscht.
 
 #+ results = 'hide'
-files.zip <- list.files("XML",
-                        pattern = "\\.zip",
+files.zip <- list.files(pattern = "\\.zip",
                         ignore.case = TRUE,
                         full.names = TRUE)
 
 
 for (file in files.zip){
-    unzip(zipfile = file,
-          exdir = "XML")
+    unzip(zipfile = file)
     }
 
 
@@ -704,8 +702,7 @@ unlink(files.zip)
 
 #'## XML Dateien auflisten und Dateigrößen speichern
 
-files.xml <- list.files("XML",
-                        pattern = "\\.xml",
+files.xml <- list.files(pattern = "\\.xml",
                         ignore.case = TRUE,
                         full.names = TRUE)
 
@@ -845,7 +842,7 @@ xmlparse.einzelnormen <- function(file.xml){
                                content.out[,.N])
 
 
-    meta$dateiname <- rep(basename(file.xml),
+    meta$dateiname <- rep(file.xml,
                           content.out[,.N])
     
 
@@ -1597,7 +1594,7 @@ f.network.analysis <- function(xml.name,
                            "_",
                            gsub("\\.xml",
                                 "",
-                                basename(xml.name)))
+                                xml.name))
 
         ## Gliederungstabelle speichern
         fwrite(gliederungseinheit.split,
@@ -1678,8 +1675,7 @@ f.network.analysis <- function(xml.name,
 
 #'### Netzwerk-Analyse durchführen
 
-files.xml <- list.files("XML",
-                        pattern = "\\.xml$")
+files.xml <- list.files(pattern = "\\.xml$")
 
 errorfiles <- c("BJNR008810961.xml",
                 "BJNR010599989.xml",
@@ -1695,9 +1691,6 @@ errorfiles <- c("BJNR008810961.xml",
                 "BJNR000939960.xml")
 
 files.xml <- setdiff(files.xml, errorfiles)
-
-files.xml <- file.path("XML",
-                       files.xml)
 
 length(files.xml)
 
@@ -1774,8 +1767,7 @@ end.netanalysis - begin.netanalysis
 #+
 #'### XML-Dateien definieren
 
-files.xml <- list.files("XML",
-                        pattern = "\\.xml",
+files.xml <- list.files(pattern = "\\.xml",
                         full.names = TRUE)
 
 
@@ -1791,8 +1783,7 @@ zip(paste0("output/",
 
 #'### Anhänge zu XML-Dateien verpacken
 
-attachments <- list.files("XML",
-                          pattern = "(\\.jpg)|(\\.gif)|(\\.pdf)|(\\.png)",
+attachments <- list.files(pattern = "(\\.jpg)|(\\.gif)|(\\.pdf)|(\\.png)",
                           ignore.case = TRUE,
                           full.names = TRUE)
 
