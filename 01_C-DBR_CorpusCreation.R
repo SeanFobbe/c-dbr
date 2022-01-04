@@ -2241,9 +2241,10 @@ if(config$parallel$lingsummarize == TRUE){
      }
 
 
-#+ lingsummarize, results = "hide"
+#+ results = 'hide'
 lingstats.normen.raw <- future_lingsummarize(dt.normen)
 
+#+ results = 'hide'
 lingstats.rechtsakte.raw <- future_lingsummarize(dt.rechtsakte)
 
 
