@@ -1693,6 +1693,23 @@ f.network.analysis <- function(xml.name,
 
 
 
+f.network.analysis.robust <- function(xml.name,
+                                      prefix.figuretitle,
+                                      caption){
+
+    tryCatch({f.network.analysis(xml.name,
+                                 prefix.figuretitle,
+                                 caption)},
+             error = function(cond) {
+                 return(NA)}
+             )
+
+}
+
+
+
+
+
 
 
 #'### Netzwerk-Analyse durchführen
@@ -1749,21 +1766,6 @@ if(config$parallel$parseNetworks == TRUE){
     plan("sequential")
 
      }
-
-
-
-f.network.analysis.robust <- function(xml.name,
-                                      prefix.figuretitle,
-                                      caption){
-
-    tryCatch({f.network.analysis(xml.name,
-                                 prefix.figuretitle,
-                                 caption)},
-             error = function(cond) {
-                 return(NA)}
-             )
-
-}
 
 
 #f.network.analysis.robust(files.xml[35],
