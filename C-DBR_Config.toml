@@ -30,9 +30,9 @@ cores.number = 8   # Die Anzahl Rechtenkerne, die verwendet werden soll; wird nu
 
 parallel.htmlLandingPages = true
 parallel.downloadXML = true
-parallel.parseEinzelnormen = true
-parallel.parseMeta = true
-parallel.parseNetworks = true
+parallel.parseEinzelnormen = false
+parallel.parseMeta = false
+parallel.parseNetworks = false
 parallel.lingsummarize = true
 parallel.downloadPDF = true
 parallel.extractPDF = true
