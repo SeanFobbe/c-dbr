@@ -143,6 +143,7 @@ packages <- c("zip",          # ZIP Files
               "future.apply") # Parallelisierung
 
 
+#+ results = 'hide'
 lapply(packages, library, character.only = TRUE)
 
 #+ results = 'hide'
@@ -185,20 +186,22 @@ dir.analysis <- paste0(getwd(),
 
 dirs <- c("output",
           "temp",
-          "netzwerke",
-          "XML",
-          "PDF",
-          "TXT",
-          "EPUB")
+          "netzwerke")
 
 
 
 #'## Dateien aus vorherigen Runs bereinigen
 
-
 unlink(dir.analysis, recursive = TRUE)
 
 unlink(dirs, recursive = TRUE)
+
+files.delete <- list.files(pattern = "\\.zip|\\.xml|\\.jpe?g|\\.png|\\.gif|\\.pdf|\\.epub",
+                           ignore.case = TRUE)
+
+unlink(files.delete)
+
+
 
 
 #'## Verzeichnisse anlegen
