@@ -192,6 +192,7 @@ print(begin.script)
 #'## Ordner für Analyse-Ergebnisse erstellen
 dir.create(outputdir)
 
+dir.create("output")
 dir.create("Netzwerke")
 dir.create("Netzwerke/Edgelists")
 dir.create("Netzwerke/Adjazenzmatrizen")

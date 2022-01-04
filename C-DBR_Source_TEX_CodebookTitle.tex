@@ -1,0 +1,93 @@
+%===========================
+% Titelseite
+%===========================
+
+
+\pagestyle{empty}
+
+\begin{tikzpicture}[overlay,remember picture]
+ 
+\node[align=center] at ($(current page.center)+(0,8.5)$)
+{ \scshape \Huge \bfseries Corpus des \\[0.5cm] \Huge \bfseries \scshape Deutschen Bundesrechts \\[0.8cm] \LARGE \bfseries (\datashort )};
+
+\node[align=center] at ($(current page.center)+(0,2)$) 
+{ \scshape \LARGE Codebook};
+
+\node[align=center] at ($(current page.center)+(0,-8)$)
+{ \large Version \version};
+
+\node[align=center] at ($(current page.center)+(0,-10)$)
+    {\includegraphics[width=.20\textwidth]{./buttons/cc-zero.png}};
+
+\node[align=center] at ($(current page.center)+(0,-12)$) 
+{ \large DOI: \dataversiondoi};
+
+\end{tikzpicture}
+
+\newpage
+
+\pagestyle{plain}
+
+
+
+%===========================
+% Inside Cover
+%===========================
+
+\newpage
+\ra{1.5}
+
+
+\begin{centering}
+\begin{longtable}{p{2.5cm}p{12.5cm}}
+
+\textbf{Titel} & \datatitle \\
+\textbf{Abkürzung} & \datashort \\
+\textbf{Autor} & \dataauthor\\
+\textbf{Version} & \version \\
+\textbf{Download} & \url{\dataversionurldoi}\\
+\textbf{Lizenz} & CC0 1.0 Universal\\
+
+\end{longtable}
+\end{centering}
+
+\textbf{Zitiervorschlag}
+
+\emph{\dataauthor} (\the\year ). \datatitle\ (\datashort ). Version \version . Zenodo. DOI: \dataversiondoi .
+
+
+\vspace{0.5cm}
+
+
+\textbf{Digital Object Identifier (DOI): Concept DOI und Version DOI}
+
+Soweit nicht anders angegeben ist die DOI immer eine \enquote{Version DOI} und bezieht sich nur auf eine bestimmte Version des Datensatzes. Sie verweist daher nur auf Version \version . Für das Gesamtkonzept dieses Datensatzes steht eine \enquote{Concept DOI} zur Verfügung, die auf der Zenodo-Seite jeder Version unter \enquote{Cite all versions?} zu finden ist. Sie lautet \dataconceptdoi . Die \enquote{Concept DOI} verlinkt immer die aktuellste Version.
+
+
+\vspace{0.5cm}
+
+
+\textbf{Urheberrecht}
+
+Der Datensatz und dieses Dokument sind unter einer \textbf{Creative Commons CC0 1.0 Universal (CC0 1.0) Public Domain Dedication Lizenz} veröffentlicht. Ich stelle den Datensatz und das Codebook vollständig gemeinfrei und verzichte weltweit auf alle damit verbundenen Urheberrechte, einschließlich aller ähnlichen Rechte, soweit dies gesetzlich möglich ist. 
+
+Sie können die Werke kopieren, modifizieren, verteilen und aufführen ohne um Erlaubnis bitten zu müssen, selbst für kommerzielle Zwecke. Patente und Markenschutzrechte bleiben von CC0 unberührt. CC0 hat auch keine Auswirkungen auf etwaige Datenschutz- oder Persönlichkeitsrechte. Jegliche Haftung für die Benutzung dieses Werkes ist ausgeschlossen, bis zu dem maximalen Umfang in dem dies gesetzlich möglich ist. 
+
+Wenn Sie diese Werke nutzen oder zitieren sollten Sie nicht den Eindruck erwecken, der Autor unterstütze ihre Nutzung.
+
+Dies ist nur eine unverbindliche deutsche Zusammenfassung der Lizenz, den vollständigen und rechtsverbindlichen Lizenztext finden Sie hier: \url{https://creativecommons.org/publicdomain/zero/1.0/legalcode}
+
+
+
+\vspace{0.5cm}
+
+
+
+\textbf{Disclaimer} 
+
+Dieser Datensatz ist eine private wissenschaftliche Initiative und steht in keiner Verbindung zu Behörden, Gerichten oder anderen amtlichen Stellen der Bundesrepublik Deutschland.
+
+
+
+
+\newpage
