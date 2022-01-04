@@ -11,9 +11,9 @@
 #'    number_sections: true
 #'    pandoc_args: --listings
 #'    includes:
-#'      in_header: tex/Preamble_DE.tex
-#'      before_body: [temp/C-DBR_Definitions.tex, tex/C-DBR_CompilationTitle.tex]
-#'bibliography: temp/packages.bib
+#'      in_header: General_Source_TEX_Preamble_DE.tex
+#'      before_body: [C-DBR_Source_TEX_Definitions.tex,C-DBR_Source_TEX_CompilationTitle.tex]
+#'bibliography: packages.bib
 #'nocite: '@*'
 #'---
 
@@ -22,11 +22,12 @@ knitr::opts_chunk$set(echo = TRUE,
                       warning = TRUE,
                       message = TRUE)
 
+
 #'# Einleitung
 
 #+
 #'## Überblick
-#' Dieses Skript wertet das amtliche Internetangebot \enquote{Gesetze im Internet} (\url{https://www.gesetze-im-internet.de}) der Bundesrepublik Deutschland vollständig aus und kompiliert es in einen reichhaltigen menschen- und maschinenlesbaren Korpus. Es ist die Grundlage des **\datatitle\ (\datashort)**.
+#' Dieses Skript wertet das amtliche Internetangebot "Gesetze im Internet" (\url{https://www.gesetze-im-internet.de}) der Bundesrepublik Deutschland vollständig aus und kompiliert es in einen reichhaltigen menschen- und maschinenlesbaren Korpus. Es ist die Grundlage des **\datatitle\ (\datashort)**.
 #'
 #' Alle mit diesem Skript erstellten Datensätze werden dauerhaft kostenlos und urheberrechtsfrei auf Zenodo, dem wissenschaftlichen Archiv des CERN, veröffentlicht. Alle Versionen sind mit einem persistenten Digital Object Identifier (DOI) versehen. Die neueste Version des Datensatzes ist immer über den Link der Concept DOI erreichbar: \url{https://doi.org/10.5281/zenodo.3832111}
 
@@ -68,9 +69,26 @@ knitr::opts_chunk$set(echo = TRUE,
 
 #+ eval = FALSE
 
-source("00_C-DBR_FullCompile.R")
+rmarkdown::render(input = "C-DBR_Source_CorpusCreation.R",
+                  output_file = paste0("C-DBR_",
+                                       Sys.Date(),
+                                       "_CompilationReport.pdf"),
+                  envir = new.env())
 
 
+
+#'### Codebook
+#' Um das **Codebook** zu kompilieren und einen PDF-Bericht zu erstellen, führen Sie bitte im Anschluss an die Kompilierung des Datensatzes (!) untenstehenden Befehl mit R aus.
+#'
+#' Bei der Prüfung der GPG-Signatur wird ein Fehler auftreten und im Codebook dokumentiert, weil die Daten nicht mit meiner Original-Signatur versehen sind. Dieser Fehler hat jedoch keine Auswirkungen auf die Funktionalität und hindert die Kompilierung nicht.
+
+#+ eval = FALSE
+
+rmarkdown::render(input = "C-DBR_Source_CodebookCreation.R",
+                  output_file = paste0("C-DBR_",
+                                       Sys.Date(),
+                                       "_Codebook.pdf"),
+                  envir = new.env())
 
 #'\newpage
 #+
@@ -89,14 +107,74 @@ source("00_C-DBR_FullCompile.R")
 
 
 #'\newpage
+#+
+#'# Parameter
+
+#'## Name des Datensatzes
+datasetname <- "C-DBR"
 
 
+#'## DOI des Datensatz-Konzeptes
+doi.concept <- "10.5281/zenodo.3832111" # checked
+
+#'## DOI der konkreten Version
+doi.version <- "10.5281/zenodo.5510458" # checked
+
+
+#'## Lizenz
+license <- "Creative Commons Zero 1.0 Universal"
+
+
+#'## Verzeichnis für Analyse-Ergebnisse
+#' Muss mit einem Schrägstrich enden!
+
+outputdir <- paste0(getwd(),
+                    "/ANALYSE/") 
+
+
+#'## Optionen: Quanteda
+tokens_locale <- "de_DE"
+
+
+#'## Optionen: Knitr
 
 #+
+#'### Ausgabe-Formate
+
+dev <- c("pdf",
+         "png")
+
+#'### DPI für Raster-Grafiken
+dpi <- 300
+
+#'### Ausrichtung von Grafiken im Compilation Report
+fig.align <- "center"
+
+
+
+#'## Frequenztabellen: Liste zu prüfender Variablen
+
+#' **Hinweis:** Nur diese Variablen werden bei der Erstellung der Frequenztabellen berücksichtigt.
+
+vars.freqtable <- c("periodikum",
+                    "fundstellentyp",
+                    "check_neuf",
+                    "check_aufh",
+                    "check_sonst",
+                    "check_hinweis",
+                    "check_stand",
+                    "gliederungskennzahl",
+                    "ausfertigung_jahr",
+                    "doi_concept",
+                    "doi_version",
+                    "version",
+                    "lizenz")
+
+
 #'# Vorbereitung
 
 
-#+ Datumsstempel
+#+
 #'## Datumsstempel
 #' Dieser Datumsstempel wird in alle Dateinamen eingefügt. Er wird am Anfang des Skripts gesetzt, für den den Fall, dass die Laufzeit die Datumsbarriere durchbricht.
 
@@ -111,223 +189,55 @@ print(begin.script)
 
 
 
+#'## Ordner für Analyse-Ergebnisse erstellen
+dir.create(outputdir)
+
+dir.create("Netzwerke")
+dir.create("Netzwerke/Edgelists")
+dir.create("Netzwerke/Adjazenzmatrizen")
+dir.create("Netzwerke/Netzwerkdiagramme")
+dir.create("Netzwerke/GraphML")
 
 
-
-#+ Packages
+#+
 #'## Packages Laden
-#' Das package *groundhog* nimmt eine strenge Versionskontrolle von R packages vor, indem es nur solche Versionen lädt, die an einem bestimmten Stichtag auf CRAN verfügbar waren. Diese werden in einer separaten library gesichert. Falls entsprechende Versionen nicht vorhanden sind, nimmt es eine automatische Installation derselben vor.
 
-
-library("zip")          # ZIP Files
-library("rvest")        # HTML/XML-Extraktion
-library("xml2")         # Verarbeitung von XML-Format
-library("RcppTOML")     # Verarbeitung von TOML-Format
-library("knitr")        # Professionelles Reporting
-library("kableExtra")   # Verbesserte Kable Tabellen
-library("magick")       # Verarbeitung von Bild-Dateien
-library("pdftools")     # Extrahieren von PDF-Dateien
-library("parallel")     # Parallelisierung
-library("doParallel")   # Parallelisierung
-library("ggplot2")      # Fortgeschrittene Datenvisualisierung
-library("data.table")   # Fortgeschrittene Datenverarbeitung
-library("quanteda")     # Fortgeschrittene Computerlinguistik
-library("scales")       # Skalierung von Diagrammen
-library("openssl")      # Kryptographische Signaturen
-library("igraph")       # Analyse von Graphen
-library("ggraph")       # Analyse von Graphen
-library("qgraph")       # Analyse von Graphen
-
-
-
+library(rvest)        # HTML/XML-Extraktion
+library(xml2)         # Arbeit mit XML-Format
+library(knitr)        # Professionelles Reporting
+library(kableExtra)   # Verbesserte Kable Tabellen
+library(pdftools)     # Extrahieren von PDF-Dateien
+library(doParallel)   # Parallelisierung
+library(ggplot2)      # Fortgeschrittene Datenvisualisierung
+library(data.table)   # Fortgeschrittene Datenverarbeitung
+library(quanteda)     # Fortgeschrittene Computerlinguistik
+library(scales)       # Skalierung von Diagrammen
+library(openssl)      # Kryptographische Signaturen
+library(igraph)       # Analyse von Graphen
+library(ggraph)       # Analyse von Graphen
+library(qgraph)       # Analyse von Graphen
 
 
 #'## Zusätzliche Funktionen einlesen
 #' **Hinweis:** Die hieraus verwendeten Funktionen werden jeweils vor der ersten Benutzung in vollem Umfang angezeigt um den Lesefluss zu verbessern.
 
-source("R-fobbe-proto-package/f.linkextract.R")
-source("R-fobbe-proto-package/f.fast.freqtable.R")
-source("R-fobbe-proto-package/f.lingsummarize.iterator.R")
-source("R-fobbe-proto-package/f.dopar.pagenums.R")
-source("R-fobbe-proto-package/f.dopar.pdfextract.R")
-source("R-fobbe-proto-package/f.dopar.multihashes.R")
-
-source("functions/f.heading.transform.R")
-source("functions/f.namechain.R")
-source("functions/f.zero.NA.R")
+source("General_Source_Functions.R")
 
 
-
-#'## Verzeichnis für Analyse-Ergebnisse und Diagramme definieren
-#' Muss mit einem Schrägstrich enden!
-
-dir.analysis <- paste0(getwd(),
-                    "/analyse/") 
+#'## Quanteda-Optionen setzen
+quanteda_options(tokens_locale = tokens_locale)
 
 
-#'## Weitere Verzeichnisse definieren
-
-dirs <- c("output",
-          "temp",
-          "netzwerke")
-
-
-#'## Dateien aus vorherigen Runs bereinigen
+#'## Knitr Optionen setzen
+knitr::opts_chunk$set(fig.path = outputdir,
+                      dev = dev,
+                      dpi = dpi,
+                      fig.align = fig.align)
 
 
-unlink(dir.analysis, recursive = TRUE)
-
-unlink(dirs, recursive = TRUE)
-
-files.delete <- list.files(pattern = "\\.zip|\\.xml|\\.jpe?g|\\.png|\\.gif|\\.pdf|\\.epub",
-                           ignore.case = TRUE)
-
-unlink(files.delete)
-
-
-
-
-#'## Verzeichnisse anlegen
-
-dir.create(dir.analysis)
-
-lapply(dirs, dir.create)
-
-
-dir.create("netzwerke/Edgelists")
-dir.create("netzwerke/Adjazenzmatrizen")
-dir.create("netzwerke/Netzwerkdiagramme")
-dir.create("netzwerke/GraphML")
-dir.create("netzwerke/Gliederungstabellen")
-
-
-#'## Vollzitate statistischer Software schreiben
+#'## Vollzitate statistischer Software
 knitr::write_bib(c(.packages()),
-                 "temp/packages.bib")
-
-
-
-
-#'## Allgemeine Konfiguration
-
-#+
-#'### Konfiguration einlesen
-config <- parseTOML("C-DBR_Config.toml")
-
-#'### Konfiguration anzeigen
-print(config)
-
-
-
-#+
-#'### Knitr Optionen setzen
-knitr::opts_chunk$set(fig.path = dir.analysis,
-                      dev = config$fig$format,
-                      dpi = config$fig$dpi,
-                      fig.align = config$fig$align)
-
-
-#'### Download Timeout setzen
-options(timeout = config$download$timeout)
-
-
-
-#'### Quellenangabe für Diagramme definieren
-
-caption <- paste("Fobbe | DOI:",
-                 config$doi$data$version)
-print(caption)
-
-
-#'### Präfix für Dateien definieren
-
-prefix.files <- paste0(config$project$shortname,
-                 "_",
-                 datestamp)
-print(prefix.files)
-
-
-#'### Präfix für Diagrammed definieren
-
-prefix.figuretitle <- paste(config$project$shortname,
-                            "| Version",
-                            datestamp)
-
-#'### Quanteda-Optionen setzen
-quanteda_options(tokens_locale = config$quanteda$tokens_locale)
-
-
-
-
-#'## LaTeX Konfiguration
-
-#+
-#'### LaTeX Parameter definieren
-
-latexdefs <- c("%===========================\n% Definitionen\n%===========================",
-               "\n% NOTE: Diese Datei wurde während des Kompilierungs-Prozesses automatisch erstellt.\n",
-               "\n%-----Autor-----",
-               paste0("\\newcommand{\\projectauthor}{",
-                      config$project$author,
-                      "}"),
-               "\n%-----Version-----",
-               paste0("\\newcommand{\\version}{",
-                      datestamp,
-                      "}"),
-               "\n%-----Titles-----",
-               paste0("\\newcommand{\\datatitle}{",
-                      config$project$fullname,
-                      "}"),
-               paste0("\\newcommand{\\datashort}{",
-                      config$project$shortname,
-                      "}"),
-               paste0("\\newcommand{\\softwaretitle}{Source Code des \\enquote{",
-                      config$project$fullname,
-                      "}}"),
-               paste0("\\newcommand{\\softwareshort}{",
-                      config$project$shortname,
-                      "-Source}"),
-               "\n%-----Data DOIs-----",
-               paste0("\\newcommand{\\dataconceptdoi}{",
-                      config$doi$data$concept,
-                      "}"),
-               paste0("\\newcommand{\\dataversiondoi}{",
-                      config$doi$data$version,
-                      "}"),
-               paste0("\\newcommand{\\dataconcepturldoi}{https://doi.org/",
-                      config$doi$data$concept,
-                      "}"),
-               paste0("\\newcommand{\\dataversionurldoi}{https://doi.org/",
-                      config$doi$data$version,
-                      "}"),
-               "\n%-----Software DOIs-----",
-               paste0("\\newcommand{\\softwareconceptdoi}{",
-                      config$doi$software$concept,
-                      "}"),
-               paste0("\\newcommand{\\softwareversiondoi}{",
-                      config$doi$software$version,
-                      "}"),
-
-               paste0("\\newcommand{\\softwareconcepturldoi}{https://doi.org/",
-                      config$doi$software$concept,
-                      "}"),
-               paste0("\\newcommand{\\softwareversionurldoi}{https://doi.org/",
-                      config$doi$software$version,
-                      "}"))
-
-
-
-#'\newpage
-#'### LaTeX Parameter in Datei schreiben
-
-writeLines(latexdefs,
-           paste0("temp/",
-                  config$project$shortname,
-                  "_Definitions.tex"))
-
-
-
-
+                 "packages.bib")
 
 
 #'## Parallelisierung aktivieren
@@ -337,19 +247,9 @@ writeLines(latexdefs,
 
 
 #+
-#'### Anzahl logischer Kerne festlegen
+#'### Anzahl logischer Kerne bestimmen
 
-if (config$cores$max == TRUE){
-    fullCores <- detectCores()
-}
-
-
-if (config$cores$max == FALSE){
-    fullCores <- as.integer(config$cores$number)
-}
-
-
-
+fullCores <- detectCores()
 print(fullCores)
 
 #'### Quanteda
@@ -357,6 +257,91 @@ quanteda_options(threads = fullCores)
 
 #'### Data.table
 setDTthreads(threads = fullCores)  
+
+
+
+
+
+#'# Funktionen definieren
+
+
+#+
+#'## Transformation von Gliederungs-Metadaten
+#' Wird bei der Umwandlung der Metadaten aus dem XML-Format benötigt. Konkret werden hierdurch Werte die nur einmal pro Abschnitt (z.B. Gliederungsüberschriften) hochgerechnet, damit jede Norm die ihr zugehörigen Abschnitts-Metadaten zugewiesen erhält.
+
+
+f.heading.transform <- function(inputvec){
+    
+    rep.text <- c("NA", inputvec[is.na(inputvec) == FALSE])
+    
+    which <- c(1, which(is.na(inputvec) == FALSE), length(inputvec) + 1)
+    
+    rep.count <- diff(which)
+    
+    rep <- data.table(rep.text,
+                      rep.count)
+    
+    replist <- vector("list",
+                      rep[,.N])
+    
+    for (i in 1:rep[,.N]){
+        
+        replist[[i]]<- rep(rep.text[i],
+                           rep.count[i])
+        
+    }
+    
+    outvec <- unlist(replist)
+    return(outvec)    
+}
+
+
+
+
+#'## NA in leere Listen-Elemente einsetzen
+
+f.zero.NA <- function(x) if (length(x) == 0){
+                             NA_character_
+                         }else{
+                             paste(x, collapse = " ")}
+
+
+#'## Erstellen von Titel- und Bezeichnungshierarchien
+#' Diese Funktion nimmt die für jedes Gesetz bereitgestellten Gliederungskennzahlen, bricht diese in ihre Bestandteile herunter und definiert für jede Gliederungskennzahl die volle Hierarchie an Titeln bzw. Gliederungsbezeichnungen.
+#'
+#' Beispiel Titelhierarchie: Recht der Schuldverhältnisse | Einzelne Schuldverhältnisse | Mietvertrag, Pachtvertrag | Mietverhältnisse über Wohnraum | Beendigung des Mietverhältnisses | Werkwohnungen
+#'
+#' Beispiel Bezeichnungshierarchie: Buch 2 | Abschnitt 8 | Titel 5 | Untertitel 2 | Kapitel 5 | Unterkapitel 4
+
+
+f.namechain <- function(kennzahl,
+                        titel,
+                        bez){
+
+    out.list <- vector("list", length(kennzahl))
+    
+    for (i in seq_along(kennzahl)){
+        
+        einzelzahl <- kennzahl[i]
+        
+        breaks <- seq_len(nchar(einzelzahl) / 3 ) * 3
+
+        chain <- unname(mapply(substr, einzelzahl, 1, breaks))
+
+        titelchain <- paste(titel[match(chain, kennzahl)], collapse = " | ")
+
+        bezchain <- paste(bez[match(chain, kennzahl)], collapse = " | ")
+
+        out.list[[i]] <- data.table(einzelzahl,
+                                    titelchain,
+                                    bezchain)
+    }
+    
+    out.vec <- rbindlist(out.list)
+    
+    return(out.vec)
+    
+}
 
 
 
@@ -394,28 +379,8 @@ print(f.linkextract)
 
 #'## Links aus HTML Landing Pages extrahieren
 
-
-
-if(config$parallel$htmlLandingPages == TRUE){
-
-    links.list <- foreach(z = seq_along(links.html),
-                          .errorhandling = 'pass') %dopar% {
-
-                              f.linkextract(links.html[z])
-
-                          }
-
-    
-}else{
-
-    links.list <- lapply(links.html,
-                         f.linkextract)
-
-}
-
-
-
-
+links.list <- lapply(links.html,
+                     f.linkextract)
 
 
 links.raw <- unlist(links.list)
@@ -557,32 +522,20 @@ colnames(conctable) <- c("ID",
 #'## Download Table als CSV speichern
 
 fwrite(download,
-       paste0(dir.analysis,
-              config$project$shortname,
+       paste0(outputdir,
+              datasetname,
               "_02_Links.csv"),
        na = "NA")
-
-
 
 
 #'## Verzeichnis aller Rechtsakte als CSV speichern
 
 fwrite(conctable,
-       paste0("output/",
-              prefix.files,
+       paste0(datasetname,
+              "_",
+              datestamp,
               "_DE_AlleRechtsakteVerzeichnis.csv"),
        na = "NA")
-
-
-
-
-#'## Debugging-Modus: Anzahl der heruntergeladenen Dateien reduzieren
-
-if (config$debug$toggle == TRUE){
-
-    download <- download[sample(download[, .N], config$debug$sample)]
-
-}
 
 
 
@@ -605,9 +558,10 @@ download[, .N] * 3
 #'## Document Type Definition herunterladen
 #' Die Document Type Definition (DTD) "definiert den Aufbau des XML-Formats zur Veroeffentlichung der aktuellen Bundesgesetze und Rechtsverordnungen ueber www.gesetze-im-internet.de" (Zitat aus dem Inhalt der Datei).
 
-download.file("https://www.gesetze-im-internet.de/dtd/1.01/gii-norm.dtd",
-              paste0("output/",
-                     prefix.files,
+download.file("http://www.gesetze-im-internet.de/dtd/1.01/gii-norm.dtd",
+              paste0(datasetname,
+                     "_",
+                     datestamp,
                      "_DE_XML_DocumentTypeDefinition_v1-01.dtd"))
 
 
@@ -619,8 +573,7 @@ download.file("https://www.gesetze-im-internet.de/dtd/1.01/gii-norm.dtd",
 #+ results = 'hide'
 mcmapply(download.file,
          download$links.xml,
-         paste0("XML/",
-                download$title.xml))
+         download$title.xml)
 
 
 
@@ -631,8 +584,7 @@ mcmapply(download.file,
 download[,.N]
 
 #'### Anzahl heruntergeladener Dateien
-files.zip <- list.files("XML",
-                        pattern = "\\.zip")
+files.zip <- list.files(pattern = "\\.zip")
 length(files.zip)
 
 #'### Fehlbetrag
@@ -650,15 +602,12 @@ print(missing)
 #' XML-Dateien und ihre Anlagen sind einzeln nach Rechtsakten in ZIP-Archiven verpackt. Diese werden nun extrahiert und die ZIP-Archive im Anschluss gelöscht.
 
 #+ results = 'hide'
-files.zip <- list.files("XML",
-                        pattern = "\\.zip",
-                        ignore.case = TRUE,
-                        full.names = TRUE)
+files.zip <- list.files(pattern = "\\.zip",
+                        ignore.case = TRUE)
 
 
 for (file in files.zip){
-    unzip(zipfile = file,
-          exdir = "XML")
+    unzip(file)
     }
 
 
@@ -668,12 +617,11 @@ unlink(files.zip)
 
 #'## XML Dateien auflisten und Dateigrößen speichern
 
-files.xml <- list.files("XML",
-                        pattern = "\\.xml",
-                        ignore.case = TRUE,
-                        full.names = TRUE)
+files.xml <- list.files(pattern = "\\.xml",
+                        ignore.case = TRUE)
 
 xml.MB <- file.size(files.xml) / 10^6
+
 
 
 
@@ -982,12 +930,12 @@ dt.normen$ausfertigung_jahr <- year(dt.normen$ausfertigung_datum)
 
 
 #'### Variable "doi_concept" hinzufügen
-dt.normen$doi_concept <- rep(config$doi$data$concept,
+dt.normen$doi_concept <- rep(doi.concept,
                              dt.normen[,.N])
 
 
 #'### Variable "doi_version" hinzufügen
-dt.normen$doi_version <- rep(config$doi$data$version,
+dt.normen$doi_version <- rep(doi.version,
                              dt.normen[,.N])
 
 
@@ -996,7 +944,7 @@ dt.normen$version <- as.character(rep(datestamp,
                                       dt.normen[,.N]))
 
 #'### Variable "lizenz" hinzufügen
-dt.normen$lizenz <- as.character(rep(config$license$data,
+dt.normen$lizenz <- as.character(rep(license,
                                      dt.normen[,.N]))
 
 
@@ -1006,16 +954,13 @@ dt.normen$lizenz <- as.character(rep(config$license$data,
 
 #'## Stichprobe für Qualitätsprüfung ziehen
 
-print(config$qa$sample)
-
-idx <- sample(dt.normen[,.N],
-              config$qa$sample)
+idx <- sample(dt.normen[,.N], 300)
 
 check <- dt.normen[idx]
 
 fwrite(check,
-       paste0(dir.analysis,
-              prefix.files,
+       paste0(outputdir,
+              datasetname,
               "_Stichprobe_Normen.csv"),
        na = "NA")
 
@@ -1274,19 +1219,22 @@ dt.meta$ausfertigung_jahr <- year(as.IDate(dt.meta$ausfertigung_datum))
 
 
 #'### Variable "doi_concept" hinzufügen
-dt.meta$doi_concept <- rep(config$doi$data$concept, dt.meta[,.N])
+dt.meta$doi_concept <- rep(doi.concept, dt.meta[,.N])
 
 
 #'### Variable "doi_version" hinzufügen
-dt.meta$doi_version <- rep(config$doi$data$version, dt.meta[,.N])
+dt.meta$doi_version <- rep(doi.version, dt.meta[,.N])
 
 
 #'### Variable "version" hinzufügen
 dt.meta$version <- as.character(rep(datestamp, dt.meta[,.N]))
 
 #'### Variable "lizenz" hinzufügen
-dt.meta$lizenz <- as.character(rep(config$license$data,
+dt.meta$lizenz <- as.character(rep(license,
                                      dt.meta[,.N]))
+
+
+
 
 
 
@@ -1455,21 +1403,21 @@ f.network.analysis <- function(xml.name){
                        "_",
                        gsub("\\.xml",
                             "",
-                            basename(xml.name)))
+                            xml.name))
 
     fwrite(edgelist,
-           paste0("netzwerke/Edgelists/",
+           paste0("Netzwerke/Edgelists/",
                   filename,
                   "_Edgelist.csv"))
 
     
     fwrite(M.adjacency,
-           paste0("netzwerke/Adjazenzmatrizen/",
+           paste0("Netzwerke/Adjazenzmatrizen/",
                   filename,
                   "_AdjazenzMatrix.csv"))
 
     write_graph(g,
-                file = paste0("netzwerke/GraphML/",
+                file = paste0("Netzwerke/GraphML/",
                               filename,
                               ".graphml"),
                 format = "graphml")
@@ -1485,10 +1433,13 @@ f.network.analysis <- function(xml.name){
                            repel = TRUE)+
             theme_void()+
             labs(
-                title = paste(prefix.figuretitle,
+                title = paste(datasetname,
+                              "| Version",
+                              datestamp,
                               "| Struktur des",
                               jurabk),
-                caption = caption
+                caption = paste("DOI:",
+                                doi.version)
             )+
             theme(
                 plot.title = element_text(size = 50,
@@ -1499,7 +1450,7 @@ f.network.analysis <- function(xml.name){
 
         ## may conflict with markdown save
         ggsave(
-            filename = paste0("netzwerke/Netzwerkdiagramme/",
+            filename = paste0("Netzwerke/Netzwerkdiagramme/",
                               filename,
                               "_NetzwerkDiagramm.pdf"),
             plot = networkplot,
@@ -1521,8 +1472,7 @@ f.network.analysis <- function(xml.name){
 
 #'### Netzwerk-Analyse durchführen
 
-files.xml <- list.files("XML",
-                        pattern = "\\.xml$")
+files.xml <- list.files(pattern = "\\.xml$")
 
 errorfiles <- c("BJNR008810961.xml",
                 "BJNR010599989.xml",
@@ -1537,9 +1487,6 @@ errorfiles <- c("BJNR008810961.xml",
                 "BJNR364800009.xml")
 
 files.xml <- setdiff(files.xml, errorfiles)
-
-files.xml <- paste0("XML/",
-                    files.xml)
 
 length(files.xml)
 
@@ -1581,38 +1528,36 @@ files.xml[grep("error",
 #+
 #'### XML-Dateien definieren
 
-files.xml <- list.files("XML",
-                        pattern = "\\.xml",
-                        full.names = TRUE)
+files.xml <- list.files(pattern = "\\.xml")
 
 
 #+
 #'### XML-Dateien verpacken
 
-zip(paste0("output/",
-          prefix.files,
-          "_DE_XML_Datensatz.zip"),
-    files.xml,
-    mode = "cherry-pick")
+zip(paste(datasetname,
+          datestamp,
+          "DE_XML_Datensatz.zip",
+          sep = "_"),
+    files.xml)
+
+unlink(files.xml)
+
+
 
 
 #'### Anhänge zu XML-Dateien verpacken
 
-attachments <- list.files("XML",
-                          pattern = "(\\.jpg)|(\\.gif)|(\\.pdf)|(\\.png)",
-                          ignore.case = TRUE,
-                          full.names = TRUE)
+attachments <- list.files(pattern="(\\.jpg)|(\\.gif)|(\\.pdf)|(\\.png)",
+                          ignore.case = TRUE)
+
+zip(paste(datasetname,
+          datestamp,
+          "DE_XML_Anlagen.zip",
+          sep = "_"),
+    attachments)
 
 
-if (length(attachments) > 0){
-
-zip(paste0("output/",
-          prefix.files,
-          "_DE_XML_Anlagen.zip"),
-    attachments,
-    mode = "cherry-pick")
-
-    }
+unlink(attachments)
 
 
 
@@ -1631,24 +1576,24 @@ zip(paste0("output/",
 print(f.fast.freqtable)
 
 #'## Liste zu prüfender Variablen
-print(config$freqtable$ignore)
+print(vars.freqtable)
 
 
 #'## Frequenztabellen erstellen
 
-prefix.freqtable.einzelnormen <- paste0(config$project$shortname,
-                                        "_01_Einzelnormen_Frequenztabelle_var-")
+prefix <- paste0(datasetname,
+                 "_01_Einzelnormen_Frequenztabelle_var-")
 
 
 #+ results = "asis"
 f.fast.freqtable(dt.normen,
-                 varlist = config$freqtable$ignore,
+                 varlist = vars.freqtable,
                  sumrow = TRUE,
                  output.list = FALSE,
                  output.kable = TRUE,
                  output.csv = TRUE,
-                 outputdir = dir.analysis,
-                 prefix = prefix.freqtable.einzelnormen)
+                 outputdir = outputdir,
+                 prefix = prefix)
 
 
 
@@ -1661,7 +1606,7 @@ varremove <- c("gliederungskennzahl")
 
 vars.freqtable.rechtsakte <- grep(paste(varremove,
                                         collapse = "|"),
-                               config$freqtable$ignore,
+                               vars.freqtable,
                                invert = TRUE,
                                value = TRUE)
 
@@ -1676,8 +1621,8 @@ print(vars.freqtable.rechtsakte)
 
 #'## Frequenztabellen erstellen
 
-prefix.freqtable.rechtsakte <- paste0(config$project$shortname,
-                                      "_01_Rechtsakte_Frequenztabelle_var-")
+prefix <- paste0(datasetname,
+                 "_01_Rechtsakte_Frequenztabelle_var-")
 
 
 #+ results = "asis"
@@ -1687,8 +1632,8 @@ f.fast.freqtable(dt.rechtsakte,
                  output.list = FALSE,
                  output.kable = TRUE,
                  output.csv = TRUE,
-                 outputdir = dir.analysis,
-                 prefix = prefix.freqtable.rechtsakte)
+                 outputdir = outputdir,
+                 prefix = prefix)
 
 
 
@@ -1705,7 +1650,7 @@ print(vars.freqtable.rechtsakte)
 
 #'## Frequenztabellen erstellen
 
-prefix.freqtable.meta <- paste0(config$project$shortname,
+prefix <- paste0(datasetname,
                  "_01_Meta_Frequenztabelle_var-")
 
 
@@ -1716,8 +1661,8 @@ f.fast.freqtable(dt.meta,
                  output.list = FALSE,
                  output.kable = TRUE,
                  output.csv = TRUE,
-                 outputdir = dir.analysis,
-                 prefix = prefix.freqtable.meta)
+                 outputdir = outputdir,
+                 prefix = prefix)
 
 
 
@@ -1732,19 +1677,16 @@ f.fast.freqtable(dt.meta,
 #+
 #'## Präfixe erstellen
 
-prefix.normen <- paste0(basename(dir.analysis),
-                        "/",
-                        config$project$shortname,
+prefix.normen <- paste0("ANALYSE/",
+                        datasetname,
                         "_01_Einzelnormen_Frequenztabelle_var-")
 
-prefix.rechtsakte <- paste0(basename(dir.analysis),
-                            "/",
-                            config$project$shortname,
+prefix.rechtsakte <- paste0("ANALYSE/",
+                            datasetname,
                             "_01_Rechtsakte_Frequenztabelle_var-")
 
-prefix.meta <- paste0(basename(dir.analysis),
-                      "/",
-                      config$project$shortname,
+prefix.meta <- paste0("ANALYSE/",
+                      datasetname,
                       "_01_Meta_Frequenztabelle_var-")
 
 
@@ -1799,9 +1741,13 @@ ggplot(data = freqtable)+
     coord_flip()+
     theme_bw()+
     labs(
-        title = paste(prefix.figuretitle,
+        title = paste(datasetname,
+                      "| Version",
+                      datestamp,
                       "| Einzelnormen je Periodikum"),
-        caption = caption,
+        caption = paste("DOI:",
+                        doi.version,
+                        "| S. Fobbe"),
         x = "Periodikum",
         y = "Einzelnormen"
     )+
@@ -1831,9 +1777,13 @@ ggplot(data = freqtable) +
     coord_flip()+
     theme_bw()+
     labs(
-        title = paste(prefix.figuretitle,
+        title = paste(datasetname,
+                      "| Version",
+                      datestamp,
                       "| Rechtsakte mit Inhalt je Periodikum"),
-        caption = caption,
+        caption = paste("DOI:",
+                        doi.version,
+                        "| S. Fobbe"),
         x = "Periodikum",
         y = "Rechtsakte"
     )+
@@ -1864,9 +1814,13 @@ ggplot(data = freqtable) +
     coord_flip()+
     theme_bw() +
     labs(
-        title = paste(prefix.figuretitle,
+        title = paste(datasetname,
+                      "| Version",
+                      datestamp,
                       "| Rechtsakte nach Metadaten je Periodikum"),
-        caption = caption,
+        caption = paste("DOI:",
+                        doi.version,
+                        "| S. Fobbe"),
         x = "Periodikum",
         y = "Rechtsakte"
     )+
@@ -1899,9 +1853,13 @@ ggplot(data = freqtable) +
              fill = "black")+
     theme_bw()+
     labs(
-        title = paste(prefix.figuretitle,
+        title = paste(datasetname,
+                      "| Version",
+                      datestamp,
                       "| Einzelnormen je Ausfertigungsjahr"),
-        caption = caption,
+        caption = paste("DOI:",
+                        doi.version,
+                        "| S. Fobbe"),
         x = "Ausfertigungsjahr",
         y = "Einzelnormen"
     )+
@@ -1929,9 +1887,13 @@ ggplot(data = freqtable) +
              fill = "black") +
     theme_bw()+
     labs(
-        title = paste(prefix.figuretitle,
+        title = paste(datasetname,
+                      "| Version",
+                      datestamp,
                       "| Rechtsakte mit Inhalt je Ausfertigungsjahr"),
-        caption = caption,
+        caption = paste("DOI:",
+                        doi.version,
+                        "| S. Fobbe"),
         x = "Ausfertigungsjahr",
         y = "Rechtsakte"
     )+
@@ -1962,9 +1924,13 @@ ggplot(data = freqtable) +
              fill = "black") +
     theme_bw()+
     labs(
-        title = paste(prefix.figuretitle,
+        title = paste(datasetname,
+                      "| Version",
+                      datestamp,
                       "| Rechtsakte nach Metadaten je Ausfertigungsjahr"),
-        caption = caption,
+        caption = paste("DOI:",
+                        doi.version,
+                        "| S. Fobbe"),
         x = "Ausfertigungsjahr",
         y = "Rechtsakte"
     )+
@@ -1990,18 +1956,18 @@ ggplot(data = freqtable) +
 
 #+
 #'### Funktion anzeigen:  f.summarize.iterator
-print(f.lingsummarize.iterator)
+print(f.summarize.iterator)
 
 
 
 #'### Berechnung durchführen
-lingstats.normen.raw <- f.lingsummarize.iterator(dt.normen,
+lingstats.normen.raw <- f.summarize.iterator(dt.normen,
+                                             threads = fullCores,
+                                             chunksize = 1)
+
+lingstats.rechtsakte.raw <- f.summarize.iterator(dt.rechtsakte,
                                                  threads = fullCores,
                                                  chunksize = 1)
-
-lingstats.rechtsakte.raw <- f.lingsummarize.iterator(dt.rechtsakte,
-                                                     threads = fullCores,
-                                                     chunksize = 1)
 
 
 #'## Variablen-Namen anpassen
@@ -2123,8 +2089,8 @@ kable(dt.stats.ling,
 #'### Zusammenfassungen speichern
 
 fwrite(dt.stats.ling,
-       paste0(dir.analysis,
-              config$project$shortname,
+       paste0(outputdir,
+              datasetname,
               "_00_Einzelnormen_KorpusStatistik_ZusammenfassungLinguistisch.csv"),
        na = "NA")
 
@@ -2200,8 +2166,8 @@ kable(dt.stats.ling,
 #'### Zusammenfassungen speichern
 
 fwrite(dt.stats.ling,
-       paste0(dir.analysis,
-              config$project$shortname,
+       paste0(outputdir,
+              datasetname,
               "_00_Rechtsakte_KorpusStatistik_ZusammenfassungLinguistisch.csv"),
        na = "NA")
 
@@ -2231,9 +2197,13 @@ ggplot(data = meta.normen)+
     coord_cartesian(xlim = c(1, 10^6))+
     theme_bw()+
     labs(
-        title = paste(prefix.figuretitle,
+        title = paste(datasetname,
+                      "| Version",
+                      datestamp,
                       "| Verteilung der Zeichen je Norm"),
-        caption = caption,
+        caption = paste("DOI:",
+                        doi.version,
+                        "| S. Fobbe"),
         x = "Zeichen",
         y = "Dichte"
     )+
@@ -2244,8 +2214,6 @@ ggplot(data = meta.normen)+
         legend.position = "none",
         plot.margin = margin(10, 20, 10, 10)
     )
-
-
 
 #'\newpage
 #+ C-DBR_04_Rechtsakte_Density_Zeichen, fig.height = 6, fig.width = 9
@@ -2258,9 +2226,13 @@ ggplot(data = meta.rechtsakte)+
     coord_cartesian(xlim = c(1, 10^6))+
     theme_bw()+
     labs(
-        title = paste(prefix.figuretitle,
+        title = paste(datasetname,
+                      "| Version",
+                      datestamp,
                       "| Verteilung der Zeichen je Rechtsakt"),
-        caption = caption,
+        caption = paste("DOI:",
+                        doi.version,
+                        "| S. Fobbe"),
         x = "Zeichen",
         y = "Dichte"
     )+
@@ -2271,8 +2243,6 @@ ggplot(data = meta.rechtsakte)+
         legend.position = "none",
         plot.margin = margin(10, 20, 10, 10)
     )
-
-
 
 #'\newpage
 #+
@@ -2288,9 +2258,13 @@ ggplot(data = meta.normen)+
     coord_cartesian(xlim = c(1, 10^6))+
     theme_bw()+
     labs(
-        title = paste(prefix.figuretitle,
+        title = paste(datasetname,
+                      "| Version",
+                      datestamp,
                       "| Verteilung der Tokens je Norm"),
-        caption = caption,
+        caption = paste("DOI:",
+                        doi.version,
+                        "| S. Fobbe"),
         x = "Tokens",
         y = "Dichte"
     )+
@@ -2301,8 +2275,6 @@ ggplot(data = meta.normen)+
         legend.position = "none",
         plot.margin = margin(10, 20, 10, 10)
     )
-
-
 
 
 #'\newpage
@@ -2316,9 +2288,13 @@ ggplot(data = meta.rechtsakte)+
     coord_cartesian(xlim = c(1, 10^6))+
     theme_bw() +
     labs(
-        title = paste(prefix.figuretitle,
+        title = paste(datasetname,
+                      "| Version",
+                      datestamp,
                       "| Verteilung der Tokens je Rechtsakt"),
-        caption = caption,
+        caption = paste("DOI:",
+                        doi.version,
+                        "| S. Fobbe"),
         x = "Tokens",
         y = "Dichte"
     )+
@@ -2329,9 +2305,6 @@ ggplot(data = meta.rechtsakte)+
         legend.position = "none",
         plot.margin = margin(10, 20, 10, 10)
     )
-
-
-
 
 
 
@@ -2348,9 +2321,13 @@ ggplot(data = meta.normen)+
     coord_cartesian(xlim = c(1, 10^6))+
     theme_bw()+
     labs(
-        title = paste(prefix.figuretitle,
+        title = paste(datasetname,
+                      "| Version",
+                      datestamp,
                       "| Verteilung der Typen je Norm"),
-        caption = caption,
+        caption = paste("DOI:",
+                        doi.version,
+                        "| S. Fobbe"),
         x = "Typen",
         y = "Dichte"
     )+
@@ -2375,9 +2352,13 @@ ggplot(data = meta.rechtsakte)+
     coord_cartesian(xlim = c(1, 10^6))+
     theme_bw()+
     labs(
-        title = paste(prefix.figuretitle,
+        title = paste(datasetname,
+                      "| Version",
+                      datestamp,
                       "| Verteilung der Typen je Rechtsakt"),
-        caption = caption,
+        caption = paste("DOI:",
+                        doi.version,
+                        "| S. Fobbe"),
         x = "Typen",
         y = "Dichte"
     )+
@@ -2388,9 +2369,6 @@ ggplot(data = meta.rechtsakte)+
         legend.position = "none",
         plot.margin = margin(10, 20, 10, 10)
     )
-
-
-
 
 
 
@@ -2407,9 +2385,13 @@ ggplot(data = meta.normen)+
     coord_cartesian(xlim = c(1, 10^6))+
     theme_bw()+
     labs(
-        title = paste(prefix.figuretitle,
+        title = paste(datasetname,
+                      "| Version",
+                      datestamp,
                       "| Verteilung der Sätze je Norm"),
-        caption = caption,
+        caption = paste("DOI:",
+                        doi.version,
+                        "| S. Fobbe"),
         x = "Sätze",
         y = "Dichte"
     )+
@@ -2420,8 +2402,6 @@ ggplot(data = meta.normen)+
         legend.position = "none",
         plot.margin = margin(10, 20, 10, 10)
     )
-
-
 
 
 
@@ -2436,9 +2416,13 @@ ggplot(data = meta.rechtsakte)+
     coord_cartesian(xlim = c(1, 10^6))+ 
     theme_bw()+
     labs(
-        title = paste(prefix.figuretitle,
+        title = paste(datasetname,
+                      "| Version",
+                      datestamp,
                       "| Verteilung der Sätze je Rechtsakt"),
-        caption = caption,
+        caption = paste("DOI:",
+                        doi.version,
+                        "| S. Fobbe"),
         x = "Sätze",
         y = "Dichte"
     )+
@@ -2487,7 +2471,7 @@ summary(dt.meta$ausfertigung_jahr)
 
 
 
-#'# Strenge Kontrolle der Variablen-Namen
+#'# Kontrolle der Variablen
 
 #+
 #'## Semantische Sortierung der Variablen
@@ -2738,15 +2722,16 @@ names(dt.meta)
 #+
 #'### Name für CSV definieren
 
-csvname.normen.gesamt <- paste0(prefix.files,
-                               "_DE_CSV_Einzelnormen_Datensatz.csv")
+csvname.normen.gesamt <- paste(datasetname,
+                               datestamp,
+                               "DE_CSV_Einzelnormen_Datensatz.csv",
+                               sep = "_")
 
 #'### Datensatz speichern
 
 fwrite(dt.normen,
-       paste0("output/",
-              csvname.normen.gesamt),
-       na = "NA")
+       csvname.normen.gesamt,
+       na = "NA") 
 
 
 #+
@@ -2755,14 +2740,15 @@ fwrite(dt.normen,
 #+
 #'### Name für CSV definieren
 
-csvname.normen.meta <- paste0(prefix.files,
-                             "_DE_CSV_Einzelnormen_Metadaten.csv")
+csvname.normen.meta <- paste(datasetname,
+                             datestamp,
+                             "DE_CSV_Einzelnormen_Metadaten.csv",
+                             sep = "_")
 
 #'### Datensatz speichern
 
 fwrite(meta.normen,
-       paste0("output/",
-              csvname.normen.meta),
+       csvname.normen.meta,
        na = "NA") 
 
 
@@ -2773,14 +2759,15 @@ fwrite(meta.normen,
 #+
 #'### Name für CSV definieren
 
-csvname.rechtsakte.gesamt <- paste0(prefix.files,
-                                   "_DE_CSV_Rechtsakte_Datensatz.csv")
+csvname.rechtsakte.gesamt <- paste(datasetname,
+                                   datestamp,
+                                   "DE_CSV_Rechtsakte_Datensatz.csv",
+                                   sep = "_")
 
 #'### Datensatz speichern
 
 fwrite(dt.rechtsakte,
-       paste0("output/",
-              csvname.rechtsakte.gesamt),
+       csvname.rechtsakte.gesamt,
        na = "NA") 
 
 
@@ -2790,15 +2777,16 @@ fwrite(dt.rechtsakte,
 #+
 #'### Name für CSV definieren
 
-csvname.rechtsakte.meta <- paste0(prefix.files,
-                                 "_DE_CSV_Rechtsakte_Metadaten.csv")
+csvname.rechtsakte.meta <- paste(datasetname,
+                                 datestamp,
+                                 "DE_CSV_Rechtsakte_Metadaten.csv",
+                                 sep = "_")
 
 
 #'### Datensatz speichern
 
 fwrite(meta.rechtsakte,
-       paste0("output/",
-              csvname.rechtsakte.meta),
+       csvname.rechtsakte.meta,
        na = "NA") 
 
 
@@ -2811,16 +2799,20 @@ fwrite(meta.rechtsakte,
 #+
 #'### Name für CSV definieren
 
-csvname.meta <- paste0(prefix.files,
-                      "_DE_CSV_MetadatenXML.csv")
+csvname.meta <- paste(datasetname,
+                      datestamp,
+                      "DE_CSV_MetadatenXML.csv",
+                      sep = "_")
 
 
 #'### Datensatz speichern
 
 fwrite(dt.meta,
-       paste0("output/",
-              csvname.meta),
+       csvname.meta,
        na = "NA")
+
+
+
 
 
 
@@ -2836,8 +2828,7 @@ fwrite(dt.meta,
 #+ results = 'hide'
 mcmapply(download.file,
          download$links.pdf,
-         paste0("PDF/",
-                download$title.pdf))
+         download$title.pdf)
 
 
 #'## Download-Ergebnis
@@ -2847,8 +2838,7 @@ mcmapply(download.file,
 download[,.N]
 
 #'### Anzahl heruntergeladener Dateien
-files.pdf <- list.files("PDF",
-                        pattern = "\\.pdf")
+files.pdf <- list.files(pattern = "\\.pdf")
 length(files.pdf)
 
 #'### Fehlbetrag
@@ -2867,10 +2857,8 @@ print(missing)
 #'# TXT-Dateien erstellen
 #' An dieser Stelle wird der reine Text aus den PDF-Dateien extrahiert und ein zusätzliches Datei-Format (TXT) generiert. TXT-Dateien sind besonders für quantitative Analysten ohne XML-Kenntnisse ein lohnenswerter Einstieg und verringern die Hürde für die Arbeit mit dem Korpus.
 
-files.pdf <- list.files("PDF",
-                        pattern = "\\.pdf",
-                        ignore.case = TRUE,
-                        full.names = TRUE)
+files.pdf <- list.files(pattern = "\\.pdf",
+                        ignore.case = TRUE)
 
 
 #'## Anzahl zu extrahierender Dateien
@@ -2896,22 +2884,6 @@ print(f.dopar.pdfextract)
 f.dopar.pdfextract(files.pdf)
 
 
-#'## TXT-Dateien in separaten Ordner verschieben
-
-files.txt <- list.files("PDF",
-                        pattern = "\\.txt",
-                        ignore.case = TRUE,
-                        full.names = TRUE)
-
-files.txt.destination <- gsub("PDF/",
-                              "TXT/",
-                              files.txt)
-
-file.rename(files.txt,
-            files.txt.destination)
-
-
-
 
 #'# Download der EPUB-Dateien
 
@@ -2921,10 +2893,7 @@ file.rename(files.txt,
 #+ results = 'hide'
 mcmapply(download.file,
          download$links.epub,
-         paste0("EPUB/",
-                download$title.epub))
-
-
+         download$title.epub)
 
 
 #'## Download-Ergebnis
@@ -2934,8 +2903,7 @@ mcmapply(download.file,
 download[,.N]
 
 #'### Anzahl heruntergeladener Dateien
-files.epub <- list.files("EPUB",
-                         pattern = "\\.epub")
+files.epub <- list.files(pattern = "\\.epub")
 length(files.epub)
 
 #'### Fehlbetrag
@@ -2949,24 +2917,11 @@ print(missing)
 
 
 
-
-
 #'# Dateigrößen analysieren
 
-files.txt <- list.files("TXT",
-                        pattern = "\\.txt$",
-                        ignore.case = TRUE,
-                        full.names = TRUE)
-
-files.pdf <- list.files("PDF",
-                        pattern = "\\.pdf$",
-                        ignore.case = TRUE,
-                        full.names = TRUE)
-
-files.epub <- list.files("EPUB",
-                         pattern = "\\.epub$",
-                         ignore.case = TRUE,
-                         full.names = TRUE)
+files.txt <- list.files(pattern = "\\.txt$", ignore.case = TRUE)
+files.pdf <- list.files(pattern = "\\.pdf$", ignore.case = TRUE)
+files.epub <- list.files(pattern = "\\.epub$", ignore.case = TRUE)
 
 
 txt.MB <- file.size(files.txt) / 10^6
@@ -2991,7 +2946,7 @@ sum(xml.MB)
 sum(txt.MB)
 
 
-#'### Objekte in RAM (MB)
+#'### Korpus-Objekte in RAM (MB)
 
 print(object.size(dt.normen),
       standard = "SI",
@@ -3025,9 +2980,13 @@ ggplot(data = dt.plot,
     annotation_logticks(sides = "b")+
     theme_bw()+
     labs(
-        title = paste(prefix.figuretitle,
+        title = paste(datasetname,
+                      "| Version",
+                      datestamp,
                       "| Verteilung der Dateigrößen (PDF)"),
-        caption = caption,
+        caption = paste("DOI:",
+                        doi.version,
+                        "| S. Fobbe"),
         x = "Dateigröße in MB",
         y = "Dichte"
     )+
@@ -3038,8 +2997,6 @@ ggplot(data = dt.plot,
         legend.position = "none",
         plot.margin = margin(10, 20, 10, 10)
     )
-
-
 
 
 #'\newpage
@@ -3057,9 +3014,13 @@ ggplot(data = dt.plot,
     annotation_logticks(sides = "b")+
     theme_bw()+
     labs(
-        title = paste(prefix.figuretitle,
+        title = paste(datasetname,
+                      "| Version",
+                      datestamp,
                       "| Verteilung der Dateigrößen (EPUB)"),
-        caption = caption,
+        caption = paste("DOI:",
+                        doi.version,
+                        "| S. Fobbe"),
         x = "Dateigröße in MB",
         y = "Dichte"
     )+
@@ -3070,8 +3031,6 @@ ggplot(data = dt.plot,
         legend.position = "none",
         plot.margin = margin(10, 20, 10, 10)
     )
-
-
 
 
 
@@ -3090,9 +3049,13 @@ ggplot(data = dt.plot,
     annotation_logticks(sides = "b")+
     theme_bw()+
     labs(
-        title = paste(prefix.figuretitle,
+        title = paste(datasetname,
+                      "| Version",
+                      datestamp,
                       "| Verteilung der Dateigrößen (XML)"),
-        caption = caption,
+        caption = paste("DOI:",
+                        doi.version,
+                        "| S. Fobbe"),
         x = "Dateigröße in MB",
         y = "Dichte"
     )+
@@ -3121,9 +3084,13 @@ ggplot(data = dt.plot,
     annotation_logticks(sides = "b")+
     theme_bw()+
     labs(
-        title = paste(prefix.figuretitle,
+        title = paste(datasetname,
+                      "| Version",
+                      datestamp,
                       "| Verteilung der Dateigrößen (TXT)"),
-        caption = caption,
+        caption = paste("DOI:",
+                        doi.version,
+                        "| S. Fobbe"),
         x = "Dateigröße in MB",
         y = "Dichte"
     )+
@@ -3153,17 +3120,13 @@ files.csv <- c(csvname.normen.gesamt,
                csvname.rechtsakte.meta,
                csvname.meta)
 
-files.csv <- paste0("output/",
-                    files.csv)
-
 csvnames.zip <- gsub(".csv",
                      ".zip",
                      files.csv)
 
 for (i in seq_along(files.csv)){
     zip(csvnames.zip[i],
-        files.csv[i],
-    mode = "cherry-pick")
+        files.csv[i])
 }
 
 unlink(files.csv)
@@ -3172,85 +3135,77 @@ unlink(files.csv)
 
 #'## Verpacken der PDF-Dateien
 
-files.pdf <- list.files("PDF",
-                        pattern = "\\.pdf$",
-                        ignore.case = TRUE,
-                        full.names = TRUE)
+files.pdf <- list.files(pattern = "\\.pdf$",
+                         ignore.case = TRUE)
 
-zip(paste0("output/",
-           prefix.files,
-           "_DE_PDF_Datensatz.zip"),
-    files.pdf,
-    mode = "cherry-pick")
+zip(paste(datasetname,
+          datestamp,
+          "DE_PDF_Datensatz.zip",
+          sep = "_"),
+    files.pdf)
 
-
+unlink(files.pdf)
 
 
 
 
 #'## Verpacken der TXT-Dateien
 
-files.txt <- list.files("TXT",
-                        pattern = "\\.txt$",
-                        ignore.case = TRUE,
-                        full.names = TRUE)
+files.txt <- list.files(pattern = "\\.txt$",
+                        ignore.case = TRUE)
 
-zip(paste0("output/",
-           prefix.files,
-           "_DE_TXT_Datensatz.zip"),
-    files.txt,
-    mode = "cherry-pick")
+zip(paste(datasetname,
+          datestamp,
+          "DE_TXT_Datensatz.zip",
+          sep = "_"),
+    files.txt)
 
-
+unlink(files.txt)
 
 
 
 #'## Verpacken der EPUB-Dateien
 
-files.epub <- list.files("EPUB",
-                         pattern = "\\.epub$",
-                         ignore.case = TRUE,
-                         full.names = TRUE)
+files.epub <- list.files(pattern = "\\.epub$",
+                         ignore.case = TRUE)
 
-zip(paste0("output/",
-           prefix.files,
-           "_DE_EPUB_Datensatz.zip"),
-    files.epub,
-    mode = "cherry-pick")
+zip(paste(datasetname,
+          datestamp,
+          "DE_EPUB_Datensatz.zip",
+          sep = "_"),
+    files.epub)
 
-
+unlink(files.epub)
 
 
 #'## Verpacken der Netzwerk-Dateien
 
-zip(paste0("output/",
-           prefix.files,
+zip(paste0(datasetname,
+           "_",
+           datestamp,
            "_DE_Netzwerke.zip"),
-    "netzwerke",
-    mode = "cherry-pick")
+    "Netzwerke")
 
-
+unlink("Netzwerke",
+       recursive = TRUE)
 
 
 #'## Verpacken der Analyse-Dateien
 
-zip(paste0("output/",
-           prefix.files,
+zip(paste0(datasetname,
+           "_",
+           datestamp,
            "_DE_",
-           toupper(basename(dir.analysis)),
+           basename(outputdir),
            ".zip"),
-    basename(dir.analysis),
-    mode = "cherry-pick")
+    basename(outputdir))
 
 
 
 
 #'## Verpacken der Source-Dateien
 
-files.source <- c(list.files(pattern = "\\.R$|\\.toml$"),
-                  "R-fobbe-proto-package",
-                  "functions",
-                  "tex",
+files.source <- c(list.files(pattern = "Source"),
                   "buttons")
 
 
@@ -3260,25 +3215,12 @@ files.source <- grep("spin",
                      ignore.case = TRUE,
                      invert = TRUE)
 
-zip(paste0("output/",
-          prefix.files,
-          "_Source_Code.zip"),
-    files.source,
-    mode = "cherry-pick")
+zip(paste(datasetname,
+           datestamp,
+           "Source_Code.zip",
+           sep = "_"),
+    files.source)
 
-
-
-#'# Aufräumen
-#' An dieser Stelle werden die Ordner mit den Roh-Dateien gelöscht.
-
-
-unlink("XML", recursive = TRUE)
-unlink("PDF", recursive = TRUE)
-unlink("TXT", recursive = TRUE)
-unlink("EPUB", recursive = TRUE)
-
-unlink("netzwerke", recursive = TRUE)
-unlink("Rplots.pdf", recursive = TRUE)
 
 
 
@@ -3288,10 +3230,8 @@ unlink("Rplots.pdf", recursive = TRUE)
 
 #+
 #'## Liste der ZIP-Archive erstellen
-files.zip <- list.files("output",
-                        pattern = "\\.zip$",
-                        ignore.case = TRUE,
-                        full.names = TRUE)
+files.zip <- list.files(pattern = "\\.zip$",
+                        ignore.case = TRUE)
 
 
 
@@ -3315,9 +3255,10 @@ multihashes$index <- seq_len(multihashes[,.N])
 
 #'## Hashes in CSV-Datei speichern
 fwrite(multihashes,
-       paste0("output/",
-              prefix.files,
-              "_KryptographischeHashes.csv"),
+       paste(datasetname,
+             datestamp,
+             "KryptographischeHashes.csv",
+             sep = "_"),
        na = "NA")
 
 
