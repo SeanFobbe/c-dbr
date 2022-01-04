@@ -1437,7 +1437,7 @@ dt.meta$lizenz <- as.character(rep(config$license$data,
 
 
 
-#'## Netzwerk-Analyse (experimentell)
+#'## Netzwerk-Analyse (experimentell!)
 
 #+
 #'### Funktion definieren: f.kennzahlen.search
@@ -1527,136 +1527,205 @@ f.kennzahlen.edgelist <- function(kennzahl, name){
 }
 
 
-#'### Funktion definieren: f.network.analysis
-#' f.network.analysis benötigt  f.kennzahlen.search, f.kennzahlen.collapse und f.kennzahlen.edgelist.
+f.split.gliederungseinheit <- function(gliederungseinheit){
 
+    kennzahl <- html_elements(gliederungseinheit, xpath = "gliederungskennzahl") %>% xml_text()
+    
+    bez <- html_elements(gliederungseinheit, xpath = "gliederungsbez") %>% xml_text()
 
-f.network.analysis <- function(xml.name){
-
-    XML <- read_xml(xml.name)
-
-    kennzahl <- xml_nodes(XML, xpath = "//norm//gliederungskennzahl") %>% xml_text()
-    kennzahl <- make.unique(kennzahl)
-    bez <- xml_nodes(XML, xpath = "//norm//gliederungsbez") %>% xml_text()
-    titel <- xml_nodes(XML, xpath = "//norm//gliederungstitel") %>% xml_text()
-
+                                        # Newlines, damit Umbrüche in Diagrammen funktionieren
     bez <- gsub(" +",
                 "\n",
                 bez)
+    
+    titel <- html_elements(gliederungseinheit, xpath = "gliederungstitel") %>% xml_text()
 
     titel <- gsub(" +",
                   "\n",
                   titel)
     
+    if(length(titel) == 0){
+        titel <- NA
+    }
 
-    jurabk <- xml_node(XML, xpath = "//norm//jurabk") %>% xml_text()
-
-
-    node.labels0 <- ifelse(titel != "",
-                           titel,
-                           bez)
-
-
-
-    node.labels <- c(jurabk,
-                     node.labels0)
-
-
-    edgelist <- f.kennzahlen.edgelist(kennzahl,
-                                      jurabk)
-
-
-
-    nodes.df <- data.table(kennzahl,
-                           titel)
-
-    addname <- data.table(jurabk,
-                          jurabk)
-
-    setnames(addname, new = c("kennzahl",
-                              "titel"))
-
-    nodes.df <- rbind(addname,
-                      nodes.df)
-
-    setnames(nodes.df, new = c("kennzahl",
-                               "label"))
-
-
-    g  <- graph.data.frame(edgelist,
-                           directed = TRUE,
-                           vertices = nodes.df)
-
-
-
-    M.adjacency <- as.matrix(get.adjacency(g,
-                                           edges = F))
-
-    filename <- paste0(gsub(" +",
-                            "-",
-                            jurabk),
-                       "_",
-                       gsub("\\.xml",
-                            "",
-                            basename(xml.name)))
-
-    fwrite(edgelist,
-           paste0("netzwerke/Edgelists/",
-                  filename,
-                  "_Edgelist.csv"))
-
+    dt <- data.table(kennzahl,
+                     bez,
+                     titel)
+    return(dt)
     
-    fwrite(M.adjacency,
-           paste0("netzwerke/Adjazenzmatrizen/",
-                  filename,
-                  "_AdjazenzMatrix.csv"))
+}
 
-    write_graph(g,
-                file = paste0("netzwerke/GraphML/",
-                              filename,
-                              ".graphml"),
-                format = "graphml")
 
-    if (length(V(g)) > 1){
+
+#xml.name <- "XML/BJNR001950896.xml" # BGB
+
+
+#xml.name <- "XML/BJNR335610017.xml" # problem
+#f.network.analysis(xml.name)
+
+
+
+#'### Funktion definieren: f.network.analysis
+#' f.network.analysis benötigt  f.kennzahlen.search, f.kennzahlen.collapse und f.kennzahlen.edgelist.
+
+
+f.network.analysis <- function(xml.name,
+                               prefix.figuretitle,
+                               caption){
+
+#    message(xml.name) # remove when debugging done
+    XML <- read_xml(xml.name)
+
+    ## Gliederungseinheiten extrahieren
+    gliederungseinheit <- html_elements(XML, xpath = "//norm//gliederungseinheit")
+
+    ## Gliederungseinheit splitten
+    gliederungseinheit.split <- lapply(gliederungseinheit,
+                                       f.split.gliederungseinheit)
+    gliederungseinheit.split <- rbindlist(gliederungseinheit.split)
+
+    gliederungseinheit.split <- unique(gliederungseinheit.split, by = "kennzahl")
+    
+    if (gliederungseinheit.split[,.N] > 0){
         
-        networkplot <- ggraph(g,
-                              'dendrogram',
-                              circular = TRUE) + 
-            geom_edge_elbow(colour = "grey") + 
-            geom_node_text(aes(label = label),
-                           size = 2,
-                           repel = TRUE)+
-            theme_void()+
-            labs(
-                title = paste(prefix.figuretitle,
-                              "| Struktur des",
-                              jurabk),
-                caption = caption
-            )+
-            theme(
-                plot.title = element_text(size = 50,
-                                          face = "bold"),
-                legend.position = "none",
-                plot.margin = margin(10, 20, 10, 10)
-            )
+        ## Abkürzung extrahieren
+        jurabk <- xml_node(XML, xpath = "//norm//jurabk") %>% xml_text()
 
-        ## may conflict with markdown save
-        ggsave(
-            filename = paste0("netzwerke/Netzwerkdiagramme/",
-                              filename,
-                              "_NetzwerkDiagramm.pdf"),
-            plot = networkplot,
-            device = "pdf",
-            scale = 1,
-            width = 50,
-            height = 50,
-            units = "in",
-            dpi = 300,
-            limitsize = FALSE
-        )
+        if (length(jurabk) == 0){
+            jurabk <- "NA"
+        }
+        
+        ## Titel als Label priorieren, sonst Bezeichnung einsetzen
+        node.labels0 <- ifelse(gliederungseinheit.split$titel != "",
+                               gliederungseinheit.split$titel,
+                               gliederungseinheit.split$bez)
+
+        ## Rechtsakt als Quelle des Netzwerks einfügen
+        node.labels <- c(jurabk,
+                         node.labels0)
+
+        
+        ## Edgelist erstellen
+        edgelist <- tryCatch({f.kennzahlen.edgelist(kennzahl = gliederungseinheit.split$kennzahl,
+                                                    name = jurabk)},
+                             error = function(cond) {
+                                 return(0)}
+                             )
+
+        # to do: print errorfilename to disk
+
+        if (edgelist != 0){
+            
+
+        ## Node Labels definieren
+        nodes.df <-gliederungseinheit.split[,.(kennzahl, titel)]
+
+        addname <- data.table(jurabk,
+                              jurabk)
+
+        setnames(addname, new = c("kennzahl",
+                                  "titel"))
+
+        nodes.df <- rbind(addname,
+                          nodes.df)
+
+        setnames(nodes.df, new = c("kennzahl",
+                                   "label"))
+
+        
+        ## Graph aus Edgelist erstellen
+        g  <- graph.data.frame(edgelist,
+                               directed = TRUE,
+                               vertices = nodes.df)
+
+
+        ## Adjazenz-Matrix erstellen
+        M.adjacency <- as.matrix(get.adjacency(g,
+                                               edges = F))
+
+        ## Dateiname definieren
+        filename <- paste0(gsub("( +)|(/)",
+                                "-",
+                                jurabk),
+                           "_",
+                           gsub("\\.xml",
+                                "",
+                                xml.name))
+
+        ## Gliederungstabelle speichern
+        fwrite(gliederungseinheit.split,
+               paste0("netzwerke/Gliederungstabellen/",
+                      filename,
+                      "_Gliederungstabelle.csv"))
+        
+        ## Edgelist speichern
+        fwrite(edgelist,
+               paste0("netzwerke/Edgelists/",
+                      filename,
+                      "_Edgelist.csv"))
+
+
+        ## Adjazenz-Matrix speichern
+        fwrite(M.adjacency,
+               paste0("netzwerke/Adjazenzmatrizen/",
+                      filename,
+                      "_AdjazenzMatrix.csv"))
+
+        ## GraphML speichern
+        write_graph(g,
+                    file = paste0("netzwerke/GraphML/",
+                                  filename,
+                                  ".graphml"),
+                    format = "graphml")
+
+        
+        ## Diagramm erstellen und speichern
+        if (length(V(g)) > 1){
+            
+            networkplot <- ggraph(g,
+                                  'dendrogram',
+                                  circular = TRUE) + 
+                geom_edge_elbow(colour = "grey") + 
+                geom_node_text(aes(label = label),
+                               size = 2,
+                               repel = TRUE)+
+                theme_void()+
+                labs(
+                    title = paste(prefix.figuretitle,
+                                  "| Struktur des",
+                                  jurabk),
+                    caption = caption
+                )+
+                theme(
+                    plot.title = element_text(size = 50,
+                                              face = "bold"),
+                    legend.position = "none",
+                    plot.margin = margin(10, 20, 10, 10)
+                )
+
+            ## may conflict with markdown save
+            ggsave(
+                filename = paste0("netzwerke/Netzwerkdiagramme/",
+                                  filename,
+                                  "_NetzwerkDiagramm.pdf"),
+                plot = networkplot,
+                device = "pdf",
+                scale = 1,
+                width = 50,
+                height = 50,
+                units = "in",
+                dpi = 300,
+                limitsize = FALSE
+            )
+        }
+
+        }
+
     }
 
 }
+
+
 
 
 
