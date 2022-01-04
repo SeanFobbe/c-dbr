@@ -394,8 +394,28 @@ print(f.linkextract)
 
 #'## Links aus HTML Landing Pages extrahieren
 
-links.list <- lapply(links.html,
-                     f.linkextract)
+
+
+if(config$parallel$htmlLandingPages == TRUE){
+
+    links.list <- foreach(z = seq_along(links.html),
+                          .errorhandling = 'pass') %dopar% {
+
+                              f.linkextract(links.html[z])
+
+                          }
+
+    
+}else{
+
+    links.list <- lapply(links.html,
+                         f.linkextract)
+
+}
+
+
+
+
 
 
 links.raw <- unlist(links.list)
