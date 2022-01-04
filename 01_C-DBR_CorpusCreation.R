@@ -22,7 +22,6 @@ knitr::opts_chunk$set(echo = TRUE,
                       warning = TRUE,
                       message = TRUE)
 
-
 #'# Einleitung
 
 #+
@@ -120,28 +119,26 @@ print(begin.script)
 #' Das package *groundhog* nimmt eine strenge Versionskontrolle von R packages vor, indem es nur solche Versionen lädt, die an einem bestimmten Stichtag auf CRAN verfügbar waren. Diese werden in einer separaten library gesichert. Falls entsprechende Versionen nicht vorhanden sind, nimmt es eine automatische Installation derselben vor.
 
 
-packages <- c("zip",          # ZIP Files
-              "rvest",        # HTML/XML-Extraktion
-              "xml2",         # Verarbeitung von XML-Format
-              "RcppTOML",     # Verarbeitung von TOML-Format
-              "knitr",        # Professionelles Reporting
-              "kableExtra",   # Verbesserte Kable Tabellen
-              "magick",       # Verarbeitung von Bild-Dateien
-              "pdftools",     # Extrahieren von PDF-Dateien
-              "parallel",     # Parallelisierung
-              "doParallel",   # Parallelisierung
-              "ggplot2",      # Fortgeschrittene Datenvisualisierung
-              "data.table",   # Fortgeschrittene Datenverarbeitung
-              "quanteda",     # Fortgeschrittene Computerlinguistik
-              "scales",       # Skalierung von Diagrammen
-              "openssl",      # Kryptographische Signaturen
-              "igraph",       # Analyse von Graphen
-              "ggraph",       # Analyse von Graphen
-              "qgraph")       # Analyse von Graphen
+library("zip")          # ZIP Files
+library("rvest")        # HTML/XML-Extraktion
+library("xml2")         # Verarbeitung von XML-Format
+library("RcppTOML")     # Verarbeitung von TOML-Format
+library("knitr")        # Professionelles Reporting
+library("kableExtra")   # Verbesserte Kable Tabellen
+library("magick")       # Verarbeitung von Bild-Dateien
+library("pdftools")     # Extrahieren von PDF-Dateien
+library("parallel")     # Parallelisierung
+library("doParallel")   # Parallelisierung
+library("ggplot2")      # Fortgeschrittene Datenvisualisierung
+library("data.table")   # Fortgeschrittene Datenverarbeitung
+library("quanteda")     # Fortgeschrittene Computerlinguistik
+library("scales")       # Skalierung von Diagrammen
+library("openssl")      # Kryptographische Signaturen
+library("igraph")       # Analyse von Graphen
+library("ggraph")       # Analyse von Graphen
+library("qgraph")       # Analyse von Graphen
 
 
-groundhog.library(pkg = packages,
-                  date = "2021-02-20")
 
 
 
@@ -172,12 +169,7 @@ dir.analysis <- paste0(getwd(),
 
 dirs <- c("output",
           "temp",
-          "netzwerke",
-          "XML",
-          "PDF",
-          "TXT",
-          "EPUB")
-
+          "netzwerke")
 
 
 #'## Dateien aus vorherigen Runs bereinigen
@@ -186,6 +178,13 @@ dirs <- c("output",
 unlink(dir.analysis, recursive = TRUE)
 
 unlink(dirs, recursive = TRUE)
+
+files.delete <- list.files(pattern = "\\.zip|\\.xml|\\.jpe?g|\\.png|\\.gif|\\.pdf|\\.epub",
+                           ignore.case = TRUE)
+
+unlink(files.delete)
+
+
 
 
 #'## Verzeichnisse anlegen
@@ -199,7 +198,7 @@ dir.create("netzwerke/Edgelists")
 dir.create("netzwerke/Adjazenzmatrizen")
 dir.create("netzwerke/Netzwerkdiagramme")
 dir.create("netzwerke/GraphML")
-
+dir.create("netzwerke/Gliederungstabellen")
 
 
 #'## Vollzitate statistischer Software schreiben
