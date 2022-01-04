@@ -828,7 +828,7 @@ xmlparse.einzelnormen <- function(file.xml){
     
     for (i in 1:length(varlist)){
         
-        temp    <- xml_node(XML, varlist[i]) %>% xml_text(trim = TRUE)
+        temp    <- html_element(XML, varlist[i]) %>% xml_text(trim = TRUE)
         meta[[i]]  <- rep(temp,
                           content.out[,.N])
         
@@ -837,7 +837,7 @@ xmlparse.einzelnormen <- function(file.xml){
     setDT(meta)
     setnames(meta, new = varlist)
     
-    meta$fundstellentyp <- rep(xml_node(XML, "fundstelle") %>% xml_attr(attr = "typ"),
+    meta$fundstellentyp <- rep(html_element(XML, "fundstelle") %>% xml_attr(attr = "typ"),
                                content.out[,.N])
 
 
@@ -914,7 +914,11 @@ xmlparse.einzelnormen.robust <- function(file.xml){
     tryCatch({xmlparse.einzelnormen(file.xml)},
              error = function(cond) {
                  return(NA)}
+             )
     }
+
+
+xmlparse.einzelnormen.robust(files.xml[1])
 
 
 
@@ -1189,14 +1193,14 @@ xmlparse.meta <- function(file.xml){
     meta <- vector("list", length(varlist))
     
     for (i in 1:length(varlist)){
-        meta[[i]] <- xml_node(XML, varlist[i]) %>% xml_text()
+        meta[[i]] <- html_element(XML, varlist[i]) %>% xml_text()
 
     }
 
     setDT(meta)
     setnames(meta, new = varlist)
     
-    meta$fundstellentyp <- xml_node(XML, "fundstelle") %>% xml_attr(attr = "typ")
+    meta$fundstellentyp <- html_element(XML, "fundstelle") %>% xml_attr(attr = "typ")
     
     meta$doc_id <- file.xml
     
@@ -1536,7 +1540,7 @@ f.network.analysis <- function(xml.name,
     if (gliederungseinheit.split[,.N] > 0){
         
         ## Abkürzung extrahieren
-        jurabk <- xml_node(XML, xpath = "//norm//jurabk") %>% xml_text()
+        jurabk <- html_element(XML, xpath = "//norm//jurabk") %>% xml_text()
 
         if (length(jurabk) == 0){
             jurabk <- "NA"
