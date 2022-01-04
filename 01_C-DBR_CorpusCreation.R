@@ -264,11 +264,12 @@ prefix.files <- paste0(config$project$shortname,
 print(prefix.files)
 
 
-#'### Präfix für Diagrammed definieren
+#'### Präfix für Diagramme definieren
 
 prefix.figuretitle <- paste(config$project$shortname,
                             "| Version",
                             datestamp)
+
 
 #'### Quanteda-Optionen setzen
 quanteda_options(tokens_locale = config$quanteda$tokens_locale)
