@@ -910,7 +910,11 @@ xmlparse.einzelnormen <- function(file.xml){
 
 
 
-
+xmlparse.einzelnormen.robust <- function(file.xml){
+    tryCatch({xmlparse.einzelnormen(file.xml)},
+             error = function(cond) {
+                 return(NA)}
+    }
 
 
 
