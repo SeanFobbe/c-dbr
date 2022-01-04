@@ -1304,7 +1304,7 @@ if(config$parallel$parseMeta == TRUE){
 
 #+ XMLmeta-parse
 out.meta <- future_lapply(files.xml,
-                     xmlparse.meta.robust)
+                          xmlparse.meta.robust)
 
 
 
