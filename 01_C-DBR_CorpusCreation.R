@@ -1265,6 +1265,19 @@ xmlparse.meta <- function(file.xml){
 
 
 
+xmlparse.meta.robust <- function(file.xml){
+    tryCatch({xmlparse.meta(file.xml)},
+             error = function(cond) {
+                 return(NA)}
+             )
+    }
+
+
+#xmlparse.meta.robust(files.xml[35])
+
+
+
+
 
 #+
 #'### Beginn XML Parsing
@@ -1291,7 +1304,7 @@ if(config$parallel$parseMeta == TRUE){
 
 #+ XMLmeta-parse
 out.meta <- future_lapply(files.xml,
-                     xmlparse.meta)
+                     xmlparse.meta.robust)
 
 
 
