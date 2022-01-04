@@ -1776,7 +1776,7 @@ if(config$parallel$parseNetworks == TRUE){
 
 #'### XML Parsen
 
-#+ netanalysis, results = 'hide'
+#+ results = 'hide'
 out.netanalysis <- future_lapply(files.xml,
                                  f.network.analysis.robust,
                                  prefix.figuretitle = prefix.figuretitle,
@@ -3619,9 +3619,15 @@ kable(multihashes[,.(index,sha3.512)],
 #'# Aufräumen
 
 
+cleanup <- list.files(pattern = "\\.zip")
 
+cleanup.destination <- file.path("output",
+                                 cleanup)
 
+print(cleanup)
 
+file.rename(cleanup,
+            cleanup.destination)
 
 
 #'# Abschluss
