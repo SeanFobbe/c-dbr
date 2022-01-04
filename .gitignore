@@ -10,6 +10,16 @@ PDF/
 TXT/
 EPUB/
 
+*.zip
+*.xml
+*.jpg
+*.jpeg
+*.gif
+*.pdf
+*.txt
+*.epub
+
+
 
 
 # Random files
