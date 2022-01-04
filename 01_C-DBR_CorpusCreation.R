@@ -3415,8 +3415,7 @@ unlink(files.csv)
 
 #'## Verpacken der PDF-Dateien
 
-files.pdf <- list.files("PDF",
-                        pattern = "\\.pdf$",
+files.pdf <- list.files(pattern = "\\.pdf$",
                         ignore.case = TRUE,
                         full.names = TRUE)
 
@@ -3433,8 +3432,7 @@ zip(paste0("output/",
 
 #'## Verpacken der TXT-Dateien
 
-files.txt <- list.files("TXT",
-                        pattern = "\\.txt$",
+files.txt <- list.files(pattern = "\\.txt$",
                         ignore.case = TRUE,
                         full.names = TRUE)
 
@@ -3450,8 +3448,7 @@ zip(paste0("output/",
 
 #'## Verpacken der EPUB-Dateien
 
-files.epub <- list.files("EPUB",
-                         pattern = "\\.epub$",
+files.epub <- list.files(pattern = "\\.epub$",
                          ignore.case = TRUE,
                          full.names = TRUE)
 
@@ -3512,13 +3509,12 @@ zip(paste0("output/",
 
 
 #'# Aufräumen
-#' An dieser Stelle werden die Ordner mit den Roh-Dateien gelöscht.
+#' An dieser Stelle werden die  Roh-Dateien gelöscht.
 
 
-unlink("XML", recursive = TRUE)
-unlink("PDF", recursive = TRUE)
-unlink("TXT", recursive = TRUE)
-unlink("EPUB", recursive = TRUE)
+files.delete <- list.files(pattern = "\\.zip|\\.xml|\\.jpe?g|\\.png|\\.gif|\\.pdf|\\.epub",
+                           ignore.case = TRUE)
+
 
 unlink("netzwerke", recursive = TRUE)
 unlink("Rplots.pdf", recursive = TRUE)
