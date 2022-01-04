@@ -3370,8 +3370,7 @@ files.csv <- c(csvname.normen.gesamt,
                csvname.rechtsakte.meta,
                csvname.meta)
 
-files.csv <- paste0("output/",
-                    files.csv)
+
 
 csvnames.zip <- gsub(".csv",
                      ".zip",
@@ -3392,8 +3391,7 @@ unlink(files.csv)
 files.pdf <- list.files(pattern = "\\.pdf$",
                         ignore.case = TRUE)
 
-zip(paste0("output/",
-           prefix.files,
+zip(paste0(prefix.files,
            "_DE_PDF_Datensatz.zip"),
     files.pdf,
     mode = "cherry-pick")
@@ -3408,8 +3406,7 @@ zip(paste0("output/",
 files.txt <- list.files(pattern = "\\.txt$",
                         ignore.case = TRUE)
 
-zip(paste0("output/",
-           prefix.files,
+zip(paste0(prefix.files,
            "_DE_TXT_Datensatz.zip"),
     files.txt,
     mode = "cherry-pick")
@@ -3423,8 +3420,7 @@ zip(paste0("output/",
 files.epub <- list.files(pattern = "\\.epub$",
                          ignore.case = TRUE)
 
-zip(paste0("output/",
-           prefix.files,
+zip(paste0(prefix.files,
            "_DE_EPUB_Datensatz.zip"),
     files.epub,
     mode = "cherry-pick")
@@ -3434,8 +3430,7 @@ zip(paste0("output/",
 
 #'## Verpacken der Netzwerk-Dateien
 
-zip(paste0("output/",
-           prefix.files,
+zip(paste0(prefix.files,
            "_DE_Netzwerke.zip"),
     "netzwerke",
     mode = "cherry-pick")
@@ -3445,8 +3440,7 @@ zip(paste0("output/",
 
 #'## Verpacken der Analyse-Dateien
 
-zip(paste0("output/",
-           prefix.files,
+zip(paste0(prefix.files,
            "_DE_",
            toupper(basename(dir.analysis)),
            ".zip"),
@@ -3471,8 +3465,7 @@ files.source <- grep("spin",
                      ignore.case = TRUE,
                      invert = TRUE)
 
-zip(paste0("output/",
-          prefix.files,
+zip(paste0(prefix.files,
           "_Source_Code.zip"),
     files.source,
     mode = "cherry-pick")
