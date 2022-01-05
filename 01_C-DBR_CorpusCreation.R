@@ -2214,14 +2214,18 @@ print(future_lingsummarize)
 
 
 
-#'### Berechnung durchführen
+#deprecated; Parallelisierung jetzt mit futures
 #lingstats.normen.raw <- f.lingsummarize.iterator(dt.normen,
 #                                                 threads = fullCores,
 #                                                 chunksize = 1)#
 
+#deprecated; Parallelisierung jetzt mit futures
 #lingstats.rechtsakte.raw <- f.lingsummarize.iterator(dt.rechtsakte,
 #                                                     threads = fullCores,
 #                                                     chunksize = 1)
+
+
+#'### Berechnung durchführen
 
 
 if(config$parallel$lingsummarize == TRUE){
