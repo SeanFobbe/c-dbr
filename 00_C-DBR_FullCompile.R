@@ -23,6 +23,9 @@ unlink("ANALYSE", recursive = TRUE)
 unlink("temp", recursive = TRUE)
 
 
+
+begin.compreport <- Sys.time()
+
 #+
 #'### Datensatz 
 #' 
@@ -35,6 +38,9 @@ rmarkdown::render(input = "01_C-DBR_CorpusCreation.R",
                                        "_CompilationReport.pdf"),
                   output_dir = "output")
 
+
+end.compreport <- Sys.time()
+print(end.compreport-begin.compreport)
 
 
 
