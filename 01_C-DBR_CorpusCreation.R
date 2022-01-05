@@ -2301,6 +2301,7 @@ meta.rechtsakte <- dt.rechtsakte[, !"text"]
 
 
 
+
 #'\newpage
 #'## Linguistische Kennwerte: Einzelnormen
 #' **Hinweis:** Typen sind definiert als einzigartige Tokens und werden hier noch einmal bezogen auf den Gesamtkorpus berechnet, statt wie vorher bezogen auf jedes Dokument.
