@@ -30,9 +30,9 @@ cores.number = 8   # Die Anzahl Rechtenkerne, die verwendet werden soll; wird nu
 
 parallel.htmlLandingPages = true
 parallel.downloadXML = true
-parallel.parseEinzelnormen = false
-parallel.parseMeta = false
-parallel.parseNetworks = false
+parallel.parseEinzelnormen = false # Parallelisierung instabil und kaum schneller als sequentielle Ausführung
+parallel.parseMeta = false # Parallelisierung instabil und kaum schneller als sequentielle Ausführung
+parallel.parseNetworks = false # Parallelisierung instabil und kaum schneller als sequentielle Ausführung
 parallel.lingsummarize = true
 parallel.downloadPDF = true
 parallel.extractPDF = true
