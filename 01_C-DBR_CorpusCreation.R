@@ -915,7 +915,7 @@ xmlparse.einzelnormen.robust <- function(file.xml){
     }
 
 
-#xmlparse.einzelnormen.robust(files.xml[10])
+
 
 
 
