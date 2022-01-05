@@ -1258,8 +1258,10 @@ kable(testresult, format = "latex", booktabs = TRUE,
 #'
 #'- Vollständige Aktualisierung der Daten
 #'- Strenge Versionskontrolle aller R packages
-#'- Neustrukturierung des Source Codes (für Nutzer:innen des fertigen Datensatzes unsichtbar)
+#'- Der Prozess der Kompilierung ist jetzt detailliert konfigurierbar, insbesondere die Parallelisierung
+#'- Parallelisierung der XML-Parser ist deaktivert, weil sie instabil ist
 #'- Fehlerhafte Kompilierungen werden nun beim nächsten Run vollautomatisch aufgeräumt
+#'- Alle Ergebnisse werden automatisch fertig verpackt in den Ordner output/ sortiert
 #'- Source Code des Changelogs zu Markdown konvertiert 
 #'
 #'## Version 2021-09-16
