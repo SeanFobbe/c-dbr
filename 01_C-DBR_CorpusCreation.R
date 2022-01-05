@@ -69,8 +69,6 @@ knitr::opts_chunk$set(echo = TRUE,
 source("00_C-DBR_FullCompile.R")
 
 
-
-#'\newpage
 #+
 #'## Systemanforderungen
 #' Das Skript in seiner veröffentlichten Form kann nur unter Linux ausgeführt werden, da es Linux-spezifische Optimierungen (z.B. Fork Cluster) und Shell-Kommandos (z.B. OpenSSL) nutzt. Das Skript wurde unter Fedora Linux entwickelt und getestet. Die zur Kompilierung benutzte Version entnehmen Sie bitte dem **sessionInfo()**-Ausdruck am Ende dieses Berichts.
