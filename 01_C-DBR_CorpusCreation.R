@@ -438,7 +438,7 @@ if(config$parallel$htmlLandingPages == TRUE){
 
 }
 
-
+#+ Extract HTML Links
 links.list <- future_lapply(links.html,
                             f.linkextract)
 
@@ -654,7 +654,7 @@ if(config$parallel$downloadXML == TRUE){
      }
 
 
-#+ results = 'hide'
+#+ DownloadXML, results = 'hide'
 future_mapply(download.file,
               download$links.xml,
               download$title.xml)
@@ -1775,7 +1775,7 @@ if(config$parallel$parseNetworks == TRUE){
 
 #'### XML Parsen
 
-#+ results = 'hide', message = FALSE, warning = FALSE
+#+ networkparse, results = 'hide', message = FALSE, warning = FALSE
 out.netanalysis <- future_lapply(files.xml,
                                  f.network.analysis.robust,
                                  prefix.figuretitle = prefix.figuretitle,
@@ -2242,7 +2242,7 @@ if(config$parallel$lingsummarize == TRUE){
 
 
 
-#+ results = 'hide', message = FALSE, warning = FALSE
+#+ lingsummarize, results = 'hide', message = FALSE, warning = FALSE
 lingstats.normen.raw <- future_lingsummarize(dt.normen)
 
 #+ results = 'hide', message = FALSE, warning = FALSE
