@@ -376,8 +376,6 @@ quanteda_options(threads = 1)
 #'### Data.table
 setDTthreads(threads = fullCores)  
 
-#'### Future
-options(future.globals.onReference = "error")
 
 
 
