@@ -1270,8 +1270,6 @@ xmlparse.meta.robust <- function(file.xml){
     }
 
 
-#xmlparse.meta.robust(files.xml[35])
-
 
 
 
