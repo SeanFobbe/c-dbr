@@ -1085,12 +1085,12 @@ fwrite(check,
 #' Zunächt der vordefinierte Satz an Metadaten.
 
 varlist.r1 <- c("jurabk",
-             "amtabk",
-             "ausfertigung_datum",
-             "periodikum",
-             "zitstelle",
-             "langue",
-             "kurzue")
+                "amtabk",
+                "ausfertigung_datum",
+                "periodikum",
+                "zitstelle",
+                "langue",
+                "kurzue")
 
 
 
