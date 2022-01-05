@@ -1164,6 +1164,7 @@ setnames(dt.rechtsakte,
 #' An dieser Stelle werden Metadaten für alle Rechtsakte von "Gesetze im Internet" erhoben, unabhängig davon ob die Rechtsakte Text enthalten oder nur mit Überschrift nachgewiesen sind.
 
 
+#+
 #'### Funktion für XML-Parsing definieren
 
 
