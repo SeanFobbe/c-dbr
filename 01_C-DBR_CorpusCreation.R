@@ -61,11 +61,8 @@ knitr::opts_chunk$set(echo = TRUE,
 #' Mit der Funktion **render()** von **rmarkdown** können der **vollständige Datensatz** und das **Codebook** kompiliert und die Skripte mitsamt ihrer Rechenergebnisse in ein gut lesbares PDF-Format überführt werden.
 #'
 #' Alle Kommentare sind im roxygen2-Stil gehalten. Die beiden Skripte können daher auch **ohne render()** regulär als R-Skripte ausgeführt werden. Es wird in diesem Fall kein PDF-Bericht erstellt und Diagramme werden nicht abgespeichert.
-
-#+
-#'### Datensatz 
 #' 
-#' Um den **vollständigen Datensatz** zu kompilieren und einen PDF-Bericht zu erstellen, kopieren Sie bitte alle im Source-Archiv bereitgestellten Dateien in einen leeren Ordner und führen mit R diesen Befehl aus:
+#' Um den **vollständigen Datensatz** zu kompilieren, sowie Compilation Report und Codebook zu erstellen, kopieren Sie bitte alle im Source-Archiv bereitgestellten Dateien in einen leeren Ordner und führen mit R diesen Befehl aus:
 
 #+ eval = FALSE
 
@@ -160,10 +157,10 @@ lapply(packages, library, character.only = TRUE)
 
 source("R-fobbe-proto-package/f.linkextract.R")
 source("R-fobbe-proto-package/f.fast.freqtable.R")
-#source("R-fobbe-proto-package/f.lingsummarize.iterator.R")
-#source("R-fobbe-proto-package/f.dopar.pagenums.R")
-#source("R-fobbe-proto-package/f.dopar.pdfextract.R")
-#source("R-fobbe-proto-package/f.dopar.multihashes.R")
+#source("R-fobbe-proto-package/f.lingsummarize.iterator.R") # deprecated; Parallelisierung jetzt mit futures
+#source("R-fobbe-proto-package/f.dopar.pagenums.R") # deprecated; Parallelisierung jetzt mit futures
+#source("R-fobbe-proto-package/f.dopar.pdfextract.R") # deprecated; Parallelisierung jetzt mit futures
+#source("R-fobbe-proto-package/f.dopar.multihashes.R") # deprecated; Parallelisierung jetzt mit futures
 
 source("functions/f.heading.transform.R")
 source("functions/f.namechain.R")
