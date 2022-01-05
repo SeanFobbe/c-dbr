@@ -1775,7 +1775,7 @@ if(config$parallel$parseNetworks == TRUE){
 
 #'### XML Parsen
 
-#+ results = 'hide'
+#+ results = 'hide', message = FALSE, warning = FALSE
 out.netanalysis <- future_lapply(files.xml,
                                  f.network.analysis.robust,
                                  prefix.figuretitle = prefix.figuretitle,
@@ -2240,10 +2240,12 @@ if(config$parallel$lingsummarize == TRUE){
      }
 
 
-#+ results = 'hide'
+
+
+#+ results = 'hide', message = FALSE, warning = FALSE
 lingstats.normen.raw <- future_lingsummarize(dt.normen)
 
-#+ results = 'hide'
+#+ results = 'hide', message = FALSE, warning = FALSE
 lingstats.rechtsakte.raw <- future_lingsummarize(dt.rechtsakte)
 
 
