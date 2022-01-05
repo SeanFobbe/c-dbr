@@ -1262,7 +1262,8 @@ kable(testresult, format = "latex", booktabs = TRUE,
 #'- Parallelisierung der XML-Parser ist deaktivert, weil sie instabil ist
 #'- Fehlerhafte Kompilierungen werden nun beim nächsten Run vollautomatisch aufgeräumt
 #'- Alle Ergebnisse werden automatisch fertig verpackt in den Ordner output/ sortiert
-#'- Source Code des Changelogs zu Markdown konvertiert 
+#'- Source Code des Changelogs zu Markdown konvertiert
+#'- Einführung eines Debugging-Modus um die Entwicklung zu beschleunigen
 #'
 #'## Version 2021-09-16
 #'
