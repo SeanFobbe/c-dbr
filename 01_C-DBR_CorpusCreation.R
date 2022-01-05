@@ -35,7 +35,7 @@ knitr::opts_chunk$set(echo = TRUE,
 #+
 #'## Endprodukte
 
-#' Primäre Endprodukte des Skripts sind folgende ZIP-Archive:
+#' Primäre Endprodukte des Skripts (im Ordner 'output/') sind folgende ZIP-Archive:
 #'
 #' \begin{enumerate}
 #' \item Der volle Datensatz im CSV-Format, unterteilt in Einzelnormen; nur Rechtsakte mit veröffentlichtem Normtext sind erfasst
@@ -602,7 +602,8 @@ fwrite(conctable,
 
 if (config$debug$toggle == TRUE){
 
-    download <- download[sample(download[, .N], config$debug$sample)]
+    download <- download[sample(download[, .N],
+                                config$debug$sample)]
 
 }
 
