@@ -330,7 +330,7 @@ latexdefs <- c("%===========================\n% Definitionen\n%=================
 
 
 
-#'\newpage
+
 #'### LaTeX Parameter schreiben
 
 writeLines(latexdefs,
