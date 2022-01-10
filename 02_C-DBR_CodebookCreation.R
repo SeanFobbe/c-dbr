@@ -582,6 +582,7 @@ kable(stats.rechtsakte.ling,
 
 #'\newpage
 
+#+
 #'## Verteilung Zeichen
 
 
@@ -593,7 +594,7 @@ kable(stats.rechtsakte.ling,
 
 
 
-
+#+
 #'## Verteilung Tokens
 
 
@@ -606,7 +607,7 @@ kable(stats.rechtsakte.ling,
 
 
 
-
+#+
 #'## Verteilung Typen
 
 
@@ -618,7 +619,7 @@ kable(stats.rechtsakte.ling,
 
 
 
-
+#+
 #'## Verteilung Sätze
 
 
