@@ -798,7 +798,7 @@ files.zip <- fread(hashfile)$filename
 files.zip <- file.path("output", files.zip)
 filesize <- round(file.size(files.zip) / 10^6, digits = 2)
 
-table.size <- data.table(files.zip,
+table.size <- data.table(basename(files.zip),
                          filesize)
 
 
