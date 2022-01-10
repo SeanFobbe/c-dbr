@@ -32,6 +32,7 @@ knitr::opts_chunk$set(fig.pos = "center",
 
 #+
 
+library(RcppTOML)     # Verarbeitung von TOML-Format
 library(knitr)        # Professionelles Reporting
 library(kableExtra)   # Verbesserte automatisierte Tabellen
 library(magick)       # Fortgeschrittene Verarbeitung von Grafiken
@@ -48,7 +49,7 @@ setDTthreads(threads = detectCores())
 ### Zusätzliche Funktionen einlesen
 ###################################
 
-source("General_Source_Functions.R")
+#source("General_Source_Functions.R")
 
 
 
@@ -56,9 +57,12 @@ source("General_Source_Functions.R")
 ### Vorbereitung
 ############################
 
-datasetname <- "C-DBR"
+config$project$shortname <- "C-DBR"
 doi.concept <- "10.5281/zenodo.3832111" # checked
-doi.version <- "10.5281/zenodo.5510458" # checked
+config$doi$data$version <- "10.5281/zenodo.5510458" # checked
+
+## Konfiguration einlesen
+config <- parseTOML("C-DBR_Config.toml")
 
 
 files.zip <- list.files(pattern = "\\.zip")
@@ -76,20 +80,20 @@ datestamp <- unique(tstrsplit(files.zip,
 
 ## Präfixe erstellen
 
-prefix.date <- paste(datasetname,
+prefix.date <- paste(config$project$shortname,
                      datestamp,
                      sep = "_")
 
 prefix.normen <- paste0("ANALYSE/",
-                        datasetname,
+                        config$project$shortname,
                         "_01_Einzelnormen_Frequenztabelle_var-")
 
 prefix.rechtsakte <- paste0("ANALYSE/",
-                            datasetname,
+                            config$project$shortname,
                             "_01_Rechtsakte_Frequenztabelle_var-")
 
 prefix.meta <- paste0("ANALYSE/",
-                      datasetname,
+                      config$project$shortname,
                       "_01_Meta_Frequenztabelle_var-")
 
 
@@ -123,11 +127,11 @@ table.meta.ausjahr <- fread(paste0(prefix.meta,
 ## Linguistische Kennzahlen einlesen
 
 stats.rechtsakte.ling <-  fread(paste0("ANALYSE/",
-                                       datasetname,
+                                       config$project$shortname,
                                        "_00_Rechtsakte_KorpusStatistik_ZusammenfassungLinguistisch.csv"))
 
 stats.normen.ling <-  fread(paste0("ANALYSE/",
-                                   datasetname,
+                                   config$project$shortname,
                                    "_00_Einzelnormen_KorpusStatistik_ZusammenfassungLinguistisch.csv"))
 
 
@@ -586,12 +590,12 @@ ggplot(data = meta.normen)+
     coord_cartesian(xlim = c(1, 10^6))+
     theme_bw()+
     labs(
-        title = paste(datasetname,
+        title = paste(config$project$shortname,
                       "| Version",
                       datestamp,
                       "| Verteilung der Zeichen je Einzelnorm"),
         caption = paste("DOI:",
-                        doi.version,
+                        config$doi$data$version,
                         "| S. Fobbe"),
         x = "Zeichen",
         y = "Dichte"
@@ -616,12 +620,12 @@ ggplot(data = meta.rechtsakte)+
     coord_cartesian(xlim = c(1, 10^6))+
     theme_bw()+
     labs(
-        title = paste(datasetname,
+        title = paste(config$project$shortname,
                       "| Version",
                       datestamp,
                       "| Verteilung der Zeichen je Rechtsakt"),
         caption = paste("DOI:",
-                        doi.version,
+                        config$doi$data$version,
                         "| S. Fobbe"),
         x = "Zeichen",
         y = "Dichte"
@@ -648,12 +652,12 @@ ggplot(data = meta.normen)+
     coord_cartesian(xlim = c(1, 10^6))+
     theme_bw()+
     labs(
-        title = paste(datasetname,
+        title = paste(config$project$shortname,
                       "| Version",
                       datestamp,
                       "| Verteilung der Tokens je Einzelnorm"),
         caption = paste("DOI:",
-                        doi.version,
+                        config$doi$data$version,
                         "| S. Fobbe"),
         x = "Tokens",
         y = "Dichte"
@@ -678,12 +682,12 @@ ggplot(data = meta.rechtsakte)+
     coord_cartesian(xlim = c(1, 10^6))+
     theme_bw() +
     labs(
-        title = paste(datasetname,
+        title = paste(config$project$shortname,
                       "| Version",
                       datestamp,
                       "| Verteilung der Tokens je Rechtsakt"),
         caption = paste("DOI:",
-                        doi.version,
+                        config$doi$data$version,
                         "| S. Fobbe"),
         x = "Tokens",
         y = "Dichte"
@@ -712,12 +716,12 @@ ggplot(data = meta.normen)+
     coord_cartesian(xlim = c(1, 10^6))+
     theme_bw()+
     labs(
-        title = paste(datasetname,
+        title = paste(config$project$shortname,
                       "| Version",
                       datestamp,
                       "| Verteilung der Typen je Einzelnorm"),
         caption = paste("DOI:",
-                        doi.version,
+                        config$doi$data$version,
                         "| S. Fobbe"),
         x = "Typen",
         y = "Dichte"
@@ -743,12 +747,12 @@ ggplot(data = meta.rechtsakte)+
     coord_cartesian(xlim = c(1, 10^6))+
     theme_bw()+
     labs(
-        title = paste(datasetname,
+        title = paste(config$project$shortname,
                       "| Version",
                       datestamp,
                       "| Verteilung der Typen je Rechtsakt"),
         caption = paste("DOI:",
-                        doi.version,
+                        config$doi$data$version,
                         "| S. Fobbe"),
         x = "Typen",
         y = "Dichte"
@@ -776,12 +780,12 @@ ggplot(data = meta.normen)+
     coord_cartesian(xlim = c(1, 10^6))+
     theme_bw()+
     labs(
-        title = paste(datasetname,
+        title = paste(config$project$shortname,
                       "| Version",
                       datestamp,
                       "| Verteilung der Sätze je Einzelnorm"),
         caption = paste("DOI:",
-                        doi.version,
+                        config$doi$data$version,
                         "| S. Fobbe"),
         x = "Sätze",
         y = "Dichte"
@@ -806,12 +810,12 @@ ggplot(data = meta.rechtsakte)+
     coord_cartesian(xlim = c(1, 10^6))+ 
     theme_bw()+
     labs(
-        title = paste(datasetname,
+        title = paste(config$project$shortname,
                       "| Version",
                       datestamp,
                       "| Verteilung der Sätze je Rechtsakt"),
         caption = paste("DOI:",
-                        doi.version,
+                        config$doi$data$version,
                         "| S. Fobbe"),
         x = "Sätze",
         y = "Dichte"
@@ -851,12 +855,12 @@ ggplot(data = freqtable) +
     coord_flip()+
     theme_bw() +
     labs(
-        title = paste(datasetname,
+        title = paste(config$project$shortname,
                       "| Version",
                       datestamp,
                       "| Einzelnormen je Periodikum"),
         caption = paste("DOI:",
-                        doi.version,
+                        config$doi$data$version,
                         "| S. Fobbe"),
         x = "Periodikum",
         y = "Einzelnormen"
@@ -899,12 +903,12 @@ ggplot(data=freqtable) +
     coord_flip()+
     theme_bw() +
     labs(
-        title = paste(datasetname,
+        title = paste(config$project$shortname,
                       "| Version",
                       datestamp,
                       "| Rechtsakte mit Inhalt je Periodikum"),
         caption = paste("DOI:",
-                        doi.version,
+                        config$doi$data$version,
                         "| S. Fobbe"),
         x = "Periodikum",
         y = "Rechtsakte"
@@ -948,12 +952,12 @@ ggplot(data = freqtable) +
     coord_flip()+
     theme_bw() +
     labs(
-        title = paste(datasetname,
+        title = paste(config$project$shortname,
                       "| Version",
                       datestamp,
                       "| Rechtsakte nach Metadaten je Periodikum"),
         caption = paste("DOI:",
-                        doi.version,
+                        config$doi$data$version,
                         "| S. Fobbe"),
         x = "Periodikum",
         y = "Rechtsakte"
@@ -998,12 +1002,12 @@ ggplot(data=freqtable) +
              fill ="black") +
     theme_bw() +
     labs(
-        title = paste(datasetname,
+        title = paste(config$project$shortname,
                       "| Version",
                       datestamp,
                       "| Einzelnormen je Ausfertigungsjahr"),
         caption = paste("DOI:",
-                        doi.version,
+                        config$doi$data$version,
                         "| S. Fobbe"),
         x = "Ausfertigungsjahr",
         y = "Einzelnormen"
@@ -1044,12 +1048,12 @@ ggplot(data = freqtable) +
              fill ="black") +
     theme_bw() +
     labs(
-        title = paste(datasetname,
+        title = paste(config$project$shortname,
                       "| Version",
                       datestamp,
                       "| Rechtsakte mit Inhalt je Ausfertigungsjahr"),
         caption = paste("DOI:",
-                        doi.version,
+                        config$doi$data$version,
                         "| S. Fobbe"),
         x = "Ausfertigungsjahr",
         y = "Rechtsakte"
@@ -1089,12 +1093,12 @@ ggplot(data = freqtable) +
              fill ="black") +
     theme_bw() +
     labs(
-        title = paste(datasetname,
+        title = paste(config$project$shortname,
                       "| Version",
                       datestamp,
                       "| Rechtsakte nach Metadaten je Ausfertigungsjahr"),
         caption = paste("DOI:",
-                        doi.version,
+                        config$doi$data$version,
                         "| S. Fobbe"),
         x = "Ausfertigungsjahr",
         y = "Rechtsakte"
