@@ -845,7 +845,7 @@ kable(table.size,
 #+
 #'## Import: Public Key
 #+ echo = TRUE
-system2("gpg2", "--import GPG_PublicKey_Fobbe-Data.asc",
+system2("gpg2", "--import gpg/PublicKey_Fobbe-Data.asc",
         stdout = TRUE,
         stderr = TRUE)
 
