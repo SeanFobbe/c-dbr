@@ -155,10 +155,10 @@ groundhog.library(pkg = packages,
 
 source("R-fobbe-proto-package/f.linkextract.R")
 source("R-fobbe-proto-package/f.fast.freqtable.R")
-#source("R-fobbe-proto-package/f.lingsummarize.iterator.R") # deprecated; Parallelisierung jetzt mit futures
-#source("R-fobbe-proto-package/f.dopar.pagenums.R") # deprecated; Parallelisierung jetzt mit futures
-#source("R-fobbe-proto-package/f.dopar.pdfextract.R") # deprecated; Parallelisierung jetzt mit futures
-#source("R-fobbe-proto-package/f.dopar.multihashes.R") # deprecated; Parallelisierung jetzt mit futures
+#source("R-fobbe-proto-package/f.lingsummarize.iterator.R") # deprecated
+#source("R-fobbe-proto-package/f.dopar.pagenums.R") # deprecated
+#source("R-fobbe-proto-package/f.dopar.pdfextract.R") # deprecated
+#source("R-fobbe-proto-package/f.dopar.multihashes.R") # deprecated
 
 source("functions/f.heading.transform.R")
 source("functions/f.namechain.R")
