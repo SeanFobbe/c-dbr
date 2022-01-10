@@ -114,7 +114,7 @@ print(begin.script)
 #'## Packages Laden
 #' Das package *groundhog* nimmt eine strenge Versionskontrolle von R packages vor, indem es nur solche Versionen lädt, die an einem bestimmten Stichtag auf CRAN verfügbar waren. Diese werden in einer separaten library gesichert. Falls entsprechende Versionen nicht vorhanden sind, nimmt es eine automatische Installation derselben vor.
 
-#library(groundhog)    # Strenge Versionskontrolle von R packages
+library(groundhog)    # Strenge Versionskontrolle von R packages
 
 packages <- c("zip",          # ZIP Files
               "rvest",        # HTML/XML-Extraktion
@@ -139,12 +139,11 @@ packages <- c("zip",          # ZIP Files
 
 
 #+ results = 'hide'
-lapply(packages, library, character.only = TRUE)
+#lapply(packages, library, character.only = TRUE)
 
 #+ results = 'hide'
-#groundhog.library(pkg = packages,
-#                  date = "2021-09-16",
-#                  tolerate.R.version = '4.0.4')
+groundhog.library(pkg = packages,
+                  date = "2022-01-01")
                  
 
 
