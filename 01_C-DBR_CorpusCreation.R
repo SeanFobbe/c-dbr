@@ -3496,6 +3496,7 @@ files.source <- c(list.files(pattern = "\\.R$|\\.toml$"),
                   "R-fobbe-proto-package",
                   "functions",
                   "tex",
+                  "gpg",
                   "buttons")
 
 
