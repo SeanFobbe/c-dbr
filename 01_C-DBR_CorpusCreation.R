@@ -143,7 +143,8 @@ packages <- c("zip",          # ZIP Files
 
 #+ results = 'hide'
 groundhog.library(pkg = packages,
-                  date = "2022-01-01")
+                  date = "2022-01-01",
+                  tolerate.R.version = "4.0.5")
                  
 
 
