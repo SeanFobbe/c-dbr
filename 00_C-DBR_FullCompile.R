@@ -9,8 +9,6 @@ library(rmarkdown)
 
 #'# Aufräumen
 
-#files.delete <- list.files(pattern = "\\.spin\\.")
-#unlink(files.delete)
 
 files.delete <- list.files(pattern = "\\.zip|\\.xml|\\.jpe?g|\\.png|\\.gif|\\.pdf|\\.epub|\\.bib|\\.csv|\\.dtd|\\.spin\\.|\\.log",
                            ignore.case = TRUE)
@@ -24,12 +22,15 @@ unlink("temp", recursive = TRUE)
 
 
 
-begin.compreport <- Sys.time()
+
 
 #+
 #'### Datensatz 
 #' 
 #' Um den **vollständigen Datensatz** zu kompilieren und einen PDF-Bericht zu erstellen, kopieren Sie bitte alle im Source-Archiv bereitgestellten Dateien in einen leeren Ordner und führen mit R diesen Befehl aus:
+
+
+begin.compreport <- Sys.time()
 
 rmarkdown::render(input = "01_C-DBR_CorpusCreation.R",
 #                  envir = new.env(),
