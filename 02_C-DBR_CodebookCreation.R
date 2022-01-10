@@ -584,125 +584,25 @@ kable(stats.rechtsakte.ling,
 
 #'## Verteilung Zeichen
 
-#+ C-DBR_04_Einzelnormen_Density_Zeichen, fig.height = 6, fig.width = 9
-ggplot(data = meta.normen)+
-    geom_density(aes(x = zeichen),
-                 fill = "black") +
-    scale_x_log10(breaks = trans_breaks("log10", function(x) 10^x),
-                  labels = trans_format("log10", math_format(10^.x)))+
-    annotation_logticks(sides = "b")+ 
-    coord_cartesian(xlim = c(1, 10^6))+
-    theme_bw()+
-    labs(
-        title = paste(config$project$shortname,
-                      "| Version",
-                      datestamp,
-                      "| Verteilung der Zeichen je Einzelnorm"),
-        caption = paste("DOI:",
-                        config$doi$data$version,
-                        "| S. Fobbe"),
-        x = "Zeichen",
-        y = "Dichte"
-    )+
-    theme(
-        text = element_text(size = 14),
-        plot.title = element_text(size = 14,
-                                  face = "bold"),
-        legend.position = "none",
-        plot.margin = margin(10, 20, 10, 10)
-    )
+
+#' ![](analyse/C-DBR_04_Einzelnormen_Density_Zeichen-1.pdf)
 
 #'\bigskip
 
-#+ C-DBR_04_Rechtsakte_Density_Zeichen, fig.height = 6, fig.width = 9
-ggplot(data = meta.rechtsakte)+
-    geom_density(aes(x = zeichen),
-                 fill = "black") +
-    scale_x_log10(breaks = trans_breaks("log10", function(x) 10^x),
-                  labels = trans_format("log10", math_format(10^.x)))+
-    annotation_logticks(sides = "b")+ 
-    coord_cartesian(xlim = c(1, 10^6))+
-    theme_bw()+
-    labs(
-        title = paste(config$project$shortname,
-                      "| Version",
-                      datestamp,
-                      "| Verteilung der Zeichen je Rechtsakt"),
-        caption = paste("DOI:",
-                        config$doi$data$version,
-                        "| S. Fobbe"),
-        x = "Zeichen",
-        y = "Dichte"
-    )+
-    theme(
-        text = element_text(size = 14),
-        plot.title = element_text(size = 14,
-                                  face = "bold"),
-        legend.position = "none",
-        plot.margin = margin(10, 20, 10, 10)
-    )
+#' ![](analyse/C-DBR_04_Rechtsakte_Density_Zeichen-1.pdf)
+
+
 
 
 #'## Verteilung Tokens
 
 
-#+ C-DBR_05_Einzelnormen_Density_Tokens, fig.height = 6, fig.width = 9
-ggplot(data = meta.normen)+
-    geom_density(aes(x = tokens),
-                 fill = "black") +
-    scale_x_log10(breaks = trans_breaks("log10", function(x) 10^x),
-                  labels = trans_format("log10", math_format(10^.x)))+
-    annotation_logticks(sides = "b")+ 
-    coord_cartesian(xlim = c(1, 10^6))+
-    theme_bw()+
-    labs(
-        title = paste(config$project$shortname,
-                      "| Version",
-                      datestamp,
-                      "| Verteilung der Tokens je Einzelnorm"),
-        caption = paste("DOI:",
-                        config$doi$data$version,
-                        "| S. Fobbe"),
-        x = "Tokens",
-        y = "Dichte"
-    )+
-    theme(
-        text = element_text(size = 14),
-        plot.title = element_text(size = 14,
-                                  face = "bold"),
-        legend.position = "none",
-        plot.margin = margin(10, 20, 10, 10)
-    )
+#' ![](analyse/C-DBR_05_Einzelnormen_Density_Tokens-1.pdf)
 
 #'\bigskip
 
-#+ C-DBR_05_Rechtsakte_Density_Tokens, fig.height = 6, fig.width = 9
-ggplot(data = meta.rechtsakte)+
-    geom_density(aes(x = tokens),
-                 fill = "black")+
-    scale_x_log10(breaks = trans_breaks("log10", function(x) 10^x),
-                  labels = trans_format("log10", math_format(10^.x)))+
-    annotation_logticks(sides = "b")+ 
-    coord_cartesian(xlim = c(1, 10^6))+
-    theme_bw() +
-    labs(
-        title = paste(config$project$shortname,
-                      "| Version",
-                      datestamp,
-                      "| Verteilung der Tokens je Rechtsakt"),
-        caption = paste("DOI:",
-                        config$doi$data$version,
-                        "| S. Fobbe"),
-        x = "Tokens",
-        y = "Dichte"
-    )+
-    theme(
-        text = element_text(size = 14),
-        plot.title = element_text(size = 14,
-                                  face = "bold"),
-        legend.position = "none",
-        plot.margin = margin(10, 20, 10, 10)
-    )
+#' ![](analyse/C-DBR_05_Rechtsakte_Density_Tokens-1.pdf)
+
 
 
 
