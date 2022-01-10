@@ -67,7 +67,8 @@ setDTthreads(threads = detectCores())
 config <- parseTOML("C-DBR_Config.toml")
 
 
-files.zip <- list.files(pattern = "\\.zip")
+files.zip <- list.files("output",
+                        pattern = "\\.zip")
 
 datestamp <- unique(tstrsplit(files.zip,
                               split = "_")[[2]])
@@ -86,15 +87,15 @@ prefix.date <- paste(config$project$shortname,
                      datestamp,
                      sep = "_")
 
-prefix.normen <- paste0("ANALYSE/",
+prefix.normen <- paste0("analyse/",
                         config$project$shortname,
                         "_01_Einzelnormen_Frequenztabelle_var-")
 
-prefix.rechtsakte <- paste0("ANALYSE/",
+prefix.rechtsakte <- paste0("analyse/",
                             config$project$shortname,
                             "_01_Rechtsakte_Frequenztabelle_var-")
 
-prefix.meta <- paste0("ANALYSE/",
+prefix.meta <- paste0("analyse/",
                       config$project$shortname,
                       "_01_Meta_Frequenztabelle_var-")
 
@@ -128,11 +129,11 @@ table.meta.ausjahr <- fread(paste0(prefix.meta,
 
 ## Linguistische Kennzahlen einlesen
 
-stats.rechtsakte.ling <-  fread(paste0("ANALYSE/",
+stats.rechtsakte.ling <-  fread(paste0("analyse/",
                                        config$project$shortname,
                                        "_00_Rechtsakte_KorpusStatistik_ZusammenfassungLinguistisch.csv"))
 
-stats.normen.ling <-  fread(paste0("ANALYSE/",
+stats.normen.ling <-  fread(paste0("analyse/",
                                    config$project$shortname,
                                    "_00_Einzelnormen_KorpusStatistik_ZusammenfassungLinguistisch.csv"))
 
@@ -324,7 +325,7 @@ txt.dbr <- readtext("./*.txt",
 #+
 #'## Qualitätsprüfung
 
-#'Insgesamt werden zusammen mit jeder Kompilierung Dutzende Tests zur Qualitätsprüfung durchgeführt. Alle Ergebnisse der Qualitätsprüfungen sind aggregiert im Compilation Report und einzeln im Archiv \enquote{ANALYSE} zusammen mit dem Datensatz veröffentlicht.
+#'Insgesamt werden zusammen mit jeder Kompilierung Dutzende Tests zur Qualitätsprüfung durchgeführt. Alle Ergebnisse der Qualitätsprüfungen sind aggregiert im Compilation Report und einzeln im Archiv \enquote{analyse} zusammen mit dem Datensatz veröffentlicht.
 
 
 
@@ -1146,17 +1147,17 @@ kable(table.size,
                     "Größe in MB"))
 
 
-#' ![](ANALYSE/C-DBR_08_Density_Dateigroessen_PDF-1.pdf)
+#' ![](analyse/C-DBR_08_Density_Dateigroessen_PDF-1.pdf)
 
 #'\vspace{1cm}
 
-#' ![](ANALYSE/C-DBR_09_Density_Dateigroessen_EPUB-1.pdf)
+#' ![](analyse/C-DBR_09_Density_Dateigroessen_EPUB-1.pdf)
 
-#' ![](ANALYSE/C-DBR_10_Density_Dateigroessen_XML-1.pdf)
+#' ![](analyse/C-DBR_10_Density_Dateigroessen_XML-1.pdf)
 
 #'\vspace{1cm}
 
-#' ![](ANALYSE/C-DBR_11_Density_Dateigroessen_TXT-1.pdf)
+#' ![](analyse/C-DBR_11_Density_Dateigroessen_TXT-1.pdf)
 
 
 
