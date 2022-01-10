@@ -3,9 +3,12 @@ project.fullname = "Corpus des Deutschen Bundesrechts"
 project.shortname = "C-DBR"
 project.author = "Seán Fobbe"
 
+
+
 # License
 license.data = "Creative Commons Zero 1.0 Universal"
 license.code = "MIT-0"
+
 
 
 # Digital Object Identifier (DOI)
@@ -17,13 +20,12 @@ doi.software.version = "10.5281/zenodo.5832095" # checked
 
 
 
-
-
 # Debugging
 
 debug.toggle = false   # Ob Debugging aktiv ist; Möglichkeiten sind "TRUE" oder "FALSE"
 debug.sample = 500      # Die Anzahl der zufällig ausgewählten Rechtsakte, die im Debugging-Modus berücksichtigt werden sollen.
 qa.sample = 50        # Die Anzahl der zufällig ausgewählten Einzelnormen, die zur Überprüfung separat gespeichert werden sollen.
+
 
 
 # Parallelization
@@ -48,14 +50,17 @@ parallel.multihashes = true
 download.timeout = 600			# Timeout für Downloads
 
 
+
 # Quanteda
 quanteda.tokens_locale = "de_DE" # Locale in denen Tokens analyisert werden
+
 
 
 # Knitr
 fig.format = [ "pdf", "png" ] 	# Ausgabe-Format für Diagramme
 fig.dpi = 300     	 	# Auflösung für Diagramme
 fig.align = "center"    	# Ausrichtung von Diagrammen im Compilation Report
+
 
 
 # Frequenztabellen: Liste zu prüfender Variablen
