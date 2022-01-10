@@ -912,7 +912,7 @@ sha3.512 <- table.hashes$sha3.512
 sha3.512.result <- mcmapply(sha3test, filename, sha3.512, USE.NAMES = FALSE)
 
 # Ergebnis anzeigen
-testresult <- data.table(filename, sha3.512.result)
+testresult <- data.table(basename(filename), sha3.512.result)
 
 #+ echo = TRUE
 kable(testresult, format = "latex", booktabs = TRUE,
