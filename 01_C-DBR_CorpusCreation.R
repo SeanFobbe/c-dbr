@@ -133,7 +133,7 @@ packages <- c("zip",          # ZIP Files
               "openssl",      # Kryptographische Signaturen
               "igraph",       # Analyse von Graphen
               "ggraph",       # Analyse von Graphen
-              "qgraph",       # Analyse von Graphen
+#              "qgraph",       # Analyse von Graphen
               "future",       # Parallelsirung
               "future.apply") # Parallelisierung
 
