@@ -57,9 +57,11 @@ setDTthreads(threads = detectCores())
 ### Vorbereitung
 ############################
 
-config$project$shortname <- "C-DBR"
-doi.concept <- "10.5281/zenodo.3832111" # checked
-config$doi$data$version <- "10.5281/zenodo.5510458" # checked
+
+
+#config$project$shortname <- "C-DBR"
+#config$doi$data$concept <- "10.5281/zenodo.3832111" # checked
+#config$doi$data$version <- "10.5281/zenodo.5510458" # checked
 
 ## Konfiguration einlesen
 config <- parseTOML("C-DBR_Config.toml")
