@@ -83,9 +83,10 @@ datestamp <- unique(tstrsplit(files.zip,
 
 ## Präfixe erstellen
 
-prefix.date <- paste(config$project$shortname,
-                     datestamp,
-                     sep = "_")
+prefix.date <- paste0("output/",
+                      config$project$shortname,
+                      "_",
+                      datestamp)
 
 prefix.normen <- paste0("analyse/",
                         config$project$shortname,
