@@ -45,27 +45,17 @@ setDTthreads(threads = detectCores())
 
 
 
-###################################
-### Zusätzliche Funktionen einlesen
-###################################
-
-#source("General_Source_Functions.R")
-
-
-
 ############################
 ### Vorbereitung
 ############################
 
 
-
-#config$project$shortname <- "C-DBR"
-#config$doi$data$concept <- "10.5281/zenodo.3832111" # checked
-#config$doi$data$version <- "10.5281/zenodo.5510458" # checked
-
 ## Konfiguration einlesen
 config <- parseTOML("C-DBR_Config.toml")
 
+
+
+## Datumsstempel einlesen
 
 files.zip <- list.files("output",
                         pattern = "\\.zip")
@@ -152,7 +142,7 @@ meta.rechtsakte <- fread(cmd = paste0("unzip -cq ",
 
 
 ############################
-### Signaturen einlesen
+### Signaturen bestimmen
 ############################
 
 
@@ -163,6 +153,9 @@ hashfile <- paste(prefix.date,
 signaturefile <- paste(prefix.date,
                        "FobbeSignaturGPG_Hashes.gpg",
                        sep = "_")
+
+
+
 
 
 ################################
