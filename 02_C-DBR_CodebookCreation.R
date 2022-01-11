@@ -604,7 +604,7 @@ kable(stats.rechtsakte.ling,
 #'## Verteilung Typen
 
 
-#' ![](analyse/C-DBR_06_Einzelnormen_Density_Typen-1.pdf) \vspace{1cm}
+#' ![](analyse/C-DBR_06_Einzelnormen_Density_Typen-1.pdf)
 #'
 #'\vspace{1cm}
 #'
