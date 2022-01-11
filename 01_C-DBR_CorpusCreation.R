@@ -114,38 +114,30 @@ print(begin.script)
 #'## Packages Laden
 #' Das package *groundhog* nimmt eine strenge Versionskontrolle von R packages vor, indem es nur solche Versionen lädt, die an einem bestimmten Stichtag auf CRAN verfügbar waren. Diese werden in einer separaten library gesichert. Falls entsprechende Versionen nicht vorhanden sind, nimmt es eine automatische Installation derselben vor.
 
-library(groundhog)    # Strenge Versionskontrolle von R packages
-
-packages <- c("zip",          # ZIP Files
-              "rvest",        # HTML/XML-Extraktion
-              "xml2",         # Verarbeitung von XML-Format
-              "RcppTOML",     # Verarbeitung von TOML-Format
-              "knitr",        # Professionelles Reporting
-              "kableExtra",   # Verbesserte Kable Tabellen
-              "magick",       # Verarbeitung von Bild-Dateien
-              "pdftools",     # Extrahieren von PDF-Dateien
-              "parallel",     # Parallelisierung
-#              "doParallel",   # Parallelisierung
-              "ggplot2",      # Fortgeschrittene Datenvisualisierung
-              "data.table",   # Fortgeschrittene Datenverarbeitung
-              "quanteda",     # Fortgeschrittene Computerlinguistik
-              "scales",       # Skalierung von Diagrammen
-              "openssl",      # Kryptographische Signaturen
-              "igraph",       # Analyse von Graphen
-              "ggraph",       # Analyse von Graphen
-#              "qgraph",       # Analyse von Graphen
-              "future",       # Parallelisierung
-              "future.apply") # Parallelisierung von base-r-Funktionen
 
 
-#+ results = 'hide'
-#lapply(packages, library, character.only = TRUE)
+library("zip")          # ZIP Files
+library("rvest")        # HTML/XML-Extraktion
+library("xml2")         # Verarbeitung von XML-Format
+library("RcppTOML")     # Verarbeitung von TOML-Format
+library("knitr")        # Professionelles Reporting
+library("kableExtra")   # Verbesserte Kable Tabellen
+library("magick")       # Verarbeitung von Bild-Dateien
+library("pdftools")     # Extrahieren von PDF-Dateien
+library("parallel")     # Parallelisierung
+##library("doParallel")   # Parallelisierung
+library("ggplot2")      # Fortgeschrittene Datenvisualisierung
+library("data.table")   # Fortgeschrittene Datenverarbeitung
+library("quanteda")     # Fortgeschrittene Computerlinguistik
+library("scales")       # Skalierung von Diagrammen
+library("openssl")      # Kryptographische Signaturen
+library("igraph")       # Analyse von Graphen
+library("ggraph")       # Analyse von Graphen
+##library("qgraph")       # Analyse von Graphen
+library("future")       # Parallelisierung
+library("future.apply") # Parallelisierung von base-r-Funktionen
 
-#+ results = 'hide'
-groundhog.library(pkg = packages,
-                  date = "2022-01-01",
-                  tolerate.R.version = "4.0.5")
-                 
+
 
 
 
