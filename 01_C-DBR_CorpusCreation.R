@@ -134,8 +134,8 @@ packages <- c("zip",          # ZIP Files
               "igraph",       # Analyse von Graphen
               "ggraph",       # Analyse von Graphen
 #              "qgraph",       # Analyse von Graphen
-              "future",       # Parallelsirung
-              "future.apply") # Parallelisierung
+              "future",       # Parallelisierung
+              "future.apply") # Parallelisierung von base-r-Funktionen
 
 
 #+ results = 'hide'
