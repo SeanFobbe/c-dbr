@@ -580,9 +580,9 @@ kable(stats.rechtsakte.ling,
 
 
 #' ![](analyse/C-DBR_04_Einzelnormen_Density_Zeichen-1.pdf)
-
+#'
 #'\vspace{1cm}
-
+#'
 #' ![](analyse/C-DBR_04_Rechtsakte_Density_Zeichen-1.pdf)
 
 
@@ -592,9 +592,9 @@ kable(stats.rechtsakte.ling,
 
 
 #' ![](analyse/C-DBR_05_Einzelnormen_Density_Tokens-1.pdf)
-
+#'
 #'\vspace{1cm}
-
+#'
 #' ![](analyse/C-DBR_05_Rechtsakte_Density_Tokens-1.pdf)
 
 
@@ -604,10 +604,10 @@ kable(stats.rechtsakte.ling,
 #'## Verteilung Typen
 
 
-#' ![](analyse/C-DBR_06_Einzelnormen_Density_Typen-1.pdf)
-
+#' ![](analyse/C-DBR_06_Einzelnormen_Density_Typen-1.pdf) \vspace{1cm}
+#'
 #'\vspace{1cm}
-
+#'
 #' ![](analyse/C-DBR_06_Rechtsakte_Density_Typen-1.pdf)
 
 
@@ -617,9 +617,9 @@ kable(stats.rechtsakte.ling,
 
 
 #' ![](analyse/C-DBR_07_Einzelnormen_Density_Saetze-1.pdf)
-
+#'
 #'\vspace{1cm}
-
+#'
 #' ![](analyse/C-DBR_07_Rechtsakte_Density_Saetze-1.pdf)
 
 
