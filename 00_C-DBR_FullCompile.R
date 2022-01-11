@@ -8,12 +8,8 @@
 
 datestamp <- Sys.Date()
 
-library(groundhog)    # Strenge Versionskontrolle von R packages
 
-groundhog.library(pkg = "rmarkdown",
-                  date = "2022-01-01",
-                  tolerate.R.version = "4.0.5")
-#library(rmarkdown)
+library(rmarkdown)
 
 
 
