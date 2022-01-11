@@ -115,6 +115,9 @@ print(begin.script)
 #' Das package *groundhog* nimmt eine strenge Versionskontrolle von R packages vor, indem es nur solche Versionen lädt, die an einem bestimmten Stichtag auf CRAN verfügbar waren. Diese werden in einer separaten library gesichert. Falls entsprechende Versionen nicht vorhanden sind, nimmt es eine automatische Installation derselben vor.
 
 
+library(checkpoint)
+checkpoint("2022-01-01")
+
 
 library("zip")          # ZIP Files
 library("rvest")        # HTML/XML-Extraktion
