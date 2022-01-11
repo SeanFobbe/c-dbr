@@ -4,14 +4,9 @@
 #'# Vorbereitung
 
 
-
-
 datestamp <- Sys.Date()
 
-
 library(rmarkdown)
-
-
 
 
 
