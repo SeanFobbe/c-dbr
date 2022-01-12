@@ -2370,7 +2370,6 @@ fwrite(dt.stats.ling,
 
 
 
-
 #'\newpage
 #'## Linguistische Kennwerte: Rechtsakte
 #' **Hinweis:** Typen sind definiert als einzigartige Tokens und werden hier noch einmal bezogen auf den Gesamtkorpus berechnet, statt wie vorher bezogen auf jedes Dokument.
@@ -3662,4 +3661,10 @@ sessionInfo()
 
 
 #'# Literaturverzeichnis
+
+
+
+
+
+
 

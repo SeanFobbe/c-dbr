@@ -11,9 +11,9 @@
 #'    number_sections: true
 #'    pandoc_args: --listings
 #'    includes:
-#'      in_header: General_Source_TEX_Preamble_DE.tex
-#'      before_body: [C-DBR_Source_TEX_Definitions.tex,C-DBR_Source_TEX_CodebookTitle.tex]
-#'bibliography: packages.bib
+#'      in_header: tex/Preamble_DE.tex
+#'      before_body: [temp/C-DBR_Definitions.tex, tex/C-DBR_CodebookTitle.tex]
+#'bibliography: temp/packages.bib
 #'nocite: '@*'
 #' ---
 
@@ -938,51 +938,49 @@ kable(testresult, format = "latex", booktabs = TRUE,
 #' 
 #'## Version 2021-07-30
 #' 
-#' \begin{itemize}
-#' \item Vollständige Aktualisierung der Daten
-#' \item Einführung von neuen Variablen für letzte Änderung (Datum), Neufassung (Datum), Aufhebung (Datum jeweils für Verkündung und Wirkung), Lizenz und hierarchische Ketten von Gliederungsbezeichnungen und -titeln
-#' \item Parallelisierung der Downloads um Kompilierung des Korpus zu beschleunigen
-#' \item Korrektur bei den Dateinamen der Allgemeinen Eisenbahngesetze: GII weist zwei gleichnamige Rechtsakte (\enquote{Allgemeines Eisenbahngesetz}) nach. Beide werden nun mit dem Jahr ihrer Ausfertigung 1951 und 1993 im Langtitel differenziert. In der Vorversion wurde das neuere AEG noch mit dem Jahr 1994 (Inkrafttreten) beschriftet und das andere AEG ohne Jahreszahl.
-#' \item Einführung von Netzwerkanalysen (experimentell!)
-#' \item Variablen in CSV-Dateien sind nun semantisch sortiert
-#' \item Neues Diagramm für Verteilung von Zeichen
-#' \item Falls die XML-Datei mehrere Bemerkungen für Hinweise, Änderung, Neufassung, den Stand oder sonstige Angaben aufweist werden diese nun durch einen vertikalen Strich getrennt (vorher nur mehrere Leerzeichen). 
-#' \item Kleinere Korrekturen und Ergänzungen im Codebook
-#' \end{itemize}
+#'- Vollständige Aktualisierung der Daten
+#'- Einführung von neuen Variablen für letzte Änderung (Datum), Neufassung (Datum), Aufhebung (Datum jeweils für Verkündung und Wirkung), Lizenz und hierarchische Ketten von Gliederungsbezeichnungen und -titeln
+#'- Parallelisierung der Downloads um Kompilierung des Korpus zu beschleunigen
+#'- Korrektur bei den Dateinamen der Allgemeinen Eisenbahngesetze: GII weist zwei gleichnamige Rechtsakte (\enquote{Allgemeines Eisenbahngesetz}) nach. Beide werden nun mit dem Jahr ihrer Ausfertigung 1951 und 1993 im Langtitel differenziert. In der Vorversion wurde das neuere AEG noch mit dem Jahr 1994 (Inkrafttreten) beschriftet und das andere AEG ohne Jahreszahl.
+#'- Einführung von Netzwerkanalysen (experimentell!)
+#'- Variablen in CSV-Dateien sind nun semantisch sortiert
+#'- Neues Diagramm für Verteilung von Zeichen
+#'- Falls die XML-Datei mehrere Bemerkungen für Hinweise, Änderung, Neufassung, den Stand oder sonstige Angaben aufweist werden diese nun durch einen vertikalen Strich getrennt (vorher nur mehrere Leerzeichen). 
+#'- Kleinere Korrekturen und Ergänzungen im Codebook
+#'
 #' 
 #'## Version 2021-01-05
 #'
-#' \begin{itemize}
-#' \item Vollständige Aktualisierung der Daten
-#' \item Komplette Überarbeitung des Source Codes
-#' \item Erstveröffentlichung eines Codebooks
-#' \item Einführung der vollautomatischen Erstellung von Datensatz und Codebook
-#' \item Einführung von Compilation Reports um den Erstellungsprozess exakt zu dokumentieren
-#' \item CSV-Dateien werden durch Parsing der XML-Dateien erstellt
-#' \item Automatisierung und deutliche Erweiterung der Qualitätskontrolle
-#' \item Einführung von Diagrammen zur Visualisierung von Prüfergebnissen
-#' \item Einführung kryptographischer Signaturen
-#' \end{itemize}
+#' 
+#'- Vollständige Aktualisierung der Daten
+#'- Komplette Überarbeitung des Source Codes
+#'- Erstveröffentlichung eines Codebooks
+#'- Einführung der vollautomatischen Erstellung von Datensatz und Codebook
+#'- Einführung von Compilation Reports um den Erstellungsprozess exakt zu dokumentieren
+#'- CSV-Dateien werden durch Parsing der XML-Dateien erstellt
+#'- Automatisierung und deutliche Erweiterung der Qualitätskontrolle
+#'- Einführung von Diagrammen zur Visualisierung von Prüfergebnissen
+#'- Einführung kryptographischer Signaturen
+#' 
 #' 
 #'## Version 2020-10-09
 #'
-#' \begin{itemize}
-#' \item Vollständige Aktualisierung der Daten
-#' \item Erstveröffentlichung des Source Codes
-#' \item XML-Daten nun fehlerfrei. In Version 2020-07-08 waren XML-Dateien mit Anhängen fehlerhaft.
-#' \end{itemize}
+#'
+#'- Vollständige Aktualisierung der Daten
+#'- Erstveröffentlichung des Source Codes
+#'- XML-Daten nun fehlerfrei. In Version 2020-07-08 waren XML-Dateien mit Anhängen fehlerhaft.
+#'
+#' 
 #' 
 #'## Version 2020-07-08
 #'
-#' \begin{itemize}
-#' \item Vollständige Aktualisierung der Daten
-#' \end{itemize}
+#' 
+#'- Vollständige Aktualisierung der Daten
+#' 
 #' 
 #'## Version 2020-05-18
 #'
-#' \begin{itemize}
-#' \item Erstveröffentlichung
-#' \end{itemize}
+#'- Erstveröffentlichung
 #' 
 
 #'\newpage

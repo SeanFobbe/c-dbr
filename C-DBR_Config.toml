@@ -27,6 +27,7 @@ debug.sample = 500      # Die Anzahl der zufällig ausgewählten Rechtsakte, die
 qa.sample = 50        # Die Anzahl der zufällig ausgewählten Einzelnormen, die zur Überprüfung separat gespeichert werden sollen.
 
 
+
 # Parallelization
 
 cores.max = true  # Ob die maximale Anzahl an logischen Kernen genutzt werden soll; Möglichkeiten sind "TRUE" oder "FALSE"
