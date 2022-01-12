@@ -14,7 +14,7 @@ library(rmarkdown)
 #'# Aufräumen
 
 
-files.delete <- list.files(pattern = "\\.zip|\\.xml|\\.jpe?g|\\.png|\\.gif|\\.pdf|\\.epub|\\.bib|\\.csv|\\.dtd|\\.spin\\.|\\.log",
+files.delete <- list.files(pattern = "\\.zip|\\.xml|\\.jpe?g|\\.png|\\.gif|\\.pdf|\\.txt|\\.epub|\\.bib|\\.csv|\\.dtd|\\.spin\\.|\\.log",
                            ignore.case = TRUE)
 
 unlink(files.delete)
