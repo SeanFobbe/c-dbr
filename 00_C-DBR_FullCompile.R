@@ -39,7 +39,7 @@ unlink("temp", recursive = TRUE)
 begin.compreport <- Sys.time()
 
 rmarkdown::render(input = "01_C-DBR_CorpusCreation.R",
-#                  envir = new.env(),
+                  envir = new.env(),
                   output_file = paste0("C-DBR_",
                                        datestamp,
                                        "_CompilationReport.pdf"),
