@@ -3,11 +3,24 @@
 temp/
 output/
 analyse/
+netzwerke/
 
 XML/
 PDF/
 TXT/
 EPUB/
+
+*.zip
+*.xml
+*.jpg
+*.JPG
+*.JPEG
+*.jpeg
+*.gif
+*.pdf
+*.txt
+*.epub
+
 
 
 

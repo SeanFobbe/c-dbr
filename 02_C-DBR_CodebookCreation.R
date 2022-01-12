@@ -32,6 +32,7 @@ knitr::opts_chunk$set(fig.pos = "center",
 
 #+
 
+library(RcppTOML)     # Verarbeitung von TOML-Format
 library(knitr)        # Professionelles Reporting
 library(kableExtra)   # Verbesserte automatisierte Tabellen
 library(magick)       # Fortgeschrittene Verarbeitung von Grafiken
@@ -44,24 +45,20 @@ setDTthreads(threads = detectCores())
 
 
 
-###################################
-### Zusätzliche Funktionen einlesen
-###################################
-
-source("General_Source_Functions.R")
-
-
-
 ############################
 ### Vorbereitung
 ############################
 
-datasetname <- "C-DBR"
-doi.concept <- "10.5281/zenodo.3832111" # checked
-doi.version <- "10.5281/zenodo.5510458" # checked
+
+## Konfiguration einlesen
+config <- parseTOML("C-DBR_Config.toml")
 
 
-files.zip <- list.files(pattern = "\\.zip")
+
+## Datumsstempel einlesen
+
+files.zip <- list.files("output",
+                        pattern = "\\.zip")
 
 datestamp <- unique(tstrsplit(files.zip,
                               split = "_")[[2]])
@@ -76,20 +73,21 @@ datestamp <- unique(tstrsplit(files.zip,
 
 ## Präfixe erstellen
 
-prefix.date <- paste(datasetname,
-                     datestamp,
-                     sep = "_")
+prefix.date <- paste0("output/",
+                      config$project$shortname,
+                      "_",
+                      datestamp)
 
-prefix.normen <- paste0("ANALYSE/",
-                        datasetname,
+prefix.normen <- paste0("analyse/",
+                        config$project$shortname,
                         "_01_Einzelnormen_Frequenztabelle_var-")
 
-prefix.rechtsakte <- paste0("ANALYSE/",
-                            datasetname,
+prefix.rechtsakte <- paste0("analyse/",
+                            config$project$shortname,
                             "_01_Rechtsakte_Frequenztabelle_var-")
 
-prefix.meta <- paste0("ANALYSE/",
-                      datasetname,
+prefix.meta <- paste0("analyse/",
+                      config$project$shortname,
                       "_01_Meta_Frequenztabelle_var-")
 
 
@@ -122,12 +120,12 @@ table.meta.ausjahr <- fread(paste0(prefix.meta,
 
 ## Linguistische Kennzahlen einlesen
 
-stats.rechtsakte.ling <-  fread(paste0("ANALYSE/",
-                                       datasetname,
+stats.rechtsakte.ling <-  fread(paste0("analyse/",
+                                       config$project$shortname,
                                        "_00_Rechtsakte_KorpusStatistik_ZusammenfassungLinguistisch.csv"))
 
-stats.normen.ling <-  fread(paste0("ANALYSE/",
-                                   datasetname,
+stats.normen.ling <-  fread(paste0("analyse/",
+                                   config$project$shortname,
                                    "_00_Einzelnormen_KorpusStatistik_ZusammenfassungLinguistisch.csv"))
 
 
@@ -144,7 +142,7 @@ meta.rechtsakte <- fread(cmd = paste0("unzip -cq ",
 
 
 ############################
-### Signaturen einlesen
+### Signaturen bestimmen
 ############################
 
 
@@ -155,6 +153,9 @@ hashfile <- paste(prefix.date,
 signaturefile <- paste(prefix.date,
                        "FobbeSignaturGPG_Hashes.gpg",
                        sep = "_")
+
+
+
 
 
 ################################
@@ -318,7 +319,7 @@ txt.dbr <- readtext("./*.txt",
 #+
 #'## Qualitätsprüfung
 
-#'Insgesamt werden zusammen mit jeder Kompilierung Dutzende Tests zur Qualitätsprüfung durchgeführt. Alle Ergebnisse der Qualitätsprüfungen sind aggregiert im Compilation Report und einzeln im Archiv \enquote{ANALYSE} zusammen mit dem Datensatz veröffentlicht.
+#'Insgesamt werden zusammen mit jeder Kompilierung Dutzende Tests zur Qualitätsprüfung durchgeführt. Alle Ergebnisse der Qualitätsprüfungen sind aggregiert im Compilation Report und einzeln im Archiv \enquote{analyse} zusammen mit dem Datensatz veröffentlicht.
 
 
 
@@ -574,255 +575,54 @@ kable(stats.rechtsakte.ling,
 
 #'\newpage
 
+#+
 #'## Verteilung Zeichen
 
-#+ C-DBR_04_Einzelnormen_Density_Zeichen, fig.height = 6, fig.width = 9
-ggplot(data = meta.normen)+
-    geom_density(aes(x = zeichen),
-                 fill = "black") +
-    scale_x_log10(breaks = trans_breaks("log10", function(x) 10^x),
-                  labels = trans_format("log10", math_format(10^.x)))+
-    annotation_logticks(sides = "b")+ 
-    coord_cartesian(xlim = c(1, 10^6))+
-    theme_bw()+
-    labs(
-        title = paste(datasetname,
-                      "| Version",
-                      datestamp,
-                      "| Verteilung der Zeichen je Einzelnorm"),
-        caption = paste("DOI:",
-                        doi.version,
-                        "| S. Fobbe"),
-        x = "Zeichen",
-        y = "Dichte"
-    )+
-    theme(
-        text = element_text(size = 14),
-        plot.title = element_text(size = 14,
-                                  face = "bold"),
-        legend.position = "none",
-        plot.margin = margin(10, 20, 10, 10)
-    )
 
-#'\bigskip
-
-#+ C-DBR_04_Rechtsakte_Density_Zeichen, fig.height = 6, fig.width = 9
-ggplot(data = meta.rechtsakte)+
-    geom_density(aes(x = zeichen),
-                 fill = "black") +
-    scale_x_log10(breaks = trans_breaks("log10", function(x) 10^x),
-                  labels = trans_format("log10", math_format(10^.x)))+
-    annotation_logticks(sides = "b")+ 
-    coord_cartesian(xlim = c(1, 10^6))+
-    theme_bw()+
-    labs(
-        title = paste(datasetname,
-                      "| Version",
-                      datestamp,
-                      "| Verteilung der Zeichen je Rechtsakt"),
-        caption = paste("DOI:",
-                        doi.version,
-                        "| S. Fobbe"),
-        x = "Zeichen",
-        y = "Dichte"
-    )+
-    theme(
-        text = element_text(size = 14),
-        plot.title = element_text(size = 14,
-                                  face = "bold"),
-        legend.position = "none",
-        plot.margin = margin(10, 20, 10, 10)
-    )
+#' ![](analyse/C-DBR_04_Einzelnormen_Density_Zeichen-1.pdf)
+#'
+#'\vspace{1cm}
+#'
+#' ![](analyse/C-DBR_04_Rechtsakte_Density_Zeichen-1.pdf)
 
 
+
+#+
 #'## Verteilung Tokens
 
 
-#+ C-DBR_05_Einzelnormen_Density_Tokens, fig.height = 6, fig.width = 9
-ggplot(data = meta.normen)+
-    geom_density(aes(x = tokens),
-                 fill = "black") +
-    scale_x_log10(breaks = trans_breaks("log10", function(x) 10^x),
-                  labels = trans_format("log10", math_format(10^.x)))+
-    annotation_logticks(sides = "b")+ 
-    coord_cartesian(xlim = c(1, 10^6))+
-    theme_bw()+
-    labs(
-        title = paste(datasetname,
-                      "| Version",
-                      datestamp,
-                      "| Verteilung der Tokens je Einzelnorm"),
-        caption = paste("DOI:",
-                        doi.version,
-                        "| S. Fobbe"),
-        x = "Tokens",
-        y = "Dichte"
-    )+
-    theme(
-        text = element_text(size = 14),
-        plot.title = element_text(size = 14,
-                                  face = "bold"),
-        legend.position = "none",
-        plot.margin = margin(10, 20, 10, 10)
-    )
-
-#'\bigskip
-
-#+ C-DBR_05_Rechtsakte_Density_Tokens, fig.height = 6, fig.width = 9
-ggplot(data = meta.rechtsakte)+
-    geom_density(aes(x = tokens),
-                 fill = "black")+
-    scale_x_log10(breaks = trans_breaks("log10", function(x) 10^x),
-                  labels = trans_format("log10", math_format(10^.x)))+
-    annotation_logticks(sides = "b")+ 
-    coord_cartesian(xlim = c(1, 10^6))+
-    theme_bw() +
-    labs(
-        title = paste(datasetname,
-                      "| Version",
-                      datestamp,
-                      "| Verteilung der Tokens je Rechtsakt"),
-        caption = paste("DOI:",
-                        doi.version,
-                        "| S. Fobbe"),
-        x = "Tokens",
-        y = "Dichte"
-    )+
-    theme(
-        text = element_text(size = 14),
-        plot.title = element_text(size = 14,
-                                  face = "bold"),
-        legend.position = "none",
-        plot.margin = margin(10, 20, 10, 10)
-    )
+#' ![](analyse/C-DBR_05_Einzelnormen_Density_Tokens-1.pdf)
+#'
+#'\vspace{1cm}
+#'
+#' ![](analyse/C-DBR_05_Rechtsakte_Density_Tokens-1.pdf)
 
 
 
 
+#+
 #'## Verteilung Typen
 
 
-#+ C-DBR_06_Einzelnormen_Density_Typen, fig.height = 6, fig.width = 9
-ggplot(data = meta.normen)+
-    geom_density(aes(x = typen),
-                 fill = "black")+
-    scale_x_log10(breaks = trans_breaks("log10", function(x) 10^x),
-                  labels = trans_format("log10", math_format(10^.x)))+
-    annotation_logticks(sides = "b")+ 
-    coord_cartesian(xlim = c(1, 10^6))+
-    theme_bw()+
-    labs(
-        title = paste(datasetname,
-                      "| Version",
-                      datestamp,
-                      "| Verteilung der Typen je Einzelnorm"),
-        caption = paste("DOI:",
-                        doi.version,
-                        "| S. Fobbe"),
-        x = "Typen",
-        y = "Dichte"
-    )+
-    theme(
-        text = element_text(size = 14),
-        plot.title = element_text(size = 14,
-                                  face = "bold"),
-        legend.position = "none",
-        plot.margin = margin(10, 20, 10, 10)
-    )
-
-#'\bigskip
-
-
-#+ C-DBR_06_Rechtsakte_Density_Typen, fig.height = 6, fig.width = 9
-ggplot(data = meta.rechtsakte)+
-    geom_density(aes(x = typen),
-                 fill = "black")+
-    scale_x_log10(breaks = trans_breaks("log10", function(x) 10^x),
-                  labels = trans_format("log10", math_format(10^.x)))+
-    annotation_logticks(sides = "b")+ 
-    coord_cartesian(xlim = c(1, 10^6))+
-    theme_bw()+
-    labs(
-        title = paste(datasetname,
-                      "| Version",
-                      datestamp,
-                      "| Verteilung der Typen je Rechtsakt"),
-        caption = paste("DOI:",
-                        doi.version,
-                        "| S. Fobbe"),
-        x = "Typen",
-        y = "Dichte"
-    )+
-    theme(
-        text = element_text(size = 14),
-        plot.title = element_text(size = 14,
-                                  face = "bold"),
-        legend.position = "none",
-        plot.margin = margin(10, 20, 10, 10)
-    )
+#' ![](analyse/C-DBR_06_Einzelnormen_Density_Typen-1.pdf)
+#'
+#'\vspace{1cm}
+#'
+#' ![](analyse/C-DBR_06_Rechtsakte_Density_Typen-1.pdf)
 
 
 
+#+
 #'## Verteilung Sätze
 
 
-#+ C-DBR_07_Einzelnormen_Density_Saetze, fig.height = 6, fig.width = 9
-ggplot(data = meta.normen)+
-    geom_density(aes(x = saetze),
-                 fill = "black")+
-    scale_x_log10(breaks = trans_breaks("log10", function(x) 10^x),
-                  labels = trans_format("log10", math_format(10^.x)))+
-    annotation_logticks(sides = "b")+ 
-    coord_cartesian(xlim = c(1, 10^6))+
-    theme_bw()+
-    labs(
-        title = paste(datasetname,
-                      "| Version",
-                      datestamp,
-                      "| Verteilung der Sätze je Einzelnorm"),
-        caption = paste("DOI:",
-                        doi.version,
-                        "| S. Fobbe"),
-        x = "Sätze",
-        y = "Dichte"
-    )+
-    theme(
-        text = element_text(size = 14),
-        plot.title = element_text(size = 14,
-                                  face = "bold"),
-        legend.position = "none",
-        plot.margin = margin(10, 20, 10, 10)
-    )
+#' ![](analyse/C-DBR_07_Einzelnormen_Density_Saetze-1.pdf)
+#'
+#'\vspace{1cm}
+#'
+#' ![](analyse/C-DBR_07_Rechtsakte_Density_Saetze-1.pdf)
 
-#'\bigskip
 
-#+ C-DBR_07_Rechtsakte_Density_Saetze, fig.height = 6, fig.width = 9
-ggplot(data = meta.rechtsakte)+
-    geom_density(aes(x = saetze),
-                 fill = "black")+
-    scale_x_log10(breaks = trans_breaks("log10", function(x) 10^x),
-                  labels = trans_format("log10", math_format(10^.x)))+
-    annotation_logticks(sides = "b")+ 
-    coord_cartesian(xlim = c(1, 10^6))+ 
-    theme_bw()+
-    labs(
-        title = paste(datasetname,
-                      "| Version",
-                      datestamp,
-                      "| Verteilung der Sätze je Rechtsakt"),
-        caption = paste("DOI:",
-                        doi.version,
-                        "| S. Fobbe"),
-        x = "Sätze",
-        y = "Dichte"
-    )+
-    theme(
-        text = element_text(size = 14),
-        plot.title = element_text(size = 14,
-                                  face = "bold"),
-        legend.position = "none",
-        plot.margin = margin(10, 20, 10, 10)
-    )
 
 
 
@@ -838,36 +638,11 @@ ggplot(data = meta.rechtsakte)+
 #+
 #'### Einzelnormen
 
-freqtable <- table.normen.periodikum[-.N]
 
-#+ C-DBR_02_Einzelnormen_Barplot_Periodikum, fig.height = 10, fig.width = 8
-ggplot(data = freqtable) +
-    geom_bar(aes(x = reorder(periodikum,
-                             N),
-                 y = N),
-             stat = "identity",
-             fill = "black",
-             color = "black") +
-    coord_flip()+
-    theme_bw() +
-    labs(
-        title = paste(datasetname,
-                      "| Version",
-                      datestamp,
-                      "| Einzelnormen je Periodikum"),
-        caption = paste("DOI:",
-                        doi.version,
-                        "| S. Fobbe"),
-        x = "Periodikum",
-        y = "Einzelnormen"
-    )+
-    theme(
-        text = element_text(size = 14),
-        plot.title = element_text(size = 14,
-                                  face = "bold"),
-        legend.position = "none",
-        plot.margin = margin(10, 20, 10, 10)
-    )
+#' ![](analyse/C-DBR_02_Einzelnormen_Barplot_Periodikum-1.pdf)
+
+
+freqtable <- table.normen.periodikum[-.N]
 
 kable(freqtable[,c(1:2,4:5)],
       format = "latex",
@@ -886,36 +661,12 @@ kable(freqtable[,c(1:2,4:5)],
 #+
 #'### Rechtsakte mit veröffentlichtem Normtext
 
-freqtable <- table.rechtsakte.periodikum[-.N]
 
-#+ C-DBR_02_Rechtsakte_Barplot_Periodikum, fig.height = 10, fig.width = 8
-ggplot(data=freqtable) +
-    geom_bar(aes(x= reorder(periodikum,
-                            N),
-                 y = N),
-             stat = "identity",
-             fill = "black",
-             color = "black") +
-    coord_flip()+
-    theme_bw() +
-    labs(
-        title = paste(datasetname,
-                      "| Version",
-                      datestamp,
-                      "| Rechtsakte mit Inhalt je Periodikum"),
-        caption = paste("DOI:",
-                        doi.version,
-                        "| S. Fobbe"),
-        x = "Periodikum",
-        y = "Rechtsakte"
-    )+
-    theme(
-        text = element_text(size = 14),
-        plot.title = element_text(size = 14,
-                                  face = "bold"),
-        legend.position = "none",
-        plot.margin = margin(10, 20, 10, 10)
-    )
+
+#' ![](analyse/C-DBR_02_Rechtsakte_Barplot_Periodikum-1.pdf)
+
+
+freqtable <- table.rechtsakte.periodikum[-.N]
 
 #'\newpage
 
@@ -931,42 +682,18 @@ kable(freqtable[,c(1:2,4:5)],
 
 
 
+
 #'\newpage
 #+
 #'### Alle Rechtsakte (mit und ohne Normtext)
 
-freqtable <- table.meta.periodikum[-.N]
 
-#+ C-DBR_02_Meta_Barplot_Periodikum, fig.height = 10, fig.width = 8
-ggplot(data = freqtable) +
-    geom_bar(aes(x = reorder(periodikum,
-                             N),
-                 y = N),
-             stat = "identity",
-             fill = "black",
-             color = "black") +
-    coord_flip()+
-    theme_bw() +
-    labs(
-        title = paste(datasetname,
-                      "| Version",
-                      datestamp,
-                      "| Rechtsakte nach Metadaten je Periodikum"),
-        caption = paste("DOI:",
-                        doi.version,
-                        "| S. Fobbe"),
-        x = "Periodikum",
-        y = "Rechtsakte"
-    )+
-    theme(
-        text = element_text(size = 14),
-        plot.title = element_text(size = 14,
-                                  face = "bold"),
-        legend.position = "none",
-        plot.margin = margin(10, 20, 10, 10)
-    )
+#' ![](analyse/C-DBR_02_Meta_Barplot_Periodikum-1.pdf)
+
 
 #'\newpage
+
+freqtable <- table.meta.periodikum[-.N]
 
 kable(freqtable[,c(1:2,4:5)],
       format = "latex",
@@ -990,31 +717,10 @@ kable(freqtable[,c(1:2,4:5)],
 
 freqtable <- table.normen.ausjahr[-.N][,lapply(.SD, as.numeric)]
 
-#+ C-DBR_03_Einzelnormen_Barplot_Ausfertigungsjahr, fig.height = 7, fig.width = 11
-ggplot(data=freqtable) +
-    geom_bar(aes(x = ausfertigung_jahr,
-                 y = N),
-             stat="identity",
-             fill ="black") +
-    theme_bw() +
-    labs(
-        title = paste(datasetname,
-                      "| Version",
-                      datestamp,
-                      "| Einzelnormen je Ausfertigungsjahr"),
-        caption = paste("DOI:",
-                        doi.version,
-                        "| S. Fobbe"),
-        x = "Ausfertigungsjahr",
-        y = "Einzelnormen"
-    )+
-    theme(
-        text = element_text(size = 16),
-        plot.title = element_text(size = 16,
-                                  face = "bold"),
-        legend.position = "none",
-        plot.margin = margin(10, 20, 10, 10)
-    )
+
+#' ![](analyse/C-DBR_03_Einzelnormen_Barplot_Ausfertigungsjahr-1.pdf)
+
+
 
 
 kable(freqtable[,c(1:2,4:5)],
@@ -1034,34 +740,12 @@ kable(freqtable[,c(1:2,4:5)],
 #+
 #'### Rechtsakte mit veröffentlichtem Normtext
 
+
+#' ![](analyse/C-DBR_03_Rechtsakte_Barplot_Ausfertigungsjahr-1.pdf)
+
+
+
 freqtable <- table.rechtsakte.ausjahr[-.N][,lapply(.SD, as.numeric)]
-
-#+ C-DBR_03_Rechtsakte_Barplot_Ausfertigungsjahr, fig.height = 7, fig.width = 11
-ggplot(data = freqtable) +
-    geom_bar(aes(x = ausfertigung_jahr,
-                 y = N),
-             stat = "identity",
-             fill ="black") +
-    theme_bw() +
-    labs(
-        title = paste(datasetname,
-                      "| Version",
-                      datestamp,
-                      "| Rechtsakte mit Inhalt je Ausfertigungsjahr"),
-        caption = paste("DOI:",
-                        doi.version,
-                        "| S. Fobbe"),
-        x = "Ausfertigungsjahr",
-        y = "Rechtsakte"
-    )+
-    theme(
-        text = element_text(size = 16),
-        plot.title = element_text(size = 16,
-                                  face = "bold"),
-        legend.position = "none",
-        plot.margin = margin(10, 20, 10, 10)
-    )
-
 
 kable(freqtable[,c(1:2,4:5)],
       format = "latex",
@@ -1078,34 +762,13 @@ kable(freqtable[,c(1:2,4:5)],
 #+
 #'###  Alle Rechtsakte (mit und ohne Normtext)
 
+
+
+#' ![](analyse/C-DBR_03_Meta_Barplot_Ausfertigungsjahr-1.pdf)
+
+
+
 freqtable <- table.meta.ausjahr[-.N][,lapply(.SD, as.numeric)]
-
-
-#+ C-DBR_03_Meta_Barplot_Ausfertigungsjahr, fig.height = 7, fig.width = 11
-ggplot(data = freqtable) +
-    geom_bar(aes(x = ausfertigung_jahr,
-                 y = N),
-             stat = "identity",
-             fill ="black") +
-    theme_bw() +
-    labs(
-        title = paste(datasetname,
-                      "| Version",
-                      datestamp,
-                      "| Rechtsakte nach Metadaten je Ausfertigungsjahr"),
-        caption = paste("DOI:",
-                        doi.version,
-                        "| S. Fobbe"),
-        x = "Ausfertigungsjahr",
-        y = "Rechtsakte"
-    )+
-    theme(
-        text = element_text(size = 16),
-        plot.title = element_text(size = 16,
-                                  face = "bold"),
-        legend.position = "none",
-        plot.margin = margin(10, 20, 10, 10)
-    )
 
 kable(freqtable[,c(1:2,4:5)],
       format = "latex",
@@ -1125,9 +788,10 @@ kable(freqtable[,c(1:2,4:5)],
 
 
 files.zip <- fread(hashfile)$filename
+files.zip <- file.path("output", files.zip)
 filesize <- round(file.size(files.zip) / 10^6, digits = 2)
 
-table.size <- data.table(files.zip,
+table.size <- data.table(basename(files.zip),
                          filesize)
 
 
@@ -1140,17 +804,17 @@ kable(table.size,
                     "Größe in MB"))
 
 
-#' ![](ANALYSE/C-DBR_08_Density_Dateigroessen_PDF-1.pdf)
+#' ![](analyse/C-DBR_08_Density_Dateigroessen_PDF-1.pdf)
 
 #'\vspace{1cm}
 
-#' ![](ANALYSE/C-DBR_09_Density_Dateigroessen_EPUB-1.pdf)
+#' ![](analyse/C-DBR_09_Density_Dateigroessen_EPUB-1.pdf)
 
-#' ![](ANALYSE/C-DBR_10_Density_Dateigroessen_XML-1.pdf)
+#' ![](analyse/C-DBR_10_Density_Dateigroessen_XML-1.pdf)
 
 #'\vspace{1cm}
 
-#' ![](ANALYSE/C-DBR_11_Density_Dateigroessen_TXT-1.pdf)
+#' ![](analyse/C-DBR_11_Density_Dateigroessen_TXT-1.pdf)
 
 
 
@@ -1181,7 +845,7 @@ kable(table.size,
 #+
 #'## Import: Public Key
 #+ echo = TRUE
-system2("gpg2", "--import GPG-Public-Key_Fobbe-Data.asc",
+system2("gpg2", "--import gpg/PublicKey_Fobbe-Data.asc",
         stdout = TRUE,
         stderr = TRUE)
 
@@ -1234,14 +898,14 @@ sha3test <- function(filename, sig){
 
 # Ursprüngliche Signaturen importieren
 table.hashes <- fread(hashfile)
-filename <- table.hashes$filename
+filename <- file.path("output", table.hashes$filename)
 sha3.512 <- table.hashes$sha3.512
 
 # Signaturprüfung durchführen 
 sha3.512.result <- mcmapply(sha3test, filename, sha3.512, USE.NAMES = FALSE)
 
 # Ergebnis anzeigen
-testresult <- data.table(filename, sha3.512.result)
+testresult <- data.table(basename(filename), sha3.512.result)
 
 #+ echo = TRUE
 kable(testresult, format = "latex", booktabs = TRUE,
@@ -1256,11 +920,21 @@ kable(testresult, format = "latex", booktabs = TRUE,
 #'
 #'## Version \version
 #'
-#' \begin{itemize}
-#' \item Vollständige Aktualisierung der Daten
-#' \item Einfügung von Kurzbezeichnungen der Rechtsakte in die Dateinamen der Netzwerkanalysen
-#' \item Einfügung der ID der Rechtsakte in die CSV-Tabelle aller Kurz- und Langtitel
-#' \end{itemize}
+#'- Vollständige Aktualisierung der Daten
+#'- Strenge Versionskontrolle aller R packages
+#'- Der Prozess der Kompilierung ist jetzt detailliert konfigurierbar, insbesondere die Parallelisierung
+#'- Parallelisierung der XML-Parser deaktivert, weil instabil
+#'- Fehlerhafte Kompilierungen werden nun beim nächsten Run vollautomatisch aufgeräumt
+#'- Alle Ergebnisse werden automatisch fertig verpackt in den Ordner \enquote{output} sortiert
+#'- Source Code des Changelogs zu Markdown konvertiert
+#'- Einführung eines Debugging-Modus um die Entwicklung zu beschleunigen
+#'
+#'## Version 2021-09-16
+#'
+#'- Vollständige Aktualisierung der Daten
+#'- Einfügung von Kurzbezeichnungen der Rechtsakte in die Dateinamen der Netzwerkanalysen
+#'- Einfügung der ID der Rechtsakte in die CSV-Tabelle aller Kurz- und Langtitel
+#'
 #' 
 #'## Version 2021-07-30
 #' 

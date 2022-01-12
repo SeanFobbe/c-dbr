@@ -3,17 +3,21 @@ project.fullname = "Corpus des Deutschen Bundesrechts"
 project.shortname = "C-DBR"
 project.author = "Seán Fobbe"
 
+
+
 # License
 license.data = "Creative Commons Zero 1.0 Universal"
 license.code = "MIT-0"
 
 
+
 # Digital Object Identifier (DOI)
 doi.data.concept = "10.5281/zenodo.3832111" # checked
-doi.data.version = "???"
+doi.data.version = "10.5281/zenodo.5832094" # checked
 
 doi.software.concept = "10.5281/zenodo.4072934" # checked
-doi.software.version = "???"
+doi.software.version = "10.5281/zenodo.5832095" # checked
+
 
 
 # Debugging
@@ -30,9 +34,9 @@ cores.number = 8   # Die Anzahl Rechtenkerne, die verwendet werden soll; wird nu
 
 parallel.htmlLandingPages = true
 parallel.downloadXML = true
-parallel.parseEinzelnormen = true
-parallel.parseMeta = true
-parallel.parseNetworks = true
+parallel.parseEinzelnormen = false # Parallelisierung instabil und kaum schneller als sequentielle Ausführung
+parallel.parseMeta = false # Parallelisierung instabil und kaum schneller als sequentielle Ausführung
+parallel.parseNetworks = false # Parallelisierung instabil und kaum schneller als sequentielle Ausführung
 parallel.lingsummarize = true
 parallel.downloadPDF = true
 parallel.extractPDF = true
@@ -45,14 +49,17 @@ parallel.multihashes = true
 download.timeout = 600			# Timeout für Downloads
 
 
+
 # Quanteda
 quanteda.tokens_locale = "de_DE" # Locale in denen Tokens analyisert werden
+
 
 
 # Knitr
 fig.format = [ "pdf", "png" ] 	# Ausgabe-Format für Diagramme
 fig.dpi = 300     	 	# Auflösung für Diagramme
 fig.align = "center"    	# Ausrichtung von Diagrammen im Compilation Report
+
 
 
 # Frequenztabellen: Liste zu prüfender Variablen
