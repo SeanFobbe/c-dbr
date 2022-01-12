@@ -924,7 +924,8 @@ kable(testresult, format = "latex", booktabs = TRUE,
 #'- Strenge Versionskontrolle aller R packages
 #'- Der Prozess der Kompilierung ist jetzt detailliert konfigurierbar, insbesondere die Parallelisierung
 #'- Parallelisierung der XML-Parser deaktivert, weil instabil
-#'- Fehlerhafte Kompilierungen werden nun beim nächsten Run vollautomatisch aufgeräumt
+#'- Parallelisierung nun vollständig mit *future* statt mit *foreach* und *doParallel* 
+#'- Fehlerhafte Kompilierungen werden beim vor der nächsten Kompilierung vollautomatisch aufgeräumt
 #'- Alle Ergebnisse werden automatisch fertig verpackt in den Ordner \enquote{output} sortiert
 #'- Source Code des Changelogs zu Markdown konvertiert
 #'- Einführung eines Debugging-Modus um die Entwicklung zu beschleunigen
