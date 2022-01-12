@@ -3489,7 +3489,10 @@ files.source <- c(list.files(pattern = "\\.R$|\\.toml$"),
                   "functions",
                   "tex",
                   "gpg",
-                  "buttons")
+                  "buttons",
+                  "renv.lock",
+                  ".Rprofile",
+                  "renv/activate.R")
 
 
 files.source <- grep("spin",
