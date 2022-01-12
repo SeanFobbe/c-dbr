@@ -47,6 +47,7 @@ rmarkdown::render(input = "01_C-DBR_CorpusCreation.R",
 
 
 end.compreport <- Sys.time()
+
 print(end.compreport-begin.compreport)
 
 
