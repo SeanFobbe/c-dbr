@@ -5,9 +5,9 @@ Das **Corpus des deutschen Bundesrechts (C-DBR)** ist eine möglichst vollständ
 
 Alle mit diesem Skript erstellten Datensätze werden dauerhaft kostenlos und urheberrechtsfrei auf Zenodo, dem wissenschaftlichen Archiv des CERN, veröffentlicht. Alle Versionen sind mit einem separaten und langzeit-stabilen (persistenten) Digital Object Identifier (DOI) versehen.
 
-Der aktuellste, funktionale und zitierfähige Release des Datensatzes ist hier abrufbar: https://doi.org/10.5281/zenodo.3832111
+Aktuellster, funktionaler und zitierfähiger Release des Datensatzes: https://doi.org/10.5281/zenodo.3832111
 
-Der aktuellste, funktionale und zitierfähige Release des Source Codes ist hier abrufbar: https://doi.org/10.5281/zenodo.4072934
+Aktuellster, funktionaler und zitierfähiger Release des Source Codes: https://doi.org/10.5281/zenodo.4072934
 
 Lesen Sie bitte zuerst den *Compilation Report* auf Zenodo (via Source Code link)! Dieser enthält den gesamten R Source Code, relevante Rechenergebnisse, alle Diagramme, Zeitstempel, sowie ein detailliertes und klickbares Inhaltsverzeichnis. Sie werden sich auf diese Weise viel schneller im eigentlichen Source Code zurechtfinden.
 
