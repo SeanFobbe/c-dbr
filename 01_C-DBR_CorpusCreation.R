@@ -130,7 +130,7 @@ library("ggplot2")      # Fortgeschrittene Datenvisualisierung
 library("data.table")   # Fortgeschrittene Datenverarbeitung
 library("quanteda")     # Fortgeschrittene Computerlinguistik
 library("scales")       # Skalierung von Diagrammen
-library("openssl")      # Kryptographische Signaturen
+library("openssl")      # Kryptographische Signaturen; can possibly be deprecated
 library("igraph")       # Analyse von Graphen
 library("ggraph")       # Analyse von Graphen
 ##library("qgraph")       # Analyse von Graphen
