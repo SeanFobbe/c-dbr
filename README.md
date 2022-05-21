@@ -1,6 +1,6 @@
 [![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.3832111.svg)](https://doi.org/10.5281/zenodo.3832111)
 
-# Corpus des Deutschen Bundesrechts
+# Corpus des Deutschen Bundesrechts (C-DBR)
 
 
 ## Überblick
