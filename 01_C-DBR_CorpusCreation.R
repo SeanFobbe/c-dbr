@@ -81,6 +81,13 @@ source("00_C-DBR_FullCompile.R")
 
 
 
+#'\newpage
+
+
+#+ results = "asis", echo = FALSE
+cat(readLines("README.md"),
+    sep = "\n")
+
 
 
 
