@@ -912,6 +912,11 @@ kable(testresult, format = "latex", booktabs = TRUE,
       longtable = TRUE, col.names = c("Datei", "Ergebnis"))
 
 
+#+ results = "asis"
+cat(readLines("CHANGELOG.md"),
+    sep = "\n")
+
+
 
 
 #+
