@@ -4,6 +4,12 @@
 ## Version \version
 
 - Vollständige Aktualisierung der Daten
+- README und CHANGELOG sind nun externe Dateien die bei der Kompilierung automatisch eingebunden werden
+
+
+## Version 2022-01-12
+
+- Vollständige Aktualisierung der Daten
 - Strenge Versionskontrolle aller R packages
 - Der Prozess der Kompilierung ist jetzt detailliert konfigurierbar, insbesondere die Parallelisierung
 - Parallelisierung der XML-Parser deaktivert, weil instabil
