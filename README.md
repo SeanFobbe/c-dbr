@@ -16,7 +16,6 @@ Aktuellster, funktionaler und zitierfähiger Release des Source Codes: https://d
 Lesen Sie bitte zuerst den *Compilation Report* auf Zenodo (via Source Code link)! Dieser enthält den gesamten R Source Code, relevante Rechenergebnisse, alle Diagramme, Zeitstempel, sowie ein detailliertes und klickbares Inhaltsverzeichnis. Sie werden sich auf diese Weise viel schneller im eigentlichen Source Code zurechtfinden.
 
 
- 
 
 ## Funktionsweise
 
