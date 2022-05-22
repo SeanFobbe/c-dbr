@@ -3434,7 +3434,7 @@ zip(paste0(prefix.files,
 
 #'## Verpacken der Source-Dateien
 
-files.source <- c(list.files(pattern = "\\.R$|\\.toml$"),
+files.source <- c(list.files(pattern = "\\.R$|\\.toml$|\\.md$"),
                   "R-fobbe-proto-package",
                   "functions",
                   "tex",
@@ -3455,8 +3455,7 @@ files.source <- grep("spin",
 
 zip(paste0(prefix.files,
           "_Source_Code.zip"),
-    files.source,
-    mode = "cherry-pick")
+    files.source)
 
 
 
