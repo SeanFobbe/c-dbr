@@ -42,6 +42,8 @@ Weiterhin kann optional ein PDF-Bericht erstellt werden (siehe unter »Kompilier
 
 ## Kompilierung
 
+**Achtung:** Verwenden Sie immer einen eigenständigen und *leeren* Ordner für die Kompilierung. Die Skripte löschen innerhalb des Ordners (working directory) vollautomatisch alle Dateien mit bestimmten Datei-Endungen (PDF, TXT, CSV usw.), die den Datensatz verunreinigen könnten --- aber auch nur dort.
+
 Alle Kommentare sind im roxygen2-Stil gehalten. Die beiden Skripte können daher auch ohne render() regulär als R-Skripte ausgeführt werden. Es wird in diesem Fall kein PDF-Bericht erstellt und Diagramme werden nicht abgespeichert.
 
 Um den **vollständigen Datensatz** zu kompilieren, sowie Compilation Report und Codebook zu erstellen, kopieren Sie bitte alle im Source-Archiv bereitgestellten Dateien in einen leeren Ordner (!) und führen mit R diesen Befehl aus:
