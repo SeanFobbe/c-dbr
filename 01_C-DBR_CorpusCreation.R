@@ -110,6 +110,7 @@ source("functions/f.future_multihashes.R")
 source("functions/f.pdf_to_txt.R")
 source("functions/f.future_pdf_to_txt.R")
 source("functions/f.future_lingsummarize.R")
+source("functions/f.download_robust.R")
 
 
 #'## Verzeichnis für Analyse-Ergebnisse und Diagramme definieren
@@ -593,9 +594,9 @@ if(config$parallel$downloadXML == TRUE){
 
 
 #+ DownloadXML, results = 'hide'
-future_mapply(download.file,
-              download$links.xml,
-              download$title.xml)
+future_mapply(f.download_robust,
+              url = download$links.xml,
+              destfile = download$title.xml)
 
 
 
@@ -3031,10 +3032,12 @@ if(config$parallel$downloadPDF == TRUE){
 
 
 
+
+
 #+ results = 'hide'
-future_mapply(download.file,
-              download$links.pdf,
-              download$title.pdf)
+future_mapply(f.download_robust,
+              url = download$links.pdf,
+              destfile = download$title.pdf)
 
 
 #'## Download-Ergebnis
@@ -3126,9 +3129,9 @@ if(config$parallel$downloadEPUB == TRUE){
 
 
 #+ results = 'hide'
-future_mapply(download.file,
-              download$links.epub,
-              download$title.epub)
+future_mapply(f.download_robust,
+              url = download$links.epub,
+              destfile = download$title.epub)
 
 
 
