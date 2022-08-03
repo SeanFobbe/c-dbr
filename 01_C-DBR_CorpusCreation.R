@@ -1958,6 +1958,9 @@ ggplot(data = freqtable)+
              stat = "identity",
              fill = "black",
              color = "black")+
+    scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x),
+                  labels = trans_format("log10", math_format(10^.x)))+
+    annotation_logticks(sides = "b")+
     coord_flip()+
     theme_bw()+
     labs(
@@ -1990,6 +1993,9 @@ ggplot(data = freqtable) +
              stat = "identity",
              fill = "black",
              color = "black") +
+    scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x),
+                  labels = trans_format("log10", math_format(10^.x)))+
+    annotation_logticks(sides = "b")+
     coord_flip()+
     theme_bw()+
     labs(
@@ -2023,6 +2029,9 @@ ggplot(data = freqtable) +
              stat = "identity",
              fill = "black",
              color = "black") +
+    scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x),
+                  labels = trans_format("log10", math_format(10^.x)))+
+    annotation_logticks(sides = "b")+
     coord_flip()+
     theme_bw() +
     labs(
