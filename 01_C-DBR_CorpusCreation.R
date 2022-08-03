@@ -412,7 +412,7 @@ if (!length(links.html) == length(filenames.epub)){
 
     stop("EPUB-Dateinamen sind fehlerhaft.")
     
-    }
+}
 
 
 
