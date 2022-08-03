@@ -1517,7 +1517,7 @@ f.network.analysis <- function(xml.name,
 
         # to do: print errorfilename to disk
 
-        if (edgelist != 0){
+        if (length(edgelist) != 0){
             
 
         ## Node Labels definieren
