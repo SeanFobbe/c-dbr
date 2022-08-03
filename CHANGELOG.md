@@ -5,6 +5,9 @@
 
 - Vollständige Aktualisierung der Daten
 - Wenn der Download einer Datei scheitert wird der Kompilierungs-Prozess nicht mehr abgebrochen; Kontrolle über Datenabgleich im Compilation Report
+- Diagramme für Norm/Rechtsakt/Metadaten je Periodikum sind nun logarithmisch skaliert
+- Technischer Bugfix bei der Berechnung von Netzwerkdiagrammen
+
 
 
 ## Version 2022-05-22
