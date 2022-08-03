@@ -397,6 +397,25 @@ filenames.epub <- grep (".epub$",
                         value = TRUE)
 
 
+#'## Test: Gleiche Länge der Dateinamen-Vektoren
+
+
+if (!length(links.html) == length(filenames.pdf)){
+
+    stop("PDF-Dateinamen sind fehlerhaft.")
+    
+}
+
+
+if (!length(links.html) == length(filenames.epub)){
+
+    stop("EPUB-Dateinamen sind fehlerhaft.")
+    
+    }
+
+
+
+    
 
 #'## Vektor der Langtitel erstellen
 #' 
