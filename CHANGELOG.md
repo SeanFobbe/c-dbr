@@ -7,6 +7,7 @@
 - Wenn der Download einer Datei scheitert wird der Kompilierungs-Prozess nicht mehr abgebrochen; Kontrolle über Datenabgleich im Compilation Report
 - Diagramme für Norm/Rechtsakt/Metadaten je Periodikum sind nun logarithmisch skaliert
 - Technischer Bugfix bei der Berechnung von Netzwerkdiagrammen
+- Neuer Unit Test auf identische Länge von HTML-Links und extrahierten PDF- und EPUB-Dateinamen
 
 
 
