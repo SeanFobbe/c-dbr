@@ -13,10 +13,10 @@ license.code = "MIT-0"
 
 # Digital Object Identifier (DOI)
 doi.data.concept = "10.5281/zenodo.3832111" # do not change
-doi.data.version = "10.5281/zenodo.6569778" # checked
+doi.data.version = "10.5281/zenodo.6959374" # checked
 
 doi.software.concept = "10.5281/zenodo.4072934" # do not change
-doi.software.version = "10.5281/zenodo.6569779" # checked
+doi.software.version = "10.5281/zenodo.6959381" # checked
 
 
 
