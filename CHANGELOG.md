@@ -4,6 +4,11 @@
 ## Version \version
 
 - Vollständige Aktualisierung der Daten
+
+
+## Version 2022-05-22
+
+- Vollständige Aktualisierung der Daten
 - README und CHANGELOG sind nun externe Dateien die bei der Kompilierung automatisch eingebunden werden
 - Das für *renv* notwendige Skript activate.R ist im ZIP-Archiv in den Ordner "renv" sortiert
 
