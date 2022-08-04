@@ -111,6 +111,8 @@ source("functions/f.pdf_to_txt.R")
 source("functions/f.future_pdf_to_txt.R")
 source("functions/f.future_lingsummarize.R")
 source("functions/f.download_robust.R")
+source("functions/f.linkextract_regex.R")
+
 
 
 #'## Verzeichnis für Analyse-Ergebnisse und Diagramme definieren
@@ -376,25 +378,26 @@ if(config$parallel$htmlLandingPages == TRUE){
 
 }
 
-#+ Extract HTML Links
-links.list <- future_lapply(links.html,
-                            f.linkextract)
+
+#+ Extract PDF and EPUB names
+names.list <- future_lapply(links.html,
+                            f.linkextract_regex,
+                            regex = "(.pdf$)|(.epub$)")
 
 
-links.raw <- unlist(links.list)
 
 
 #'## Dateinamen von PDF und EPUB-Dateien in separate Vektoren sortieren
 
-filenames.pdf <- grep (".pdf$",
-                       links.raw,
-                       ignore.case = TRUE,
-                       value = TRUE)
+# PDF
+names.pdf <- lapply(names.list, grep, pattern = "pdf", value = TRUE)
+names.pdf <- lapply(names.pdf, f.zero.NA)
+filenames.pdf <- unlist(names.pdf)
 
-filenames.epub <- grep (".epub$",
-                        links.raw,
-                        ignore.case = TRUE,
-                        value = TRUE)
+# EPUB
+names.epub <- lapply(names.list, grep, pattern = "epub", value = TRUE)
+names.epub <- lapply(names.epub, f.zero.NA)
+filenames.epub <- unlist(names.epub)
 
 
 
