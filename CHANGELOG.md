@@ -9,6 +9,7 @@
 - Technischer Bugfix bei der Berechnung von Netzwerkdiagrammen
 - Neuer Unit Test um identische Länge von HTML-Links und extrahierten PDF- und EPUB-Dateinamen
 - Fehlende PDF- oder EPUB-Dateien führen nun nicht mehr zu Fehlern in der Pipeline
+- Unterscheidung zwischen VBVG 2005 und VBVG 2023
 
 
 ## Version 2022-05-22
