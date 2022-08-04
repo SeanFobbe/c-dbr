@@ -430,17 +430,27 @@ longtitle.raw <- html_elements(XML, "title") %>% xml_text()
 
 #'### Namen bereinigen und kürzen
 
-longtitle <- gsub(" ", "", longtitle.raw)
 longtitle <- gsub("[[:punct:]]", "", longtitle)
+longtitle <- gsub(" ", "-", longtitle.raw)
+
 
 
 #'### Indizes der AEG bestimmen
-AEGindex <- grep("AllgemeinesEisenbahngesetz", longtitle)
+AEG.index <- grep("Allgemeines-Eisenbahngesetz", longtitle)
 
 
 #'### AEGs umbenennen
-longtitle[AEGindex] <- c("AllgemeinesEisenbahngesetz1993",
-                         "AllgemeinesEisenbahngesetz1951")
+longtitle[AEG.index] <- c("Allgemeines-Eisenbahngesetz-1993",
+                         "Allgemeines-Eisenbahngesetz-1951")
+
+
+#'### Indizes der VBVG bestimmen
+vormund.index <- grep("Vormünder", longtitle)
+
+
+#'### VBVG umbenennen
+longtitle[vormund.index] <- c("Gesetz-über-die-Vergütung-von-Vormündern-und-Betreuern-2005",
+                         "Gesetz-über-die-Vergütung-von-Vormündern-und-Betreuern-2023")
 
 
 #'## Vektor der Kurztitel erstellen
