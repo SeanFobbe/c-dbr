@@ -296,7 +296,7 @@ writeLines(latexdefs,
 #'### Anzahl logischer Kerne festlegen
 
 if (config$cores$max == TRUE){
-    fullCores <- detectCores()
+    fullCores <- detectCores() - 1
 }
 
 
