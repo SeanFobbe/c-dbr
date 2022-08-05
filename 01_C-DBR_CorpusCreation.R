@@ -430,8 +430,8 @@ longtitle.raw <- html_elements(XML, "title") %>% xml_text()
 
 #'### Namen bereinigen und kürzen
 
-longtitle <- gsub("[[:punct:]]", "", longtitle)
-longtitle <- gsub(" ", "-", longtitle.raw)
+longtitle <- gsub("[[:punct:]]", "", longtitle.raw)
+longtitle <- gsub(" ", "-", longtitle)
 
 
 
