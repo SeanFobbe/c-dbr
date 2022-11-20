@@ -285,24 +285,34 @@ tar_target(xml.toc,
 ```
 
 
+```{targets tar.download2}
+
+tar_target(xml.toc1,
+           length(xml.toc))
+
+```
+
+
+
+
 ## Report Targets
 
 Dieser Abschnitt der Pipeline erstellt die finalen Berichte (Codebook und Robustness Checks).
 
 
 
-<!-- ### LaTeX-Definitionen schreiben -->
+### LaTeX-Definitionen schreiben
 
-<!-- Um Variablen aus der Pipeline in die LaTeX-Kompilierung einzuführen, müssen diese als .tex-Datei auf die Festplatte geschrieben werden. -->
+Um Variablen aus der Pipeline in die LaTeX-Kompilierung einzuführen, müssen diese als .tex-Datei auf die Festplatte geschrieben werden.
 
-<!-- ```{targets tar.report1} -->
-<!-- tar_target(latexdefs, -->
-<!--                 f.latexdefs(config, -->
-<!--                             dir = "temp", -->
-<!--                             version = datestamp), -->
-<!-- 	       format = "file") -->
+```{targets tar.report1}
+tar_target(latexdefs,
+                f.latexdefs(config,
+                            dir = "temp",
+                            version = datestamp),
+	       format = "file")
 
-<!-- ``` -->
+```
 
 
 
