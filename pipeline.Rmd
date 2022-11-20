@@ -255,26 +255,33 @@ Mit diesem Abschnitt der Pipeline werden Input-Dateien getrackt und eingelesen. 
 
 
 
+```{targets test}
+tar_target(test,
+           "test")
+
+```
+
+
 
 ### Source Code
 
-Dies sind alle Dateien, die den Source Code für den Datensatz bereitstellen.
+<!-- Dies sind alle Dateien, die den Source Code für den Datensatz bereitstellen. -->
 
-```{targets tar.file1}
-tar_target(files.source,
-           files.source.raw,
-           format = "file")
+<!-- ```{targets tar.file1} -->
+<!-- tar_target(files.source, -->
+<!--            files.source.raw, -->
+<!--            format = "file") -->
 
-```
+<!-- ``` -->
 
 
-### Changelog
+<!-- ### Changelog -->
 
-```{targets tar.file2}
-tar_target(changelog,
-           "CHANGELOG.md",
-           format = "file")
-```
+<!-- ```{targets tar.file2} -->
+<!-- tar_target(changelog, -->
+<!--            "CHANGELOG.md", -->
+<!--            format = "file") -->
+<!-- ``` -->
 
 
 
