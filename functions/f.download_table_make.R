@@ -19,7 +19,7 @@ f.download_table_make <- function(dt.filenames,
 
 
     ## Split Filename Table
-    filenames.pdf <- dt.filename$filenames.pdf
+    filenames.pdf <- dt.filenames$filenames.pdf
     filenames.epub <- dt.filenames$filenames.epub
     
 
