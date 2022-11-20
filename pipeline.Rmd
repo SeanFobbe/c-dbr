@@ -31,7 +31,7 @@ knitr::opts_chunk$set(echo = TRUE,
 
 
 ```{r, results = "asis", echo = FALSE}
-cat(readLines("README.md"),
+cat(readLines("README.md")[-1],
     sep = "\n")
 ```
 
