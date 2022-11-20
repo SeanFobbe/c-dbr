@@ -309,9 +309,9 @@ Dieser Abschnitt der Pipeline erstellt die finalen Berichte (Codebook und Robust
 
 ## Durchführen der Kompilierung
 
-```{r pipeline-run, results = "hide"}
-tar_make()
-```
+<!-- ```{r pipeline-run, results = "hide"} -->
+<!-- tar_make() -->
+<!-- ``` -->
 
 
 
