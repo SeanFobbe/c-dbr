@@ -107,7 +107,6 @@ unlink(grep(datestamp,
 ```{r}
 
 #unlink("output", recursive = TRUE)
-dir.create("files", showWarnings = FALSE)
 dir.create("output", showWarnings = FALSE)
 dir.create("temp", showWarnings = FALSE)
 
@@ -141,17 +140,16 @@ tar_option_set(packages = c("tarchetypes",
                             "zip",          # Verbessertes ZIP Handling
                             "mgsub",        # Vektorisiertes Gsub
                             "httr",         # HTTP-Werkzeuge
-							"xml2",         # XML-Extraktion
-                            "rvest",        # HTMLExtraktion
+                            "rvest",        # HTML/XML-Extraktion
                             "knitr",        # Professionelles Reporting
                             "kableExtra",   # Verbesserte Kable Tabellen
                             "pdftools",     # Verarbeitung von PDF-Dateien
                             "ggplot2",      # Datenvisualisierung
-							"igraph",       # Analyse von Graphen
 							"ggraph",       # Visualisierung von Graphen
                             "scales",       # Skalierung von Diagrammen
                             "data.table",   # Fortgeschrittene Datenverarbeitung
                             "readtext",     # TXT-Dateien einlesen
+							"udpipe",       # Annotation von Texten
                             "quanteda",     # Computerlinguistik
                             "future",       # Parallelisierung
                             "future.apply"))# Funktionen für Future
@@ -258,21 +256,21 @@ Mit diesem Abschnitt der Pipeline werden Input-Dateien getrackt und eingelesen. 
 
 Dies sind alle Dateien, die den Source Code für den Datensatz bereitstellen.
 
-<!-- ```{targets tar.file1} -->
-<!-- tar_target(files.source, -->
-<!--            files.source.raw, -->
-<!--            format = "file") -->
+```{targets tar.file1}
+tar_target(files.source,
+           files.source.raw,
+           format = "file")
 
-<!-- ``` -->
+```
 
 
-<!-- ### Changelog -->
+### Changelog
 
-<!-- ```{targets tar.file2} -->
-<!-- tar_target(changelog, -->
-<!--            "CHANGELOG.md", -->
-<!--            format = "file") -->
-<!-- ``` -->
+```{targets tar.file2}
+tar_target(changelog,
+           "CHANGELOG.md",
+           format = "file")
+```
 
 
 
