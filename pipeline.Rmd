@@ -285,6 +285,14 @@ tar_target(url.xml,
 ```
 
 
+```{targets tar.download2}
+
+tar_target(url.html,
+           gsub("/xml.zip",
+                "/index.html",
+                url.xml))
+
+```
 
 
 
