@@ -279,20 +279,14 @@ tar_target(changelog,
 
 ```{targets tar.download1}
 
-tar_target(xml.toc,
-           xml2::read_xml("https://www.gesetze-im-internet.de/gii-toc.xml"))
+tar_target(url.xml,
+           f.links_xml())
 
 ```
 
 
-### Links zu XML-Dateien aus XML-Inhaltsverzeichnis extrahieren
 
-```{targets tar.download2}
 
-tar_target(links.xml,
-           xml_text(html_elements(xml.toc, "link")))
-
-```
 
 
 
