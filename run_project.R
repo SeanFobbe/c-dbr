@@ -1,29 +1,15 @@
-## Parameters
-
-begin <- Sys.time()
-datestamp <- Sys.Date()
+# Run full pipeline
 
 dir.out <- "output"
 
-config <- RcppTOML::parseTOML("config.toml")
-
-
-## Create Dir
-
 dir.create(dir.out, showWarnings = FALSE)
 
-
-## Run full pipeline
+config <- RcppTOML::parseTOML("config.toml")
 
 rmarkdown::render("pipeline.Rmd",
                   output_file = file.path(dir.out,
                                           paste0(config$project$shortname,
                                                  "_",
-                                                 datestamp,
+                                                 Sys.Date(),
                                                  "_CompilationReport.pdf")))
 
-
-## Runtime
-
-end <- Sys.time()
-print(end-begin)
