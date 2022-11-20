@@ -331,9 +331,10 @@ tar_target(dt.conctable,
 
 tar_target(file.dtd,
            f.download("https://www.gesetze-im-internet.de/dtd/1.01/gii-norm.dtd",
-                         paste0("output/",
-                                prefix.files,
-                                "_DE_XML_DocumentTypeDefinition_v1-01.dtd")),
+                      paste0(prefix.files,
+                             "_DE_XML_DocumentTypeDefinition_v1-01.dtd"),
+                      dir = "output",
+                      clean = FALSE),
            format = "file")
 
 ```
