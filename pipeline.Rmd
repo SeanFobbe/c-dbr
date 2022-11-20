@@ -296,8 +296,14 @@ tar_target(dt.filenames,
 
 
 
+```{targets tar.download3}
 
+tar_target(dt.download,
+           f.download_table_make(dt.filenames = dt.filenames,
+                                 url.xml = url.xml,
+                                 xml.toc = "https://www.gesetze-im-internet.de/gii-toc.xml"))
 
+```
 
 
 
