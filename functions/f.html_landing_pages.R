@@ -1,3 +1,12 @@
+#' Extract filenames from GII HTMl Landing Pages
+#'
+#' @param url.xml Character. Vektor of URLs to XML(ZIP) archives from www.gesetze-im-internet.de
+#' @param multicore Logical. Parallelize extraction.
+#' @param cores Integer. Number of cores to use.
+#'
+#'
+#' @return Data.table. A table of all PDF and EPUB filenames.
+
 
 
 
