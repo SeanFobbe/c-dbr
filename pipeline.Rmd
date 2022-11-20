@@ -286,18 +286,18 @@ Dieser Abschnitt der Pipeline erstellt die finalen Berichte (Codebook und Robust
 
 
 
-### LaTeX-Definitionen schreiben
+<!-- ### LaTeX-Definitionen schreiben -->
 
-Um Variablen aus der Pipeline in die LaTeX-Kompilierung einzuführen, müssen diese als .tex-Datei auf die Festplatte geschrieben werden.
+<!-- Um Variablen aus der Pipeline in die LaTeX-Kompilierung einzuführen, müssen diese als .tex-Datei auf die Festplatte geschrieben werden. -->
 
-```{targets tar.report1}
-tar_target(latexdefs,
-                f.latexdefs(config,
-                            dir = "temp",
-                            version = datestamp),
-	       format = "file")
+<!-- ```{targets tar.report1} -->
+<!-- tar_target(latexdefs, -->
+<!--                 f.latexdefs(config, -->
+<!--                             dir = "temp", -->
+<!--                             version = datestamp), -->
+<!-- 	       format = "file") -->
 
-```
+<!-- ``` -->
 
 
 
