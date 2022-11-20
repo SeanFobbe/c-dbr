@@ -140,7 +140,8 @@ tar_option_set(packages = c("tarchetypes",
                             "zip",          # Verbessertes ZIP Handling
                             "mgsub",        # Vektorisiertes Gsub
                             "httr",         # HTTP-Werkzeuge
-                            "rvest",        # HTML/XML-Extraktion
+							"xml2",         # XML-Extraktion
+                            "rvest",        # HTML-Extraktion
                             "knitr",        # Professionelles Reporting
                             "kableExtra",   # Verbesserte Kable Tabellen
                             "pdftools",     # Verarbeitung von PDF-Dateien
