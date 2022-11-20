@@ -107,6 +107,7 @@ unlink(grep(datestamp,
 ```{r}
 
 #unlink("output", recursive = TRUE)
+dir.create("files", showWarnings = FALSE)
 dir.create("output", showWarnings = FALSE)
 dir.create("temp", showWarnings = FALSE)
 
