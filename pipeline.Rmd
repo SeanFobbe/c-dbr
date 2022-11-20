@@ -1,0 +1,499 @@
+---
+title: "Compilation Report | Corpus des Deutschen Bundesrechts (C-DBR)"
+author: Seán Fobbe
+geometry: margin=3cm
+fontsize: 11pt
+papersize: a4
+output:
+  pdf_document:
+    toc: true
+    toc_depth: 3
+    number_sections: true
+    pandoc_args: --listings
+    includes:
+      in_header: tex/Preamble_DE.tex
+      before_body: [temp/Definitions.tex, tex/Titlepage_Compilation.tex]
+bibliography: temp/packages.bib
+nocite: '@*'
+---
+
+
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      warning = TRUE,
+                      message = TRUE,
+                      collapse = TRUE,
+                      comment = "#>")
+```
+
+
+
+
+```{r, results = "asis", echo = FALSE}
+cat(readLines("README.md"),
+    sep = "\n")
+```
+
+
+
+# Packages laden
+
+
+```{r}
+
+library(targets)
+library(tarchetypes)
+library(RcppTOML)
+library(future)
+library(data.table)
+library(quanteda)
+library(knitr)
+library(kableExtra)
+library(igraph)
+library(ggraph)
+
+tar_unscript()
+```
+
+
+
+# Vorbereitung
+
+## Definitionen
+
+```{r}
+
+## Datum
+datestamp <- Sys.Date()
+print(datestamp)
+
+## Datum und Uhrzeit (Beginn)
+begin.script <- Sys.time()
+
+## Konfiguration
+config <- RcppTOML::parseTOML("config.toml")
+print(config)
+
+
+# Analyse-Ordner
+dir.analysis <- paste0(getwd(),
+                       "/analysis")
+
+
+```
+
+
+## Aufräumen
+
+Löscht Dateien im Output-Ordner, die nicht vom heutigen Tag sind.
+
+
+```{r}
+
+unlink(grep(datestamp,
+            list.files("output",
+                       full.names = TRUE),
+            invert = TRUE,
+            value = TRUE))
+
+
+```
+
+
+
+## Ordner erstellen
+
+```{r}
+
+#unlink("output", recursive = TRUE)
+dir.create("files", showWarnings = FALSE)
+dir.create("output", showWarnings = FALSE)
+dir.create("temp", showWarnings = FALSE)
+
+dir.create(dir.analysis, showWarnings = FALSE)
+
+```
+
+
+
+## Vollzitate statistischer Software schreiben
+
+```{r}
+knitr::write_bib(renv::dependencies()$Package,
+                 "temp/packages.bib")
+```
+
+
+
+
+# Globale Variablen
+
+
+## Packages definieren
+
+```{targets global-packages, tar_globals = TRUE}
+
+tar_option_set(packages = c("tarchetypes",
+                            "RcppTOML",     # TOML-Dateien lesen und schreiben
+							"testthat",     # Unit Tests
+                            "fs",           # Verbessertes File Handling
+                            "zip",          # Verbessertes ZIP Handling
+                            "mgsub",        # Vektorisiertes Gsub
+                            "httr",         # HTTP-Werkzeuge
+							"xml2",         # XML-Extraktion
+                            "rvest",        # HTMLExtraktion
+                            "knitr",        # Professionelles Reporting
+                            "kableExtra",   # Verbesserte Kable Tabellen
+                            "pdftools",     # Verarbeitung von PDF-Dateien
+                            "ggplot2",      # Datenvisualisierung
+							"igraph",       # Analyse von Graphen
+							"ggraph",       # Visualisierung von Graphen
+                            "scales",       # Skalierung von Diagrammen
+                            "data.table",   # Fortgeschrittene Datenverarbeitung
+                            "readtext",     # TXT-Dateien einlesen
+							"udpipe",       # Annotation von Texten
+                            "quanteda",     # Computerlinguistik
+                            "future",       # Parallelisierung
+                            "future.apply"))# Funktionen für Future
+
+tar_option_set(workspace_on_error = TRUE) # Save Workspace on Error
+tar_option_set(format = "qs")
+
+```
+
+
+## Konfiguration
+
+
+```{targets global-config, tar_globals = TRUE}
+
+datestamp <- Sys.Date()
+
+config <- RcppTOML::parseTOML("config.toml")
+
+dir.analysis <- paste0(getwd(),
+                       "/analysis")
+
+## Caption for diagrams
+caption <- paste("Fobbe | DOI:",
+                 config$doi$data$version)
+
+
+## Prefix for figure titles
+prefix.figuretitle <- paste(config$project$shortname,
+                            "| Version",
+                            datestamp)
+
+## File prefix
+prefix.files <- paste0(config$project$shortname,
+                       "_",
+                       datestamp)
+
+
+if (config$cores$max == TRUE){
+    fullCores <- future::availableCores()
+}
+
+
+if (config$cores$max == FALSE){
+    fullCores <- as.integer(config$cores$number)
+}
+
+```
+
+
+
+
+## Funktionen definieren
+
+```{targets global-functions, tar_globals = TRUE}
+
+lapply(list.files("functions", pattern = "\\.R$", full.names = TRUE), source)
+
+```
+
+
+
+
+
+
+## ZIP-Datei für Source definieren
+
+```{targets global-sourcefiles, tar_globals = TRUE}
+
+files.source.raw <-  c(list.files(pattern = "\\.R$|\\.toml$|\\.md$|\\.Rmd$"),
+					   "reports",
+                       "data",
+                       "functions",
+                       "tex",
+                       "gpg",
+                       "buttons",
+                       list.files(pattern = "renv\\.lock|\\.Rprofile",
+                                  all.files = TRUE),
+                       list.files("renv",
+                                  pattern = "activate\\.R",
+                                  full.names = TRUE))
+
+```
+
+
+
+
+
+
+# Pipeline: Konstruktion
+
+
+
+
+## File Tracking Targets
+
+Mit diesem Abschnitt der Pipeline werden Input-Dateien getrackt und eingelesen. Mit der Option \enquote{format = "file"} werden für Input-Dateien Prüfsummen berechnet. Falls sich diese verändern werden alle von ihnen abhängigen Pipeline-Schritte als veraltet markiert und neu berechnet.
+
+
+
+
+
+
+### Source Code
+
+Dies sind alle Dateien, die den Source Code für den Datensatz bereitstellen.
+
+```{targets tar.file1}
+tar_target(files.source,
+           files.source.raw,
+           format = "file")
+
+```
+
+
+### Changelog
+
+```{targets tar.file2}
+tar_target(changelog,
+           "CHANGELOG.md",
+           format = "file")
+```
+
+
+
+
+
+## Report Targets
+
+Dieser Abschnitt der Pipeline erstellt die finalen Berichte (Codebook und Robustness Checks).
+
+
+
+### LaTeX-Definitionen schreiben
+
+Um Variablen aus der Pipeline in die LaTeX-Kompilierung einzuführen, müssen diese als .tex-Datei auf die Festplatte geschrieben werden.
+
+```{targets tar.report1}
+tar_target(latexdefs,
+                f.latexdefs(config,
+                            dir = "temp",
+                            version = datestamp),
+	       format = "file")
+
+```
+
+
+
+
+
+
+# Pipeline: Kompilierung
+
+
+
+## Durchführen der Kompilierung
+
+```{r pipeline-run, results = "hide"}
+tar_make()
+```
+
+
+
+## Visualisierung
+
+```{r, pipeline-graph, fig.width = 10, fig.height = 14}
+
+edgelist <- tar_network(targets_only = TRUE)$edges
+setDT(edgelist)
+
+g  <- igraph::graph.data.frame(edgelist,
+                               directed = TRUE)
+
+
+ggraph(g,
+       'sugiyama') + 
+    geom_edge_diagonal(colour = "grey70")+
+    geom_node_point(size = 2)+
+    geom_node_text(aes(label = name),
+                   size = 2,
+                   repel = TRUE)+
+    theme_void()
+
+```
+                       
+
+
+
+# Pipeline: Analyse
+
+
+## Gesamte Liste
+
+Die vollständige Liste aller Targets, inklusive ihres Types und ihrer Größe. Targets die auf Dateien verweisen (z.B. alle PDF-Dateien) geben die Gesamtgröße der Dateien auf der Festplatte an.
+
+
+
+
+
+```{r, pipeline-list}
+
+meta <- tar_meta(fields = c("type", "bytes", "format"), complete_only = TRUE)
+setDT(meta)
+meta$MB <- round(meta$bytes / 1e6, digits = 2)
+
+# Gesamter Speicherplatzverbrauch
+sum(meta$MB, na.rm = TRUE)
+
+kable(meta[order(type, name)],
+      format = "latex",
+      align = "r",
+      booktabs = TRUE,
+      longtable = TRUE) %>% kable_styling(latex_options = "repeat_header")
+
+
+```
+
+\newpage
+## Timing
+
+### Gesamte Laufzeit
+
+```{r, pipeline-runtime}
+meta <- tar_meta(fields = c("time", "seconds"), complete_only = TRUE)
+setDT(meta)
+meta$mins <- round(meta$seconds / 60, digits = 2)
+
+runtime.sum <- sum(meta$seconds)
+
+## Sekunden
+print(runtime.sum)
+
+## Minuten
+runtime.sum / 60
+
+## Stunden
+runtime.sum / 3600
+```
+
+### Laufzeit einzelner Targets
+
+Der Zeitpunkt an dem die Targets berechnet wurden und ihre jeweilige Laufzeit in Sekunden.
+
+
+```{r, pipeline-timing}
+kable(meta[order(-seconds)],
+      format = "latex",
+      align = "r",
+      booktabs = TRUE,
+      longtable = TRUE) %>% kable_styling(latex_options = "repeat_header")
+
+
+```
+
+
+
+\newpage
+## Warnungen
+
+
+
+```{r, pipeling-warnings}
+
+meta <- tar_meta(fields = "warnings", complete_only = TRUE)
+setDT(meta)
+
+kable(meta,
+      format = "latex",
+      align = c("P{4cm}", "p{10cm}"),
+      booktabs = TRUE,
+      longtable = TRUE)
+
+
+```
+
+
+\newpage
+## Fehlermeldungen
+
+```{r, pipeline-errors}
+
+meta <- tar_meta(fields = "error", complete_only = TRUE)
+setDT(meta)
+
+kable(meta,
+      format = "latex",
+      align = c("P{4cm}", "p{10cm}"),
+      booktabs = TRUE,
+      longtable = TRUE)
+
+
+```
+
+
+
+
+
+
+
+
+
+\newpage
+
+```{r, results = "asis", echo = FALSE}
+cat(readLines("CHANGELOG.md"),
+    sep = "\n")
+
+```
+
+
+# Abschluss
+
+```{r}
+
+## Datumsstempel
+print(datestamp) 
+
+## Datum und Uhrzeit (Anfang)
+print(begin.script)
+
+
+## Datum und Uhrzeit (Ende)
+end.script <- Sys.time()
+print(end.script)
+
+
+## Laufzeit des gesamten Skriptes
+print(end.script - begin.script)
+
+```
+
+
+# Parameter für strenge Replikationen
+
+
+```{r}
+system2("openssl", "version", stdout = TRUE)
+
+sessionInfo()
+
+```
+
+
+# Literaturverzeichnis
