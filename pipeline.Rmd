@@ -156,8 +156,6 @@ tar_option_set(packages = c("tarchetypes",
                             "future",       # Parallelisierung
                             "future.apply"))# Funktionen für Future
 
-tar_option_set(workspace_on_error = TRUE) # Save Workspace on Error
-tar_option_set(format = "qs")
 
 ```
 
