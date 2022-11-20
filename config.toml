@@ -33,23 +33,23 @@ qaSample = 50        # Die Anzahl der zufällig ausgewählten Einzelnormen, die 
 
 [cores]
 
-cores.max = true  # Ob die maximale Anzahl an logischen Kernen genutzt werden soll; Möglichkeiten sind "TRUE" oder "FALSE"
-cores.number = 8   # Die Anzahl Rechtenkerne, die verwendet werden soll; wird nur berücksichtigt falls "cores.max" auf "FAlSE" steht
+max = true  # Ob die maximale Anzahl an logischen Kernen genutzt werden soll; Möglichkeiten sind "TRUE" oder "FALSE"
+number = 8   # Die Anzahl Rechtenkerne, die verwendet werden soll; wird nur berücksichtigt falls "cores.max" auf "FAlSE" steht
 
 
 
 [parallel]
 
-parallel.htmlLandingPages = true
-parallel.downloadXML = true
-parallel.parseEinzelnormen = false # Parallelisierung instabil und kaum schneller als sequentielle Ausführung
-parallel.parseMeta = false # Parallelisierung instabil und kaum schneller als sequentielle Ausführung
-parallel.parseNetworks = false # Parallelisierung instabil und kaum schneller als sequentielle Ausführung
-parallel.lingsummarize = true
-parallel.downloadPDF = true
-parallel.extractPDF = true
-parallel.downloadEPUB = true
-parallel.multihashes = true
+htmlLandingPages = true
+downloadXML = true
+parseEinzelnormen = false # Parallelisierung instabil und kaum schneller als sequentielle Ausführung
+parseMeta = false # Parallelisierung instabil und kaum schneller als sequentielle Ausführung
+parseNetworks = false # Parallelisierung instabil und kaum schneller als sequentielle Ausführung
+lingsummarize = true
+downloadPDF = true
+extractPDF = true
+downloadEPUB = true
+multihashes = true
 
 
 
