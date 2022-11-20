@@ -18,6 +18,11 @@ f.download_table_make <- function(dt.filenames,
                                   xml.toc = "https://www.gesetze-im-internet.de/gii-toc.xml"){
 
 
+    ## Split Filename Table
+    filenames.pdf <- dt.filename$filenames.pdf
+    filenames.epub <- dt.filenames$filenames.epub
+    
+
     ## XML TOC einlesen
     xml <- xml2::read_xml(xml.toc)
     
@@ -57,7 +62,7 @@ f.download_table_make <- function(dt.filenames,
 
     ## Vektor der Kurztitel erstellen
 
-    shorttitle <- dt.filenames$filenames.pdf
+    shorttitle <- filenames.pdf
 
     shorttitle <- gsub(".pdf",
                        "",
