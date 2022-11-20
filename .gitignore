@@ -1,25 +1,17 @@
 # Project specific files
 
-temp/
+_targets/
+_targets_r/
+_targets.R
+files/
+analysis/
 output/
-analyse/
-netzwerke/
+temp/
+markdown/*.pdf
 
-XML/
-PDF/
-TXT/
-EPUB/
+*/auto/
 
-*.zip
-*.xml
-*.jpg
-*.JPG
-*.JPEG
-*.jpeg
-*.gif
-*.pdf
-*.txt
-*.epub
+
 
 
 
