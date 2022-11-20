@@ -287,10 +287,10 @@ tar_target(url.xml,
 
 ```{targets tar.download2}
 
-tar_target(url.html,
-           gsub("/xml.zip",
-                "/index.html",
-                url.xml))
+tar_target(filenames,
+           f.html_landing_pages(url.xml,
+                                multicore = config$parallel$htmlLandingPages,
+                                cores = fullCores))
 
 ```
 
