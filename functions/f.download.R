@@ -24,6 +24,8 @@ f.download <- function(url,
                        filename,
                        dir,
                        clean = TRUE,
+                       multicore = FALSE,
+                       cores = parallel::detectCores(),
                        sleep.min = 0,
                        sleep.max = 0.1,
                        retries = 3,
@@ -34,8 +36,27 @@ f.download <- function(url,
                        debug.toggle = FALSE,
                        debug.files = 500){
 
+
+
+    if(multicore == TRUE){
+
+        future::plan("multicore",
+                     workers = cores)
+
+        sleep.min  <- 0
+        sleep.max  <- 0
+        
+    }else{
+
+        future::plan("sequential")
+
+    }
+
+    
     ## Set timeout for downloads
     options(timeout = timeout)
+
+    
     
     ## Test for equality of length
     if(length(url) != length(filename)){
@@ -44,10 +65,13 @@ f.download <- function(url,
         
     }
 
-    ## Create folder
-    dir.create(dir, showWarnings = FALSE)
     
-    ## Create Data Frame
+    ## Create download folder
+    dir.create(dir, showWarnings = FALSE)
+
+
+    
+    ## Create data frame
     df <- data.frame(url, filename)
 
 
@@ -83,32 +107,20 @@ f.download <- function(url,
     
     ## Download: First Try
 
-    if(random.order == TRUE){
-        
-        download.order <- sample(nrow(df.todo))
-
-    }else{
-        
-        download.order <- 1:nrow(df.todo)
-        
-    }
-
 
     if(nrow(df.todo) > 0){
         
-        for (i in download.order){
+        if(random.order == TRUE){
             
-            tryCatch({download.file(url = df.todo$url[i],
-                                    destfile = file.path(dir,
-                                                         df.todo$filename[i]))
-            },
-            
-            error = function(cond) {
-                return(NA)}
-            )
-            
-            Sys.sleep(runif(1, sleep.min, sleep.max))
+            df.todo <- df.todo[sample(nrow(df.todo)),]
+
         }
+        
+        future_mapply(f.download_robust,
+                      url = df.todo$url,
+                      destfile = df.todo$filename,
+                      sleep.min = sleep.min,
+                      sleep.max = sleep.max)
 
     }
     
@@ -125,35 +137,25 @@ f.download <- function(url,
         df.missing  <- df[df$filename %in% filename.missing,]
         df.missing <- df.missing[!is.na(df.missing$url),] # skip NA urls
 
+
         if(nrow(df.missing) > 0){
-
-
+            
             if(random.order == TRUE){
                 
-                download.order <- sample(nrow(df.missing))
+                df.missing <- df.todo[sample(nrow(df.missing)),]
 
-            }else{
-                
-                download.order <- 1:nrow(df.missing)
-                
             }
             
-            
-            for (i in download.order){
-                
-                tryCatch({download.file(url = df.missing$url[i],
-                                        destfile = file.path(dir,
-                                                             df.missing$filename[i]))
-                },
-                error = function(cond) {
-                    return(NA)}
-                )     
-                
-                Sys.sleep(runif(1, retry.sleep.min, retry.sleep.max))
-            } 
+            future_mapply(f.download_robust,
+                          url = df.missing$url,
+                          destfile = df.missing$filename,
+                          sleep.min = retry.sleep.min,
+                          sleep.max = retry.sleep.max)
+
         }
-        
+
     }
+    
 
 
 
@@ -175,4 +177,41 @@ f.download <- function(url,
 
     return(files.all)
     
+}
+
+
+
+
+
+
+
+#' Wrapper function for download.file that returns 'NA' instead of an error when a file is not available.
+#'
+#' @param url A valid URL.
+#' @param destile The destination file.
+#' @param sleep.min Positive Integer. Minimum number of seconds to randomly sleep between requests.
+#' @param sleep.max Positive Integer. Maximum number of seconds to randomly sleep between requests.
+#'
+#' @return Character. Returns destination file invisibly.
+
+
+
+
+f.download_robust <- function(url,
+                              destfile,
+                              sleep.min = 0,
+                              sleep.max = 0){
+
+    tryCatch({download.file(url = url,
+                            destfile = destfile)
+    },
+    error = function(cond) {
+        return(NA)}
+
+    )
+
+    Sys.sleep(runif(1, sleep.min, sleep.max))
+
+    invisible(destfile)
+
 }
