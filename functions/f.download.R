@@ -6,6 +6,7 @@
 #' @param url Character. A vector of URLS.
 #' @param filename Character. A vector of filenames.
 #' @param dir Character. The destination directory. Will be created if not already present.
+#' @param clean Logical. Clean folder of all files that are not on the download list?
 #' @param sleep.min Positive Integer. Minimum number of seconds to randomly sleep between requests.
 #' @param sleep.max Positive Integer. Maximum number of seconds to randomly sleep between requests.
 #' @param retries Positive Integer. Number of retries for entire download set.
@@ -22,6 +23,7 @@
 f.download <- function(url,
                        filename,
                        dir,
+                       clean = TRUE,
                        sleep.min = 0,
                        sleep.max = 0.1,
                        retries = 3,
@@ -59,10 +61,14 @@ f.download <- function(url,
 
     
     ## Clean folder: Only files included in 'filename' may be present
+
+    if (clean == TRUE){
     
     files.all <- list.files(dir, full.names = TRUE)
     delete <- setdiff(files.all, file.path(dir, df$filename))
-    unlink(delete)
+        unlink(delete)
+
+    }
 
 
     
