@@ -284,14 +284,6 @@ tar_target(xml.toc,
 ```
 
 
-```{targets tar.download2}
-
-tar_target(xml.toc1,
-           length(xml.toc))
-
-```
-
-
 
 
 ## Report Targets
