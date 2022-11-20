@@ -325,133 +325,133 @@ tar_make()
 
 ## Visualisierung
 
-<!-- ```{r, pipeline-graph, fig.width = 10, fig.height = 14} -->
+```{r, pipeline-graph, fig.width = 10, fig.height = 14}
 
-<!-- edgelist <- tar_network(targets_only = TRUE)$edges -->
-<!-- setDT(edgelist) -->
+edgelist <- tar_network(targets_only = TRUE)$edges
+setDT(edgelist)
 
-<!-- g  <- igraph::graph.data.frame(edgelist, -->
-<!--                                directed = TRUE) -->
+g  <- igraph::graph.data.frame(edgelist,
+                               directed = TRUE)
 
 
-<!-- ggraph(g, -->
-<!--        'sugiyama') +  -->
-<!--     geom_edge_diagonal(colour = "grey70")+ -->
-<!--     geom_node_point(size = 2)+ -->
-<!--     geom_node_text(aes(label = name), -->
-<!--                    size = 2, -->
-<!--                    repel = TRUE)+ -->
-<!--     theme_void() -->
+ggraph(g,
+       'sugiyama') +
+    geom_edge_diagonal(colour = "grey70")+
+    geom_node_point(size = 2)+
+    geom_node_text(aes(label = name),
+                   size = 2,
+                   repel = TRUE)+
+    theme_void()
 
-<!-- ``` -->
+```
                        
 
 
 
-<!-- # Pipeline: Analyse -->
+# Pipeline: Analyse
 
 
-<!-- ## Gesamte Liste -->
+## Gesamte Liste
 
-<!-- Die vollständige Liste aller Targets, inklusive ihres Types und ihrer Größe. Targets die auf Dateien verweisen (z.B. alle PDF-Dateien) geben die Gesamtgröße der Dateien auf der Festplatte an. -->
-
-
-
-
-
-<!-- ```{r, pipeline-list} -->
-
-<!-- meta <- tar_meta(fields = c("type", "bytes", "format"), complete_only = TRUE) -->
-<!-- setDT(meta) -->
-<!-- meta$MB <- round(meta$bytes / 1e6, digits = 2) -->
-
-<!-- # Gesamter Speicherplatzverbrauch -->
-<!-- sum(meta$MB, na.rm = TRUE) -->
-
-<!-- kable(meta[order(type, name)], -->
-<!--       format = "latex", -->
-<!--       align = "r", -->
-<!--       booktabs = TRUE, -->
-<!--       longtable = TRUE) %>% kable_styling(latex_options = "repeat_header") -->
-
-
-<!-- ``` -->
-
-<!-- \newpage -->
-<!-- ## Timing -->
-
-<!-- ### Gesamte Laufzeit -->
-
-<!-- ```{r, pipeline-runtime} -->
-<!-- meta <- tar_meta(fields = c("time", "seconds"), complete_only = TRUE) -->
-<!-- setDT(meta) -->
-<!-- meta$mins <- round(meta$seconds / 60, digits = 2) -->
-
-<!-- runtime.sum <- sum(meta$seconds) -->
-
-<!-- ## Sekunden -->
-<!-- print(runtime.sum) -->
-
-<!-- ## Minuten -->
-<!-- runtime.sum / 60 -->
-
-<!-- ## Stunden -->
-<!-- runtime.sum / 3600 -->
-<!-- ``` -->
-
-<!-- ### Laufzeit einzelner Targets -->
-
-<!-- Der Zeitpunkt an dem die Targets berechnet wurden und ihre jeweilige Laufzeit in Sekunden. -->
-
-
-<!-- ```{r, pipeline-timing} -->
-<!-- kable(meta[order(-seconds)], -->
-<!--       format = "latex", -->
-<!--       align = "r", -->
-<!--       booktabs = TRUE, -->
-<!--       longtable = TRUE) %>% kable_styling(latex_options = "repeat_header") -->
-
-
-<!-- ``` -->
+Die vollständige Liste aller Targets, inklusive ihres Types und ihrer Größe. Targets die auf Dateien verweisen (z.B. alle PDF-Dateien) geben die Gesamtgröße der Dateien auf der Festplatte an.
 
 
 
-<!-- \newpage -->
-<!-- ## Warnungen -->
+
+
+```{r, pipeline-list}
+
+meta <- tar_meta(fields = c("type", "bytes", "format"), complete_only = TRUE)
+setDT(meta)
+meta$MB <- round(meta$bytes / 1e6, digits = 2)
+
+# Gesamter Speicherplatzverbrauch
+sum(meta$MB, na.rm = TRUE)
+
+kable(meta[order(type, name)],
+      format = "latex",
+      align = "r",
+      booktabs = TRUE,
+      longtable = TRUE) %>% kable_styling(latex_options = "repeat_header")
+
+
+```
+
+\newpage
+## Timing
+
+### Gesamte Laufzeit
+
+```{r, pipeline-runtime}
+meta <- tar_meta(fields = c("time", "seconds"), complete_only = TRUE)
+setDT(meta)
+meta$mins <- round(meta$seconds / 60, digits = 2)
+
+runtime.sum <- sum(meta$seconds)
+
+## Sekunden
+print(runtime.sum)
+
+## Minuten
+runtime.sum / 60
+
+## Stunden
+runtime.sum / 3600
+```
+
+### Laufzeit einzelner Targets
+
+Der Zeitpunkt an dem die Targets berechnet wurden und ihre jeweilige Laufzeit in Sekunden.
+
+
+```{r, pipeline-timing}
+kable(meta[order(-seconds)],
+      format = "latex",
+      align = "r",
+      booktabs = TRUE,
+      longtable = TRUE) %>% kable_styling(latex_options = "repeat_header")
+
+
+```
 
 
 
-<!-- ```{r, pipeling-warnings} -->
-
-<!-- meta <- tar_meta(fields = "warnings", complete_only = TRUE) -->
-<!-- setDT(meta) -->
-
-<!-- kable(meta, -->
-<!--       format = "latex", -->
-<!--       align = c("P{4cm}", "p{10cm}"), -->
-<!--       booktabs = TRUE, -->
-<!--       longtable = TRUE) -->
+\newpage
+## Warnungen
 
 
-<!-- ``` -->
+
+```{r, pipeling-warnings}
+
+meta <- tar_meta(fields = "warnings", complete_only = TRUE)
+setDT(meta)
+
+kable(meta,
+      format = "latex",
+      align = c("P{4cm}", "p{10cm}"),
+      booktabs = TRUE,
+      longtable = TRUE)
 
 
-<!-- \newpage -->
-<!-- ## Fehlermeldungen -->
-
-<!-- ```{r, pipeline-errors} -->
-
-<!-- meta <- tar_meta(fields = "error", complete_only = TRUE) -->
-<!-- setDT(meta) -->
-
-<!-- kable(meta, -->
-<!--       format = "latex", -->
-<!--       align = c("P{4cm}", "p{10cm}"), -->
-<!--       booktabs = TRUE, -->
-<!--       longtable = TRUE) -->
+```
 
 
-<!-- ``` -->
+\newpage
+## Fehlermeldungen
+
+```{r, pipeline-errors}
+
+meta <- tar_meta(fields = "error", complete_only = TRUE)
+setDT(meta)
+
+kable(meta,
+      format = "latex",
+      align = c("P{4cm}", "p{10cm}"),
+      booktabs = TRUE,
+      longtable = TRUE)
+
+
+```
 
 
 
