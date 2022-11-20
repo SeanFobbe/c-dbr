@@ -1,0 +1,95 @@
+[project]
+
+fullname = "Corpus des Deutschen Bundesrechts"
+shortname = "C-DBR"
+author = "Seán Fobbe"
+
+
+
+[license]
+
+data = "Creative Commons Zero 1.0 Universal"
+code = "MIT-0"
+
+
+
+[doi] # Digital Object Identifier
+
+data.concept = "10.5281/zenodo.3832111" # do not change
+data.version = "???" # 
+
+software.concept = "10.5281/zenodo.4072934" # do not change
+software.version = "???" # 
+
+
+
+[debug]
+
+toggle = false   # Ob Debugging aktiv ist; Möglichkeiten sind "TRUE" oder "FALSE"
+sample = 500      # Die Anzahl der zufällig ausgewählten Rechtsakte, die im Debugging-Modus berücksichtigt werden sollen.
+qaSample = 50        # Die Anzahl der zufällig ausgewählten Einzelnormen, die zur Überprüfung separat gespeichert werden sollen.
+
+
+
+[cores]
+
+cores.max = true  # Ob die maximale Anzahl an logischen Kernen genutzt werden soll; Möglichkeiten sind "TRUE" oder "FALSE"
+cores.number = 8   # Die Anzahl Rechtenkerne, die verwendet werden soll; wird nur berücksichtigt falls "cores.max" auf "FAlSE" steht
+
+
+
+[parallel]
+
+parallel.htmlLandingPages = true
+parallel.downloadXML = true
+parallel.parseEinzelnormen = false # Parallelisierung instabil und kaum schneller als sequentielle Ausführung
+parallel.parseMeta = false # Parallelisierung instabil und kaum schneller als sequentielle Ausführung
+parallel.parseNetworks = false # Parallelisierung instabil und kaum schneller als sequentielle Ausführung
+parallel.lingsummarize = true
+parallel.downloadPDF = true
+parallel.extractPDF = true
+parallel.downloadEPUB = true
+parallel.multihashes = true
+
+
+
+[download]
+
+timeout = 600			# Timeout für Downloads
+
+
+
+[quanteda]
+
+tokens_locale = "de_DE" # Locale in denen Tokens analyisert werden
+
+
+
+[fig] # Knitr
+
+format = [ "pdf", "png" ] 	# Ausgabe-Format für Diagramme
+dpi = 300     	 	# Auflösung für Diagramme
+align = "center"    	# Ausrichtung von Diagrammen im Compilation Report
+
+
+
+
+
+[freqtable]
+
+# Frequenztabellen: Liste zu prüfender Variablen
+#' **Hinweis:** Nur diese Variablen werden bei der Erstellung der Frequenztabellen berücksichtigt.
+
+ignore =  ["periodikum",
+	    	    "fundstellentyp",
+		    "check_neuf",
+		    "check_aufh",
+		    "check_sonst",
+		    "check_hinweis",
+		    "check_stand",
+		    "gliederungskennzahl",
+		    "ausfertigung_jahr",
+		    "doi_concept",
+		    "doi_version",
+		    "version",	
+		    "lizenz" ]
