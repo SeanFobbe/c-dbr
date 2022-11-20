@@ -277,6 +277,15 @@ tar_target(changelog,
 
 
 
+## Download Targets
+
+
+```{targets tar.download1}
+
+tar_target(xml.toc,
+           xml2::read_xml("https://www.gesetze-im-internet.de/gii-toc.xml"))
+
+```
 
 
 ## Report Targets
