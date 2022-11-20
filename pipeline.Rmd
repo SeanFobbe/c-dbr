@@ -149,7 +149,6 @@ tar_option_set(packages = c("tarchetypes",
                             "scales",       # Skalierung von Diagrammen
                             "data.table",   # Fortgeschrittene Datenverarbeitung
                             "readtext",     # TXT-Dateien einlesen
-							"udpipe",       # Annotation von Texten
                             "quanteda",     # Computerlinguistik
                             "future",       # Parallelisierung
                             "future.apply"))# Funktionen für Future
@@ -324,6 +323,7 @@ tar_target(latexdefs,
 
 
 ## Durchführen der Kompilierung
+
 
 ```{r pipeline-run, results = "hide"}
 tar_make()
