@@ -317,25 +317,25 @@ Dieser Abschnitt der Pipeline erstellt die finalen Berichte (Codebook und Robust
 
 ## Visualisierung
 
-```{r, pipeline-graph, fig.width = 10, fig.height = 14}
+<!-- ```{r, pipeline-graph, fig.width = 10, fig.height = 14} -->
 
-edgelist <- tar_network(targets_only = TRUE)$edges
-setDT(edgelist)
+<!-- edgelist <- tar_network(targets_only = TRUE)$edges -->
+<!-- setDT(edgelist) -->
 
-g  <- igraph::graph.data.frame(edgelist,
-                               directed = TRUE)
+<!-- g  <- igraph::graph.data.frame(edgelist, -->
+<!--                                directed = TRUE) -->
 
 
-ggraph(g,
-       'sugiyama') + 
-    geom_edge_diagonal(colour = "grey70")+
-    geom_node_point(size = 2)+
-    geom_node_text(aes(label = name),
-                   size = 2,
-                   repel = TRUE)+
-    theme_void()
+<!-- ggraph(g, -->
+<!--        'sugiyama') +  -->
+<!--     geom_edge_diagonal(colour = "grey70")+ -->
+<!--     geom_node_point(size = 2)+ -->
+<!--     geom_node_text(aes(label = name), -->
+<!--                    size = 2, -->
+<!--                    repel = TRUE)+ -->
+<!--     theme_void() -->
 
-```
+<!-- ``` -->
                        
 
 
