@@ -1,0 +1,66 @@
+---
+title: "Codebook | Corpus des Deutschen Bundesrechts (C-DBR)"
+author: Seán Fobbe
+geometry: margin=3cm
+papersize: a4
+fontsize: 11pt
+output:
+  pdf_document:
+    toc: true
+    toc_depth: 3
+    number_sections: true
+    pandoc_args: --listings
+    includes:
+      in_header: ../tex/Preamble_DE.tex
+      before_body: [../temp/Definitions.tex, ../tex/Titlepage_Codebook.tex]
+bibliography: ../temp/packages.bib
+nocite: '@*'
+---
+
+
+```{r, setup, include=FALSE}
+knitr::opts_chunk$set(fig.path = file.path("..", "analysis/"),
+                      dev = config$fig$format,
+                      dpi = config$fig$dpi,
+                      fig.align = config$fig$align,
+                      echo = FALSE,
+                      warning = FALSE,
+                      message = FALSE)
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+```{r, results = "asis"}
+cat(readLines(tar_read(changelog)),
+    sep = "\n")
+
+```
+
+
+
+
+
+
+
+# Parameter für strenge Replikationen
+
+
+```{r}
+system2("openssl", "version", stdout = TRUE)
+
+sessionInfo()
+
+```
+
+
+# Literaturverzeichnis

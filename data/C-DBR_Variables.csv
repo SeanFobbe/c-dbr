@@ -1,0 +1,2 @@
+varname,type,explanation
+doc\_id,String,(Nur CSV) Dateiname der extrahierten TXT-Datei.
