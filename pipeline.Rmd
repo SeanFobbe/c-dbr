@@ -290,7 +290,7 @@ tar_target(xml.toc,
 ```{targets tar.download2}
 
 tar_target(links.xml,
-           xml_text(html_elements(XML, "link")))
+           xml_text(html_elements(xml.toc, "link")))
 
 ```
 
