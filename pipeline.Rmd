@@ -257,7 +257,7 @@ Mit diesem Abschnitt der Pipeline werden Input-Dateien getrackt und eingelesen. 
 
 Dies sind alle Dateien, die den Source Code für den Datensatz bereitstellen.
 
-```{targets tar.file1}
+```{targets tar.file.source}
 tar_target(files.source,
            files.source.raw,
            format = "file")
@@ -267,7 +267,7 @@ tar_target(files.source,
 
 ### Changelog
 
-```{targets tar.file2}
+```{targets tar.file.changelog}
 tar_target(changelog,
            "CHANGELOG.md",
            format = "file")
@@ -281,7 +281,7 @@ tar_target(changelog,
 
 ### URLs für XML-Archive
 
-```{targets tar.download1}
+```{targets tar.download.xmlurl}
 
 tar_target(url.xml,
            f.links_xml())
@@ -291,7 +291,7 @@ tar_target(url.xml,
 
 ### Tabelle der Dateinamen erstellen
 
-```{targets tar.download2}
+```{targets tar.download.filenames}
 
 tar_target(dt.filenames,
            f.html_landing_pages(url.xml,
@@ -303,7 +303,7 @@ tar_target(dt.filenames,
 ### Download Tabelle erstellen
 
 
-```{targets tar.download3}
+```{targets tar.download.table}
 
 tar_target(dt.download,
            f.download_table_make(dt.filenames = dt.filenames,
@@ -315,7 +315,7 @@ tar_target(dt.download,
 ### Konkordanzabelle erstellen
 
 
-```{targets tar.download4}
+```{targets tar.download.conc}
 
 tar_target(dt.conctable,
            f.conctable(dt.download = dt.download))
@@ -328,7 +328,7 @@ tar_target(dt.conctable,
 
 
 
-```{targets tar.download5}
+```{targets tar.download.dtd}
 
 tar_target(file.dtd,
            f.download("https://www.gesetze-im-internet.de/dtd/1.01/gii-norm.dtd",
@@ -345,7 +345,7 @@ tar_target(file.dtd,
 ### XML (ZIP)-Archive herunterladen
 
 
-```{targets tar.download6}
+```{targets tar.download.xmlzip}
 tar_target(files.xmlzip,
                 f.download(url = dt.download$url.xml,
                            filename = dt.download$title.xml,
@@ -370,7 +370,7 @@ tar_target(files.xmlzip,
 ### PDF-Dateien herunterladen
 
 
-```{targets tar.download7}
+```{targets tar.download.pdf}
 tar_target(files.pdf,
                 f.download(url = dt.download$url.pdf,
                            filename = dt.download$title.pdf,
@@ -394,7 +394,7 @@ tar_target(files.pdf,
 ### EPUB-Dateien herunterladen
 
 
-```{targets tar.download8}
+```{targets tar.download.epub}
 tar_target(files.epub,
                 f.download(url = dt.download$url.epub,
                            filename = dt.download$title.epub,
@@ -419,7 +419,7 @@ tar_target(files.epub,
 ## Convert Targets
 
 
-```{targets tar.convert1}
+```{targets tar.convert.unzip}
 tar_target(files.xml.all,
            f.tar_unzip(zipfiles = files.xmlzip,
                        exdir = "files/xml"),
@@ -431,9 +431,9 @@ tar_target(files.xml.all,
 ## Parse Targets
 
 
-### Korpus der Einzelnormen
+### Datensatz erstellen: Einzelnormen
 
-```{targets tar.parse1}
+```{targets tar.parse.normen}
 tar_target(dt.normen,
            f.dt.einzelnormen(file.xml = files.xml.all[grepl("\\.xml$", files.xml.all)],
                   multicore = config$parallel$parseEinzelnormen,
@@ -441,26 +441,107 @@ tar_target(dt.normen,
 
 ```
 
-### Korpus der Rechtsakte (mit Text) erstellen
+### Datensatz erstellen: Rechtsakte (mit Text)
 
-
-```{targets tar.parse2}
+```{targets tar.parse.rechtsakte}
 tar_target(dt.rechtsakte,
            f.dt.rechtsakte(dt.normen))
 
 ```
 
 
-### Korpus der Rechtsakte (nur Metadaten) erstellen
+### Datensatz erstellen: XML-Metadaten
 
 
-```{targets tar.parse3}
+```{targets tar.parse.xmlmeta}
 tar_target(dt.meta,
            f.dt.meta(file.xml = files.xml.all[grepl("\\.xml$", files.xml.all)],
                   multicore = config$parallel$parseMeta,
                   cores = fullCores))
 
 ```
+
+
+
+
+
+## Write Targets
+
+Dieser Abschnitt der Pipeline schreibt den Datensatz und alle Hash-Prüfsummen auf die Festplatte.
+
+
+
+
+
+### CSV schreiben: Download-Tabelle
+
+
+```{targets tar.write.download}
+tar_target(csv.meta,
+           f.tar_fwrite(x = dt.download,
+                        filename = file.path(dir.analysis,
+                                             paste0(prefix.files,
+                                                    "_02_Download-Tabelle.csv"))
+                        )
+           )
+```
+
+
+### CSV schreiben: Konkordanztabelle
+
+
+```{targets tar.write.conc}
+tar_target(csv.conctable,
+           f.tar_fwrite(x = dt.conctable,
+                        filename = file.path("output",
+                                             paste0(prefix.files,
+                                                    "_DE_Alle-Rechtsakte-Verzeichnis.csv"))
+                        )
+           )
+```
+
+
+
+### CSV schreiben: Einzelnormen
+
+```{targets tar.write.normen}
+tar_target(csv.normen,
+           f.tar_fwrite(x = dt.normen,
+                        filename = file.path("output",
+                                             paste0(prefix.files,
+                                                    "_DE_CSV_Einzelnormen_Datensatz.csv"))
+                        )
+           )
+```
+
+
+### CSV schreiben: Rechtsakte (mit Text)
+
+```{targets tar.write.rechtsakte}
+tar_target(csv.rechtsakte,
+           f.tar_fwrite(x = dt.rechtsakte,
+                        filename = file.path("output",
+                                             paste0(prefix.files,
+                                                    "_DE_CSV_Rechtsakte_Datensatz.csv"))
+                        )
+           )
+```
+
+
+
+
+### CSV schreiben: XML-Metadaten
+
+```{targets tar.write.xmlmeta}
+tar_target(csv.meta,
+           f.tar_fwrite(x = dt.meta,
+                        filename = file.path("output",
+                                             paste0(prefix.files,
+                                                    "_DE_CSV_MetadatenXML.csv"))
+                        )
+           )
+```
+
 
 
 
@@ -477,13 +558,39 @@ Dieser Abschnitt der Pipeline erstellt die finalen Berichte (Codebook und Robust
 
 Um Variablen aus der Pipeline in die LaTeX-Kompilierung einzuführen, müssen diese als .tex-Datei auf die Festplatte geschrieben werden.
 
-```{targets tar.report1}
+```{targets tar.report.defs}
 tar_target(latexdefs,
                 f.latexdefs(config,
                             dir = "temp",
                             version = datestamp),
 	       format = "file")
 
+```
+
+
+
+
+
+
+
+
+
+## ZIP Targets
+
+Diese Abschnitt der Pipeline erstellt ZIP-Archive für alle zentralen Rechenergebnisse und speichert diese im Ordner \enquote{output}.
+
+
+### ZIP erstellen: Source Code
+
+
+```{targets tar.zip.source}
+tar_target(zip.source,
+                f.tar_zip(files.source,
+                              filename = paste0(prefix.files,
+                                                "_Source_Code.zip"),
+                              dir = "output",
+                              mode = "mirror"),
+                format = "file")
 ```
 
 
