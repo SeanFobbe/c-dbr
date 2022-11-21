@@ -431,13 +431,20 @@ tar_target(files.xml.all,
 ## Parse Targets
 
 ```{targets tar.parse1}
-tar_target(dt.einzelnormen,
+tar_target(dt.normen,
            f.dt.einzelnormen(file.xml = files.xml.all[grepl("\\.xml$", files.xml.all)],
                   multicore = config$parallel$parseEinzelnormen,
                   cores = fullCores))
 
 ```
 
+
+
+```{targets tar.parse2}
+tar_target(dt.rechtsakte,
+           f.dt.rechtsakte(dt.normen)
+
+```
 
 
 
