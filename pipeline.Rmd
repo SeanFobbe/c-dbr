@@ -430,6 +430,9 @@ tar_target(files.xml.all,
 
 ## Parse Targets
 
+
+### Korpus der Einzelnormen
+
 ```{targets tar.parse1}
 tar_target(dt.normen,
            f.dt.einzelnormen(file.xml = files.xml.all[grepl("\\.xml$", files.xml.all)],
@@ -438,6 +441,7 @@ tar_target(dt.normen,
 
 ```
 
+### Korpus der Rechtsakte (mit Text) erstellen
 
 
 ```{targets tar.parse2}
@@ -447,6 +451,16 @@ tar_target(dt.rechtsakte,
 ```
 
 
+### Korpus der Rechtsakte (nur Metadaten) erstellen
+
+
+```{targets tar.parse3}
+tar_target(dt.meta,
+           f.dt.meta(file.xml = files.xml.all[grepl("\\.xml$", files.xml.all)],
+                  multicore = config$parallel$parseMeta,
+                  cores = fullCores))
+
+```
 
 
 
