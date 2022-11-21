@@ -118,7 +118,7 @@ f.download <- function(url,
         
         future_mapply(f.download_robust,
                       url = df.todo$url,
-                      destfile = df.todo$filename,
+                      destfile = file.path(dir, df.todo$filename),
                       sleep.min = sleep.min,
                       sleep.max = sleep.max)
 
@@ -148,7 +148,7 @@ f.download <- function(url,
             
             future_mapply(f.download_robust,
                           url = df.missing$url,
-                          destfile = df.missing$filename,
+                          destfile = file.path(dir, df.todo$filename),
                           sleep.min = retry.sleep.min,
                           sleep.max = retry.sleep.max)
 
