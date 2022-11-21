@@ -342,6 +342,29 @@ tar_target(file.dtd,
 
 
 
+### XML (ZIP)-Archive herunterladen
+
+
+```{targets tar.download6}
+tar_target(zip.xml.orig,
+                f.download(url = dt.download$url.xml,
+                           filename = dt.download$title.xml,
+                           dir = "files/xml_zip",
+						   clean = TRUE,
+						   multcore = config$parallel$downloadXML,
+						   cores = fullCores,
+                           sleep.min = 0,
+                           sleep.max = 0,
+                           retries = 3,
+                           retry.sleep.min = 1,
+                           retry.sleep.max = 2,
+                           timeout = config$download$timeout,
+                           debug.toggle = TRUE,
+                           debug.files = 500),
+                format = "file")
+
+```
+
 
 
 
