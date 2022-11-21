@@ -333,7 +333,7 @@ tar_target(dt.conctable,
 tar_target(file.dtd,
            f.download("https://www.gesetze-im-internet.de/dtd/1.01/gii-norm.dtd",
                       paste0(prefix.files,
-                             "_DE_XML_DocumentTypeDefinition_v1-01.dtd"),
+                             "_DE_XML_Document-Type-Definition_v1-01.dtd"),
                       dir = "output",
                       clean = FALSE),
            format = "file")
@@ -452,6 +452,8 @@ tar_target(dt.rechtsakte,
 
 ### Datensatz erstellen: XML-Metadaten
 
+ Diese Datei unterscheidet sich von der Variante der "Rechtsakte (Metadaten)", weil sie auch Rechtsakte enthält, die ohne Text veröffentlicht wurden. Die Differenz betrifft etwa 1000 Rechtsakte, ist also erheblich.
+
 
 ```{targets tar.parse.xmlmeta}
 tar_target(dt.meta,
@@ -537,7 +539,7 @@ tar_target(csv.meta,
            f.tar_fwrite(x = dt.meta,
                         filename = file.path("output",
                                              paste0(prefix.files,
-                                                    "_DE_CSV_MetadatenXML.csv"))
+                                                    "_DE_CSV_Metadaten-XML.csv"))
                         )
            )
 ```
