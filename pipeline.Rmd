@@ -346,7 +346,7 @@ tar_target(file.dtd,
 
 
 ```{targets tar.download6}
-tar_target(zip.xml.orig,
+tar_target(files.xmlzip,
                 f.download(url = dt.download$url.xml,
                            filename = dt.download$title.xml,
                            dir = "files/xml_zip",
@@ -359,7 +359,7 @@ tar_target(zip.xml.orig,
                            retry.sleep.min = 1,
                            retry.sleep.max = 2,
                            timeout = config$download$timeout,
-                           debug.toggle = TRUE,
+                           debug.toggle = FALSE,
                            debug.files = 500),
                 format = "file")
 
@@ -367,6 +367,52 @@ tar_target(zip.xml.orig,
 
 
 
+### PDF-Dateien herunterladen
+
+
+```{targets tar.download7}
+tar_target(files.pdf,
+                f.download(url = dt.download$url.pdf,
+                           filename = dt.download$title.pdf,
+                           dir = "files/pdf",
+						   clean = TRUE,
+						   multicore = config$parallel$downloadPDF,
+						   cores = fullCores,
+                           sleep.min = 0,
+                           sleep.max = 0,
+                           retries = 3,
+                           retry.sleep.min = 1,
+                           retry.sleep.max = 2,
+                           timeout = config$download$timeout,
+                           debug.toggle = FALSE,
+                           debug.files = 500),
+                format = "file")
+
+```
+
+
+### EPUB-Dateien herunterladen
+
+
+```{targets tar.download8}
+tar_target(files.epub,
+                f.download(url = dt.download$url.epub,
+                           filename = dt.download$title.epub,
+                           dir = "files/epub",
+						   clean = TRUE,
+						   multicore = config$parallel$downloadEPUB,
+						   cores = fullCores,
+                           sleep.min = 0,
+                           sleep.max = 0,
+                           retries = 3,
+                           retry.sleep.min = 1,
+                           retry.sleep.max = 2,
+                           timeout = config$download$timeout,
+                           debug.toggle = FALSE,
+                           debug.files = 500),
+                format = "file")
+
+```
 
 
 
