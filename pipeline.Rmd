@@ -743,6 +743,7 @@ kable(meta[order(-seconds)],
 
 meta <- tar_meta(fields = "warnings", complete_only = TRUE)
 setDT(meta)
+meta <- meta[name != "files.network"]
 
 kable(meta,
       format = "latex",
