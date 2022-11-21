@@ -2,7 +2,7 @@
 
 #' Netzwerk-Analyse (experimentell!)
 #'
-#' Diese Funktionen sind noch hoch-experimentell. Bitte immer qualitativ validieren!
+#' Diese Funktionen sind noch experimentell. Bitte immer qualitativ validieren!
 
 
 
@@ -10,6 +10,16 @@ dir.out <- "netzwerke"
 caption <- "test"
 prefix.figuretitle <- "test"
 multicore = FALSE
+
+
+grep("BJNR001950896.xml", files.xml)
+
+
+out <- f.network.analysis(files.xml = files.xml[904],
+                          prefix.figuretitle = "test",
+                          caption = "test",
+                          dir.out = "netzwerke",
+                          multicore = FALSE)
 
 
 
@@ -60,12 +70,19 @@ f.network.analysis <- function(files.xml,
                                      f.network.analysis.robust,
                                      prefix.figuretitle = prefix.figuretitle,
                                      caption = caption,
+                                     dir.out = dir.out,
                                      future.seed = TRUE)
     
     
-    files.xml[grep("error",
-                   out.netanalysis)]
-    
+    errorfiles <- files.xml[grep("error",
+                                 out.netanalysis)]
+
+    if(length(errorfiles) > 0){
+        
+        warning("Errored files:")
+        warning(errorfiles)
+
+    }
     
 
     ## Files Output
@@ -133,11 +150,13 @@ f.network.analysis <- function(files.xml,
 
 f.network.analysis.robust <- function(xml.name,
                                       prefix.figuretitle,
-                                      caption){
+                                      caption,
+                                      dir.out){
 
     tryCatch({f.network.analysis.raw(xml.name,
                                      prefix.figuretitle,
-                                     caption)},
+                                     caption,
+                                     dir.out = dir.out)},
              error = function(cond) {
                  return(NA)}
              )
@@ -174,7 +193,8 @@ f.network.analysis.robust <- function(xml.name,
 
 f.network.analysis.raw <- function(xml.name,
                                    prefix.figuretitle,
-                                   caption){
+                                   caption,
+                                   dir.out){
 
     ##    message(xml.name) # remove after debugging
     XML <- read_xml(xml.name)
@@ -257,14 +277,14 @@ f.network.analysis.raw <- function(xml.name,
 
             ## Gliederungstabelle speichern
             fwrite(gliederungseinheit.split,
-                   paste0(out.dir,
+                   paste0(dir.out,
                           "/Gliederungstabellen/",
                           filename,
                           "_Gliederungstabelle.csv"))
             
             ## Edgelist speichern
             fwrite(edgelist,
-                   paste0(out.dir,
+                   paste0(dir.out,
                           "/Edgelists/",
                           filename,
                           "_Edgelist.csv"))
@@ -272,7 +292,7 @@ f.network.analysis.raw <- function(xml.name,
 
             ## Adjazenz-Matrix speichern
             fwrite(M.adjacency,
-                   paste0(out.dir,
+                   paste0(dir.out,
                           "/Adjazenz-Matrizen/",
                           filename,
                           "_AdjazenzMatrix.csv"))
@@ -280,7 +300,7 @@ f.network.analysis.raw <- function(xml.name,
             
             ## GraphML speichern
             write_graph(g,
-                        file = paste0(out.dir,
+                        file = paste0(dir.out,
                                       "/GraphML/",
                                       filename,
                                       ".graphml"),
@@ -356,7 +376,7 @@ f.network.analysis.raw <- function(xml.name,
                     )
                 
                 ggsave(
-                    filename = paste0(out.dir,
+                    filename = paste0(dir.out,
                                       "/Visualisierung_Dendrogramm/",
                                       filename,
                                       "_Dendrogramm.pdf"),
@@ -403,7 +423,7 @@ f.network.analysis.raw <- function(xml.name,
                     )
                 
                 ggsave(
-                    filename = paste0(out.dir,
+                    filename = paste0(dir.out,
                                       "/Visualisierung_Circlepack/",
                                       filename,
                                       "_Circlepack.pdf"),
@@ -451,7 +471,7 @@ f.network.analysis.raw <- function(xml.name,
                     )
                 
                 ggsave(
-                    filename = paste0(out.dir,
+                    filename = paste0(dir.out,
                                       "/Visualisierung_Sunburst/",
                                       filename,
                                       "_Sunburst.pdf"),
