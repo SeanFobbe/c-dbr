@@ -55,7 +55,7 @@ multihashes = true
 
 [download]
 
-timeout = 600			# Timeout für Downloads
+timeout = 10			# Timeout für Downloads
 
 
 
