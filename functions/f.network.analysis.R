@@ -1,46 +1,108 @@
 
 
-#'## Netzwerk-Analyse (experimentell!)
+#' Netzwerk-Analyse (experimentell!)
+#'
+#' Diese Funktionen sind noch hoch-experimentell. Bitte immer qualitativ validieren!
 
 
 
-out.dir <- "test/netzwerke"
+dir.out <- "netzwerke"
+caption <- "test"
+prefix.figuretitle <- "test"
+multicore = FALSE
 
 
-subdir <- c("Edgelists",
-            "Adjazenz-Matrizen",
-            "GraphML",
-            "Gliederungstabellen",
-            "Netzwerkvisualisierung_Dendrogramm")
 
-lapply(file.path(out.dir,
-                 subdir),
-       dir.create,
-       showWarnings = FALSE,
-       recursive = TRUE)
+f.network.analysis <- function(files.xml,
+                               prefix.figuretitle,
+                               caption,
+                               dir.out,
+                               multicore = FALSE,
+                               cores = paralell:detectCores()){
+
+
+    ## Parallel Settings
+    if(multicore == TRUE){
+
+        plan("multicore",
+             workers = cores)
+        
+    }else{
+
+        plan("sequential")
+
+    }
+
+
+
+    
+    ## Create Directories
+    
+    subdir <- c("Edgelists",
+                "Adjazenz-Matrizen",
+                "GraphML",
+                "Gliederungstabellen",
+                "Visualisierung_Dendrogramm",
+                "Visualisierung_Circlepack",
+                "Visualisierung_Sunburst")
+
+    lapply(file.path(dir.out,
+                     subdir),
+           dir.create,
+           showWarnings = FALSE,
+           recursive = TRUE)
+
+
+
+    ## XML Parsen
+
+    out.netanalysis <- future_lapply(files.xml,
+                                     f.network.analysis.robust,
+                                     prefix.figuretitle = prefix.figuretitle,
+                                     caption = caption,
+                                     future.seed = TRUE)
+    
+    
+    files.xml[grep("error",
+                   out.netanalysis)]
+    
+    
+
+    ## Files Output
+
+    results <- list.files(out.dir, full.names = TRUE)
+
+    return(results)
+
+}
+
+
+
+
+
 
 
 
 #'### Netzwerk-Analyse durchführen
 
-files.xml <- list.files("test", pattern = "\\.xml$", full.names=TRUE)
+## files.xml <- list.files("test", pattern = "\\.xml$", full.names=TRUE)
 
-errorfiles <- c("BJNR008810961.xml",
-                "BJNR010599989.xml",
-                "BJNR043410015.xml",
-                "BJNR093000015.xml",
-                "BJNR135410017.xml",
-                "BJNR158720007.xml",
-                "BJNR203210978.xml",
-                "BJNR203220978.xml",
-                "BJNR277700013.xml",
-                "BJNR284600017.xml",
-                "BJNR364800009.xml",
-                "BJNR000939960.xml")
+## errorfiles <- c("BJNR008810961.xml",
+##                 "BJNR010599989.xml",
+##                 "BJNR043410015.xml",
+##                 "BJNR093000015.xml",
+##                 "BJNR135410017.xml",
+##                 "BJNR158720007.xml",
+##                 "BJNR203210978.xml",
+##                 "BJNR203220978.xml",
+##                 "BJNR277700013.xml",
+##                 "BJNR284600017.xml",
+##                 "BJNR364800009.xml",
+##                 "BJNR000939960.xml")
 
-files.xml <- setdiff(files.xml, errorfiles)
+## files.xml <- setdiff(files.xml, errorfiles)
 
-length(files.xml)
+## length(files.xml)
 
 
 
@@ -50,62 +112,14 @@ length(files.xml)
 #xml.name <- files.xml[205]
 
 #xml.name <- "XML/BJNR002089971.xml" # problem
-#xml.name <- "XML/BJNR001950896.xml" # BGB
+#xml.name <- "test/BJNR001950896.xml" # BGB
+#xml.name <- "test/BJNR001270871.xml" # StGB
 
 
-
-
-#+
-#'### Beginn Network Analysis
-begin.netanalysis <- Sys.time()
-
-
-#'### Parallelisierung definieren
-#'  Parallele Berechnung funktioniert nicht mit errorfiles; sequentielle Berechnung schon
-
-
-
-if(config$parallel$parseNetworks == TRUE){
-
-    plan("multicore",
-         workers = fullCores)
-    
-}else{
-
-    plan("sequential")
-
-     }
-
-
-#debug
-f.network.analysis.robust(files.xml[1],
-                          prefix.figuretitle = prefix.figuretitle,
-                          caption = caption)
-
-
-
-#'### XML Parsen
-
-#+ networkparse, results = 'hide', message = FALSE, warning = FALSE
-out.netanalysis <- future_lapply(files.xml,
-                                 f.network.analysis.robust,
-                                 prefix.figuretitle = prefix.figuretitle,
-                                 caption = caption,
-                                 future.seed = TRUE)
-
-
-#'### XML-Dateien bei denen Fehler auftreten
-
-files.xml[grep("error",
-               out.netanalysis)]
-
-
-#'### Ende XML Parsing
-end.netanalysis <- Sys.time()
-
-#'### Dauer XML Parsing
-end.netanalysis - begin.netanalysis
-
+## #debug
+## f.network.analysis.robust(xml.name,
+##                           prefix.figuretitle = prefix.figuretitle,
+##                           caption = caption)
 
 
 
@@ -121,9 +135,9 @@ f.network.analysis.robust <- function(xml.name,
                                       prefix.figuretitle,
                                       caption){
 
-    tryCatch({f.network.analysis(xml.name,
-                                 prefix.figuretitle,
-                                 caption)},
+    tryCatch({f.network.analysis.raw(xml.name,
+                                     prefix.figuretitle,
+                                     caption)},
              error = function(cond) {
                  return(NA)}
              )
@@ -139,22 +153,28 @@ f.network.analysis.robust <- function(xml.name,
 
 
 
-
+### DEBUGGING
 #xml.name <- "XML/BJNR001950896.xml" # BGB
-
+#xml.name <- "test/BJNR001270871.xml" # StGB
 
 #xml.name <- "XML/BJNR335610017.xml" # problem
-#f.network.analysis(xml.name)
+#f.network.analysis.raw(xml.name)
 
 
 
-#'### Funktion definieren: f.network.analysis
+
+
+
+
+
+
+#'### Funktion definieren: f.network.analysis.raw
 #' f.network.analysis benötigt  f.kennzahlen.search, f.kennzahlen.collapse und f.kennzahlen.edgelist.
 
 
-f.network.analysis <- function(xml.name,
-                               prefix.figuretitle,
-                               caption){
+f.network.analysis.raw <- function(xml.name,
+                                   prefix.figuretitle,
+                                   caption){
 
     ##    message(xml.name) # remove after debugging
     XML <- read_xml(xml.name)
@@ -267,52 +287,193 @@ f.network.analysis <- function(xml.name,
                         format = "graphml")
 
             
-            ## Diagramm erstellen und speichern
+            ## Dendrogramm
             if (length(V(g)) > 1){
+
+                if (length(V(g)) > 200){
+                    
+                    labelsize <- 2
+                    textsize <- 30
+                    captionsize <- 30
+                    width  <- 30
+                    height  <- 30
+
+                }else if(length(V(g)) > 100){
+                    
+                    labelsize <- 2
+                    textsize <- 20
+                    captionsize <- 20
+                    width  <- 20
+                    height  <- 20
+
+                }else if(length(V(g)) > 50){
+                    
+                    labelsize <- 2
+                    textsize <- 15
+                    captionsize <- 15
+                    width  <- 15
+                    height  <- 15
+                    
+
+                }else{
+                    
+                    labelsize <- 1.5
+                    textsize <- 10
+                    captionsize <- 10
+                    width  <- 10
+                    height  <- 10
+                    
+                    
+                }
+                
+                
                 
                 dendrogram <- ggraph(g,
-                                      'dendrogram',
-                                      circular = TRUE) + 
-                    geom_edge_elbow(colour = "grey") + 
+                                     'dendrogram',
+                                     circular = TRUE) + 
+                    geom_edge_elbow(colour = "steelblue2") + 
                     geom_node_text(aes(label = label),
-                                   size = 2,
-                                   repel = TRUE)+
+                                   size = labelsize,
+                                   repel = TRUE,
+                                   color = "white")+
                     theme_void()+
                     labs(
                         title = paste(prefix.figuretitle,
                                       "| Struktur des",
-                                      jurabk),
+                                      jurabk,
+                                      "| Dendrogramm"),
                         caption = caption
                     )+
                     theme(
-                        plot.title = element_text(size = 50,
-                                                  face = "bold"),
+                        plot.title = element_text(size = textsize,
+                                                  face = "bold",
+                                                  color = "white"),                        
+                        plot.background = element_rect(fill = "black"),                        
+                        plot.caption = element_text(size = captionsize,
+                                                    color = "white"),
                         legend.position = "none",
                         plot.margin = margin(10, 20, 10, 10)
                     )
-
+                
                 ggsave(
                     filename = paste0(out.dir,
-                                      "/Netzwerkdiagramme/",
+                                      "/Visualisierung_Dendrogramm/",
                                       filename,
                                       "_Dendrogramm.pdf"),
                     plot = dendrogram,
                     device = "pdf",
                     scale = 1,
-                    width = 50,
-                    height = 50,
+                    width = width,
+                    height = height,
                     units = "in",
                     dpi = 300,
                     limitsize = FALSE
                 )
             }
 
+
+            ## Circlepacking-Diagramm
+            if (length(V(g)) > 1){
+
+                textsize <- 20
+                width  <- 10
+                height  <- 10                                
+                
+                circlepack <- ggraph(g,
+                                     'circlepack',
+                                     circular = TRUE) + 
+                    geom_node_circle(aes(fill = depth),
+                                     size = 0.25) + 
+                    coord_fixed()+
+                    theme_void()+
+                    labs(
+                        title = paste(prefix.figuretitle,
+                                      "| Struktur des",
+                                      jurabk,
+                                      "| Circlepack"),
+                        caption = caption
+                    )+
+                    theme(
+                        plot.title = element_text(size = textsize,
+                                                  hjust = 0.5),
+                        plot.margin = margin(10, 20, 10, 10)
+                    )+
+                    guides(
+                        fill = guide_legend(title = "Ebene")
+                    )
+                
+                ggsave(
+                    filename = paste0(out.dir,
+                                      "/Visualisierung_Circlepack/",
+                                      filename,
+                                      "_Circlepack.pdf"),
+                    plot = circlepack,
+                    device = "pdf",
+                    scale = 1,
+                    width = width,
+                    height = height,
+                    units = "in",
+                    dpi = 300,
+                    limitsize = FALSE
+                )
+            }
+
+            
+
+
+            ## Sunburst-Diagramm
+            if (length(V(g)) > 1){
+
+                textsize <- 20
+                width  <- 10
+                height  <- 10                                
+                
+                sunburst <- ggraph(g,
+                                   "partition",
+                                   circular = TRUE) + 
+                    geom_node_arc_bar(aes(fill = depth),
+                                      size = 0.25)+
+                    theme_void()+
+                    labs(
+                        title = paste(prefix.figuretitle,
+                                      "| Struktur des",
+                                      jurabk,
+                                      "| Sunburst"),
+                        caption = caption
+                    )+
+                    theme(
+                        plot.title = element_text(size = textsize,
+                                                  hjust = 0.5),
+                        plot.margin = margin(10, 20, 10, 10)
+                    )+
+                    guides(
+                        fill = guide_legend(title = "Ebene")
+                    )
+                
+                ggsave(
+                    filename = paste0(out.dir,
+                                      "/Visualisierung_Sunburst/",
+                                      filename,
+                                      "_Sunburst.pdf"),
+                    plot = sunburst,
+                    device = "pdf",
+                    scale = 1,
+                    width = width,
+                    height = height,
+                    units = "in",
+                    dpi = 300,
+                    limitsize = FALSE
+                )
+            }
+
+
+
+            
         }
 
     }
 
 }
-
 
 
 
