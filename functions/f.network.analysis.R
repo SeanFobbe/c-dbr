@@ -266,9 +266,9 @@ f.network.analysis.raw <- function(xml.name,
 
             
             ## Graph aus Edgelist erstellen
-            g  <- graph.data.frame(edgelist,
-                                   directed = TRUE,
-                                   vertices = nodes.df)
+            g  <- igraph::graph.data.frame(edgelist,
+                                           directed = TRUE,
+                                           vertices = nodes.df)
 
 
             ## Adjazenz-Matrix erstellen
