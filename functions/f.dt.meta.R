@@ -28,7 +28,7 @@ f.dt.meta <- function(file.xml,
 
 
     ## XML Parse
-    out.meta <- future_lapply(files.xml,
+    out.meta <- future_lapply(file.xml,
                               xmlparse.meta.robust)
 
 
