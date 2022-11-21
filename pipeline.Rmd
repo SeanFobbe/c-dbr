@@ -482,11 +482,12 @@ tar_target(dt.meta,
 ```{targets tar.parse.networks}
 tar_target(files.network,
            f.network.analysis(files.xml = files.xml,
-                               prefix.figuretitle = prefix.figuretitle,
-                               caption = caption,
-                               dir.out = "netzwerke",
-                               multicore = FALSE,
-                               cores = config$parallel$parseNetworks))
+                              prefix.figuretitle = "test",
+                              caption = "test",
+                              dir.out = "netzwerke",
+                              multicore = FALSE,
+                              cores = config$parallel$parseNetworks),
+           format = "file")
 
 ```
 
