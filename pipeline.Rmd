@@ -428,6 +428,19 @@ tar_target(files.xml.all,
 ```
 
 
+```{targets tar.convert.xmlfiles}
+tar_target(files.xml,
+           files.xml.all[grepl("\\.xml$", files.xml.all)],
+           format = "file")
+
+```
+
+
+
+
+
+
+
 ## Parse Targets
 
 
