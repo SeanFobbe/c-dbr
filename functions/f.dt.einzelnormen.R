@@ -9,7 +9,7 @@
 #'
 #' @param file.xml Character. Vektor mit Pfaden zu XML-Dateien von www.gesetze-im-internet.de
 #'
-#' @return Data.table. Eine Tabelle mit allen relevanten Inhalten der XML-Datei.
+#' @return Data.table. Eine Tabelle mit den Texten und Metadaten jeder Einzelorm aus den XML-Dateien.
 
 
 
