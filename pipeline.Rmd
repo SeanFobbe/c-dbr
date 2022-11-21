@@ -482,7 +482,7 @@ tar_target(dt.meta,
 
 ```{targets tar.parse.networks}
 tar_target(files.network,
-           f.network.analysis(files.xml = files.xml[904],
+           f.network.analysis(files.xml = files.xml,
                               prefix.figuretitle = prefix.figuretitle,
                               caption = caption,
                               dir.out = "netzwerke",
