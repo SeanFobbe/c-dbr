@@ -442,7 +442,7 @@ tar_target(dt.normen,
 
 ```{targets tar.parse2}
 tar_target(dt.rechtsakte,
-           f.dt.rechtsakte(dt.normen)
+           f.dt.rechtsakte(dt.normen))
 
 ```
 
