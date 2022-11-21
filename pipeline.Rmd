@@ -487,7 +487,8 @@ tar_target(files.network,
                               caption = caption,
                               dir.out = "netzwerke",
                               multicore = config$parallel$parseNetworks,
-                              cores = fullCores))
+                              cores = fullCores),
+           format = "file")
 
 ```
 
