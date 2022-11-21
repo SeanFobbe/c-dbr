@@ -6,20 +6,29 @@
 
 
 
-dir.out <- "netzwerke"
-caption <- "test"
-prefix.figuretitle <- "test"
-multicore = FALSE
+
+### DEBUGGING
+
+## dir.out <- "netzwerke"
+## caption <- "test"
+## prefix.figuretitle <- "test"
+## multicore = FALSE
 
 
-grep("BJNR001950896.xml", files.xml)
+## grep("BJNR001950896.xml", files.xml)
 
 
-out <- f.network.analysis(files.xml = files.xml[904],
-                          prefix.figuretitle = "test",
-                          caption = "test",
-                          dir.out = "netzwerke",
-                          multicore = FALSE)
+
+
+## out <- f.network.analysis(files.xml = files.xml,
+##                           prefix.figuretitle = "test",
+##                           caption = "test",
+##                           dir.out = "netzwerke",
+##                           multicore = FALSE)
+
+
+### DEBUGGING
+
 
 
 
@@ -87,7 +96,7 @@ f.network.analysis <- function(files.xml,
 
     ## Files Output
 
-    results <- list.files(out.dir, full.names = TRUE)
+    results <- list.files(dir.out, full.names = TRUE, recursive = TRUE)
 
     return(results)
 
