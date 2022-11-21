@@ -428,6 +428,19 @@ tar_target(files.xml.all,
 ```
 
 
+## Parse Targets
+
+```{targets tar.parse1}
+tar_target(dt.einzelnormen,
+           f.dt.einzelnormen(file.xml = files.xml.all[grepl("\\.xml$", files.xml.all)],
+                  multicore = config$parallel$parseEinzelnormen,
+                  cores = fullCores))
+
+```
+
+
+
+
 
 
 
