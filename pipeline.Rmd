@@ -416,6 +416,17 @@ tar_target(files.epub,
 
 
 
+## Convert Targets
+
+
+```{targets tar.convert1}
+tar_target(files.xml.all,
+           f.tar_unzip(zipfiles = files.xmlzip,
+                       exdir = "files/xml"),
+           format = "file")
+
+```
+
 
 
 
