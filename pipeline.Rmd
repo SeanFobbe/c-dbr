@@ -443,19 +443,19 @@ tar_target(files.xml,
 
 
 
-### PDF zu TXT konvertieren
+<!-- ### PDF zu TXT konvertieren -->
 
 
-```{targets tar.convert.txt}
+<!-- ```{targets tar.convert.txt} -->
 
-tar_target(files.txt,
-                f.tar_pdf_extract(x = files.pdf,
-                                  outputdir = "files/txt",
-								  multicore = config$parallel$extractPDF,
-                                  cores = fullCores),
-                format = "file")
+<!-- tar_target(files.txt, -->
+<!--                 f.tar_pdf_extract(x = files.pdf, -->
+<!--                                   outputdir = "files/txt", -->
+<!-- 								  multicore = config$parallel$extractPDF, -->
+<!--                                   cores = fullCores), -->
+<!--                 format = "file") -->
 					
-```	
+<!-- ```	 -->
 
 
 
@@ -717,14 +717,12 @@ Diese Abschnitt der Pipeline erstellt ZIP-Archive für alle zentralen Rechenerge
 values <- tibble::tibble(
                       name = c("source",
                                "pdf",
-							   "txt",
                                "epub",
                                "xml",
                                "attachments",
                                "networks"),
                       input = c(quote(files.source),
                                 quote(files.pdf),
-								quote(files.txt),
                                 quote(files.epub),
                                 quote(files.xml),
                                 quote(setdiff(files.xml.all, files.xml)),
@@ -733,7 +731,6 @@ values <- tibble::tibble(
                       suffix.files = paste0(prefix.files,
                                             c("_Source_Code",
                                               "_DE_PDF_Datensatz",
-											  "_DE_TXT_Datensatz",
                                               "_DE_EPUB_Datensatz",
                                               "_DE_XML_Datensatz",
                                               "_DE_XML_Anlagen",
@@ -741,7 +738,6 @@ values <- tibble::tibble(
                                             ".zip"),
                       mode = c("mirror",
                                "cherry-pick",
-							   "cherry-pick",
                                "cherry-pick",
                                "cherry-pick",
                                "cherry-pick",
