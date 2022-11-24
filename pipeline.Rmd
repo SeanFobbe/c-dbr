@@ -800,7 +800,7 @@ values <- tibble::tibble(
                                "attachments",
                                "einzelnormen_",
                                "einzelnormen_meta",
-                               "rechtsakte"
+                               "rechtsakte",
                                "rechtsakte_meta",
                                "xml_meta"),
                       input = c(quote(files.source),
