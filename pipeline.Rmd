@@ -722,13 +722,20 @@ Diese Abschnitt der Pipeline erstellt ZIP-Archive für alle zentralen Rechenerge
 
 
 
-```{targets zipp}
+```{targets zip}
 
 values <- tibble::tibble(
-    name = c("zip.source", "zip.xml"),
-    input = c(quote(files.source), quote(files.xml)),
-    suffix.files = c("_Source_Code", "_DE_PDF_Datensatz")
-)
+                      name = c("source",
+                               "xml",
+                               "epub"),
+                      input = c(quote(files.source),
+                                quote(files.xml),
+                                quote(files.epub)
+                                ),
+                      suffix.files = c("_Source_Code",
+                                       "_DE_PDF_Datensatz",
+                                       "_DE_EPUB_Datensatz")
+                  )
 
 zip.all1 <- tarchetypes::tar_map(unlist = FALSE,
                                  values = values,
@@ -739,7 +746,7 @@ zip.all1 <- tarchetypes::tar_map(unlist = FALSE,
                                                       dir = "output",
                                                       mode = "mirror"))
                                  )
-                                            
+
 
 
 ```
