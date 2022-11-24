@@ -726,15 +726,22 @@ Diese Abschnitt der Pipeline erstellt ZIP-Archive für alle zentralen Rechenerge
 
 values <- tibble::tibble(
                       name = c("source",
-                               "xml",
-                               "epub"),
+                               "pdf",
+                               "epub",
+                               "xml"),
                       input = c(quote(files.source),
-                                quote(files.xml),
-                                quote(files.epub)
+                                quote(files.pdf),
+                                quote(files.epub),
+                                quote(files.xml)
                                 ),
                       suffix.files = c("_Source_Code",
                                        "_DE_PDF_Datensatz",
-                                       "_DE_EPUB_Datensatz")
+                                       "_DE_EPUB_Datensatz",
+                                       "_DE_XML_Datensatz"),
+                      mode = c("mirror",
+                               "cherry-pick",
+                               "cherry-pick",
+                               "cherry-pick")
                   )
 
 zip.all1 <- tarchetypes::tar_map(unlist = FALSE,
@@ -744,7 +751,7 @@ zip.all1 <- tarchetypes::tar_map(unlist = FALSE,
                                             f.tar_zip(x = input,
                                                       filename = paste0(prefix.files, suffix.files, ".zip"),
                                                       dir = "output",
-                                                      mode = "mirror"))
+                                                      mode = mode))
                                  )
 
 
