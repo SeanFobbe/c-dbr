@@ -420,6 +420,9 @@ tar_target(files.epub,
 ## Convert Targets
 
 
+### Entpacken
+
+
 ```{targets tar.convert.unzip}
 tar_target(files.xml.all,
            f.tar_unzip(zipfiles = files.xmlzip,
@@ -427,6 +430,8 @@ tar_target(files.xml.all,
            format = "file")
 
 ```
+
+### XML-Dateien bestimmen
 
 
 ```{targets tar.convert.xmlfiles}
@@ -438,6 +443,19 @@ tar_target(files.xml,
 
 
 
+### PDF zu TXT konvertieren
+
+
+```{targets tar.convert.txt}
+
+tar_target(files.txt,
+                f.tar_pdf_extract(x = files.pdf,
+                                  outputdir = "files/txt",
+								  multicore = config$parallel$extractPDF,
+                                  cores = fullCores),
+                format = "file")
+					
+```	
 
 
 
@@ -676,7 +694,7 @@ tar_target(latexdefs,
 Diese Abschnitt der Pipeline erstellt ZIP-Archive für alle zentralen Rechenergebnisse und speichert diese im Ordner \enquote{output}.
 
 
-### ZIP erstellen: Source Code
+### ZIP erstellen: Map
 
 
 <!-- ```{targets tar.zip.source} -->
@@ -754,15 +772,18 @@ values <- tibble::tibble(
                                "mirror")
                   )
 
-zip.all1 <- tarchetypes::tar_map(unlist = FALSE,
-                                 values = values,
-                                 names = name,
-                                 tar_target(zip,
-                                            f.tar_zip(x = input,
-                                                      filename = , suffix.files,
-                                                      dir = "output",
-                                                      mode = mode))
-                                 )
+
+
+
+zip.all <- tarchetypes::tar_map(unlist = FALSE,
+                                values = values,
+                                names = name,
+                                tar_target(zip,
+                                           f.tar_zip(x = input,
+                                                     filename = , suffix.files,
+                                                     dir = "output",
+                                                     mode = mode))
+                                )
 
 
 
