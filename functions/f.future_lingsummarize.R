@@ -1,5 +1,5 @@
 #'# future_lingsummarize
-#' Iterated parallel computation of characters, tokens, types and sentences for each document of a given data table. Documents must contain text in a "text" variable and document names in a "doc_id" variable.
+#' Iterated parallel computation of characters, tokens, types and sentences for each document of a given data table. Documents must contain text in a "text" variable and document names in a "doc_id" variable. The functionality is similar to textstats_summary() from the quanteda.textstats package, but this function is optimized for parallel processing of very large corpora.
 #'
 #' During computation documents are ordered by number of characters (descending) to ensure that long documents are computed first. For corpora with a skewed document length distribution this is significantly faster. The variables "nchars" is also added to the original object.
 
@@ -11,7 +11,7 @@
 
 
 
-lingsummarize <- function(dt){
+f.lingsummarize <- function(dt){
 
     corpus <- corpus(dt)
     
@@ -45,7 +45,7 @@ lingsummarize <- function(dt){
 
 
 
-future_lingsummarize <- function(dt,
+f.future_lingsummarize <- function(dt,
                                  chunksperworker = 1,
                                  chunksize = NULL){
 
@@ -68,7 +68,7 @@ future_lingsummarize <- function(dt,
     raw.list <- split(dt, seq(nrow(dt)))
     
     result.list <- future_lapply(raw.list,
-                                 lingsummarize,
+                                 f.lingsummarize,
                                  future.seed = TRUE,
                                  future.scheduling = chunksperworker,
                                  future.chunk.size = chunksize)
