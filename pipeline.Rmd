@@ -808,11 +808,11 @@ values <- tibble::tibble(
                                 quote(files.pdf),
                                 quote(files.epub),
                                 quote(files.xml),
-                                quote(setdiff(files.xml.all, files.xml))
+                                quote(setdiff(files.xml.all, files.xml)),
                                 quote(csv_normen),
                                 quote(csv_normen_meta),
-                                quote(csv_rechtsakte)
-                                quote(csv_rechtsakte_meta)
+                                quote(csv_rechtsakte),
+                                quote(csv_rechtsakte_meta),
                                 quote(csv_xml_meta)),
                       filename = paste0(prefix.files,
                                         c("_Source_Code",
