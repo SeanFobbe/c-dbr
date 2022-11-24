@@ -548,7 +548,7 @@ tar_target(var_lingstats.rechtsakte,
 ### Finale Datensätze erstellen
 
 
-```{targets tar.enhance.lingstats.normen}
+```{targets tar.enhance.finalize.normen}
 tar_target(dt.normen.final,
            cbind(dt.normen,
                  var_lingstats.normen))
@@ -557,7 +557,7 @@ tar_target(dt.normen.final,
 
 
 
-```{targets tar.enhance.lingstats.rechtsakte}
+```{targets tar.enhance.finalize.rechtsakte}
 tar_target(dt.rechtsakte.final,
            cbind(dt.rechtsakte,
                  var_lingstats.rechtsakte))
