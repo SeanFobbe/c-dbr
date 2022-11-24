@@ -10,7 +10,17 @@
 #' @return A TXT file on disk with the same basename as the original PDF file.
 
 
+
 pdf_to_txt <- function(x){
+    tryCatch({pdf_to_txt_raw(x)},
+        error = function(cond) {
+            return(NA)}
+        )
+}
+
+
+
+pdf_to_txt_raw <- function(x){
     
     ## Extract text layer from PDF
     pdf.extracted <- pdftools::pdf_text(x)
@@ -29,3 +39,6 @@ pdf_to_txt <- function(x){
                        col.names = FALSE)
     
 }
+
+
+
