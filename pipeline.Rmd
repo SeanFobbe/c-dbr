@@ -586,6 +586,54 @@ tar_target(dt.rechtsakte.meta,
 Dieser Abschnitt der Pipeline schreibt den Datensatz und alle Hash-Prüfsummen auf die Festplatte.
 
 
+```{targets tar.write}
+
+values <- tibble::tibble(
+                      name = c("source",
+                               "pdf",
+                               "epub",
+                               "xml",
+                               "attachments",
+                               "networks"),
+                      input = c(quote(files.source),
+                                quote(files.pdf),
+                                quote(files.epub),
+                                quote(files.xml),
+                                quote(setdiff(files.xml.all, files.xml)),
+                                quote(files.network)
+                                ),
+                      suffix.files = paste0(prefix.files,
+                                            c("_Source_Code",
+                                              "_DE_PDF_Datensatz",
+                                              "_DE_EPUB_Datensatz",
+                                              "_DE_XML_Datensatz",
+                                              "_DE_XML_Anlagen",
+                                              "_DE_Netzwerke"),
+                                            ".zip"),
+                      mode = c("mirror",
+                               "cherry-pick",
+                               "cherry-pick",
+                               "cherry-pick",
+                               "cherry-pick",
+                               "mirror")
+                  )
+
+
+
+
+zip.all <- tarchetypes::tar_map(unlist = FALSE,
+                                values = values,
+                                names = name,
+                                tar_target(csv,
+                                           f.tar_fwrite(x = input,
+                                                     filename = , suffix.files,
+                                                     dir = "output",
+                                                     mode = mode))
+                                )
+
+```
+
+
 
 
 
@@ -758,7 +806,7 @@ values <- tibble::tibble(
                                 quote(setdiff(files.xml.all, files.xml)),
                                 quote(files.network)
                                 ),
-                      suffix.files = paste0(prefix.files,
+                      filename = paste0(prefix.files,
                                             c("_Source_Code",
                                               "_DE_PDF_Datensatz",
                                               "_DE_EPUB_Datensatz",
@@ -782,7 +830,7 @@ zip.all <- tarchetypes::tar_map(unlist = FALSE,
                                 names = name,
                                 tar_target(zip,
                                            f.tar_zip(x = input,
-                                                     filename = , suffix.files,
+                                                     filename = filename,
                                                      dir = "output",
                                                      mode = mode))
                                 )
