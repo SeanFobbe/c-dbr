@@ -3,9 +3,7 @@
 targets::tar_destroy(ask = FALSE)
 
 
-delete <- c("txt/",
-            "pdf/",
-            "html/",
+delete <- c("files/",
             "temp/",
             "analysis/",
             "output/")
