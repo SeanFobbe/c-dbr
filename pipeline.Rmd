@@ -725,9 +725,9 @@ Diese Abschnitt der Pipeline erstellt ZIP-Archive für alle zentralen Rechenerge
 ```{targets zipp}
 
 values <- data.frame(
-    target = c("zip.source", "zip.xml"),
-    input = c("files.source", "files.xml"),
-    suffix.files = c("_Source_Code", "_DE_XML_Datensatz")
+    target = c("zip.source", "zip.pdf"),
+    input = c("files.source", "files.pdf"),
+    suffix.files = c("_Source_Code", "_DE_PDF_Datensatz")
 )
 
 zip.all1 <- tarchetypes::tar_map(unlist = FALSE,
