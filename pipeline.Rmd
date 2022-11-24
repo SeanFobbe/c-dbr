@@ -726,7 +726,7 @@ Diese Abschnitt der Pipeline erstellt ZIP-Archive für alle zentralen Rechenerge
 
 values <- data.frame(
     target = c("zip.source", "zip.pdf"),
-    input = quote(files.source, files.pdf),
+    input = quote(c(files.source, files.pdf)),
     suffix.files = c("_Source_Code", "_DE_PDF_Datensatz")
 )
 
