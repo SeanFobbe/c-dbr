@@ -555,14 +555,27 @@ tar_target(dt.normen.final,
 ```
 
 
-
-
 ```{targets tar.enhance.finalize.rechtsakte}
 tar_target(dt.rechtsakte.final,
            cbind(dt.rechtsakte,
                  var_lingstats.rechtsakte))
 ```
 
+
+### Varianten erstellen: Nur Metadaten
+
+
+```{targets tar.enhance.finalize.normen.meta}
+tar_target(dt.normen.meta,
+           dt.normen[, !"text"])
+```
+
+
+
+```{targets tar.enhance.finalize.rechtsakte.meta}
+tar_target(dt.rechtsakte.meta,
+           dt.rechtsakte[, !"text"])
+```
 
 
 
