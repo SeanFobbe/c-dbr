@@ -11,7 +11,7 @@ f.tar_pdf_extract <- function(x,
                               cores = parallel::detectCores()){
     
     unlink(outputdir, recursive = TRUE)
-    dir.create(outputdir)
+    dir.create(outputdir, recursive = TRUE)
 
     ## Parallel Computing Settings
     if(multicore == TRUE){
