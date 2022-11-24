@@ -734,7 +734,7 @@ zip.all1 <- tarchetypes::tar_map(unlist = FALSE,
                                  values = values,
                                  names = target,
                                  tar_target(zip,
-                                            f.tar_zip(x = input,
+                                            f.tar_zip(x = rlang::syms(input),
                                                       filename = paste0(prefix.files, suffix.files, ".zip"),
                                                       dir = "output",
                                                       mode = "mirror"))
