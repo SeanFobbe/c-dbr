@@ -589,46 +589,28 @@ Dieser Abschnitt der Pipeline schreibt den Datensatz und alle Hash-Prüfsummen a
 ```{targets tar.write}
 
 values <- tibble::tibble(
-                      name = c("source",
-                               "pdf",
-                               "epub",
-                               "xml",
-                               "attachments",
-                               "networks"),
-                      input = c(quote(files.source),
-                                quote(files.pdf),
-                                quote(files.epub),
-                                quote(files.xml),
-                                quote(setdiff(files.xml.all, files.xml)),
-                                quote(files.network)
+                      name = c("download",
+                               "contable"),
+                      input = c(quote(dt.download),
+                                quote(dt.conctable)
                                 ),
-                      suffix.files = paste0(prefix.files,
-                                            c("_Source_Code",
-                                              "_DE_PDF_Datensatz",
-                                              "_DE_EPUB_Datensatz",
-                                              "_DE_XML_Datensatz",
-                                              "_DE_XML_Anlagen",
-                                              "_DE_Netzwerke"),
-                                            ".zip"),
-                      mode = c("mirror",
-                               "cherry-pick",
-                               "cherry-pick",
-                               "cherry-pick",
-                               "cherry-pick",
-                               "mirror")
+                      filename = paste0(prefix.files,
+                                            c("_02_Download-Tabelle.csv",
+                                              "_DE_Alle-Rechtsakte-Verzeichnis.csv"),
+                                        ".csv"),
+                      dir = c(dir.analysis,
+                              "output")
                   )
 
 
 
 
-zip.all <- tarchetypes::tar_map(unlist = FALSE,
+csv.all <- tarchetypes::tar_map(unlist = FALSE,
                                 values = values,
                                 names = name,
                                 tar_target(csv,
                                            f.tar_fwrite(x = input,
-                                                     filename = , suffix.files,
-                                                     dir = "output",
-                                                     mode = mode))
+                                                        filename = file.path(dir, filename)))
                                 )
 
 ```
@@ -637,74 +619,74 @@ zip.all <- tarchetypes::tar_map(unlist = FALSE,
 
 
 
-### CSV schreiben: Download-Tabelle
+<!-- ### CSV schreiben: Download-Tabelle -->
 
 
-```{targets tar.write.download}
-tar_target(csv.download,
-           f.tar_fwrite(x = dt.download,
-                        filename = file.path(dir.analysis,
-                                             paste0(prefix.files,
-                                                    "_02_Download-Tabelle.csv"))
-                        )
-           )
-```
+<!-- ```{targets tar.write.download} -->
+<!-- tar_target(csv.download, -->
+<!--            f.tar_fwrite(x = dt.download, -->
+<!--                         filename = file.path(dir.analysis, -->
+<!--                                              paste0(prefix.files, -->
+<!--                                                     "_02_Download-Tabelle.csv")) -->
+<!--                         ) -->
+<!--            ) -->
+<!-- ``` -->
 
 
-### CSV schreiben: Konkordanztabelle
+<!-- ### CSV schreiben: Konkordanztabelle -->
 
 
-```{targets tar.write.conc}
-tar_target(csv.conctable,
-           f.tar_fwrite(x = dt.conctable,
-                        filename = file.path("output",
-                                             paste0(prefix.files,
-                                                    "_DE_Alle-Rechtsakte-Verzeichnis.csv"))
-                        )
-           )
-```
-
-
-
-### CSV schreiben: Einzelnormen
-
-```{targets tar.write.normen}
-tar_target(csv.normen,
-           f.tar_fwrite(x = dt.normen,
-                        filename = file.path("output",
-                                             paste0(prefix.files,
-                                                    "_DE_CSV_Einzelnormen_Datensatz.csv"))
-                        )
-           )
-```
-
-
-### CSV schreiben: Rechtsakte (mit Text)
-
-```{targets tar.write.rechtsakte}
-tar_target(csv.rechtsakte,
-           f.tar_fwrite(x = dt.rechtsakte,
-                        filename = file.path("output",
-                                             paste0(prefix.files,
-                                                    "_DE_CSV_Rechtsakte_Datensatz.csv"))
-                        )
-           )
-```
+<!-- ```{targets tar.write.conc} -->
+<!-- tar_target(csv.conctable, -->
+<!--            f.tar_fwrite(x = dt.conctable, -->
+<!--                         filename = file.path("output", -->
+<!--                                              paste0(prefix.files, -->
+<!--                                                     "_DE_Alle-Rechtsakte-Verzeichnis.csv")) -->
+<!--                         ) -->
+<!--            ) -->
+<!-- ``` -->
 
 
 
+<!-- ### CSV schreiben: Einzelnormen -->
 
-### CSV schreiben: XML-Metadaten
+<!-- ```{targets tar.write.normen} -->
+<!-- tar_target(csv.normen, -->
+<!--            f.tar_fwrite(x = dt.normen, -->
+<!--                         filename = file.path("output", -->
+<!--                                              paste0(prefix.files, -->
+<!--                                                     "_DE_CSV_Einzelnormen_Datensatz.csv")) -->
+<!--                         ) -->
+<!--            ) -->
+<!-- ``` -->
 
-```{targets tar.write.xmlmeta}
-tar_target(csv.meta,
-           f.tar_fwrite(x = dt.meta,
-                        filename = file.path("output",
-                                             paste0(prefix.files,
-                                                    "_DE_CSV_Metadaten-XML.csv"))
-                        )
-           )
-```
+
+<!-- ### CSV schreiben: Rechtsakte (mit Text) -->
+
+<!-- ```{targets tar.write.rechtsakte} -->
+<!-- tar_target(csv.rechtsakte, -->
+<!--            f.tar_fwrite(x = dt.rechtsakte, -->
+<!--                         filename = file.path("output", -->
+<!--                                              paste0(prefix.files, -->
+<!--                                                     "_DE_CSV_Rechtsakte_Datensatz.csv")) -->
+<!--                         ) -->
+<!--            ) -->
+<!-- ``` -->
+
+
+
+
+<!-- ### CSV schreiben: XML-Metadaten -->
+
+<!-- ```{targets tar.write.xmlmeta} -->
+<!-- tar_target(csv.meta, -->
+<!--            f.tar_fwrite(x = dt.meta, -->
+<!--                         filename = file.path("output", -->
+<!--                                              paste0(prefix.files, -->
+<!--                                                     "_DE_CSV_Metadaten-XML.csv")) -->
+<!--                         ) -->
+<!--            ) -->
+<!-- ``` -->
 
 
 
