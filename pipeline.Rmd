@@ -728,20 +728,30 @@ values <- tibble::tibble(
                       name = c("source",
                                "pdf",
                                "epub",
-                               "xml"),
+                               "xml",
+                               "attachments",
+                               "networks"),
                       input = c(quote(files.source),
                                 quote(files.pdf),
                                 quote(files.epub),
-                                quote(files.xml)
+                                quote(files.xml),
+                                quote(setdiff(files.xml.all, files.xml)),
+                                quote(files.network)
                                 ),
-                      suffix.files = c("_Source_Code",
-                                       "_DE_PDF_Datensatz",
-                                       "_DE_EPUB_Datensatz",
-                                       "_DE_XML_Datensatz"),
+                      suffix.files = paste0(prefix.files,
+                                            c("_Source_Code",
+                                              "_DE_PDF_Datensatz",
+                                              "_DE_EPUB_Datensatz",
+                                              "_DE_XML_Datensatz",
+                                              "_DE_XML_Anlagen",
+                                              "_DE_Netzwerke"),
+                                            ".zip"),
                       mode = c("mirror",
                                "cherry-pick",
                                "cherry-pick",
-                               "cherry-pick")
+                               "cherry-pick",
+                               "cherry-pick",
+                               "mirror")
                   )
 
 zip.all1 <- tarchetypes::tar_map(unlist = FALSE,
@@ -749,7 +759,7 @@ zip.all1 <- tarchetypes::tar_map(unlist = FALSE,
                                  names = name,
                                  tar_target(zip,
                                             f.tar_zip(x = input,
-                                                      filename = paste0(prefix.files, suffix.files, ".zip"),
+                                                      filename = , suffix.files,
                                                       dir = "output",
                                                       mode = mode))
                                  )
