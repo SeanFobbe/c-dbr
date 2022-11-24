@@ -605,13 +605,13 @@ values <- tibble::tibble(
                                 quote(dt.meta)
                                 ),
                       filename = paste0(prefix.files,
-                                        c("_02_Download-Tabelle.csv",
-                                          "_DE_Alle-Rechtsakte-Verzeichnis.csv",
-                                          "_DE_CSV_Einzelnormen_Datensatz.csv",
-                                          "_DE_CSV_Einzelnormen_Metadaten.csv",
-                                          "_DE_CSV_Rechtsakte_Datensatz.csv",
-                                          "_DE_CSV_Rechtsakte_Metadaten.csv",
-                                          "_DE_CSV_Metadaten-XML_Datensatz.csv"),
+                                        c("_02_Download-Tabelle",
+                                          "_DE_Alle-Rechtsakte-Verzeichnis",
+                                          "_DE_CSV_Einzelnormen_Datensatz",
+                                          "_DE_CSV_Einzelnormen_Metadaten",
+                                          "_DE_CSV_Rechtsakte_Datensatz",
+                                          "_DE_CSV_Rechtsakte_Metadaten",
+                                          "_DE_CSV_Metadaten-XML_Datensatz"),
                                         ".csv"),
                       dir = c(dir.analysis,
                               rep("output", 6))
@@ -626,7 +626,8 @@ csv.all <- tarchetypes::tar_map(unlist = FALSE,
                                 tar_target(csv,
                                            f.tar_fwrite(x = input,
                                                         filename = file.path(dir,
-                                                                             filename)))
+                                                                             filename)),
+                                           format = "file")
                                 )
 
 ```
@@ -788,7 +789,7 @@ Diese Abschnitt der Pipeline erstellt ZIP-Archive für alle zentralen Rechenerge
 
 
 
-```{targets zip}
+```{targets tar.zip}
 
 values <- tibble::tibble(
                       name = c("source",
@@ -825,7 +826,8 @@ zip.all <- tarchetypes::tar_map(unlist = FALSE,
                                            f.tar_zip(x = input,
                                                      filename = filename,
                                                      dir = "output",
-                                                     mode = mode))
+                                                     mode = mode),
+                                           format = "file")
                                 )
 
 
