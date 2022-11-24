@@ -679,31 +679,31 @@ Diese Abschnitt der Pipeline erstellt ZIP-Archive für alle zentralen Rechenerge
 ### ZIP erstellen: Source Code
 
 
-```{targets tar.zip.source}
-tar_target(zip.source,
-                f.tar_zip(files.source,
-                              filename = paste0(prefix.files,
-                                                "_Source_Code.zip"),
-                              dir = "output",
-                              mode = "mirror"),
-                format = "file")
-```
+<!-- ```{targets tar.zip.source} -->
+<!-- tar_target(zip.source, -->
+<!--                 f.tar_zip(files.source, -->
+<!--                               filename = paste0(prefix.files, -->
+<!--                                                 "_Source_Code.zip"), -->
+<!--                               dir = "output", -->
+<!--                               mode = "mirror"), -->
+<!--                 format = "file") -->
+<!-- ``` -->
 
 
 
 
-### ZIP erstellen: XML
+<!-- ### ZIP erstellen: XML -->
 
 
-```{targets tar.zip.xml}
-tar_target(zip.xml,
-                f.tar_zip(files.xml,
-                              filename = paste0(prefix.files,
-                                                "_DE_XML_Datensatz.zip"),
-                              dir = "output",
-                              mode = "mirror"),
-                format = "file")
-```
+<!-- ```{targets tar.zip.xml} -->
+<!-- tar_target(zip.xml, -->
+<!--                 f.tar_zip(files.xml, -->
+<!--                               filename = paste0(prefix.files, -->
+<!--                                                 "_DE_XML_Datensatz.zip"), -->
+<!--                               dir = "output", -->
+<!--                               mode = "mirror"), -->
+<!--                 format = "file") -->
+<!-- ``` -->
 
 
 
@@ -722,27 +722,27 @@ tar_target(zip.xml,
 
 
 
-<!-- ```{targets zipp} -->
+```{targets zipp}
 
-<!-- values <- data.frame( -->
-<!--     target = c("zip.source", "zip.pdf"), -->
-<!--     input = c("files.source", "files.pdf"), -->
-<!--     suffix.files = c("_Source_Code", "_DE_PDF_Datensatz") -->
-<!-- ) -->
+values <- data.frame(
+    target = c("zip.source", "zip.xml"),
+    input = c("files.source", "files.xml"),
+    suffix.files = c("_Source_Code", "_DE_PDF_Datensatz")
+)
 
-<!-- zip.all1 <- tarchetypes::tar_map(unlist = FALSE, -->
-<!--                                  values = values, -->
-<!--                                  names = target, -->
-<!--                                  tar_target(zip, -->
-<!--                                             f.tar_zip(x = quote(input), -->
-<!--                                                       filename = paste0(prefix.files, suffix.files, ".zip"), -->
-<!--                                                       dir = "output", -->
-<!--                                                       mode = "mirror")) -->
-<!--                                  ) -->
+zip.all1 <- tarchetypes::tar_map(unlist = FALSE,
+                                 values = values,
+                                 names = target,
+                                 tar_target(zip,
+                                            f.tar_zip(x = !!!syms(input),
+                                                      filename = paste0(prefix.files, suffix.files, ".zip"),
+                                                      dir = "output",
+                                                      mode = "mirror"))
+                                 )
                                             
 
 
-<!-- ``` -->
+```
 
 
 
