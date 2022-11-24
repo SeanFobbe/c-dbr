@@ -496,6 +496,67 @@ tar_target(files.network,
 
 
 
+## Enhance Targets
+
+
+
+### Variablen erstellen: \enquote{zeichen, token, typen, saetze}
+
+Berechnung klassischer linguistischer Kennzahlen.
+
+
+
+```{targets tar.enhance.lingstats.normen}
+tar_target(var_lingstats.normen,
+                f.lingstats(dt.normen,
+                            multicore = config$parallel$lingsummarize,
+                            cores = fullCores,
+                            germanvars = TRUE))
+```
+
+
+
+```{targets tar.enhance.lingstats.rechtsakte}
+tar_target(var_lingstats.rechtsakte,
+                f.lingstats(dt.rechtsakte,
+                            multicore = config$parallel$lingsummarize,
+                            cores = fullCores,
+                            germanvars = TRUE))
+```
+
+
+
+
+### Konstanten erstellen
+
+Konstanten die dem Datensatz wichtige Herkunftsinformationen hinzufügen. Darunter sind die Versionsnummer, die Version DOI, die Concept DOI und die Lizenz.
+
+
+
+```{targets tar.enhance.constants.normen}
+tar_target(var_constants.normen,
+           data.frame(version = as.character(datestamp),
+                      doi_concept = config$doi$data$concept,
+                      doi_version = config$doi$data$version,
+                      lizenz = as.character(config$license$data))[rep(1,
+                                                                      nrow(dt.normen)),])
+```
+
+
+
+
+```{targets tar.enhance.constants.rechtsakte}
+tar_target(var_constants.rechtsakte,
+           data.frame(version = as.character(datestamp),
+                      doi_concept = config$doi$data$concept,
+                      doi_version = config$doi$data$version,
+                      lizenz = as.character(config$license$data))[rep(1,
+                                                                      nrow(dt.rechtsakte)),])
+```
+
+
+
+
 
 
 
@@ -618,15 +679,74 @@ Diese Abschnitt der Pipeline erstellt ZIP-Archive für alle zentralen Rechenerge
 ### ZIP erstellen: Source Code
 
 
-```{targets tar.zip.source}
-tar_target(zip.source,
-                f.tar_zip(files.source,
-                              filename = paste0(prefix.files,
-                                                "_Source_Code.zip"),
-                              dir = "output",
-                              mode = "mirror"),
-                format = "file")
+<!-- ```{targets tar.zip.source} -->
+<!-- tar_target(zip.source, -->
+<!--                 f.tar_zip(files.source, -->
+<!--                               filename = paste0(prefix.files, -->
+<!--                                                 "_Source_Code.zip"), -->
+<!--                               dir = "output", -->
+<!--                               mode = "mirror"), -->
+<!--                 format = "file") -->
+<!-- ``` -->
+
+
+
+
+<!-- ### ZIP erstellen: XML -->
+
+
+<!-- ```{targets tar.zip.xml} -->
+<!-- tar_target(zip.xml, -->
+<!--                 f.tar_zip(files.xml, -->
+<!--                               filename = paste0(prefix.files, -->
+<!--                                                 "_DE_XML_Datensatz.zip"), -->
+<!--                               dir = "output", -->
+<!--                               mode = "mirror"), -->
+<!--                 format = "file") -->
+<!-- ``` -->
+
+
+
+
+<!-- ```{targets tar.zip.attachments} -->
+<!-- tar_target(zip.xml, -->
+<!--                 f.tar_zip(files.xml, -->
+<!--                               filename = paste0(prefix.files, -->
+<!--                                                 "_DE_XML_Datensatz.zip"), -->
+<!--                               dir = "output", -->
+<!--                               mode = "mirror"), -->
+<!--                 format = "file") -->
+<!-- ``` -->
+
+
+
+
+
+```{targets zipp, eval = FALSE}
+
+values <- data.frame(
+    target = c(zip.source, zip.xml),
+    input = c(files.source, files.xml),
+    suffix.files = c("_Source_Code", "_DE_XML_Datensatz")
+)
+
+zip.all1 <- tarchetypes::tar_map(unlist = FALSE,
+                                 values = values,
+                                 names = target,
+                                 tar_target(zip,
+                                            f.tar_zip(x = input,
+                                                      filename = paste0(prefix.files, suffix.files, ".zip")
+                                                      dir = "output",
+                                                      mode = "mirror"))
+                                 )
+                                            
+
+
 ```
+
+
+
+
 
 
 
