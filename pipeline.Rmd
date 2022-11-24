@@ -722,7 +722,7 @@ Diese Abschnitt der Pipeline erstellt ZIP-Archive für alle zentralen Rechenerge
 
 
 
-```{targets zipp, eval = FALSE}
+```{targets zipp}
 
 values <- data.frame(
     target = c("zip.source", "zip.xml"),
