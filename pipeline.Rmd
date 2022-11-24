@@ -545,34 +545,6 @@ tar_target(var_lingstats.rechtsakte,
 
 
 
-### Konstanten erstellen
-
-Konstanten die dem Datensatz wichtige Herkunftsinformationen hinzufügen. Darunter sind die Versionsnummer, die Version DOI, die Concept DOI und die Lizenz.
-
-
-
-```{targets tar.enhance.constants.normen}
-tar_target(var_constants.normen,
-           data.frame(version = as.character(datestamp),
-                      doi_concept = config$doi$data$concept,
-                      doi_version = config$doi$data$version,
-                      lizenz = as.character(config$license$data))[rep(1,
-                                                                      nrow(dt.normen)),])
-```
-
-
-
-
-```{targets tar.enhance.constants.rechtsakte}
-tar_target(var_constants.rechtsakte,
-           data.frame(version = as.character(datestamp),
-                      doi_concept = config$doi$data$concept,
-                      doi_version = config$doi$data$version,
-                      lizenz = as.character(config$license$data))[rep(1,
-                                                                      nrow(dt.rechtsakte)),])
-```
-
-
 
 
 
