@@ -83,13 +83,13 @@ names(dt.meta)
 ```
 
 
-## Beispiel-Werte
+<!-- ## Beispiel-Werte -->
 
-```{r}
-str(dt.normen)
-str(dt.rechtsakte)
-str(dt.meta)
-```
+<!-- ```{r} -->
+<!-- str(dt.normen) -->
+<!-- str(dt.rechtsakte) -->
+<!-- str(dt.meta) -->
+<!-- ``` -->
 
 
 
