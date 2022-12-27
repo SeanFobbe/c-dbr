@@ -34,6 +34,8 @@ knitr::opts_chunk$set(fig.path = file.path("..", "analysis/"),
 tar_load(latexdefs)
 tar_load(lingstats.summary.normen)
 tar_load(lingstats.summary.rechtsakte)
+tar_load(dt.normen.final)
+tar_load(dt.rechtsakte.final)
 
 ```
 
@@ -445,19 +447,19 @@ kable(lingstats.summary.normen,
 
 
 ```{r}
-setnames(lingstats.summary.rechtsakte, c("Kennzahl",
-                                  "Gesamt",
-                                  "Min",
-                                  "1. Quartil",
-                                  "Median",
-                                  "Mittel",
-                                  "3. Quartil",
-                                  "Max"))
+setnames(lingstats.summary.rechtsakte, c("Variable",
+                                         "Gesamt",
+                                         "Min",
+                                         "1. Quartil",
+                                         "Median",
+                                         "Mittel",
+                                         "3. Quartil",
+                                         "Max"))
 
-lingstats.summary.rechtsakte$Kennzahl <- c("Zeichen",
-                                    "Tokens",
-                                    "Typen",
-                                    "Sätze")
+lingstats.summary.rechtsakte$Variable <- c("Zeichen",
+                                           "Tokens",
+                                           "Typen",
+                                           "Sätze")
 
 kable(lingstats.summary.rechtsakte,
       digits = 2,
@@ -470,7 +472,250 @@ kable(lingstats.summary.rechtsakte,
 
 
 
+## Verteilung Zeichen
 
+
+
+```{r C-DBR_01_Einzelnormen_Density_Zeichen, fig.height = 6, fig.width = 9}
+ggplot(data = dt.normen.final)+
+    geom_density(aes(x = zeichen),
+                 fill = "black") +
+    scale_x_log10(breaks = trans_breaks("log10", function(x) 10^x),
+                  labels = trans_format("log10", math_format(10^.x)))+
+    annotation_logticks(sides = "b")+ 
+    coord_cartesian(xlim = c(1, 10^6))+
+    theme_bw()+
+    labs(
+        title = paste(prefix.figuretitle,
+                      "| Verteilung der Zeichen je Norm"),
+        caption = caption,
+        x = "Zeichen",
+        y = "Dichte"
+    )+
+    theme(
+        text = element_text(size = 14),
+        plot.title = element_text(size = 14,
+                                  face = "bold"),
+        legend.position = "none",
+        plot.margin = margin(10, 20, 10, 10)
+    )
+```
+
+
+
+\vspace{1cm}
+
+
+```{r C-DBR_01_Rechtsakte_Density_Zeichen, fig.height = 6, fig.width = 9}
+ggplot(data = dt.rechtsakte.final)+
+    geom_density(aes(x = zeichen),
+                 fill = "black") +
+    scale_x_log10(breaks = trans_breaks("log10", function(x) 10^x),
+                  labels = trans_format("log10", math_format(10^.x)))+
+    annotation_logticks(sides = "b")+ 
+    coord_cartesian(xlim = c(1, 10^6))+
+    theme_bw()+
+    labs(
+        title = paste(prefix.figuretitle,
+                      "| Verteilung der Zeichen je Rechtsakt"),
+        caption = caption,
+        x = "Zeichen",
+        y = "Dichte"
+    )+
+    theme(
+        text = element_text(size = 14),
+        plot.title = element_text(size = 14,
+                                  face = "bold"),
+        legend.position = "none",
+        plot.margin = margin(10, 20, 10, 10)
+    )
+```
+
+
+
+## Verteilung Tokens
+
+
+```{r C-DBR_02_Einzelnormen_Density_Tokens, fig.height = 6, fig.width = 9}
+ggplot(data = dt.normen.final)+
+    geom_density(aes(x = tokens),
+                 fill = "black") +
+    scale_x_log10(breaks = trans_breaks("log10", function(x) 10^x),
+                  labels = trans_format("log10", math_format(10^.x)))+
+    annotation_logticks(sides = "b")+ 
+    coord_cartesian(xlim = c(1, 10^6))+
+    theme_bw()+
+    labs(
+        title = paste(prefix.figuretitle,
+                      "| Verteilung der Tokens je Norm"),
+        caption = caption,
+        x = "Tokens",
+        y = "Dichte"
+    )+
+    theme(
+        text = element_text(size = 14),
+        plot.title = element_text(size = 14,
+                                  face = "bold"),
+        legend.position = "none",
+        plot.margin = margin(10, 20, 10, 10)
+    )
+
+
+```
+
+\vspace{1cm}
+
+
+
+```{r C-DBR_02_Rechtsakte_Density_Tokens, fig.height = 6, fig.width = 9}
+ggplot(data = dt.rechtsakte.final)+
+    geom_density(aes(x = tokens),
+                 fill = "black")+
+    scale_x_log10(breaks = trans_breaks("log10", function(x) 10^x),
+                  labels = trans_format("log10", math_format(10^.x)))+
+    annotation_logticks(sides = "b")+ 
+    coord_cartesian(xlim = c(1, 10^6))+
+    theme_bw() +
+    labs(
+        title = paste(prefix.figuretitle,
+                      "| Verteilung der Tokens je Rechtsakt"),
+        caption = caption,
+        x = "Tokens",
+        y = "Dichte"
+    )+
+    theme(
+        text = element_text(size = 14),
+        plot.title = element_text(size = 14,
+                                  face = "bold"),
+        legend.position = "none",
+        plot.margin = margin(10, 20, 10, 10)
+    )
+```
+
+
+
+
+## Verteilung Typen
+
+```{r C-DBR_03_Einzelnormen_Density_Typen, fig.height = 6, fig.width = 9}
+ggplot(data = dt.normen.final)+
+    geom_density(aes(x = typen),
+                 fill = "black")+
+    scale_x_log10(breaks = trans_breaks("log10", function(x) 10^x),
+                  labels = trans_format("log10", math_format(10^.x)))+
+    annotation_logticks(sides = "b")+ 
+    coord_cartesian(xlim = c(1, 10^6))+
+    theme_bw()+
+    labs(
+        title = paste(prefix.figuretitle,
+                      "| Verteilung der Typen je Norm"),
+        caption = caption,
+        x = "Typen",
+        y = "Dichte"
+    )+
+    theme(
+        text = element_text(size = 14),
+        plot.title = element_text(size = 14,
+                                  face = "bold"),
+        legend.position = "none",
+        plot.margin = margin(10, 20, 10, 10)
+    )
+```
+
+
+\vspace{1cm}
+
+
+```{r C-DBR_03_Rechtsakte_Density_Typen, fig.height = 6, fig.width = 9}
+ggplot(data = dt.rechtsakte.final)+
+    geom_density(aes(x = typen),
+                 fill = "black")+
+    scale_x_log10(breaks = trans_breaks("log10", function(x) 10^x),
+                  labels = trans_format("log10", math_format(10^.x)))+
+    annotation_logticks(sides = "b")+ 
+    coord_cartesian(xlim = c(1, 10^6))+
+    theme_bw()+
+    labs(
+        title = paste(prefix.figuretitle,
+                      "| Verteilung der Typen je Rechtsakt"),
+        caption = caption,
+        x = "Typen",
+        y = "Dichte"
+    )+
+    theme(
+        text = element_text(size = 14),
+        plot.title = element_text(size = 14,
+                                  face = "bold"),
+        legend.position = "none",
+        plot.margin = margin(10, 20, 10, 10)
+    )
+```
+
+
+
+
+## Verteilung Sätze
+
+
+
+
+```{r C-DBR_04_Einzelnormen_Density_Saetze, fig.height = 6, fig.width = 9}
+ggplot(data = dt.normen.final)+
+    geom_density(aes(x = saetze),
+                 fill = "black")+
+    scale_x_log10(breaks = trans_breaks("log10", function(x) 10^x),
+                  labels = trans_format("log10", math_format(10^.x)))+
+    annotation_logticks(sides = "b")+ 
+    coord_cartesian(xlim = c(1, 10^6))+
+    theme_bw()+
+    labs(
+        title = paste(prefix.figuretitle,
+                      "| Verteilung der Sätze je Norm"),
+        caption = caption,
+        x = "Sätze",
+        y = "Dichte"
+    )+
+    theme(
+        text = element_text(size = 14),
+        plot.title = element_text(size = 14,
+                                  face = "bold"),
+        legend.position = "none",
+        plot.margin = margin(10, 20, 10, 10)
+    )
+
+
+```
+
+\vspace{1cm}
+
+
+
+
+```{r C-DBR_04_Rechtsakte_Density_Saetze, fig.height = 6, fig.width = 9}
+ggplot(data = dt.rechtsakte.final)+
+    geom_density(aes(x = saetze),
+                 fill = "black")+
+    scale_x_log10(breaks = trans_breaks("log10", function(x) 10^x),
+                  labels = trans_format("log10", math_format(10^.x)))+
+    annotation_logticks(sides = "b")+ 
+    coord_cartesian(xlim = c(1, 10^6))+ 
+    theme_bw()+
+    labs(
+        title = paste(prefix.figuretitle,
+                      "| Verteilung der Sätze je Rechtsakt"),
+        caption = caption,
+        x = "Sätze",
+        y = "Dichte"
+    )+
+    theme(
+        text = element_text(size = 14),
+        plot.title = element_text(size = 14,
+                                  face = "bold"),
+        legend.position = "none",
+        plot.margin = margin(10, 20, 10, 10)
+    )
+
+```
 
 
 
