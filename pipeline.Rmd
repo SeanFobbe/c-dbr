@@ -883,18 +883,17 @@ values <- tibble::tibble(
 
 
 
-tarchetypes::tar_combine(zip.all,
-                         tarchetypes::tar_map(unlist = FALSE,
-                                              values = values,
-                                              names = name,
-                                              tar_target(zip,
-                                                         f.tar_zip(x = input,
-                                                                   filename = filename,
-                                                                   dir = "output",
-                                                                   mode = mode),
-                                                         format = "file")
-                                              ),
-                         command = dplyr::bind_rows(!!!.x, .id = "method"))
+
+zip.all <- tarchetypes::tar_map(unlist = FALSE,
+                                values = values,
+                                names = name,
+                                tar_target(zip,
+                                           f.tar_zip(x = input,
+                                                     filename = filename,
+                                                     dir = "output",
+                                                     mode = mode),
+                                           format = "file")
+                                )
 
 
 
@@ -910,24 +909,50 @@ tarchetypes::tar_combine(zip.all,
 ### Zu hashende ZIP-Archive definieren
 
 
-<!-- ```{targets tar.hashes1} -->
-<!-- tarchetypes::tar_combine(zip.all1, -->
-<!--                          zip.all, -->
-<!--                          command = dplyr::bind_rows(!!!.x, .id = "method")) -->
-<!-- ``` -->
+```{targets tar.hashes.list}
+ tar_target(zip.all,
+            c(zip_source,
+              zip_networks,
+              zip_pdf,
+              zip_epub,
+              zip_xml,
+              zip_attachments,
+              zip_einzelnormen_,
+              zip_einzelnormen_meta,
+              zip_rechtsakte,
+              zip_rechtsakte_meta,
+              zip_xml_meta))
+```
+
+
 
 ### Kryptographische Hashes berechnen
 
 
+```{targets tar.hashes2}
+tar_target(hashes,
+           f.tar_multihashes(c(zip.all,
+                               report.codebook[1],
+                               report.robustness[1]),
+                             multicore = config$parallel$multihashes,
+                             cores = fullCores))
+```
 
-<!-- ```{targets tar.hashes2} -->
-<!-- tar_target(hashes, -->
-<!--            f.tar_multihashes(c(zip.all, -->
-<!--                                report.codebook[1], -->
-<!--                                report.robustness[1]), -->
-<!--                              multicore = config$parallel$multihashes, -->
-<!--                              cores = fullCores)) -->
-<!-- ``` -->
+
+
+### CSV schreiben: Kryptographische Hashes
+
+
+```{targets tar.hashes3}
+tar_target(csv.hashes,
+           f.tar_fwrite(x = hashes,
+                        filename = file.path("output",
+                                             paste0(prefix.files,
+                                                    "_KryptographischeHashes.csv"))
+                        )
+           )
+```
+
 
 
 
