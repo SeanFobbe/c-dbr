@@ -154,13 +154,14 @@ Mit jeder Kompilierung des vollständigen Datensatzes wird auch ein umfangreiche
 
 
 ## Grenzen des Datensatzes
+
 Nutzer sollten folgende wichtige Grenzen beachten:
  
-\begin{enumerate}
-\item Der Datensatz enthält nur das, was das Bundesjustizministerium auch tatsächlich veröffentlicht (\emph{publication bias}). Es fehlen insbesondere Änderungsgesetze und -verordnungen. Manche Rechtsakte sind zudem nur mit den Metadaten nachgewiesen --- ihr Inhalt fehlt aus technischen Gründen oder weil in der Bereinigten Sammlung Bundesgesetzblatt Teil III nur bibliographische Angaben enthalten sind (§ 3 Abs. 2 BRSG).\footnote{\url{https://www.gesetze-im-internet.de/hinweise.html}}
-\item Es kann aufgrund technischer Grenzen bzw. Fehler sein, dass manche --- im Grunde verfügbare --- Rechtsakte nicht oder nicht korrekt abgerufen werden (\emph{automation bias}).
-\item Es sind nur am Tag des Abrufs veröffentlichte konsolidierte Rechtsakte enthalten, eine diachronische Untersuchung muss somit mehrere verfügbare Versionen auswerten (\emph{temporal bias}). 
-\end{enumerate}
+
+- Der Datensatz enthält nur das, was das Bundesjustizministerium auch tatsächlich veröffentlicht (\emph{publication bias}). Es fehlen insbesondere Änderungsgesetze und -verordnungen. Manche Rechtsakte sind zudem nur mit den Metadaten nachgewiesen --- ihr Inhalt fehlt aus technischen Gründen oder weil in der Bereinigten Sammlung Bundesgesetzblatt Teil III nur bibliographische Angaben enthalten sind (§ 3 Abs. 2 BRSG).\footnote{\url{https://www.gesetze-im-internet.de/hinweise.html}}
+- Es kann aufgrund technischer Grenzen bzw. Fehler sein, dass manche --- im Grunde verfügbare --- Rechtsakte nicht oder nicht korrekt abgerufen werden (\emph{automation bias}).
+- Es sind nur am Tag des Abrufs veröffentlichte konsolidierte Rechtsakte enthalten, eine diachronische Untersuchung muss somit mehrere verfügbare Versionen auswerten (\emph{temporal bias}). 
+
 
 
 
