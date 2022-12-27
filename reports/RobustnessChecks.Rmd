@@ -92,6 +92,34 @@ str(dt.meta)
 ```
 
 
+# Quantitative Variablen
+
+
+## Ausfertigungsdatum
+
+***Einzelnormen***
+summary(as.IDate(dt.normen$ausfertigung_datum))
+
+***Rechtsakte***
+summary(as.IDate(dt.rechtsakte$ausfertigung_datum))
+
+***XML-Metadaten***
+summary(as.IDate(dt.meta$ausfertigung_datum))
+
+
+
+## Ausfertigungsjahr
+
+***Einzelnormen***
+summary(dt.normen$ausfertigung_jahr)
+
+***Rechtsakte***
+summary(dt.rechtsakte$ausfertigung_jahr)
+
+***XML-Metadaten***
+summary(dt.meta$ausfertigung_jahr)
+
+
 
 
 
