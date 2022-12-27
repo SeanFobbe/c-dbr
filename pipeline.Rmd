@@ -567,14 +567,14 @@ tar_target(dt.rechtsakte.final,
 
 ```{targets tar.enhance.finalize.normen.meta}
 tar_target(dt.normen.meta,
-           dt.normen[, !"text"])
+           dt.normen.final[, !"text"])
 ```
 
 
 
 ```{targets tar.enhance.finalize.rechtsakte.meta}
 tar_target(dt.rechtsakte.meta,
-           dt.rechtsakte[, !"text"])
+           dt.rechtsakte.final[, !"text"])
 ```
 
 
