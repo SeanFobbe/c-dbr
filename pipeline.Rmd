@@ -908,11 +908,11 @@ zip.all <- tarchetypes::tar_map(unlist = FALSE,
 ### Zu hashende ZIP-Archive definieren
 
 
-<!-- ```{targets tar.hashes1} -->
-<!-- tarchetypes::tar_combine(zip.all1, -->
-<!-- zip.all[[2]], -->
-<!-- command = dplyr::bind_rows(!!!.x, .id = "method")) -->
-<!-- ``` -->
+```{targets tar.hashes1}
+tarchetypes::tar_combine(zip.all1,
+                         zip.all,
+                         command = dplyr::bind_rows(!!!.x, .id = "method"))
+```
 
 ### Kryptographische Hashes berechnen
 
