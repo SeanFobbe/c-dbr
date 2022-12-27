@@ -101,6 +101,151 @@ txt.dbr <- readtext("./*.txt",
 
 
 
+# Konstruktion
+
+
+
+## Beschreibung des Datensatzes
+
+Der Datensatz ist eine möglichst vollständige Sammlung der konsolidierten Fassungen aller Gesetze und Verordnungen auf Bundesebene. Änderungsgesetze und -verordnungen sind nicht enthalten. Er enthält alle Rechtsakte, die auf der amtlichen Webseite \enquote{Gesetze im Internet} des Bundesministerium des Justiz am jeweiligen Stichtag verfügbar waren. Die Stichtage für jede Version sind in der Versionsnummer festgehalten.
+
+Zusätzlich zu den einfach maschinenlesbaren Formaten (CSV und TXT) sind die XML-, PDF- und EPUB-Rohdaten enthalten, damit Analysten gegebenenfalls ihre eigene Konvertierung vornehmen können. Die Rohdaten wurden inhaltlich nicht verändert. Die PDF- und EPUB-Varianten der Rechtsakte sollen primär traditionelle juristische Forschung und \emph{mixed methods}-Ansätze unterstützen.
+
+ In diesem Datensatz sind nur Rechtsakte mit Außenwirkung (d.h. das Grundgesetz, Bundesgesetze und Bundesverordnungen) enthalten. Verwaltungsvorschriften sind nicht Teil des Datensatzes.
+
+
+
+
+## Datenquellen
+
+\begin{centering}
+\begin{longtable}{P{5cm}p{9cm}}
+
+\toprule
+
+ Datenquelle & Fundstelle \\
+
+\midrule
+
+ Primäre Datenquelle & \url{https://www.gesetze-im-internet.de/}\\
+ Source Code & \url{\softwareversionurldoi}\\
+
+\bottomrule
+
+\end{longtable}
+\end{centering}
+
+
+
+
+## Sammlung der Daten
+
+Die Daten wurden vollautomatisiert gesammelt und mit Abschluss der Verarbeitung kryptographisch signiert. Die Webseite des Justizministeriums ist laut dem Reiter \enquote{Hinweise}\footnote{\url{https://www.gesetze-im-internet.de/hinweise.html}} ausdrücklich für die vollautomatisierte Datensammlung freigegeben. Der Abruf geschieht ausschließlich über TLS-verschlüsselte Verbindungen.
+
+
+
+## Source Code und Compilation Report
+
+Der gesamte Source Code --- sowohl für die Erstellung des Datensatzes, als auch für dieses Codebook --- ist öffentlich einsehbar und dauerhaft erreichbar im wissenschaftlichen Archiv des CERN unter dieser Addresse hinterlegt: \softwareversionurldoi
+
+Mit jeder Kompilierung des vollständigen Datensatzes wird auch ein umfangreicher **Compilation Report** in einem attraktiv designten PDF-Format erstellt (ähnlich diesem Codebook). Der Compilation Report enthält den vollständigen Source Code, dokumentiert relevante Rechenergebnisse, gibt sekundengenaue Zeitstempel an und ist mit einem klickbaren Inhaltsverzeichnis versehen. Er ist zusammen mit dem Source Code hinterlegt. Wenn Sie sich für Details des Erstellungs-Prozesses interessieren, lesen Sie diesen bitte zuerst.
+
+
+
+
+## Grenzen des Datensatzes
+Nutzer sollten folgende wichtige Grenzen beachten:
+ 
+\begin{enumerate}
+\item Der Datensatz enthält nur das, was das Bundesjustizministerium auch tatsächlich veröffentlicht (\emph{publication bias}). Es fehlen insbesondere Änderungsgesetze und -verordnungen. Manche Rechtsakte sind zudem nur mit den Metadaten nachgewiesen --- ihr Inhalt fehlt aus technischen Gründen oder weil in der Bereinigten Sammlung Bundesgesetzblatt Teil III nur bibliographische Angaben enthalten sind (§ 3 Abs. 2 BRSG).\footnote{\url{https://www.gesetze-im-internet.de/hinweise.html}}
+\item Es kann aufgrund technischer Grenzen bzw. Fehler sein, dass manche --- im Grunde verfügbare --- Rechtsakte nicht oder nicht korrekt abgerufen werden (\emph{automation bias}).
+\item Es sind nur am Tag des Abrufs veröffentlichte konsolidierte Rechtsakte enthalten, eine diachronische Untersuchung muss somit mehrere verfügbare Versionen auswerten (\emph{temporal bias}). 
+\end{enumerate}
+
+
+
+## Urheberrechtsfreiheit von Rohdaten und Datensatz 
+
+An den Rechtsakten und Rechtsnormen besteht gem. § 5 Abs. 1 UrhG kein Urheberrecht, da sie amtliche Werke sind. § 5 UrhG ist auf amtliche Datenbanken analog anzuwenden (BGH, Beschluss vom 28.09.2006, I ZR 261/03, \enquote{Sächsischer Ausschreibungsdienst}).
+
+ Alle eigenen Beiträge (z.B. durch Zusammenstellung und Anpassung der Metadaten) und damit den gesamten Datensatz stelle ich gemäß einer \emph{CC0 1.0 Universal Public Domain Lizenz} vollständig urheberrechtsfrei.
+
+
+
+
+## Metadaten
+
+Alle Metadaten wurden aus den XML-Rohdaten zeitgleich mit dem Text der Normen extrahiert. Der volle Satz an Metadaten ist nur in den CSV-Dateien enthalten. Bitte beachten Sie, dass bei weitem nicht alle XML-Nodes ausgewertet wurden. Viele Nodes enthalten nur optische Informationen und wurden deshalb ignoriert. Manche Nodes (z.B. einzelne Absätze, Listen) wurden nicht extrahiert, weil nicht alle Normen in Absätze und Listen unterteilt sind und die Bereitstellung in einem nicht-hierarchischen Format wie CSV keine Vorteile gegenüber dem XML-Format bringen würde.
+ 
+Die Dateinamen der PDF-, TXT und EPUB-Dateien enthalten nur eine Abkürzung und einen modifizierten Langtitel (auf 200 Zeichen gekürzt und um Sonderzeichen bereinigt). Diese wurden aus den jeweiligen Header-Markierungen der HTML-Seiten extrahiert.
+
+
+
+### Schema für die Dateinamen (PDF, TXT, EPUB)
+
+\begin{verbatim}
+[Abkürzung]_[modifizierter_Langtitel]
+\end{verbatim}
+
+
+### Beispiel eines Dateinamens
+
+\begin{verbatim}
+2.WasSV_ZweiteWassersicherstellungsverordnung.pdf
+\end{verbatim}
+
+
+## Qualitätsprüfung
+
+Insgesamt werden zusammen mit jeder Kompilierung Dutzende Tests zur Qualitätsprüfung durchgeführt. Alle Ergebnisse der Qualitätsprüfungen sind aggregiert im Compilation Report und einzeln im Archiv \enquote{analyse} zusammen mit dem Datensatz veröffentlicht.
+
+
+
+
+
+
+
+# Varianten und Zielgruppen
+
+Dieser Datensatz ist in verschiedenen Varianten verfügbar, die sich an unterschiedliche Zielgruppen richten. Zielgruppe sind nicht nur quantitativ forschende RechtswissenschaftlerInnen, sondern auch traditionell arbeitende JuristInnen. Idealerweise müssen quantitative Methoden ohnehin immer durch qualitative Interpretation, Bildung von Theorien und kritische Auseinandersetzung verstärkt werden (\emph{mixed methods approach}).
+
+Lehrende werden zudem von den vorbereiteten Tabellen und Diagrammen besonders profitieren, die bei der Erläuterung der Charakteristika der Daten hilfreich sein können und Zeit im universitären Alltag sparen. Alle Tabellen und Diagramme liegen auch als separate Dateien vor um sie einfach z.B. in Präsentations-Folien oder Handreichungen zu integrieren.
+
+\begin{centering}
+\begin{longtable}{P{3.5cm}p{10.5cm}}
+
+\toprule
+
+Variante & Zielgruppe und Beschreibung\\
+
+\midrule
+\endhead
+
+ CSV\_Einzelnormen\_ Datensatz & \textbf{Legal Tech/Quantitative Forschung}. Diese CSV-Datei ist eine der für statistische Analysen empfohlenen Varianten des Datensatzes. Sie enthält den Volltext aller Rechtsakte, disaggregiert nach Einzelnormen, sowie alle in diesem Codebook beschriebenen Metadaten. Enthält nur Rechtsakte, für die mindestens eine Einzelnorm mit Normtext veröffentlicht wurde!\\
+ CSV\_Einzelnormen\_ Metadaten & \textbf{Legal Tech/Quantitative Forschung}. Wie die andere CSV-Datei mit Einzelnormen, nur ohne die Normtexte. Sinnvoll für Analyst:innen, die sich nur für die Metadaten interessieren und Speicherplatz sparen wollen. Enthält nur Rechtsakte, für die mindestens eine Einzelnorm mit Normtext veröffentlicht wurde!\\
+ CSV\_Rechtsakte\_ Datensatz & \textbf{Legal Tech/Quantitative Forschung}. Diese CSV-Datei ist eine der für statistische Analysen empfohlenen Varianten des Datensatzes. Sie enthält den Volltext aller Rechtsakte, sowie fast alle in diesem Codebook beschriebenen Metadaten. Die gegenüber den Einzelnormen fehlenden Metadaten betreffen vor allem Gliederungsdaten (z.B. Gliederungsüberschrift), die auf Rechtsakts-Ebene keinen Sinn ergeben. Wurde durch ein Zusammenfügen der Einzelnorm-Variante erstellt. Enthält nur Rechtsakte, für die mindestens eine Einzelnorm mit Normtext veröffentlicht wurde!\\
+ CSV\_Rechtsakte\_ Metadaten & \textbf{Legal Tech/Quantitative Forschung}. Wie die andere CSV-Datei mit Rechtsakten, nur ohne die Normtexte. Sinnvoll für Analyst:innen, die sich nur für die Metadaten interessieren und Speicherplatz sparen wollen. Enthält nur Rechtsakte, für die mindestens eine Einzelnorm mit Normtext veröffentlicht wurde!\\
+ CSV\_MetadatenXML & \textbf{Legal Tech/Quantitative Forschung}. Diese CSV-Datei enthält Metadaten für jeden auf der amtlichen Webeite nachgewiesenen Rechtsakt, unabhängig davon, ob mit oder ohne Normtext veröffentlicht. Die Zahl der Rechtsakte ist daher um etwa 1000 höher als bei den anderen CSV-Dateien, es sind aber keine Normtexte enthalten.\\
+ XML\_Datensatz & \textbf{Legal Tech/Quantitative Forschung}. Die XML-Rohdaten. Alle CSV-Dateien wurden aus diesen Rohdaten extrahiert. XML ist ein komplexes Format und daher nur für entsprechend versierte Forscher:innen geeignet.\\
+ XML\_Anlagen & \textbf{Legal Tech/Quantitative Forschung}. Manche XML-Dateien verweisen auf Anlagen, vorwiegend Bild-Dateien. Diese sind hier zusammengefasst.\\
+ PDF\_Datensatz & \textbf{Traditionelle juristische Forschung}. Die PDF-Dokumente wie sie vom Bundesjustizministerium auf der amtlichen Webseite bereitgestellt werden, jedoch verbessert durch semantisch hochwertige Dateinamen, die sowohl die Abkürzung, als auch einen modifizierten Langtitel enthalten. Die Dateinamen sind so konzipiert, dass sie auch für traditionelle qualitative juristische Arbeit einen erheblichen Mehrwert bieten. Im Vergleich zu den CSV-Dateien enthalten die Dateinamen nur einen drastisch reduzierten Umfang an Metadaten, um Kompatibilitätsprobleme unter Windows zu vermeiden und die Lesbarkeit zu verbessern. Besonders geeignet für die Arbeit an Desktop PCs.\\
+ EPUB\_Datensatz & \textbf{Traditionelle juristische Forschung}. Die PDF-Dokumente wie sie vom Bundesjustizministerium auf der amtlichen Webseite bereitgestellt werden, jedoch verbessert durch semantisch hochwertige Dateinamen, die sowohl die Abkürzung, als auch einen modifizierten Langtitel enthalten. Die Dateinamen sind so konzipiert, dass sie auch für traditionelle qualitative juristische Arbeit einen erheblichen Mehrwert bieten. Im Vergleich zu den CSV-Dateien enthalten die Dateinamen nur einen drastisch reduzierten Umfang an Metadaten, um Kompatibilitätsprobleme unter Windows zu vermeiden und die Lesbarkeit zu verbessern. Besonders geeignet für die Arbeit an mobilen Endgeräten, weil sich das Format der Bildschirmgröße anpassen kann.\\
+ TXT\_Datensatz & \textbf{Subsidiär}. Diese Variante enthält die vollständigen aus den PDF-Dateien extrahierten Normtexte der Rechtsakte, aber nur einen drastisch reduzierten Umfang an Metadaten, der dem der PDF-Dateien entspricht. Die TXT-Dateien sind optisch an das Layout der PDF-Dateien angelehnt. Geeignet für qualitative Forscher, die nur wenig Speicherplatz oder eine langsame Internetverbindung zur Verfügung haben und für quantitative Forscher, die beim Einlesen der CSV-Dateien Probleme haben.\\
+ Netzwerke & \textbf{Experimentell}. Die Gliederungshierarchie aller Rechtsakte wurde in eine Netzwerkstruktur übersetzt und ist in verschiedenen Formaten bereitgestellt (GraphML, Adjazenzmatrizen und Edge Lists). Aus dieser Netzwerkstruktur wurden zudem hierarchische Dendrogramme erstellt um einen visuellen Überblick zu bieten. Einzelnormen sind in den Netzwerkstrukturen aktuell noch nicht berücksichtigt. Diese Variante ist noch hoch-experimentell, sollte also nicht ohne genaue Prüfung für die eigene Forschung verwendet werden.\\ 
+ ANALYSE & \textbf{Alle Lehrenden und Forschenden}. Dieses Archiv enthält alle während dem Kompilierungs- und Prüfprozess erstellten Tabellen (CSV) und Diagramme (PDF, PNG) im Original. Sie sind inhaltsgleich mit den in diesem Codebook verwendeten Tabellen und Diagrammen. Das PDF-Format eignet sich besonders für die Verwendung in gedruckten Publikationen, das PNG-Format besonders für die Darstellung im Internet. Analyst:innen mit fortgeschrittenen Kenntnissen in R können auch auf den Source Code zurückgreifen. Empfohlen für Nutzer die einzelne Inhalte aus dem Codebook für andere Zwecke (z.B. eigene Publikationen) weiterverwenden möchten.\\
+
+
+\bottomrule
+
+\end{longtable}
+\end{centering}
+
+
+
+
+\newpage
+
+
 
 
 
