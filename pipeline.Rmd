@@ -766,6 +766,24 @@ tarchetypes::tar_render(report.robustness,
 
 
 
+### Report erstellen: Codebook
+
+
+
+```{targets tar.report.codebook}
+tarchetypes::tar_render(report.codebook,
+                        file.path("reports",
+                                  "Codebook.Rmd"),
+                        output_file = file.path("../output",
+                                                paste0(config$project$shortname,
+                                                       "_",
+                                                       datestamp,
+                                                       "_Codebook.pdf")))
+
+```
+
+
+
 
 
 
