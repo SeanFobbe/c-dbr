@@ -70,26 +70,3 @@ tokens_locale = "de_DE" # Locale in denen Tokens analyisert werden
 format = [ "pdf", "png" ] 	# Ausgabe-Format für Diagramme
 dpi = 300     	 	# Auflösung für Diagramme
 align = "center"    	# Ausrichtung von Diagrammen im Compilation Report
-
-
-
-
-
-[freqtable]
-
-# Frequenztabellen: Liste zu prüfender Variablen
-#' **Hinweis:** Nur diese Variablen werden bei der Erstellung der Frequenztabellen berücksichtigt.
-
-ignore =  ["periodikum",
-	    	    "fundstellentyp",
-		    "check_neuf",
-		    "check_aufh",
-		    "check_sonst",
-		    "check_hinweis",
-		    "check_stand",
-		    "gliederungskennzahl",
-		    "ausfertigung_jahr",
-		    "doi_concept",
-		    "doi_version",
-		    "version",	
-		    "lizenz" ]
