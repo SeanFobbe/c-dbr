@@ -101,7 +101,7 @@ str(dt.meta)
 
 ## Liste zu prüfender Variablen
 
- **Hinweis:** Diese Variablen werden bei der Erstellung der Frequenztabellen nicht berücksichtigt.
+ **Hinweis:** Nur diese Variablen werden bei der Erstellung der Frequenztabellen berücksichtigt.
  
  
 
@@ -133,7 +133,7 @@ prefix.freqtable.einzelnormen <- paste0(config$project$shortname,
 
 
 f.fast.freqtable(dt.normen,
-                 varlist = config$freqtable$ignore,
+                 varlist = varlist,
                  sumrow = TRUE,
                  output.list = FALSE,
                  output.kable = TRUE,
@@ -141,6 +141,8 @@ f.fast.freqtable(dt.normen,
                  outputdir = dir.analysis,
                  prefix = prefix.freqtable.einzelnormen)
 ```
+
+
 
 
 # Frequenztabellen erstellen: Rechtsakte
