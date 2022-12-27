@@ -911,7 +911,7 @@ zip.all <- tarchetypes::tar_map(unlist = FALSE,
 
 ```{targets tar.hashes2}
 tar_target(hashes,
-           f.tar_multihashes(c(zip.all,
+           f.tar_multihashes(c(tar_select_targets(zip.all, starts_with("zip")),
                                report.codebook[1],
                                report.robustness[1]),
                              multicore = config$parallel$multihashes,
