@@ -443,19 +443,19 @@ tar_target(files.xml,
 
 
 
-<!-- ### PDF zu TXT konvertieren -->
+### PDF zu TXT konvertieren
 
 
-<!-- ```{targets tar.convert.txt} -->
+```{targets tar.convert.txt}
 
-<!-- tar_target(files.txt, -->
-<!--                 f.tar_pdf_extract(x = files.pdf, -->
-<!--                                   outputdir = "files/txt", -->
-<!-- 								  multicore = config$parallel$extractPDF, -->
-<!--                                   cores = fullCores), -->
-<!--                 format = "file") -->
-					
-<!-- ```	 -->
+tar_target(files.txt, 
+           f.tar_pdf_extract(x = files.pdf, 
+                             outputdir = "files/txt", 
+                             multicore = config$parallel$extractPDF, 
+                             cores = fullCores), 
+           format = "file") 
+
+ ```
 
 
 
