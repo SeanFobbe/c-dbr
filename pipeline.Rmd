@@ -902,6 +902,22 @@ zip.all <- tarchetypes::tar_map(unlist = FALSE,
 
 
 
+## Kryptographische Hashes
+
+
+
+### Kryptographische Hashes berechnen
+
+
+```{targets tar.hashes2}
+tar_target(hashes,
+           f.tar_multihashes(c(zip.all,
+                               report.codebook[1],
+                               report.robustness[1]),
+                             multicore = config$parallel$multihashes,
+                             cores = fullCores))
+```
+
 
 
 
