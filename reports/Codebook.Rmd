@@ -68,8 +68,6 @@ freqtable.xmlmeta <- f.fast.freqtable(dt.meta,
                                       output.kable = FALSE,
                                       output.csv = FALSE)
 
-
-
 ```
 
 
@@ -760,10 +758,10 @@ ggplot(data = dt.rechtsakte.final)+
 
 ### Einzelnormen
 
-freqtable <- table.normen.periodikum[-.N]
 
-#+ C-DBR_02_Einzelnormen_Barplot_Periodikum, fig.height = 10, fig.width = 8
-ggplot(data = freqtable)+
+
+```{r C-DBR_05_Einzelnormen_Barplot_Periodikum, fig.height = 10, fig.width = 8}
+ggplot(data = freqtable.normen$periodikum[-.N])+
     geom_bar(aes(x = reorder(periodikum,
                              N),
                  y = N),
@@ -789,12 +787,12 @@ ggplot(data = freqtable)+
         legend.position = "none",
         plot.margin = margin(10, 20, 10, 10)
     )
+```
 
 
 
-freqtable <- table.normen.periodikum[-.N]
-
-kable(freqtable[,c(1:2,4:5)],
+```{r}
+kable(freqtable.normen$periodikum,
       format = "latex",
       align = 'P{3cm}',
       booktabs = TRUE,
@@ -804,7 +802,7 @@ kable(freqtable[,c(1:2,4:5)],
                     "% Gesamt",
                     "% Kumulativ")) %>% kable_styling(latex_options = "repeat_header")
 
-
+```
 
 
 \newpage
@@ -813,10 +811,9 @@ kable(freqtable[,c(1:2,4:5)],
 
 
 
-freqtable <- table.rechtsakte.periodikum[-.N]
 
-#+ C-DBR_02_Rechtsakte_Barplot_Periodikum, fig.height = 10, fig.width = 8
-ggplot(data = freqtable) +
+```{r C-DBR_05_Rechtsakte_Barplot_Periodikum, fig.height = 10, fig.width = 8}
+ggplot(data = freqtable.rechtsakte$periodikum[-.N]) +
     geom_bar(aes(x = reorder(periodikum,
                              N),
                  y = N),
@@ -842,14 +839,13 @@ ggplot(data = freqtable) +
         legend.position = "none",
         plot.margin = margin(10, 20, 10, 10)
     )
+```
 
-
-
-freqtable <- table.rechtsakte.periodikum[-.N]
 
 \newpage
 
-kable(freqtable[,c(1:2,4:5)],
+```{r}
+kable(freqtable.rechtsakte$periodikum,
       format = "latex",
       align = 'P{3cm}',
       booktabs = TRUE,
@@ -858,18 +854,20 @@ kable(freqtable[,c(1:2,4:5)],
                     "Rechtsakte",
                     "% Gesamt",
                     "% Kumulativ")) %>% kable_styling(latex_options = "repeat_header")
-
+```
 
 
 
 \newpage
 
+
+
+
 ### Alle Rechtsakte (mit und ohne Normtext)
 
-freqtable <- table.meta.periodikum[-.N]
 
-#+ C-DBR_02_Meta_Barplot_Periodikum, fig.height = 10, fig.width = 8
-ggplot(data = freqtable) +
+```{r C-DBR_05_Meta_Barplot_Periodikum, fig.height = 10, fig.width = 8}
+ggplot(data = freqtable.xmlmeta$periodikum[-.N]) +
     geom_bar(aes(x = reorder(periodikum,
                              N),
                  y = N),
@@ -895,15 +893,15 @@ ggplot(data = freqtable) +
         legend.position = "none",
         plot.margin = margin(10, 20, 10, 10)
     )
-
+```
 
 
 
 \newpage
 
-freqtable <- table.meta.periodikum[-.N]
 
-kable(freqtable[,c(1:2,4:5)],
+```{r}
+kable(freqtable.xmlmeta$periodikum,
       format = "latex",
       align = 'P{3cm}',
       booktabs = TRUE,
@@ -912,6 +910,10 @@ kable(freqtable[,c(1:2,4:5)],
                     "Rechtsakte",
                     "% Gesamt",
                     "% Kumulativ")) %>% kable_styling(latex_options = "repeat_header")
+```
+
+
+
 
 
 
