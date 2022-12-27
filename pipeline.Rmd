@@ -1056,7 +1056,7 @@ kable(meta,
 # Dateigrößen der Endergebnisse
 
 
-## ZIP
+## ZIP-Dateien
 
 ```{r filesize.zip}
 
@@ -1080,7 +1080,7 @@ kable(table.size,
 ```
 
 
-## CSV
+## CSV-Dateien
 
 ```{r filesize.csv}
 
