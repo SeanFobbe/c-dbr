@@ -884,7 +884,7 @@ values <- tibble::tibble(
 
 
 
-zip.all <- tarchetypes::tar_map(unlist = FALSE,
+zip.list <- tarchetypes::tar_map(unlist = FALSE,
                                 values = values,
                                 names = name,
                                 tar_target(zip,
@@ -929,7 +929,7 @@ zip.all <- tarchetypes::tar_map(unlist = FALSE,
 ### Kryptographische Hashes berechnen
 
 
-```{targets tar.hashes2}
+```{targets tar.hashes.compute}
 tar_target(hashes,
            f.tar_multihashes(c(zip.all,
                                report.codebook[1],
@@ -943,7 +943,7 @@ tar_target(hashes,
 ### CSV schreiben: Kryptographische Hashes
 
 
-```{targets tar.hashes3}
+```{targets tar.hashes.csv}
 tar_target(csv.hashes,
            f.tar_fwrite(x = hashes,
                         filename = file.path("output",
