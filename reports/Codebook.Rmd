@@ -36,11 +36,41 @@ tar_load(lingstats.summary.normen)
 tar_load(lingstats.summary.rechtsakte)
 tar_load(dt.normen.final)
 tar_load(dt.rechtsakte.final)
-
+tar_load(dt.meta)
 ```
 
+```{r, echo = FALSE}
+
+## Frequenztabellen
+
+varlist  <-  c("periodikum",
+               "ausfertigung_jahr")
 
 
+freqtable.normen <- f.fast.freqtable(dt.normen.final,
+                                     varlist = varlist,
+                                     sumrow = TRUE,
+                                     output.list = TRUE,
+                                     output.kable = FALSE,
+                                     output.csv = FALSE)
+
+freqtable.rechtsakte <- f.fast.freqtable(dt.rechtsakte.final,
+                                         varlist = varlist,
+                                         sumrow = TRUE,
+                                         output.list = TRUE,
+                                         output.kable = FALSE,
+                                         output.csv = FALSE)
+
+freqtable.xmlmeta <- f.fast.freqtable(dt.meta,
+                                      varlist = varlist,
+                                      sumrow = TRUE,
+                                      output.list = TRUE,
+                                      output.kable = FALSE,
+                                      output.csv = FALSE)
+
+
+
+```
 
 
 # Einführung
@@ -717,6 +747,313 @@ ggplot(data = dt.rechtsakte.final)+
 
 ```
 
+
+
+\newpage
+\ra{1.4}
+
+# Inhalt
+
+
+## Nach Periodikum
+
+
+### Einzelnormen
+
+freqtable <- table.normen.periodikum[-.N]
+
+#+ C-DBR_02_Einzelnormen_Barplot_Periodikum, fig.height = 10, fig.width = 8
+ggplot(data = freqtable)+
+    geom_bar(aes(x = reorder(periodikum,
+                             N),
+                 y = N),
+             stat = "identity",
+             fill = "black",
+             color = "black")+
+    scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x),
+                  labels = trans_format("log10", math_format(10^.x)))+
+    annotation_logticks(sides = "b")+
+    coord_flip()+
+    theme_bw()+
+    labs(
+        title = paste(prefix.figuretitle,
+                      "| Einzelnormen je Periodikum"),
+        caption = caption,
+        x = "Periodikum",
+        y = "Einzelnormen"
+    )+
+    theme(
+        text = element_text(size = 14),
+        plot.title = element_text(size = 14,
+                                  face = "bold"),
+        legend.position = "none",
+        plot.margin = margin(10, 20, 10, 10)
+    )
+
+
+
+freqtable <- table.normen.periodikum[-.N]
+
+kable(freqtable[,c(1:2,4:5)],
+      format = "latex",
+      align = 'P{3cm}',
+      booktabs = TRUE,
+      longtable = TRUE,
+      col.names = c("Periodikum",
+                    "Einzelnormen",
+                    "% Gesamt",
+                    "% Kumulativ")) %>% kable_styling(latex_options = "repeat_header")
+
+
+
+
+\newpage
+
+### Rechtsakte mit veröffentlichtem Normtext
+
+
+
+freqtable <- table.rechtsakte.periodikum[-.N]
+
+#+ C-DBR_02_Rechtsakte_Barplot_Periodikum, fig.height = 10, fig.width = 8
+ggplot(data = freqtable) +
+    geom_bar(aes(x = reorder(periodikum,
+                             N),
+                 y = N),
+             stat = "identity",
+             fill = "black",
+             color = "black") +
+    scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x),
+                  labels = trans_format("log10", math_format(10^.x)))+
+    annotation_logticks(sides = "b")+
+    coord_flip()+
+    theme_bw()+
+    labs(
+        title = paste(prefix.figuretitle,
+                      "| Rechtsakte mit Inhalt je Periodikum"),
+        caption = caption,
+        x = "Periodikum",
+        y = "Rechtsakte"
+    )+
+    theme(
+        text = element_text(size = 14),
+        plot.title = element_text(size = 14,
+                                  face = "bold"),
+        legend.position = "none",
+        plot.margin = margin(10, 20, 10, 10)
+    )
+
+
+
+freqtable <- table.rechtsakte.periodikum[-.N]
+
+\newpage
+
+kable(freqtable[,c(1:2,4:5)],
+      format = "latex",
+      align = 'P{3cm}',
+      booktabs = TRUE,
+      longtable = TRUE,
+      col.names = c("Periodikum",
+                    "Rechtsakte",
+                    "% Gesamt",
+                    "% Kumulativ")) %>% kable_styling(latex_options = "repeat_header")
+
+
+
+
+\newpage
+
+### Alle Rechtsakte (mit und ohne Normtext)
+
+freqtable <- table.meta.periodikum[-.N]
+
+#+ C-DBR_02_Meta_Barplot_Periodikum, fig.height = 10, fig.width = 8
+ggplot(data = freqtable) +
+    geom_bar(aes(x = reorder(periodikum,
+                             N),
+                 y = N),
+             stat = "identity",
+             fill = "black",
+             color = "black") +
+    scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x),
+                  labels = trans_format("log10", math_format(10^.x)))+
+    annotation_logticks(sides = "b")+
+    coord_flip()+
+    theme_bw() +
+    labs(
+        title = paste(prefix.figuretitle,
+                      "| Rechtsakte nach Metadaten je Periodikum"),
+        caption = caption,
+        x = "Periodikum",
+        y = "Rechtsakte"
+    )+
+    theme(
+        text = element_text(size = 14),
+        plot.title = element_text(size = 14,
+                                  face = "bold"),
+        legend.position = "none",
+        plot.margin = margin(10, 20, 10, 10)
+    )
+
+
+
+
+\newpage
+
+freqtable <- table.meta.periodikum[-.N]
+
+kable(freqtable[,c(1:2,4:5)],
+      format = "latex",
+      align = 'P{3cm}',
+      booktabs = TRUE,
+      longtable = TRUE,
+      col.names = c("Periodikum",
+                    "Rechtsakte",
+                    "% Gesamt",
+                    "% Kumulativ")) %>% kable_styling(latex_options = "repeat_header")
+
+
+
+\newpage
+
+## Nach Ausfertigungsjahr
+
+
+
+### Einzelnormen
+
+freqtable <- table.normen.ausjahr[-.N][,lapply(.SD, as.numeric)]
+
+
+freqtable <- table.normen.ausjahr[-.N][,lapply(.SD, as.numeric)]
+
+#+ C-DBR_03_Einzelnormen_Barplot_Ausfertigungsjahr, fig.height = 7, fig.width = 11
+ggplot(data = freqtable) +
+    geom_bar(aes(x = ausfertigung_jahr,
+                 y = N),
+             stat = "identity",
+             fill = "black")+
+    theme_bw()+
+    labs(
+        title = paste(prefix.figuretitle,
+                      "| Einzelnormen je Ausfertigungsjahr"),
+        caption = caption,
+        x = "Ausfertigungsjahr",
+        y = "Einzelnormen"
+    )+
+    theme(
+        text = element_text(size = 16),
+        plot.title = element_text(size = 16,
+                                  face = "bold"),
+        legend.position = "none",
+        plot.margin = margin(10, 20, 10, 10)
+    )
+
+
+kable(freqtable[,c(1:2,4:5)],
+      format = "latex",
+      align = 'P{3cm}',
+      booktabs = TRUE,
+      longtable = TRUE,
+      col.names = c("Jahr",
+                    "Einzelnormen",
+                    "% Gesamt",
+                    "% Kumulativ")) %>% kable_styling(latex_options = "repeat_header")
+
+
+
+
+\newpage
+
+### Rechtsakte mit veröffentlichtem Normtext
+
+
+freqtable <- table.rechtsakte.ausjahr[-.N][,lapply(.SD, as.numeric)]
+
+#+ C-DBR_03_Rechtsakte_Barplot_Ausfertigungsjahr, fig.height = 7, fig.width = 11
+ggplot(data = freqtable) +
+    geom_bar(aes(x = ausfertigung_jahr,
+                 y = N),
+             stat = "identity",
+             fill = "black") +
+    theme_bw()+
+    labs(
+        title = paste(prefix.figuretitle,
+                      "| Rechtsakte mit Inhalt je Ausfertigungsjahr"),
+        caption = caption,
+        x = "Ausfertigungsjahr",
+        y = "Rechtsakte"
+    )+
+    theme(
+        text = element_text(size = 16),
+        plot.title = element_text(size = 16,
+                                  face = "bold"),
+        legend.position = "none",
+        plot.margin = margin(10, 20, 10, 10)
+    )
+
+
+
+
+
+freqtable <- table.rechtsakte.ausjahr[-.N][,lapply(.SD, as.numeric)]
+
+kable(freqtable[,c(1:2,4:5)],
+      format = "latex",
+      align = 'P{3cm}',
+      booktabs = TRUE,
+      longtable = TRUE,
+      col.names = c("Jahr",
+                    "Rechtsakte",
+                    "% Gesamt",
+                    "% Kumulativ")) %>% kable_styling(latex_options = "repeat_header")
+
+
+\newpage
+
+###  Alle Rechtsakte (mit und ohne Normtext)
+
+
+freqtable <- table.meta.ausjahr[-.N][,lapply(.SD, as.numeric)]
+
+
+#+ C-DBR_03_Meta_Barplot_Ausfertigungsjahr, fig.height = 7, fig.width = 11
+ggplot(data = freqtable) +
+    geom_bar(aes(x = ausfertigung_jahr,
+                 y = N),
+             stat = "identity",
+             fill = "black") +
+    theme_bw()+
+    labs(
+        title = paste(prefix.figuretitle,
+                      "| Rechtsakte nach Metadaten je Ausfertigungsjahr"),
+        caption = caption,
+        x = "Ausfertigungsjahr",
+        y = "Rechtsakte"
+    )+
+    theme(
+        text = element_text(size = 16),
+        plot.title = element_text(size = 16,
+                                  face = "bold"),
+        legend.position = "none",
+        plot.margin = margin(10, 20, 10, 10)
+    )
+
+
+
+
+freqtable <- table.meta.ausjahr[-.N][,lapply(.SD, as.numeric)]
+
+kable(freqtable[,c(1:2,4:5)],
+      format = "latex",
+      align = 'P{3cm}',
+      booktabs = TRUE,
+      longtable = TRUE,
+      col.names = c("Jahr",
+                    "Rechtsakte",
+                    "% Gesamt",
+                    "% Kumulativ")) %>% kable_styling(latex_options = "repeat_header")
 
 
 
