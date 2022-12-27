@@ -96,125 +96,125 @@ names(dt.meta)
 
 
 
-# Frequenztabellen erstellen
+<!-- # Frequenztabellen erstellen -->
 
 
-## Liste zu prüfender Variablen
+<!-- ## Liste zu prüfender Variablen -->
 
- **Hinweis:** Nur diese Variablen werden bei der Erstellung der Frequenztabellen berücksichtigt.
+<!--  **Hinweis:** Nur diese Variablen werden bei der Erstellung der Frequenztabellen berücksichtigt. -->
  
  
 
-```{r}
-varlist  <-  c("periodikum",
-               "fundstellentyp",
-               "check_neuf",
-               "check_aufh",
-               "check_sonst",
-               "check_hinweis",
-               "check_stand",
-               "gliederungskennzahl",
-               "ausfertigung_jahr",
-               "doi_concept",
-               "doi_version",
-               "version",	
-               "lizenz" )
-```
+<!-- ```{r} -->
+<!-- varlist  <-  c("periodikum", -->
+<!--                "fundstellentyp", -->
+<!--                "check_neuf", -->
+<!--                "check_aufh", -->
+<!--                "check_sonst", -->
+<!--                "check_hinweis", -->
+<!--                "check_stand", -->
+<!--                "gliederungskennzahl", -->
+<!--                "ausfertigung_jahr", -->
+<!--                "doi_concept", -->
+<!--                "doi_version", -->
+<!--                "version",	 -->
+<!--                "lizenz" ) -->
+<!-- ``` -->
 
 
 
 
 
-# Frequenztabellen erstellen: Einzelnormen
+<!-- # Frequenztabellen erstellen: Einzelnormen -->
 
-```{r, results = "asis"}
-prefix.freqtable.einzelnormen <- paste0(config$project$shortname,
-                                        "_01_Einzelnormen_Frequenztabelle_var-")
-
-
-f.fast.freqtable(dt.normen,
-                 varlist = varlist,
-                 sumrow = TRUE,
-                 output.list = FALSE,
-                 output.kable = TRUE,
-                 output.csv = TRUE,
-                 outputdir = dir.analysis,
-                 prefix = prefix.freqtable.einzelnormen)
-```
+<!-- ```{r, results = "asis"} -->
+<!-- prefix.freqtable.einzelnormen <- paste0(config$project$shortname, -->
+<!--                                         "_01_Einzelnormen_Frequenztabelle_var-") -->
 
 
-
-
-# Frequenztabellen erstellen: Rechtsakte
-
-## Reduzierte Liste zu prüfender Variablen
-
-Folgende Variablen sind wegen der geringeren Auflösung der Metadaten (nur Rechtsaktebene, nicht Normebene) nicht mehr nutzbar.
-
-
-```{r}
-
-varremove <- c("gliederungskennzahl")
-
-vars.freqtable.rechtsakte <- setdiff(varlist, varremove)
-
-print(vars.freqtable.rechtsakte)
-```
+<!-- f.fast.freqtable(dt.normen, -->
+<!--                  varlist = varlist, -->
+<!--                  sumrow = TRUE, -->
+<!--                  output.list = FALSE, -->
+<!--                  output.kable = TRUE, -->
+<!--                  output.csv = TRUE, -->
+<!--                  outputdir = dir.analysis, -->
+<!--                  prefix = prefix.freqtable.einzelnormen) -->
+<!-- ``` -->
 
 
 
 
-## Frequenztabellen erstellen
+<!-- # Frequenztabellen erstellen: Rechtsakte -->
+
+<!-- ## Reduzierte Liste zu prüfender Variablen -->
+
+<!-- Folgende Variablen sind wegen der geringeren Auflösung der Metadaten (nur Rechtsaktebene, nicht Normebene) nicht mehr nutzbar. -->
 
 
-```{r, results = "asis"}
-prefix.freqtable.rechtsakte <- paste0(config$project$shortname,
-                                      "_01_Rechtsakte_Frequenztabelle_var-")
+<!-- ```{r} -->
 
+<!-- varremove <- c("gliederungskennzahl") -->
 
+<!-- vars.freqtable.rechtsakte <- setdiff(varlist, varremove) -->
 
-f.fast.freqtable(dt.rechtsakte,
-                 varlist = vars.freqtable.rechtsakte,
-                 sumrow = TRUE,
-                 output.list = FALSE,
-                 output.kable = TRUE,
-                 output.csv = TRUE,
-                 outputdir = dir.analysis,
-                 prefix = prefix.freqtable.rechtsakte)
-
-```
+<!-- print(vars.freqtable.rechtsakte) -->
+<!-- ``` -->
 
 
 
 
-
-# Frequenztabellen erstellen: XML-Metadaten
-
-
-## Liste zu prüfender Variablen
-
-```{r}
-print(vars.freqtable.rechtsakte)
-```
+<!-- ## Frequenztabellen erstellen -->
 
 
-## Frequenztabellen erstellen
-
-```{r, results = "asis"}
-prefix.freqtable.meta <- paste0(config$project$shortname,
-                 "_01_Meta_Frequenztabelle_var-")
+<!-- ```{r, results = "asis"} -->
+<!-- prefix.freqtable.rechtsakte <- paste0(config$project$shortname, -->
+<!--                                       "_01_Rechtsakte_Frequenztabelle_var-") -->
 
 
-f.fast.freqtable(dt.meta,
-                 varlist = vars.freqtable.rechtsakte,
-                 sumrow = TRUE,
-                 output.list = FALSE,
-                 output.kable = TRUE,
-                 output.csv = TRUE,
-                 outputdir = dir.analysis,
-                 prefix = prefix.freqtable.meta)
 
-```
+<!-- f.fast.freqtable(dt.rechtsakte, -->
+<!--                  varlist = vars.freqtable.rechtsakte, -->
+<!--                  sumrow = TRUE, -->
+<!--                  output.list = FALSE, -->
+<!--                  output.kable = TRUE, -->
+<!--                  output.csv = TRUE, -->
+<!--                  outputdir = dir.analysis, -->
+<!--                  prefix = prefix.freqtable.rechtsakte) -->
+
+<!-- ``` -->
+
+
+
+
+
+<!-- # Frequenztabellen erstellen: XML-Metadaten -->
+
+
+<!-- ## Liste zu prüfender Variablen -->
+
+<!-- ```{r} -->
+<!-- print(vars.freqtable.rechtsakte) -->
+<!-- ``` -->
+
+
+<!-- ## Frequenztabellen erstellen -->
+
+<!-- ```{r, results = "asis"} -->
+<!-- prefix.freqtable.meta <- paste0(config$project$shortname, -->
+<!--                  "_01_Meta_Frequenztabelle_var-") -->
+
+
+<!-- f.fast.freqtable(dt.meta, -->
+<!--                  varlist = vars.freqtable.rechtsakte, -->
+<!--                  sumrow = TRUE, -->
+<!--                  output.list = FALSE, -->
+<!--                  output.kable = TRUE, -->
+<!--                  output.csv = TRUE, -->
+<!--                  outputdir = dir.analysis, -->
+<!--                  prefix = prefix.freqtable.meta) -->
+
+<!-- ``` -->
 
 
 
