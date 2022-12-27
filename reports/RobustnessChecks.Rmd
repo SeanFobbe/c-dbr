@@ -52,6 +52,10 @@ tar_load(files.epub)
 
 
 ```{r}
+length(files.xml) == length(files.epub)
+length(files.xml) == length(files.pdf)
+length(files.pdf) == length(files.txt)
+
 length(files.pdf)
 length(files.txt)
 length(files.xml)
@@ -65,6 +69,8 @@ length(files.epub)
 
 ```{r}
 length(dt.normen)
+length(dt.rechtsakte)
+length(dt.meta)
 ```
 
 
@@ -72,6 +78,8 @@ length(dt.normen)
 
 ```{r}
 names(dt.normen)
+names(dt.rechtsakte)
+names(dt.meta)
 ```
 
 
@@ -79,6 +87,8 @@ names(dt.normen)
 
 ```{r}
 str(dt.normen)
+str(dt.rechtsakte)
+str(dt.meta)
 ```
 
 
