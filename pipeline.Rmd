@@ -1053,6 +1053,55 @@ kable(meta,
 
 
 
+# Dateigrößen der Endergebnisse
+
+
+## ZIP
+
+```{r filesize.zip}
+
+files <- list.files("output", pattern = "\\.zip", full.names = TRUE)
+
+filesize <- round(file.size(files) / 10^6, digits = 2)
+
+table.size <- data.table(basename(files),
+                         filesize)
+
+
+kable(table.size,
+      format = "latex",
+      align = c("l", "r"),
+      format.args = list(big.mark = ","),
+      booktabs = TRUE,
+      longtable = TRUE,
+      col.names = c("Datei",
+                    "Größe in MB"))
+
+```
+
+
+## CSV
+
+```{r filesize.csv}
+
+files <- list.files("output", pattern = "\\.csv", full.names = TRUE)
+
+filesize <- round(file.size(files) / 10^6, digits = 2)
+
+table.size <- data.table(basename(files),
+                         filesize)
+
+
+kable(table.size,
+      format = "latex",
+      align = c("l", "r"),
+      format.args = list(big.mark = ","),
+      booktabs = TRUE,
+      longtable = TRUE,
+      col.names = c("Datei",
+                    "Größe in MB"))
+
+```
 
 
 
