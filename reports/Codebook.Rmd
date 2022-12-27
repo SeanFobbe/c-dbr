@@ -37,6 +37,10 @@ tar_load(lingstats.summary.rechtsakte)
 tar_load(dt.normen.final)
 tar_load(dt.rechtsakte.final)
 tar_load(dt.meta)
+tar_load(files.xml)
+tar_load(files.pdf)
+tar_load(files.txt)
+tar_load(files.epub)
 ```
 
 ```{r, echo = FALSE}
@@ -1056,6 +1060,181 @@ kable(freqtable.xmlmeta$ausfertigung_jahr,
                     "% Kumulativ")) %>% kable_styling(latex_options = "repeat_header")
 
 ```
+
+
+
+# Dateigrößen
+
+
+```{r, C-DBR_07_Density_Dateigroessen_XML, fig.height = 6, fig.width = 9}
+
+
+xml.MB <- file.size(files.xml) / 10^6
+
+
+dt.plot <- data.table(xml.MB)
+
+ggplot(data = dt.plot,
+       aes(x = xml.MB)) +
+    geom_density(fill = "black") +
+    scale_x_log10(breaks = trans_breaks("log10", function(x) 10^x),
+                  labels = trans_format("log10", math_format(10^.x)))+
+    annotation_logticks(sides = "b")+
+    theme_bw() +
+    labs(
+        title = paste(prefix.figuretitle,
+                      "| Verteilung der Dateigrößen (XML)"),
+        caption = caption,
+        x = "Dateigröße in MB",
+        y = "Dichte"
+    )+
+    theme(
+        text = element_text(size = 14),
+        plot.title = element_text(size = 14,
+                                  face = "bold"),
+        legend.position = "none",
+        panel.spacing = unit(0.1, "lines"),
+        plot.margin = margin(10, 20, 10, 10)
+    )
+    
+```
+
+
+
+
+```{r, C-DBR_07_Density_Dateigroessen_PDF, fig.height = 6, fig.width = 9}
+
+
+pdf.MB <- file.size(files.pdf) / 10^6
+
+
+dt.plot <- data.table(pdf.MB)
+
+ggplot(data = dt.plot,
+       aes(x = pdf.MB)) +
+    geom_density(fill = "black") +
+    scale_x_log10(breaks = trans_breaks("log10", function(x) 10^x),
+                  labels = trans_format("log10", math_format(10^.x)))+
+    annotation_logticks(sides = "b")+
+    theme_bw() +
+    labs(
+        title = paste(prefix.figuretitle,
+                      "| Verteilung der Dateigrößen (PDF)"),
+        caption = caption,
+        x = "Dateigröße in MB",
+        y = "Dichte"
+    )+
+    theme(
+        text = element_text(size = 14),
+        plot.title = element_text(size = 14,
+                                  face = "bold"),
+        legend.position = "none",
+        panel.spacing = unit(0.1, "lines"),
+        plot.margin = margin(10, 20, 10, 10)
+    )
+    
+```
+
+
+
+```{r, C-DBR_07_Density_Dateigroessen_TXT, fig.height = 6, fig.width = 9}
+
+
+txt.MB <- file.size(files.txt) / 10^6
+
+
+dt.plot <- data.table(txt.MB)
+
+ggplot(data = dt.plot,
+       aes(x = txt.MB)) +
+    geom_density(fill = "black") +
+    scale_x_log10(breaks = trans_breaks("log10", function(x) 10^x),
+                  labels = trans_format("log10", math_format(10^.x)))+
+    annotation_logticks(sides = "b")+
+    theme_bw() +
+    labs(
+        title = paste(prefix.figuretitle,
+                      "| Verteilung der Dateigrößen (TXT)"),
+        caption = caption,
+        x = "Dateigröße in MB",
+        y = "Dichte"
+    )+
+    theme(
+        text = element_text(size = 14),
+        plot.title = element_text(size = 14,
+                                  face = "bold"),
+        legend.position = "none",
+        panel.spacing = unit(0.1, "lines"),
+        plot.margin = margin(10, 20, 10, 10)
+    )
+    
+```
+
+
+
+
+```{r, C-DBR_07_Density_Dateigroessen_EPUB, fig.height = 6, fig.width = 9}
+
+
+epub.MB <- file.size(files.epub) / 10^6
+
+
+dt.plot <- data.table(epub.MB)
+
+ggplot(data = dt.plot,
+       aes(x = epub.MB)) +
+    geom_density(fill = "black") +
+    scale_x_log10(breaks = trans_breaks("log10", function(x) 10^x),
+                  labels = trans_format("log10", math_format(10^.x)))+
+    annotation_logticks(sides = "b")+
+    theme_bw() +
+    labs(
+        title = paste(prefix.figuretitle,
+                      "| Verteilung der Dateigrößen (EPUB)"),
+        caption = caption,
+        x = "Dateigröße in MB",
+        y = "Dichte"
+    )+
+    theme(
+        text = element_text(size = 14),
+        plot.title = element_text(size = 14,
+                                  face = "bold"),
+        legend.position = "none",
+        panel.spacing = unit(0.1, "lines"),
+        plot.margin = margin(10, 20, 10, 10)
+    )
+    
+```
+
+
+
+
+# Kryptographische Signaturen
+
+
+## Zwei-Phasen-Signatur
+
+Die Integrität und Echtheit der einzelnen Archive des Datensatzes sind durch eine Zwei-Phasen-Signatur sichergestellt.
+
+In **Phase I** werden während der Kompilierung für jedes ZIP-Archiv, das Codebook und die Robustness Checks Hash-Werte in zwei verschiedenen Verfahren (SHA2-256 und SHA3-512) berechnet und in einer CSV-Datei dokumentiert.
+
+In **Phase II** werden diese CSV-Datei und der Compilation Report mit meinem persönlichen geheimen GPG-Schlüssel signiert. Dieses Verfahren stellt sicher, dass die Kompilierung von jedermann durchgeführt werden kann, insbesondere im Rahmen von Replikationen, die persönliche Gewähr für Ergebnisse aber dennoch vorhanden bleibt.
+
+
+## Persönliche GPG-Signatur
+
+Die während der Kompilierung des Datensatzes erstellte CSV-Datei mit den Hash-Prüfsummen und der Compilation Report sind mit meiner persönlichen GPG-Signatur versehen. Der mit dieser Version korrespondierende Public Key ist sowohl mit dem Datensatz als auch mit dem Source Code hinterlegt. Er hat folgende Kenndaten:
+ 
+ **Name:** Sean Fobbe (fobbe-data@posteo.de)
+ 
+ **Fingerabdruck:** FE6F B888 F0E5 656C 1D25  3B9A 50C4 1384 F44A 4E42
+
+
+
+
+
+\newpage
+
 
 
 
