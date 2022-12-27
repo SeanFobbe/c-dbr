@@ -827,7 +827,7 @@ ggplot(data = freqtable.rechtsakte$periodikum[-.N]) +
     theme_bw()+
     labs(
         title = paste(prefix.figuretitle,
-                      "| Rechtsakte mit Inhalt je Periodikum"),
+                      "| Rechtsakte mit Normtext je Periodikum"),
         caption = caption,
         x = "Periodikum",
         y = "Rechtsakte"
@@ -881,7 +881,7 @@ ggplot(data = freqtable.xmlmeta$periodikum[-.N]) +
     theme_bw() +
     labs(
         title = paste(prefix.figuretitle,
-                      "| Rechtsakte nach Metadaten je Periodikum"),
+                      "| Rechtsakte mit/ohne Normtext je Periodikum"),
         caption = caption,
         x = "Periodikum",
         y = "Rechtsakte"
@@ -925,13 +925,10 @@ kable(freqtable.xmlmeta$periodikum,
 
 ### Einzelnormen
 
-freqtable <- table.normen.ausjahr[-.N][,lapply(.SD, as.numeric)]
 
+```{r C-DBR_03_Einzelnormen_Barplot_Ausfertigungsjahr, fig.height = 7, fig.width = 11}
 
-freqtable <- table.normen.ausjahr[-.N][,lapply(.SD, as.numeric)]
-
-#+ C-DBR_03_Einzelnormen_Barplot_Ausfertigungsjahr, fig.height = 7, fig.width = 11
-ggplot(data = freqtable) +
+ggplot(data = freqtable.normen$ausfertigung_jahr[-.N][,lapply(.SD, as.numeric)]) +
     geom_bar(aes(x = ausfertigung_jahr,
                  y = N),
              stat = "identity",
@@ -952,8 +949,12 @@ ggplot(data = freqtable) +
         plot.margin = margin(10, 20, 10, 10)
     )
 
+```
 
-kable(freqtable[,c(1:2,4:5)],
+
+```{r}
+
+kable(freqtable.normen$ausfertigung_jahr,
       format = "latex",
       align = 'P{3cm}',
       booktabs = TRUE,
@@ -963,7 +964,7 @@ kable(freqtable[,c(1:2,4:5)],
                     "% Gesamt",
                     "% Kumulativ")) %>% kable_styling(latex_options = "repeat_header")
 
-
+```
 
 
 \newpage
@@ -971,10 +972,8 @@ kable(freqtable[,c(1:2,4:5)],
 ### Rechtsakte mit veröffentlichtem Normtext
 
 
-freqtable <- table.rechtsakte.ausjahr[-.N][,lapply(.SD, as.numeric)]
-
-#+ C-DBR_03_Rechtsakte_Barplot_Ausfertigungsjahr, fig.height = 7, fig.width = 11
-ggplot(data = freqtable) +
+```{r C-DBR_03_Rechtsakte_Barplot_Ausfertigungsjahr, fig.height = 7, fig.width = 11}
+ggplot(data = freqtable.rechtsakte$ausfertigung_jahr[-.N][,lapply(.SD, as.numeric)]) +
     geom_bar(aes(x = ausfertigung_jahr,
                  y = N),
              stat = "identity",
@@ -982,7 +981,7 @@ ggplot(data = freqtable) +
     theme_bw()+
     labs(
         title = paste(prefix.figuretitle,
-                      "| Rechtsakte mit Inhalt je Ausfertigungsjahr"),
+                      "| Rechtsakte mit Normtext je Ausfertigungsjahr"),
         caption = caption,
         x = "Ausfertigungsjahr",
         y = "Rechtsakte"
@@ -995,13 +994,12 @@ ggplot(data = freqtable) +
         plot.margin = margin(10, 20, 10, 10)
     )
 
+```
 
 
+```{r}
 
-
-freqtable <- table.rechtsakte.ausjahr[-.N][,lapply(.SD, as.numeric)]
-
-kable(freqtable[,c(1:2,4:5)],
+kable(freqtable.rechtsakte$ausfertigung_jahr,
       format = "latex",
       align = 'P{3cm}',
       booktabs = TRUE,
@@ -1010,6 +1008,9 @@ kable(freqtable[,c(1:2,4:5)],
                     "Rechtsakte",
                     "% Gesamt",
                     "% Kumulativ")) %>% kable_styling(latex_options = "repeat_header")
+
+```
+
 
 
 \newpage
@@ -1017,11 +1018,8 @@ kable(freqtable[,c(1:2,4:5)],
 ###  Alle Rechtsakte (mit und ohne Normtext)
 
 
-freqtable <- table.meta.ausjahr[-.N][,lapply(.SD, as.numeric)]
-
-
-#+ C-DBR_03_Meta_Barplot_Ausfertigungsjahr, fig.height = 7, fig.width = 11
-ggplot(data = freqtable) +
+```{r C-DBR_03_Meta_Barplot_Ausfertigungsjahr, fig.height = 7, fig.width = 11}
+ggplot(data = freqtable.xmlmeta$ausfertigung_jahr[-.N][,lapply(.SD, as.numeric)]) +
     geom_bar(aes(x = ausfertigung_jahr,
                  y = N),
              stat = "identity",
@@ -1029,7 +1027,7 @@ ggplot(data = freqtable) +
     theme_bw()+
     labs(
         title = paste(prefix.figuretitle,
-                      "| Rechtsakte nach Metadaten je Ausfertigungsjahr"),
+                      "| Rechtsakte mit/ohne Normtext je Ausfertigungsjahr"),
         caption = caption,
         x = "Ausfertigungsjahr",
         y = "Rechtsakte"
@@ -1041,13 +1039,13 @@ ggplot(data = freqtable) +
         legend.position = "none",
         plot.margin = margin(10, 20, 10, 10)
     )
+```
 
 
 
+```{r}
 
-freqtable <- table.meta.ausjahr[-.N][,lapply(.SD, as.numeric)]
-
-kable(freqtable[,c(1:2,4:5)],
+kable(freqtable.xmlmeta$ausfertigung_jahr,
       format = "latex",
       align = 'P{3cm}',
       booktabs = TRUE,
@@ -1057,7 +1055,7 @@ kable(freqtable[,c(1:2,4:5)],
                     "% Gesamt",
                     "% Kumulativ")) %>% kable_styling(latex_options = "repeat_header")
 
-
+```
 
 
 
