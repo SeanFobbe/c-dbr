@@ -909,22 +909,23 @@ zip.all <- tarchetypes::tar_map(unlist = FALSE,
 
 
 ```{targets tar.hashes1}
-tar_target(zip.all,
-           c(tar_select_targets(zip.all, starts_with("zip"))))
+tarchetypes::tar_combine(zip.all1,
+zip.all[[2]],
+command = dplyr::bind_rows(!!!.x, .id = "method"))
 ```
 
 ### Kryptographische Hashes berechnen
 
 
 
-```{targets tar.hashes2}
-tar_target(hashes,
-           f.tar_multihashes(c(zip.all,
-                               report.codebook[1],
-                               report.robustness[1]),
-                             multicore = config$parallel$multihashes,
-                             cores = fullCores))
-```
+<!-- ```{targets tar.hashes2} -->
+<!-- tar_target(hashes, -->
+<!--            f.tar_multihashes(c(zip.all, -->
+<!--                                report.codebook[1], -->
+<!--                                report.robustness[1]), -->
+<!--                              multicore = config$parallel$multihashes, -->
+<!--                              cores = fullCores)) -->
+<!-- ``` -->
 
 
 
