@@ -1,0 +1,218 @@
+---
+title: "Robustness Checks | Corpus des Deutschen Bundesrechts (C-DBR)"
+author: Seán Fobbe
+geometry: margin=3cm
+papersize: a4
+fontsize: 11pt
+output:
+  pdf_document:
+    toc: true
+    toc_depth: 3
+    number_sections: true
+    pandoc_args: --listings
+    includes:
+      in_header: ../tex/Preamble_DE.tex
+      before_body: [../temp/Definitions.tex, ../tex/Titlepage_Robustness.tex]
+bibliography: ../temp/packages.bib
+nocite: '@*'
+---
+
+
+```{r, setup, include=FALSE}
+knitr::opts_chunk$set(fig.path = file.path("..", "analysis/"),
+                      dev = config$fig$format,
+                      dpi = config$fig$dpi,
+                      fig.align = config$fig$align,
+                      echo = TRUE,
+                      warning = TRUE,
+                      message = TRUE)
+
+```
+
+
+# Ergebnisse laden
+
+
+```{r}
+tar_load(latexdefs)
+tar_load(dt.normen)
+tar_load(dt.rechtsakte)
+tar_load(dt.meta)
+tar_load(files.pdf)
+tar_load(files.txt)
+tar_load(files.xml)
+tar_load(files.epub)
+
+```
+
+
+
+
+
+# Variablen
+
+## Anzahl Variablen
+
+```{r}
+length(dt.normen)
+```
+
+
+## Alle Namen der Variablen
+
+```{r}
+names(dt.normen)
+```
+
+
+## Beispiel-Werte
+
+```{r}
+str(dt.normen)
+```
+
+
+
+
+
+
+# Frequenztabellen erstellen
+
+
+## Liste zu prüfender Variablen
+
+ **Hinweis:** Diese Variablen werden bei der Erstellung der Frequenztabellen nicht berücksichtigt.
+ 
+ 
+
+```{r}
+varlist  <-  c("periodikum",
+               "fundstellentyp",
+               "check_neuf",
+               "check_aufh",
+               "check_sonst",
+               "check_hinweis",
+               "check_stand",
+               "gliederungskennzahl",
+               "ausfertigung_jahr",
+               "doi_concept",
+               "doi_version",
+               "version",	
+               "lizenz" )
+```
+
+
+
+
+
+# Frequenztabellen erstellen: Einzelnormen
+
+```{r, results = "asis"}
+prefix.freqtable.einzelnormen <- paste0(config$project$shortname,
+                                        "_01_Einzelnormen_Frequenztabelle_var-")
+
+
+f.fast.freqtable(dt.normen,
+                 varlist = config$freqtable$ignore,
+                 sumrow = TRUE,
+                 output.list = FALSE,
+                 output.kable = TRUE,
+                 output.csv = TRUE,
+                 outputdir = dir.analysis,
+                 prefix = prefix.freqtable.einzelnormen)
+```
+
+
+# Frequenztabellen erstellen: Rechtsakte
+
+## Reduzierte Liste zu prüfender Variablen
+
+Folgende Variablen sind wegen der geringeren Auflösung der Metadaten (nur Rechtsaktebene, nicht Normebene) nicht mehr nutzbar.
+
+
+```{r}
+
+varremove <- c("gliederungskennzahl")
+
+vars.freqtable.rechtsakte <- setdiff(varlist, varremove)
+
+print(vars.freqtable.rechtsakte)
+```
+
+
+
+
+## Frequenztabellen erstellen
+
+
+```{r, results = "asis"}
+prefix.freqtable.rechtsakte <- paste0(config$project$shortname,
+                                      "_01_Rechtsakte_Frequenztabelle_var-")
+
+
+
+f.fast.freqtable(dt.rechtsakte,
+                 varlist = vars.freqtable.rechtsakte,
+                 sumrow = TRUE,
+                 output.list = FALSE,
+                 output.kable = TRUE,
+                 output.csv = TRUE,
+                 outputdir = dir.analysis,
+                 prefix = prefix.freqtable.rechtsakte)
+
+```
+
+
+
+
+
+# Frequenztabellen erstellen: XML-Metadaten
+
+
+## Liste zu prüfender Variablen
+
+```{r}
+print(vars.freqtable.rechtsakte)
+```
+
+
+## Frequenztabellen erstellen
+
+```{r, results = "asis"}
+prefix.freqtable.meta <- paste0(config$project$shortname,
+                 "_01_Meta_Frequenztabelle_var-")
+
+
+f.fast.freqtable(dt.meta,
+                 varlist = vars.freqtable.rechtsakte,
+                 sumrow = TRUE,
+                 output.list = FALSE,
+                 output.kable = TRUE,
+                 output.csv = TRUE,
+                 outputdir = dir.analysis,
+                 prefix = prefix.freqtable.meta)
+
+```
+
+
+
+
+```{r, results = "asis"}
+cat(readLines(tar_read(changelog)),
+    sep = "\n")
+
+```
+
+
+# Parameter für strenge Replikationen
+
+
+```{r}
+system2("openssl", "version", stdout = TRUE)
+
+sessionInfo()
+
+```
+
+
+# Literaturverzeichnis
