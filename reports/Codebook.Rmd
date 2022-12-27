@@ -30,6 +30,13 @@ knitr::opts_chunk$set(fig.path = file.path("..", "analysis/"),
 ```
 
 
+```{r, echo = FALSE}
+tar_load(latexdefs)
+tar_load(lingstats.summary.normen)
+tar_load(lingstats.summary.rechtsakte)
+
+```
+
 
 
 
@@ -399,6 +406,66 @@ Variable & Definition\\
 
 \end{longtable}
 \end{centering}
+
+
+
+
+
+
+## Kennzahlen: Einzelnormen
+
+
+```{r}
+setnames(lingstats.summary.normen, c("Variable",
+                                     "Gesamt",
+                                     "Min",
+                                     "1. Quartil",
+                                     "Median",
+                                     "Mittel",
+                                     "3. Quartil",
+                                     "Max"))
+
+lingstats.summary.normen$Variable <- c("Zeichen",
+                                       "Tokens",
+                                       "Typen",
+                                       "Sätze")
+
+kable(lingstats.summary.normen,
+      digits = 2,
+      format.args = list(big.mark = ","),
+      format = "latex",
+      booktabs = TRUE,
+      longtable = TRUE)
+```
+
+
+
+
+## Kennzahlen: Rechtsakte
+
+
+```{r}
+setnames(lingstats.summary.rechtsakte, c("Kennzahl",
+                                  "Gesamt",
+                                  "Min",
+                                  "1. Quartil",
+                                  "Median",
+                                  "Mittel",
+                                  "3. Quartil",
+                                  "Max"))
+
+lingstats.summary.rechtsakte$Kennzahl <- c("Zeichen",
+                                    "Tokens",
+                                    "Typen",
+                                    "Sätze")
+
+kable(lingstats.summary.rechtsakte,
+      digits = 2,
+      format.args = list(big.mark = ","),
+      format = "latex",
+      booktabs = TRUE,
+      longtable = TRUE)
+```
 
 
 
