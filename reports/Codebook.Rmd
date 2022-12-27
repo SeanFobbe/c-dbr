@@ -926,7 +926,7 @@ kable(freqtable.xmlmeta$periodikum,
 ### Einzelnormen
 
 
-```{r C-DBR_03_Einzelnormen_Barplot_Ausfertigungsjahr, fig.height = 7, fig.width = 11}
+```{r C-DBR_06_Einzelnormen_Barplot_Ausfertigungsjahr, fig.height = 7, fig.width = 11}
 
 ggplot(data = freqtable.normen$ausfertigung_jahr[-.N][,lapply(.SD, as.numeric)]) +
     geom_bar(aes(x = ausfertigung_jahr,
@@ -972,7 +972,7 @@ kable(freqtable.normen$ausfertigung_jahr,
 ### Rechtsakte mit veröffentlichtem Normtext
 
 
-```{r C-DBR_03_Rechtsakte_Barplot_Ausfertigungsjahr, fig.height = 7, fig.width = 11}
+```{r C-DBR_06_Rechtsakte_Barplot_Ausfertigungsjahr, fig.height = 7, fig.width = 11}
 ggplot(data = freqtable.rechtsakte$ausfertigung_jahr[-.N][,lapply(.SD, as.numeric)]) +
     geom_bar(aes(x = ausfertigung_jahr,
                  y = N),
@@ -1018,7 +1018,7 @@ kable(freqtable.rechtsakte$ausfertigung_jahr,
 ###  Alle Rechtsakte (mit und ohne Normtext)
 
 
-```{r C-DBR_03_Meta_Barplot_Ausfertigungsjahr, fig.height = 7, fig.width = 11}
+```{r C-DBR_06_Meta_Barplot_Ausfertigungsjahr, fig.height = 7, fig.width = 11}
 ggplot(data = freqtable.xmlmeta$ausfertigung_jahr[-.N][,lapply(.SD, as.numeric)]) +
     geom_bar(aes(x = ausfertigung_jahr,
                  y = N),
