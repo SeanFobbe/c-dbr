@@ -36,7 +36,9 @@ knitr::opts_chunk$set(fig.path = file.path("..", "analysis/"),
 ```{r}
 tar_load(latexdefs)
 tar_load(dt.normen)
+tar_load(dt.normen.meta)
 tar_load(dt.rechtsakte)
+tar_load(dt.rechtsakte.meta)
 tar_load(dt.meta)
 tar_load(files.pdf)
 tar_load(files.txt)
@@ -69,7 +71,9 @@ length(files.epub)
 
 ```{r}
 length(dt.normen)
+length(dt.normen.meta)
 length(dt.rechtsakte)
+length(dt.rechtsakte.meta)
 length(dt.meta)
 ```
 
@@ -78,7 +82,9 @@ length(dt.meta)
 
 ```{r}
 names(dt.normen)
+names(dt.normen.meta)
 names(dt.rechtsakte)
+names(dt.rechtsakte.meta)
 names(dt.meta)
 ```
 
