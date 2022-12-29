@@ -29,6 +29,7 @@ toggle = false   # Ob Debugging aktiv ist; Möglichkeiten sind "TRUE" oder "FALS
 sample = 500      # Die Anzahl der zufällig ausgewählten Rechtsakte, die im Debugging-Modus berücksichtigt werden sollen.
 qaSample = 50        # Die Anzahl der zufällig ausgewählten Einzelnormen, die zur Überprüfung separat gespeichert werden sollen.
 
+cleanrun = false # Löscht vor jedem Run alle gespeicherten Zwischen- und Endergebnisse (Hinweis: ist unabhängig von debug.toggle, aber idR für Debugging nützlich)
 
 
 [cores]
