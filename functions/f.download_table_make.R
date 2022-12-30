@@ -26,7 +26,7 @@ f.download_table_make <- function(dt.filenames,
     
 
     ## === Vektor der Langtitel erstellen ===
-    ## **Hinweis:** Es gibt zwei Rechtsakte mit dem Namen "Allgemeine Eisenbahngesetz", obwohl es sich um zwei unterschiedliche Rechtsakte handelt. Die beiden Rechtsakte werden daher um ihr jeweiliges Ausfertigungsjahr ergänzt um die Dateinamen einzigartig zu machen.
+    ## **Hinweis:** Es gibt einige Rechtsakte mit gleichem Namen aber unterschiedlichem Inhalt. Die Rechtsakte werden daher um ihr jeweiliges Ausfertigungsjahr ergänzt, um die Dateinamen einzigartig zu machen.
 
     longtitle.elements <- rvest::html_elements(xml, "title")
     longtitle.raw  <- xml2::xml_text(longtitle.elements)
