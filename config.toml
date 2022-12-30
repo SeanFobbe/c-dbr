@@ -16,10 +16,10 @@ code = "MIT-0"
 [doi] # Digital Object Identifier
 
 data.concept = "10.5281/zenodo.3832111" # do not change
-data.version = "???" # 
+data.version = "10.5281/zenodo.7494474" # 
 
 software.concept = "10.5281/zenodo.4072934" # do not change
-software.version = "???" # 
+software.version = "10.5281/zenodo.7494477" # 
 
 
 
@@ -35,7 +35,7 @@ cleanrun = false # Löscht vor jedem Run alle gespeicherten Zwischen- und Enderg
 [cores]
 
 max = true  # Ob die maximale Anzahl an logischen Kernen genutzt werden soll; Möglichkeiten sind "TRUE" oder "FALSE"
-number = 8   # Die Anzahl Rechtenkerne, die verwendet werden soll; wird nur berücksichtigt falls "cores.max" auf "FAlSE" steht
+number = 8   # Die Anzahl Rechenkerne, die verwendet werden soll; wird nur berücksichtigt falls "cores.max" auf "FAlSE" steht
 
 
 
