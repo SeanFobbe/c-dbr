@@ -8,6 +8,8 @@
 #'
 #'
 #' @param file.xml Character. Vektor mit Pfaden zu XML-Dateien von www.gesetze-im-internet.de
+#' @param multicore Logical. Ob das Parsing parallelisiert werden soll (aktuell meist fehlerhaft).
+#' @param cores Integer. Anzahl Kerne für die Parallelisierung.
 #'
 #' @return Data.table. Eine Tabelle mit den Texten und Metadaten jeder Einzelorm aus den XML-Dateien.
 
@@ -349,8 +351,3 @@ xmlparse.einzelnormen <- function(file.xml){
     return(out.dt)
     
 }
-
-
-
-
-
