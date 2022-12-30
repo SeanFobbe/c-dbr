@@ -16,7 +16,7 @@ f.finalize_einzelnormen <- function(dt.normen,
     ## Unit Test
     test_that("Argumente entsprechen Erwartungen.", {
         expect_s3_class(dt.normen, "data.table")
-        expect_s3_class(dt.lingstats, "data.table")
+        expect_s3_class(lingstats, "data.table")
     })
 
     
