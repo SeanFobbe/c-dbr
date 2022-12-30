@@ -3,7 +3,7 @@
 #' @param dt.normen Data.table. Der fast-finale Datensatz mit den Einzelnormen.
 #' @param lingstats Data.table. Die linguistischen Kennzahlen für die Einzelnormen
 #'
-#' @return Der finalisierte und geprüfte Datensatz.
+#' @return Data.table. Der finalisierte und geprüfte Datensatz.
 
 
 
