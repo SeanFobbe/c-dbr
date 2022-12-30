@@ -7,6 +7,8 @@ files/
 analysis/
 output/
 temp/
+netzwerke/
+test/
 markdown/*.pdf
 
 */auto/
