@@ -35,9 +35,9 @@ knitr::opts_chunk$set(fig.path = file.path("..", "analysis/"),
 
 ```{r}
 tar_load(latexdefs)
-tar_load(dt.normen)
+tar_load(dt.normen.final)
 tar_load(dt.normen.meta)
-tar_load(dt.rechtsakte)
+tar_load(dt.rechtsakte.final)
 tar_load(dt.rechtsakte.meta)
 tar_load(dt.meta)
 tar_load(files.pdf)
@@ -70,9 +70,9 @@ length(files.epub)
 ## Anzahl Variablen
 
 ```{r}
-length(dt.normen)
+length(dt.normen.final)
 length(dt.normen.meta)
-length(dt.rechtsakte)
+length(dt.rechtsakte.final)
 length(dt.rechtsakte.meta)
 length(dt.meta)
 ```
@@ -81,9 +81,9 @@ length(dt.meta)
 ## Alle Namen der Variablen
 
 ```{r}
-names(dt.normen)
+names(dt.normen.final)
 names(dt.normen.meta)
-names(dt.rechtsakte)
+names(dt.rechtsakte.final)
 names(dt.rechtsakte.meta)
 names(dt.meta)
 ```
@@ -92,8 +92,8 @@ names(dt.meta)
 ## Beispiel-Werte
 
 ```{r}
-str(dt.normen)
-str(dt.rechtsakte)
+str(dt.normen.final)
+str(dt.rechtsakte.final)
 str(dt.meta)
 ```
 
@@ -104,10 +104,10 @@ str(dt.meta)
 ## Ausfertigungsdatum
 
 ***Einzelnormen***
-summary(as.IDate(dt.normen$ausfertigung_datum))
+summary(as.IDate(dt.normen.final$ausfertigung_datum))
 
 ***Rechtsakte***
-summary(as.IDate(dt.rechtsakte$ausfertigung_datum))
+summary(as.IDate(dt.rechtsakte.final$ausfertigung_datum))
 
 ***XML-Metadaten***
 summary(as.IDate(dt.meta$ausfertigung_datum))
@@ -117,10 +117,10 @@ summary(as.IDate(dt.meta$ausfertigung_datum))
 ## Ausfertigungsjahr
 
 ***Einzelnormen***
-summary(dt.normen$ausfertigung_jahr)
+summary(dt.normen.final$ausfertigung_jahr)
 
 ***Rechtsakte***
-summary(dt.rechtsakte$ausfertigung_jahr)
+summary(dt.rechtsakte.final$ausfertigung_jahr)
 
 ***XML-Metadaten***
 summary(dt.meta$ausfertigung_jahr)
@@ -166,7 +166,7 @@ prefix.freqtable.einzelnormen <- paste0(config$project$shortname,
                                         "_01_Einzelnormen_Frequenztabelle_var-")
 
 
-f.fast.freqtable(dt.normen,
+f.fast.freqtable(dt.normen.final,
                  varlist = varlist,
                  sumrow = TRUE,
                  output.list = FALSE,
@@ -207,7 +207,7 @@ prefix.freqtable.rechtsakte <- paste0(config$project$shortname,
 
 
 
-f.fast.freqtable(dt.rechtsakte,
+f.fast.freqtable(dt.rechtsakte.final,
                  varlist = vars.freqtable.rechtsakte,
                  sumrow = TRUE,
                  output.list = FALSE,
