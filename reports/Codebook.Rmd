@@ -407,7 +407,7 @@ kable(dt.var_codebook,
 
 ## Erläuterung der Kennzahlen
 
- Zur besseren Einschätzung des inhaltlichen Umfangs des Korpus dokumentiere ich an dieser Stelle die Verteilung der Werte für drei verschiedene klassische linguistische Kennzahlen:
+ Zur besseren Einschätzung des inhaltlichen Umfangs des Korpus dokumentiere ich an dieser Stelle die Verteilung der Werte für verschiedene klassische linguistische Kennzahlen:
 
  \medskip
 
@@ -432,7 +432,7 @@ Sätze & Entsprechen in etwa dem üblichen Verständnis eines Satzes. Die Regeln
 
 
 
-\ra{1.0}
+\ra{1.3}
 
 
 ## Kennzahlen: Einzelnormen
