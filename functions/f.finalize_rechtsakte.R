@@ -9,7 +9,7 @@
 
 
 f.finalize_rechtsakte <- function(dt.rechtsakte,
-                                    lingstats){
+                                  lingstats){
 
 
 
