@@ -122,6 +122,42 @@ f.dt.meta <- function(file.xml,
 
 
 
+    ## Variablen sortieren
+
+    setcolorder(dt.meta,
+                c("doc_id",
+                  "jurabk",
+                  "amtabk",
+                  "langue",
+                  "kurzue",
+                  "ausfertigung_datum",
+                  "ausfertigung_jahr",        
+                  "aenderung_datum",
+                  "aufhebung_verkuendung_datum",
+                  "aufhebung_wirkung_datum",
+                  "neufassung_datum",
+                  "fundstellentyp",
+                  "periodikum",
+                  "zitstelle",
+                  "stand",
+                  "aufh",
+                  "neuf",
+                  "hinweis",
+                  "sonst",
+                  "check_stand",
+                  "check_aufh",
+                  "check_neuf",
+                  "check_hinweis",
+                  "check_sonst",
+                  "builddate_original",
+                  "builddate_iso",
+                  "doi_concept",
+                  "doi_version",
+                  "version",
+                  "lizenz"))
+
+    
+
     return(dt.meta)
 
     
