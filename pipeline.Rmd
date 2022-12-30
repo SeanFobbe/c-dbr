@@ -275,6 +275,23 @@ tar_target(changelog,
 ```
 
 
+### Liste aller Variablen im Codebook
+
+Die Variablen des Datensatzes, inklusive ihrer Erläuterung.
+
+
+```{targets tar.file.varlist}
+list(
+    tar_target(file.var_codebook,
+               "data/C-DBR_Variables.csv",
+               format = "file"),
+    tar_target(dt.var_codebook,
+               fread(file.var_codebook))
+)
+```
+
+
+
 
 ## Download Targets
 
