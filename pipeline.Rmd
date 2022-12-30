@@ -567,15 +567,15 @@ tar_target(var_lingstats.rechtsakte,
 
 ```{targets tar.enhance.finalize.normen}
 tar_target(dt.normen.final,
-           cbind(dt.normen,
-                 var_lingstats.normen))
+           f.finalize_einzelnormen(dt.normen = dt.normen,
+                                   lingstats = var_lingstats.normen))
 ```
 
 
 ```{targets tar.enhance.finalize.rechtsakte}
 tar_target(dt.rechtsakte.final,
-           cbind(dt.rechtsakte,
-                 var_lingstats.rechtsakte))
+           f.finalize_rechtsakte(dt.rechtsakte = dt.rechtsakte,
+                                 lingstats = var_lingstats.rechtsakte))
 ```
 
 
