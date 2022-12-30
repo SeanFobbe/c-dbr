@@ -6,7 +6,11 @@
 
 - Vollständige Aktualisierung der Daten
 - Neuer Entwurf des gesamten Source Codes im {targets} Framework
+- Zusätzliche Netzwerk-Diagramme für alle Rechtsakte: Sunburst und Circlepacking
+- Reguläre Netzwerk-Diagramme nun in blau auf schwarzem Hintergrund
 - Manche finale Dateinamen nun mit Trennstrichen statt Pascal Case
+
+
 
 ## Version 2022-08-05
 
