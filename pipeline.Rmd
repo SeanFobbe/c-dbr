@@ -468,8 +468,8 @@ tar_target(files.txt,
 ```{targets tar.parse.normen}
 tar_target(dt.normen,
            f.dt.einzelnormen(file.xml = files.xml,
-                  multicore = config$parallel$parseEinzelnormen,
-                  cores = fullCores))
+                             multicore = config$parallel$parseEinzelnormen,
+                             cores = fullCores))
 
 ```
 
@@ -490,8 +490,8 @@ tar_target(dt.rechtsakte,
 ```{targets tar.parse.xmlmeta}
 tar_target(dt.meta,
            f.dt.meta(file.xml = files.xml,
-                  multicore = config$parallel$parseMeta,
-                  cores = fullCores))
+                     multicore = config$parallel$parseMeta,
+                     cores = fullCores))
 
 ```
 
