@@ -1,11 +1,10 @@
-
 #' Extract all links from a html page and return only those indicated by the regular expression.
 
 
-#' @param URL A valid URL
+#' @param URL A valid URL or path to a HTML file.
 #' @param regex A valid regular expression.
 
-#' @return A vector of links.
+#' @return A vector of URLs.
 
 
 f.linkextract_regex <- function(URL,
