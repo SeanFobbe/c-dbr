@@ -103,28 +103,47 @@ str(dt.meta)
 
 ## Ausfertigungsdatum
 
-***Einzelnormen***
+### Einzelnormen
+
+```{r}
 summary(as.IDate(dt.normen.final$ausfertigung_datum))
+```
 
-***Rechtsakte***
+
+### Rechtsakte
+
+```{r}
 summary(as.IDate(dt.rechtsakte.final$ausfertigung_datum))
+```
 
-***XML-Metadaten***
+
+### XML-Metadaten
+
+```{r}
 summary(as.IDate(dt.meta$ausfertigung_datum))
-
+```
 
 
 ## Ausfertigungsjahr
 
-***Einzelnormen***
+### Einzelnormen
+
+```{r}
 summary(dt.normen.final$ausfertigung_jahr)
+```
 
-***Rechtsakte***
+### Rechtsakte
+
+```{r}
 summary(dt.rechtsakte.final$ausfertigung_jahr)
+```
 
-***XML-Metadaten***
+
+### XML-Metadaten
+
+```{r}
 summary(dt.meta$ausfertigung_jahr)
-
+```
 
 
 
