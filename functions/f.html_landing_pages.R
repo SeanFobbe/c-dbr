@@ -1,7 +1,7 @@
 #' Extract filenames from GII HTMl Landing Pages
 #'
-#' @param url.xml Character. Vektor of URLs to XML(ZIP) archives from www.gesetze-im-internet.de
-#' @param multicore Logical. Parallelize extraction.
+#' @param url.xml Character. Vector of URLs to zipped XML archives on www.gesetze-im-internet.de
+#' @param multicore Logical. Whether to use multiple cores.
 #' @param cores Integer. Number of cores to use.
 #'
 #'
