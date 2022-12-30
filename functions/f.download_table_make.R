@@ -1,11 +1,9 @@
 #' Download Table erstellen
 #'
 #'
-#' @param dt.filenames Data.table. Tabelle mit PDF und EPUB Dateinamen von www.gesetze-im-internet.de
-#' @param url.xml Character. Vektor mit URLs zu XML (ZIP) Dateien auf GII.
-#' @param xml.toc Character. XML-Inhaltsverzeichnis auf GII.
-#'
-#'
+#' @param dt.filenames Data.table. Tabelle mit PDF- und EPUB-Dateinamen von www.gesetze-im-internet.de
+#' @param url.xml Character. Vektor mit URLs zu als ZIP verpackten XML-Dateien von GII.
+#' @param xml.toc Character. XML-Inhaltsverzeichnis von GII.
 #'
 #' @return Data.table. Eine fertige Download-Tabelle mit Namen und URLs für alle Formate.
 
