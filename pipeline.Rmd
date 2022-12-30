@@ -285,7 +285,7 @@ tar_target(changelog,
 ```{targets tar.download.xmlurl}
 
 tar_target(url.xml,
-           f.links_xml())
+           f.links_xml(url = "https://www.gesetze-im-internet.de/gii-toc.xml"))
 
 ```
 
