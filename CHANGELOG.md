@@ -10,6 +10,7 @@
 - Reguläre Netzwerk-Diagramme nun in blau auf schwarzem Hintergrund
 - Manche finale Dateinamen nun mit Trennstrichen statt Pascal Case
 - TXT-Konvertierung bricht bei Fehler nicht ab, dokumentiert aber fehlende TXT-Dateien
+- Einführung eines separaten Berichts für Robustness Checks
 
 
 
