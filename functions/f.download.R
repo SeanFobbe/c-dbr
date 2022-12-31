@@ -120,7 +120,8 @@ f.download <- function(url,
                       url = df.todo$url,
                       destfile = file.path(dir, df.todo$filename),
                       sleep.min = sleep.min,
-                      sleep.max = sleep.max)
+                      sleep.max = sleep.max,
+                      future.seed = TRUE)
 
     }
     
@@ -150,7 +151,8 @@ f.download <- function(url,
                           url = df.missing$url,
                           destfile = file.path(dir, df.todo$filename),
                           sleep.min = retry.sleep.min,
-                          sleep.max = retry.sleep.max)
+                          sleep.max = retry.sleep.max,
+                          future.seed = TRUE)
 
         }
 
