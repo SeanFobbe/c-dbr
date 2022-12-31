@@ -818,6 +818,7 @@ values <- tibble::tibble(
                       name = c("source",
                                "networks",
                                "pdf",
+							   "txt,"
                                "epub",
                                "xml",
                                "attachments",
@@ -829,6 +830,7 @@ values <- tibble::tibble(
                       input = c(quote(files.source),
                                 quote(files.network),
                                 quote(files.pdf),
+								quote(files.txt),
                                 quote(files.epub),
                                 quote(files.xml),
                                 quote(setdiff(files.xml.all, files.xml)),
@@ -841,6 +843,7 @@ values <- tibble::tibble(
                                         c("_Source_Code",
                                           "_DE_Netzwerke",
                                           "_DE_PDF_Datensatz",
+										  "_DE_TXT_Datensatz",
                                           "_DE_EPUB_Datensatz",
                                           "_DE_XML_Datensatz",
                                           "_DE_XML_Anlagen",
@@ -851,9 +854,8 @@ values <- tibble::tibble(
                                           "_DE_CSV_Metadaten-XML"),
                                         ".zip"),
                       mode = c(rep("mirror", 2),
-                               rep("cherry-pick", 9))
+                               rep("cherry-pick", 10))
                   )
-
 
 
 
