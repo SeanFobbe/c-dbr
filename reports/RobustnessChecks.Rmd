@@ -42,7 +42,7 @@ tar_load(dt.rechtsakte.meta)
 tar_load(dt.meta)
 tar_load(files.pdf)
 tar_load(files.txt)
-tar_load(files.xml)
+tar_load(files.xmlzip)
 tar_load(files.epub)
 
 ```
@@ -50,22 +50,57 @@ tar_load(files.epub)
 
 
 
-# Vollständigkeit von Download und Konvertierung
+# Vollständigkeit des Downloads
 
 
-## Download von XML, PDF und EPUB
+## Überblick
 
 ```{r}
-length(files.xml) == length(files.epub)
-length(files.xml) == length(files.pdf)
+length(files.xmlzip) == length(files.epub)
+length(files.xmlzip) == length(files.pdf)
 
-length(files.xml)
+length(files.xmlzip)
 length(files.pdf)
 length(files.epub)
 ```
 
-## Konvertierung von PDF zu TXT
 
+## Fehlende XML-Archive
+
+```{r}
+setdiff(dt.download$title.xml,
+        basename(files.xmlzip))
+
+```
+
+
+## Fehlende PDF-Dateien
+
+```{r}
+setdiff(dt.download$title.pdf,
+        basename(files.pdf))
+
+```
+
+
+## Fehlende EPUB-Dateien
+
+```{r}
+setdiff(dt.download$title.epub,
+        basename(files.epub))
+
+```
+
+
+
+
+
+# Vollständigkeit der Konvertierung
+
+
+
+
+## Überblick
 
 
 ```{r}
@@ -75,6 +110,13 @@ length(files.pdf)
 length(files.txt)
 ```
 
+
+## Fehlende TXT-Dateien
+
+```{r}
+setdiff(tools::file_path_sans_ext(basename(files.pdf)),
+        tools::file_path_sans_ext(basename(files.txt)))
+```
 
 
 
