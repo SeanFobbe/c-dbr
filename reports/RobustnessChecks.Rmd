@@ -112,7 +112,7 @@ length(files.txt)
 ```
 
 
-## Fehlende TXT-Dateien
+## Fehler bei TXT-Konvertierung
 
 ```{r}
 setdiff(tools::file_path_sans_ext(basename(files.pdf)),
