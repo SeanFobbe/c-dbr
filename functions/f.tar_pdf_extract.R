@@ -4,6 +4,11 @@
 
 #' @param x Character. A vector of PDF filenames.
 #' @param outputdir Character. The directory to store the extracted TXT files in.
+#' @param multicore Logical. Use multiple cores?
+#' @param cores Integer. Set number of cores.
+
+
+
 
 f.tar_pdf_extract <- function(x,
                               outputdir = "txt",
