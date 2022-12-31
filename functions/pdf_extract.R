@@ -32,7 +32,7 @@ pdf_extract <- function(x,
 
     ## Perform conversion from PDF to TXT
     invisible(future.apply::future_lapply(x,
-                                          pdf_extract_single,
+                                          pdf_extract_single_robust,
                                           outputdir = outputdir,
                                           future.seed = TRUE))
 
@@ -72,6 +72,20 @@ pdf_extract <- function(x,
                        end.extract))
     }
 
+}
+
+
+
+
+
+pdf_extract_single_robust <- function(x,
+                                      outputdir = NULL){
+    tryCatch({pdf_extract_single(x = x,
+                                 outputdir = outputdir)
+    },
+    error = function(cond) {
+        return(NA)}
+    )
 }
 
 
