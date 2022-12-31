@@ -95,8 +95,6 @@ pdf_extract_single_robust <- function(x,
 
 pdf_extract_single <- function(x,
                                outputdir = NULL){
-
-    print(x)
     
     ## Extract text layer from PDF
     pdf.extracted <- pdftools::pdf_text(x)
