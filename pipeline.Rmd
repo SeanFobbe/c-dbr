@@ -616,8 +616,8 @@ values <- tibble::tibble(
                       input = c(quote(dt.download),
                                 quote(dt.conctable),
                                 quote(dt.normen.final),
-                                quote(dt.rechtsakte.final),
                                 quote(dt.normen.meta),
+                                quote(dt.rechtsakte.final),
                                 quote(dt.rechtsakte.meta),
                                 quote(dt.meta)
                                 ),
@@ -1165,7 +1165,7 @@ kable(table.size,
 
 ```
 
-
+\newpage
 ## CSV-Dateien
 
 ```{r filesize.csv}
