@@ -41,7 +41,7 @@ tar_load(dt.rechtsakte.final)
 tar_load(dt.rechtsakte.meta)
 tar_load(dt.meta)
 tar_load(files.pdf)
-tar_load(files.txt)
+#tar_load(files.txt)
 tar_load(files.xml)
 tar_load(files.epub)
 
@@ -56,10 +56,10 @@ tar_load(files.epub)
 ```{r}
 length(files.xml) == length(files.epub)
 length(files.xml) == length(files.pdf)
-length(files.pdf) == length(files.txt)
+#length(files.pdf) == length(files.txt)
 
 length(files.pdf)
-length(files.txt)
+#length(files.txt)
 length(files.xml)
 length(files.epub)
 ```
