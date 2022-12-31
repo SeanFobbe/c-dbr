@@ -1113,11 +1113,6 @@ kable(hashes[,.(index,filename)],
       booktabs = TRUE,
       longtable = TRUE)
 
-```
-
-\newpage
-
-```{r}
 
 kable(hashes[,.(index,sha2.256)],
       format = "latex",
@@ -1127,6 +1122,11 @@ kable(hashes[,.(index,sha2.256)],
       longtable = TRUE)
 
 
+```
+
+\newpage
+
+```{r}
 
 kable(hashes[,.(index,sha3.512)],
       format = "latex",
