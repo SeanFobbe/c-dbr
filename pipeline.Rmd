@@ -943,7 +943,7 @@ tar_target(zip_analysis,
 ```{targets tar.hashes.list}
 tar_target(zip.all,
            c(zip_source,
-             zip_analyse,
+             zip_analysis,
              zip_networks,
              zip_pdf,
              zip_epub,
