@@ -107,7 +107,7 @@ Die Daten sind in offenen, interoperablen und weit verbreiteten Formaten (CSV, X
 
 Am einfachsten ist es die **CSV-Dateien** einzulesen. Die Nutzung der CSV-Varianten ist aus Qualitätsgründen und den umfangreicheren Metadaten \emph{empfohlen}. CSV\footnote{Das CSV-Format ist in RFC 4180 definiert, siehe \url{https://tools.ietf.org/html/rfc4180}} ist ein einfaches und maschinell gut lesbares Tabellen-Format. In diesem Datensatz sind die Werte komma-separiert. Jede Spalte entspricht einer Variable, jede Zeile einer Einzelnorm bzw. einem Rechtsakt (je nach Variante). Die Variablen sind unter Punkt \ref{variablen} genauer erläutert.
 
-Hier empfehle ich für **R** das package **data.table** (via CRAN verfügbar). Dessen Funktion **fread()** ist etwa zehnmal so schnell wie die normale **read.csv()**-Funktion in Base-R. Sie erkennt auch den Datentyp von Variablen sicherer. Ein Beispiel:
+Zum Einlesen empfehle ich für **R** das package **data.table** (via CRAN verfügbar). Dessen Funktion **fread()** ist etwa zehnmal so schnell wie die normale **read.csv()**-Funktion in Base-R. Sie erkennt auch den Datentyp von Variablen sicherer. Ein Beispiel:
 
 
 ```{r eval = FALSE, echo = TRUE}
@@ -274,7 +274,7 @@ Die Dateinamen der PDF-, TXT und EPUB-Dateien enthalten nur eine Abkürzung und 
 
 ## Qualitätsprüfung
 
-Insgesamt werden zusammen mit jeder Kompilierung Dutzende Tests zur Qualitätsprüfung durchgeführt. Alle Ergebnisse der Qualitätsprüfungen sind aggregiert im Compilation Report und einzeln im Archiv \enquote{analyse} zusammen mit dem Datensatz veröffentlicht.
+Insgesamt werden zusammen mit jeder Kompilierung Dutzende Tests zur Qualitätsprüfung durchgeführt. Alle Ergebnisse der Qualitätsprüfungen sind aggregiert im Compilation Report und im Robustess Checks-Bericht, sowie einzeln im Archiv \enquote{Analyse} zusammen mit dem Datensatz veröffentlicht.
 
 
 
