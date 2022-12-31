@@ -818,7 +818,7 @@ values <- tibble::tibble(
                       name = c("source",
                                "networks",
                                "pdf",
-							   "txt,"
+							   "txt",
                                "epub",
                                "xml",
                                "attachments",
