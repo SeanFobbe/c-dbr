@@ -50,9 +50,10 @@ tar_load(files.epub)
 
 
 
-# Vollständigkeit von Download
+# Vollständigkeit von Download und Konvertierung
 
-## Download
+
+## Download von XML, PDF und EPUB
 
 ```{r}
 length(files.xml) == length(files.epub)
@@ -63,7 +64,7 @@ length(files.pdf)
 length(files.epub)
 ```
 
-## Konvertierung zu TXT
+## Konvertierung von PDF zu TXT
 
 
 
