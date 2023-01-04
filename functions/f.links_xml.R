@@ -14,6 +14,8 @@ f.links_xml <- function(url = "https://www.gesetze-im-internet.de/gii-toc.xml"){
 
     links.xml <- xml2::xml_text(links)
 
+    ## Enforce HTTPS
+    links.xml <- gsub("http://", "https://", links.xml)
 
     return(links.xml)
 
