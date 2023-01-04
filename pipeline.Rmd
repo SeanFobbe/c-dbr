@@ -295,6 +295,8 @@ list(
 
 ## Download Targets
 
+Es werden von \url{www.gesetze-im-internet.de} alle Rechtsakte im XML-, EPUB- und PDF-Format heruntergeladen und auf der Festplatte gespeichert. Die Document Type Definition (DTD) für die XML-Dateien wird ebenfalls archiviert.
+
 
 
 ### URLs für XML-Archive
@@ -436,6 +438,7 @@ tar_target(files.epub,
 
 ## Convert Targets
 
+Dieser Abschnitt entpackt die ZIP-Dateien, erstellt ein Target mit allen XML-Dateien und konvertiert die PDF-Dateien in das TXT-Format.
 
 ### Entpacken
 
@@ -478,6 +481,8 @@ tar_target(files.txt,
 
 
 ## Parse Targets
+
+Der Abschnitt zum Parsing extrahiert aus den XML-Dateien alle relevanten Normtexte und Metadaten. Es wird auch eine Netzwerk-Analyse der Struktur der Rechtsakte durchgeführt.
 
 
 ### Datensatz erstellen: Einzelnormen
@@ -533,6 +538,7 @@ tar_target(files.network,
 
 ## Enhance Targets
 
+Hier werden vereinzelte Verbesserungen vorgenommen und weitere Variablen hinzugefügt. Schließlich werden die geprüften finalen Varianten erstellt.
 
 
 ### Variablen erstellen: \enquote{zeichen, token, typen, saetze}
@@ -825,6 +831,8 @@ tar_target(zip_analysis,
 
 
 ## Kryptographische Hashes
+
+Zum Ende hin werden für alle wichtigen Ergebnisse kryptographische Prüfsummen berechnet, die abschließend (außerhalb der Pipeline) mit dem persönlichen GPG-Key von Seán Fobbe signiert werden.
 
 
 ### Zu hashende ZIP-Archive definieren
