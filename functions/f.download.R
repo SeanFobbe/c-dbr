@@ -121,7 +121,7 @@ f.download <- function(url,
                                      destfile = file.path(dir, df.todo$filename),
                                      sleep.min = sleep.min,
                                      sleep.max = sleep.max,
-                                     future.seed = TRUE))
+                                     future.seed = TRUE)
 
     }
     
