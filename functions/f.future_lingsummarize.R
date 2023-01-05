@@ -29,7 +29,7 @@ f.lingsummarize <- function(dt){
     
     ntokens <- unname(ntoken(tokens))
     ntypes  <- unname(ntype(tokens))
-    nsentences <- unname(nsentence(corpus))
+    nsentences <- suppressWarnings(unname(nsentence(corpus)))
 
     out <- data.table(ntokens,
                       ntypes,
