@@ -53,7 +53,7 @@ f.future_lingsummarize <- function(dt,
 
     dt <- dt[,.(doc_id, text)]
     
-    nchars <- dt[, lapply(.(text), nchar)]
+    nchars <- dt[, lapply(.(text), nchar)]$V1
     
     print(paste0("Processing ",
                  dt[,.N],
