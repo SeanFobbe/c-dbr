@@ -995,8 +995,8 @@ kable(meta[order(-seconds)],
 
 
 
-\newpage
-## Warnungen
+
+# Warnungen
 
 
 
@@ -1016,8 +1016,8 @@ kable(meta,
 ```
 
 
-\newpage
-## Fehlermeldungen
+
+# Fehlermeldungen
 
 ```{r, pipeline-errors}
 
