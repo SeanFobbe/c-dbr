@@ -191,7 +191,7 @@ prefix.files <- paste0(config$project$shortname,
 
 
 if (config$cores$max == TRUE){
-    fullCores <- future::availableCores()
+    fullCores <- future::availableCores() - 1
 }
 
 
