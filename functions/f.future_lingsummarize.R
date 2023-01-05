@@ -11,40 +11,6 @@
 
 
 
-f.lingsummarize <- function(dt){
-
-    corpus <- corpus(dt)
-    
-    tokens <- tokens(corpus,
-                     what = "word",
-                     remove_punct = FALSE,
-                     remove_symbols = FALSE,
-                     remove_numbers = FALSE,
-                     remove_url = FALSE,
-                     remove_separators = TRUE,
-                     split_hyphens = FALSE,
-                     include_docvars = FALSE,
-                     padding = FALSE
-                     )
-    
-    ntokens <- unname(ntoken(tokens))
-    ntypes  <- unname(ntype(tokens))
-    nsentences <- suppressWarnings(unname(nsentence(corpus)))
-
-    out <- data.table(ntokens,
-                      ntypes,
-                      nsentences)
-    
-    return(out)
-
-    
-}
-
-
-
-
-
-
 f.future_lingsummarize <- function(dt,
                                  chunksperworker = 1,
                                  chunksize = NULL){
@@ -102,3 +68,42 @@ f.future_lingsummarize <- function(dt,
     return(summary.corpus)
 
 }
+
+
+
+
+
+
+
+
+
+f.lingsummarize <- function(dt){
+
+    corpus <- corpus(dt)
+    
+    tokens <- tokens(corpus,
+                     what = "word",
+                     remove_punct = FALSE,
+                     remove_symbols = FALSE,
+                     remove_numbers = FALSE,
+                     remove_url = FALSE,
+                     remove_separators = TRUE,
+                     split_hyphens = FALSE,
+                     include_docvars = FALSE,
+                     padding = FALSE
+                     )
+    
+    ntokens <- unname(ntoken(tokens))
+    ntypes  <- unname(ntype(tokens))
+    nsentences <- suppressWarnings(unname(nsentence(corpus)))
+
+    out <- data.table(ntokens,
+                      ntypes,
+                      nsentences)
+    
+    return(out)
+
+    
+}
+
+
