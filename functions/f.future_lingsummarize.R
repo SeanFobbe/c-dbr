@@ -88,20 +88,6 @@ f.future_lingsummarize <- function(dt,
              "V1",
              "nchars")
 
-
-    if(dt["nchars" == 0, .N] > 0){
-        
-        dt.charnull <- dt["nchars" == 0]
-        dt.charnull$text <- NULL
-        dt.charnull$ntokens <- rep(0, dt.charnull[,.N])
-        dt.charnull$ntypes <- rep(0, dt.charnull[,.N])
-        dt.charnull$nsentences <- rep(0, dt.charnull[,.N])
-
-        summary.corpus <- rbind(summary.corpus,
-                                dt.charnull)
-    }
-
-    
     summary.corpus <- summary.corpus[order(ord)]
 
     
