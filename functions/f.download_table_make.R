@@ -49,15 +49,6 @@ f.download_table_make <- function(dt.filenames,
                               "Allgemeines-Eisenbahngesetz-1951")
 
 
-    ## Indizes der VBVG bestimmen
-    vormund.index <- grep("Vormünder", longtitle)
-
-
-    ## VBVG umbenennen
-    longtitle[vormund.index] <- c("Gesetz-über-die-Vergütung-von-Vormündern-und-Betreuern-2005",
-                                  "Gesetz-über-die-Vergütung-von-Vormündern-und-Betreuern-2023")
-
-
     ## Vektor der Kurztitel erstellen
 
     shorttitle <- filenames.pdf
