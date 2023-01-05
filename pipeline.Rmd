@@ -756,7 +756,7 @@ values <- tibble::tibble(
                                "epub",
                                "xml",
                                "attachments",
-                               "einzelnormen_",
+                               "einzelnormen",
                                "einzelnormen_meta",
                                "rechtsakte",
                                "rechtsakte_meta",
