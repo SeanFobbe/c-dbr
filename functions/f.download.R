@@ -67,7 +67,7 @@ f.download <- function(url,
 
     
     ## Create download folder
-    dir.create(dir, showWarnings = FALSE)
+    dir.create(dir, showWarnings = FALSE, recursive = TRUE)
 
 
     
