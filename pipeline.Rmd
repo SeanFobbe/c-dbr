@@ -1001,35 +1001,56 @@ kable(meta[order(-seconds)],
 
 
 
-```{r, pipeling-warnings}
+```{r, pipline-warnings, results = 'asis'}
 
 meta <- tar_meta(fields = "warnings", complete_only = TRUE)
 setDT(meta)
 meta <- meta[name != "files.network"]
+meta$warnings <- gsub("(\\.pdf|\\.html?|\\.txt)|\\.xml", "\\1 \n\n", meta$warnings)
 
-kable(meta,
-      format = "latex",
-      align = c("P{4cm}", "p{10cm}"),
-      booktabs = TRUE,
-      longtable = TRUE)
+if (meta[,.N > 0]){
 
+    for(i in 1:meta[,.N]){
+
+        cat(paste("###", meta[i]$name), "\n\n")
+        cat(paste(meta[i]$warnings, "\n\n"))
+        
+    }
+
+}else{
+
+    cat("No warnings to report.")
+
+}
 
 ```
 
 
 
-# Fehlermeldungen
+
+
+\newpage
+## Fehlermeldungen
 
 ```{r, pipeline-errors}
 
 meta <- tar_meta(fields = "error", complete_only = TRUE)
 setDT(meta)
 
-kable(meta,
-      format = "latex",
-      align = c("P{4cm}", "p{10cm}"),
-      booktabs = TRUE,
-      longtable = TRUE)
+if (meta[,.N > 0]){
+
+    for(i in 1:meta[,.N]){
+
+        cat(paste("###", meta[i]$name), "\n\n")
+        cat(paste(meta[i]$error, "\n\n"))
+        
+    }
+
+}else{
+
+    cat("No errors to report.")
+
+}
 
 
 ```
