@@ -6,6 +6,7 @@
 - Vollständige Aktualisierung der Daten
 - ZIP-Archiv der TXT-Dateien wird nun auch gehasht
 - Verbesserte Formatierung von Warnungen und Fehlermeldungen im Compilation Report
+- Veränderung der Download-Reihenfolge
 
 ## Version 2023-01-05
 
