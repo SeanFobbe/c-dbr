@@ -31,7 +31,7 @@ f.download <- function(url,
                        retries = 3,
                        retry.sleep.min = 2,
                        retry.sleep.max = 5,
-                       random.order = TRUE,
+                       random.order = FALSE,
                        timeout = 300,
                        debug.toggle = FALSE,
                        debug.files = 500){
