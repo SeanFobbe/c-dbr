@@ -4,6 +4,7 @@
 ## Version \version
 
 - Vollständige Aktualisierung der Daten
+- Gesamte Laufzeitumgebung nun mit Docker versionskontrolliert
 - ZIP-Archiv der TXT-Dateien wird nun auch gehasht
 - Verbesserte Formatierung von Warnungen und Fehlermeldungen im Compilation Report
 - Veränderung der Download-Reihenfolge
