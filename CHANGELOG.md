@@ -8,6 +8,8 @@
 - Verbesserte Formatierung von Warnungen und Fehlermeldungen im Compilation Report
 - Veränderung der Download-Reihenfolge
 - Falls im ersten Download-Durchlauf Dateien fehlen werden die Folgeversuche nun korrekt durchgeführt
+- Die Pipeline mit allen Zwischenergebnissen wird nun automatisch in "output/" archiviert
+
 
 ## Version 2023-01-05
 
