@@ -1,0 +1,10 @@
+version: "3.9"
+
+services:
+  c-dbr:
+    container_name: c-dbr
+    image: c-dbr:4.2.2
+    tty: true
+    volumes:
+      - .:/c-dbr:z
+      - ./gitconfig:/etc/gitconfig:z
