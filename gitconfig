@@ -1,0 +1,15 @@
+[user]
+        name = Sean Fobbe
+        email = 70438644+SeanFobbe@users.noreply.github.com
+[pull]
+        rebase = false
+[core]
+        editor = vim
+[init]
+        defaultBranch = main
+[color]
+        ui = auto
+[receive]
+        fsckObjects = true
+[safe]
+        directory = /c-dbr
