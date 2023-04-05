@@ -91,7 +91,7 @@ ggraph(g,
 
 ggraph(g,
        'sugiyama') + 
-    geom_edge_diagonal(colour = "green")+
+    geom_edge_diagonal(colour = "darkgreen")+
     geom_node_point(size = 2,
                     color = "white")+
     geom_node_text(aes(label = name),
