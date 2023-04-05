@@ -12,6 +12,7 @@
 - Die Pipeline mit allen Zwischenergebnissen wird nun automatisch in "output/" archiviert
 - Source Code ZIP-Archiv wird nun anhand des git-Manifestes generiert
 - README im Hinblick auf Docker aktualisiert
+- Struktur des Compilation Reports angepasst um Warnungen und Fehler prominenter anzuzeigen
 
 
 ## Version 2023-01-05
