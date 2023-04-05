@@ -19,6 +19,6 @@ COPY requirements-R.R .
 RUN Rscript requirements-R.R
 
 
-WORKDIR /ce-dbr
+WORKDIR /c-dbr
 
 CMD "R"
