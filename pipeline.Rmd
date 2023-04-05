@@ -221,18 +221,8 @@ lapply(list.files("functions", pattern = "\\.R$", full.names = TRUE), source)
 
 ```{targets global-sourcefiles, tar_globals = TRUE}
 
-files.source.raw <-  c(list.files(pattern = "\\.R$|\\.toml$|\\.md$|\\.Rmd$"),
-					   "reports",
-                       "data",
-                       "functions",
-                       "tex",
-                       "gpg",
-                       "buttons",
-                       list.files(pattern = "renv\\.lock|\\.Rprofile",
-                                  all.files = TRUE),
-                       list.files("renv",
-                                  pattern = "activate\\.R",
-                                  full.names = TRUE))
+files.source.raw <-  c(system2("git", "ls-files", stdout = TRUE),
+                       ".git")
 
 ```
 
