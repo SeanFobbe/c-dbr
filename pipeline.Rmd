@@ -231,7 +231,7 @@ files.source.raw <-  c(system2("git", "ls-files", stdout = TRUE),
 
 
 
-# Pipeline: Konstruktion
+# Pipeline: Kompilierung
 
 
 
