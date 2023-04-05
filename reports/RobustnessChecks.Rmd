@@ -52,7 +52,7 @@ tar_load(files.epub)
 
 # Pipeline visualisieren
 
-```{r, C-DBR_00_Pipeline_Graph_dark-blue, fig.width = 12, fig.height = 14, fig.pos = "p", fig.cap = "Der vollständige Prozess der Datensatz-Kompilierung."}
+```{r, C-DBR_00_Pipeline_Graph_orange, fig.width = 12, fig.height = 14, fig.pos = "p", fig.cap = "Der vollständige Prozess der Datensatz-Kompilierung."}
 
 
 edgelist <- tar_network(targets_only = TRUE)$edges
@@ -63,7 +63,7 @@ g  <- igraph::graph.data.frame(edgelist,
 
 ggraph(g,
        'sugiyama') + 
-    geom_edge_diagonal(colour = "steelblue2")+
+    geom_edge_diagonal(colour = "orange")+
     geom_node_point(size = 2,
                     color = "white")+
     geom_node_text(aes(label = name),
