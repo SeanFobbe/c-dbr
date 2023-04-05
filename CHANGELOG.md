@@ -10,6 +10,7 @@
 - Veränderung der Download-Reihenfolge
 - Falls im ersten Download-Durchlauf Dateien fehlen werden die Folgeversuche nun korrekt durchgeführt
 - Die Pipeline mit allen Zwischenergebnissen wird nun automatisch in "output/" archiviert
+- Source Code ZIP-Archiv wird nun anhand des git-Manifestes generiert
 - README im Hinblick auf Docker aktualisiert
 
 
