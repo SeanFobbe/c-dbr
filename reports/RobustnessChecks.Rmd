@@ -65,7 +65,7 @@ ggraph(g,
        'sugiyama') + 
     geom_edge_diagonal(colour = "darkgoldenrod2")+
     geom_node_point(size = 2,
-                    color = "white")+
+                    color = "red")+
     geom_node_text(aes(label = name),
                    color = "white",
                    size = 2,
