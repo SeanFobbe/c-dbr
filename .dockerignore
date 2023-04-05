@@ -1,0 +1,27 @@
+# Targets files
+
+_targets.R
+_targets_r/
+_targets/
+
+
+# Project directories
+
+analysis/
+test/
+output/
+temp/
+files/
+pdf/
+txt/
+
+
+# git
+
+.git/
+
+
+
+# Tex
+
+tex/auto/
