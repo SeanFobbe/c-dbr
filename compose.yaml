@@ -8,3 +8,5 @@ services:
     volumes:
       - .:/c-dbr:z
       - ./gitconfig:/etc/gitconfig:z
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
