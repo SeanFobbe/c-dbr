@@ -1005,7 +1005,7 @@ kable(meta[order(-seconds)],
 
 
 
-# Pipeline: Warnungen
+# Warnungen
 
 
 
@@ -1038,7 +1038,7 @@ if (meta[,.N > 0]){
 
 
 \newpage
-## Pipeline: Fehlermeldungen
+# Fehlermeldungen
 
 ```{r, pipeline-errors}
 
