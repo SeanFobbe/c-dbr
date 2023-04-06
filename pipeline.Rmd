@@ -293,8 +293,9 @@ Es werden von \url{www.gesetze-im-internet.de} alle Rechtsakte im XML-, EPUB- un
 
 ```{targets tar.download.xmlurl}
 
-tar_target(url.xml,
-           f.links_xml(url = "https://www.gesetze-im-internet.de/gii-toc.xml"))
+tarchetypes::tar_age(url.xml,
+                     f.links_xml(url = "https://www.gesetze-im-internet.de/gii-toc.xml"),
+                     age = as.difftime(1, units = "days"))
 
 ```
 
@@ -303,10 +304,11 @@ tar_target(url.xml,
 
 ```{targets tar.download.filenames}
 
-tar_target(dt.filenames,
-           f.html_landing_pages(url.xml,
-                                multicore = config$parallel$htmlLandingPages,
-                                cores = fullCores))
+tarchetypes::tar_age(dt.filenames,
+                     f.html_landing_pages(url.xml,
+                                          multicore = config$parallel$htmlLandingPages,
+                                          cores = fullCores),
+                     age = as.difftime(1, units = "days"))
 
 ```
 
