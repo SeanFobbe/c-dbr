@@ -138,7 +138,7 @@ f.download_table_make <- function(dt.filenames,
         expect_equal(length(title), length(url.pdf))
     })
 
-    ## In case of failure: downloaded files are probably too old, need to be rerun daily.
+    ## In case of failure: download manifest is probably too old, need to be rerun daily.
 
     
 
