@@ -5,6 +5,7 @@
 
 - Vollständige Aktualisierung der Daten
 - Gesamte Laufzeitumgebung nun mit Docker versionskontrolliert
+- Download-Manifest wird nun spätestens nach 24h Stunden invalidiert, damit keine alten Daten aus früheren Kompilierungen den Prozess zum Absturz bringen
 - ZIP-Archiv der TXT-Dateien wird nun auch gehasht
 - Verbesserte Formatierung von Warnungen und Fehlermeldungen im Compilation Report
 - Veränderung der Download-Reihenfolge
@@ -12,7 +13,8 @@
 - Die Pipeline mit allen Zwischenergebnissen wird nun automatisch in "output/" archiviert
 - Source Code ZIP-Archiv wird nun anhand des git-Manifestes generiert
 - README im Hinblick auf Docker aktualisiert
-- Struktur des Compilation Reports angepasst um Warnungen und Fehler prominenter anzuzeigen
+- Struktur des Compilation Reports angepasst, um Warnungen und Fehler prominenter anzuzeigen
+- Zusätzliche Unit Tests
 
 
 ## Version 2023-01-05
