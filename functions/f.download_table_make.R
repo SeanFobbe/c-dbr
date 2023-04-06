@@ -16,6 +16,16 @@ f.download_table_make <- function(dt.filenames,
                                   xml.toc = "https://www.gesetze-im-internet.de/gii-toc.xml"){
 
 
+    ## Unit Test
+    test_that("Argumente entsprechen Erwartungen.", {
+        expect_s3_class(dt.filenames, "data.table")
+        expect_type(url.xml, "character")
+        expect_type(xml.toc, "character")
+        expect_equal(nrow(dt.filenames), length(url.xml))
+    })
+
+    
+
     ## Split Filename Table
     filenames.pdf <- dt.filenames$filenames.pdf
     filenames.epub <- dt.filenames$filenames.epub
@@ -115,6 +125,24 @@ f.download_table_make <- function(dt.filenames,
 
 
 
+    ## Unit Test
+    test_that("Ergebnisse entsprechen Erwartungen.", {
+        expect_equal(length(title), length(longtitle))
+        expect_equal(length(title), length(longtitle.raw))
+        expect_equal(length(title), length(shorttitle))
+        expect_equal(length(title), length(title.xml))
+        expect_equal(length(title), length(url.xml))
+        expect_equal(length(title), length(title.epub))
+        expect_equal(length(title), length(url.epub))
+        expect_equal(length(title), length(title.pdf))
+        expect_equal(length(title), length(url.pdf))
+    })
+
+    ## In case of failure: downloaded files are probably too old, need to be rerun daily.
+
+    
+
+
     #'## Data Table für Download vorbereiten
 
     dt.final <- data.table(title,
@@ -134,3 +162,11 @@ f.download_table_make <- function(dt.filenames,
     
     
 }
+
+
+### DEBUGGING
+
+
+## tar_load(dt.filenames)
+## tar_load(url.xml)
+## xml.toc = "https://www.gesetze-im-internet.de/gii-toc.xml"
