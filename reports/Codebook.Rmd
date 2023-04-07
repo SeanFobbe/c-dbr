@@ -782,7 +782,7 @@ ggplot(data = freqtable.normen$periodikum[-.N])+
     )
 ```
 
-
+\newpage
 
 ```{r}
 kable(freqtable.normen$periodikum,
