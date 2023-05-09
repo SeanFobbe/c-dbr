@@ -1,10 +1,12 @@
+version: "3.7"
+
 services:
   c-dbr:
     container_name: c-dbr
     image: c-dbr:4.2.2
     tty: true
     volumes:
-      - .:/c-dbr:z
-      - ./gitconfig:/etc/gitconfig:z
+      - .:/c-dbr
+      - ./gitconfig:/etc/gitconfig
     environment:
       - TZ=Europe/Berlin
