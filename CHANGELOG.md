@@ -4,7 +4,7 @@
 ## Version \version
 
 - Vollständige Aktualisierung der Daten
-
+- Konfigurations-Dateien in etc/ verschoben
 
 
 # Version 2023-04-07
