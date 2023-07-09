@@ -8,15 +8,15 @@ RUN apt-get update && apt-get install -y pandoc pandoc-citeproc texlive-science 
 
 # System dependency layer
 COPY requirements-system.txt .
-RUN apt-get update && apt-get -y install $(cat requirements-system.txt)
+RUN apt-get update && apt-get -y install $(cat etc/requirements-system.txt)
 
 # Python layer
 COPY requirements-python.txt .
-RUN pip install -r requirements-python.txt
+RUN pip install -r etc/requirements-python.txt
 
 # R layer
 COPY requirements-R.R .
-RUN Rscript requirements-R.R
+RUN Rscript etc/requirements-R.R
 
 
 WORKDIR /c-dbr
