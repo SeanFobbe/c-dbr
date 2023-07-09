@@ -4,6 +4,12 @@
 ## Version \version
 
 - Vollständige Aktualisierung der Daten
+
+
+
+# Version 2023-04-07
+
+- Vollständige Aktualisierung der Daten
 - Gesamte Laufzeitumgebung nun mit Docker versionskontrolliert
 - Download-Manifest wird nun spätestens nach 24h Stunden invalidiert, damit keine alten Daten aus früheren Kompilierungen den Prozess zum Absturz bringen
 - ZIP-Archiv der TXT-Dateien wird nun auch gehasht
