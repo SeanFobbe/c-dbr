@@ -5,6 +5,10 @@
 
 - Vollständige Aktualisierung der Daten
 
+# Version 2023-10-03
+
+- Vollständige Aktualisierung der Daten
+
 
 ## Version 2023-07-09
 
