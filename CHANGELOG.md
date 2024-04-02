@@ -4,7 +4,8 @@
 ## Version \version
 
 - Vollständige Aktualisierung der Daten
-- Aktualisieurng der Python Toolchain
+- Aktualisierung der Python Toolchain
+- Aktualisierung des Public GPG Keys im Repository
 
 
 
