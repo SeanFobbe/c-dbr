@@ -5,15 +5,25 @@
 
 - Vollständige Aktualisierung der Daten
 
+
+
+## Version 2024-01-07
+
+- Vollständige Aktualisierung der Daten
+
+
+
 ## Version 2023-10-03
 
 - Vollständige Aktualisierung der Daten
+
 
 
 ## Version 2023-07-09
 
 - Vollständige Aktualisierung der Daten
 - Konfigurations-Dateien in etc/ verschoben
+
 
 
 ## Version 2023-04-07
@@ -30,6 +40,7 @@
 - README im Hinblick auf Docker aktualisiert
 - Struktur des Compilation Reports angepasst, um Warnungen und Fehler prominenter anzuzeigen
 - Zusätzliche Unit Tests
+
 
 
 ## Version 2023-01-05
@@ -55,11 +66,13 @@
 - Unterscheidung zwischen VBVG 2005 und VBVG 2023
 
 
+
 ## Version 2022-05-22
 
 - Vollständige Aktualisierung der Daten
 - README und CHANGELOG sind nun externe Dateien die bei der Kompilierung automatisch eingebunden werden
 - Das für *renv* notwendige Skript activate.R ist im ZIP-Archiv in den Ordner "renv" sortiert
+
 
 
 ## Version 2022-01-12
@@ -74,12 +87,15 @@
 - Source Code des Changelogs zu Markdown konvertiert
 - Einführung eines Debugging-Modus um die Entwicklung zu beschleunigen
 
+
+
 ## Version 2021-09-16
 
 - Vollständige Aktualisierung der Daten
 - Einfügung von Kurzbezeichnungen der Rechtsakte in die Dateinamen der Netzwerkanalysen
 - Einfügung der ID der Rechtsakte in die CSV-Tabelle aller Kurz- und Langtitel
 
+ 
  
 ## Version 2021-07-30
  
@@ -93,10 +109,10 @@
 - Falls die XML-Datei mehrere Bemerkungen für Hinweise, Änderung, Neufassung, den Stand oder sonstige Angaben aufweist werden diese nun durch einen vertikalen Strich getrennt (vorher nur mehrere Leerzeichen). 
 - Kleinere Korrekturen und Ergänzungen im Codebook
 
+
  
 ## Version 2021-01-05
 
- 
 - Vollständige Aktualisierung der Daten
 - Komplette Überarbeitung des Source Codes
 - Erstveröffentlichung eines Codebooks
@@ -108,8 +124,8 @@
 - Einführung kryptographischer Signaturen
  
  
+ 
 ## Version 2020-10-09
-
 
 - Vollständige Aktualisierung der Daten
 - Erstveröffentlichung des Source Codes
@@ -119,8 +135,8 @@
  
 ## Version 2020-07-08
 
- 
 - Vollständige Aktualisierung der Daten
+ 
  
  
 ## Version 2020-05-18
