@@ -3,10 +3,10 @@
 
 ## Version \version
 
-
 - LIZENZÄNDERUNG: Source Code jetzt unter GNU General Public License Version 3 (GPLv3) oder später lizenziert
 - Vollständige Aktualisierung der Daten
 - Python Toolchain entfernt
+
 
 
 ## Version 2024-04-03
