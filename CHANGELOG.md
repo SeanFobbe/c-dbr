@@ -3,6 +3,14 @@
 
 ## Version \version
 
+
+- Vollständige Aktualisierung der Daten
+- LIZENZÄNDERUNG: Source Code jetzt unter GNU General Public License Version 3 (GPLv3) oder später lizenziert
+
+
+
+## Version 2024-04-03
+
 - Vollständige Aktualisierung der Daten
 - Aktualisierung der Python Toolchain
 - Aktualisierung des Public GPG Keys im Repository
