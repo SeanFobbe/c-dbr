@@ -5,7 +5,7 @@
 
 - LIZENZÄNDERUNG: Source Code jetzt unter GNU General Public License Version 3 (GPLv3) oder später lizenziert
 - Vollständige Aktualisierung der Daten
-- R-Docker Image auf 4.4.0 aktualisiert
+- Docker Image auf R 4.4.0 aktualisiert (wegen CVE-2024-27322)
 - Python Toolchain entfernt
 
 
