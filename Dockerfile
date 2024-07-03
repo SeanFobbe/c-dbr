@@ -1,4 +1,4 @@
-FROM rocker/r-ver:4.2.2
+FROM rocker/r-ver:4.4.0
 
 #RUN sudo apt-get remove -y rstudio-server # only if tidyverse or verse base images used
 
