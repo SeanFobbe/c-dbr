@@ -3,8 +3,14 @@
 
 ## Version \version
 
-- LIZENZÄNDERUNG: Source Code jetzt unter GNU General Public License Version 3 (GPLv3) oder später lizenziert
 - Vollständige Aktualisierung der Daten
+- Überarbeitung der Berechnung linguistischer Kennzahlen
+
+
+## Version 2024-07-04
+
+- Vollständige Aktualisierung der Daten
+- LIZENZÄNDERUNG: Source Code jetzt unter GNU General Public License Version 3 (GPLv3) oder später lizenziert
 - Docker Image auf R 4.4.0 aktualisiert (wegen CVE-2024-27322)
 - Python Toolchain entfernt
 
