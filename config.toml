@@ -35,13 +35,13 @@ cleanrun = false # Löscht vor jedem Run alle gespeicherten Zwischen- und Enderg
 [cores]
 
 max = false  # Ob die maximale Anzahl an logischen Kernen genutzt werden soll; Möglichkeiten sind "TRUE" oder "FALSE"
-number = 8   # Die Anzahl Rechenkerne, die verwendet werden soll; wird nur berücksichtigt falls "cores.max" auf "FAlSE" steht
-
+number = 8   # Die Anzahl Threads, die für Berechnungen verwendet werden soll; wird nur berücksichtigt falls "cores.max" auf "FAlSE" steht
+download = 4 # Die Anzahl paralleler Downloads
 
 
 [parallel]
 
-htmlLandingPages = true
+htmlLandingPages = false
 downloadXML = true
 downloadPDF = true
 downloadEPUB = true
