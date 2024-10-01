@@ -16,10 +16,10 @@ code = "GNU General Public License Version 3 (GPLv3)"
 [doi] # Digital Object Identifier
 
 data.concept = "10.5281/zenodo.3832111" # do not change
-data.version = "10.5281/zenodo.12635739" # checked
+data.version = "10.5281/zenodo.13871896" # checked
 
 software.concept = "10.5281/zenodo.4072934" # do not change
-software.version = "10.5281/zenodo.12635744" # checked
+software.version = "10.5281/zenodo.13871897" # checked
 
 
 
