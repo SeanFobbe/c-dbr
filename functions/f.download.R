@@ -88,8 +88,8 @@ f.download <- function(url,
 
     if (clean == TRUE){
     
-    files.all <- list.files(dir, full.names = TRUE)
-    delete <- setdiff(files.all, file.path(dir, df$filename))
+        files.all <- list.files(dir, full.names = TRUE)
+        delete <- setdiff(files.all, file.path(dir, df$filename))
         unlink(delete)
 
     }
