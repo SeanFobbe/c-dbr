@@ -42,14 +42,14 @@ number = 8   # Die Anzahl Rechenkerne, die verwendet werden soll; wird nur berü
 [parallel]
 
 htmlLandingPages = true
-downloadXML = true
+downloadXML = false
+downloadPDF = false
+downloadEPUB = false
 parseEinzelnormen = false # Parallelisierung instabil und kaum schneller als sequentielle Ausführung
 parseMeta = false # Parallelisierung instabil und kaum schneller als sequentielle Ausführung
 parseNetworks = false # Parallelisierung instabil und kaum schneller als sequentielle Ausführung
 lingsummarize = true
-downloadPDF = true
 extractPDF = true
-downloadEPUB = true
 multihashes = true
 
 
