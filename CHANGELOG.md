@@ -7,6 +7,7 @@
 - Überarbeitung der Berechnung linguistischer Kennzahlen
 - Erweiterung des Lösch-Skriptes
 - Download-Timeout nun bei 300 sek
+- Anzahl paralleler Downloads kann separat konfiguriert werden
 
 
 ## Version 2024-07-04
