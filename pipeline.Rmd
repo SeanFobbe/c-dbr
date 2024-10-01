@@ -197,6 +197,7 @@ if (config$cores$max == TRUE){
 
 if (config$cores$max == FALSE){
     fullCores <- as.integer(config$cores$number)
+	downloadCores <- as.integer(config$cores$download)
 }
 
 ```
@@ -307,7 +308,7 @@ tarchetypes::tar_age(url.xml,
 tarchetypes::tar_age(dt.filenames,
                      f.html_landing_pages(url.xml,
                                           multicore = config$parallel$htmlLandingPages,
-                                          cores = fullCores),
+                                          cores = downloadCores),
                      age = as.difftime(1, units = "days"))
 
 ```
@@ -365,7 +366,7 @@ tar_target(files.xmlzip,
 						   clean = TRUE,
 						   random.order = FALSE,
 						   multicore = config$parallel$downloadXML,
-						   cores = fullCores,
+						   cores = downloadCores,
                            sleep.min = 0,
                            sleep.max = 0,
                            retries = 3,
@@ -391,7 +392,7 @@ tar_target(files.pdf,
 						   clean = TRUE,
                            random.order = FALSE,
 						   multicore = config$parallel$downloadPDF,
-						   cores = fullCores,
+						   cores = downloadCores,
                            sleep.min = 0,
                            sleep.max = 0,
                            retries = 3,
@@ -416,7 +417,7 @@ tar_target(files.epub,
 						   clean = TRUE,
 						   random.order = FALSE,
 						   multicore = config$parallel$downloadEPUB,
-						   cores = fullCores,
+						   cores = downloadCores,
                            sleep.min = 0,
                            sleep.max = 0,
                            retries = 3,
