@@ -7,8 +7,9 @@ delete <- c("files/",
             "netzwerke",
             "temp/",
             "analysis/",
-            "output/")
+            "output/",
+            "_targets.R")
 
-
+logfiles <- list.files(pattern = "\\.log")
 
 unlink(delete, recursive = TRUE)
