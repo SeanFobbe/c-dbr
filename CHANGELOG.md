@@ -6,7 +6,6 @@
 - Vollständige Aktualisierung der Daten
 - Überarbeitung der Berechnung linguistischer Kennzahlen
 - Erweiterung des Lösch-Skriptes
-- Download standardmäßig nur noch sequentiell
 
 
 ## Version 2024-07-04
