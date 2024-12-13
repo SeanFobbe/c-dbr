@@ -190,7 +190,7 @@ f.download <- function(url,
 #' Wrapper function for download.file that returns 'NA' instead of an error when a file is not available.
 #'
 #' @param url A valid URL.
-#' @param destile The destination file.
+#' @param destfile The destination file.
 #' @param sleep.min Positive Integer. Minimum number of seconds to randomly sleep between requests.
 #' @param sleep.max Positive Integer. Maximum number of seconds to randomly sleep between requests.
 #'
