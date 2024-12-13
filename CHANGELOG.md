@@ -4,6 +4,12 @@
 ## Version \version
 
 - Vollständige Aktualisierung der Daten
+- Entfernung von überholtem Source Code
+
+
+## Version 2024-10-12
+
+- Vollständige Aktualisierung der Daten
 - Überarbeitung der Berechnung linguistischer Kennzahlen
 - Erweiterung des Lösch-Skriptes
 - Download-Timeout nun bei 300 sek
