@@ -7,6 +7,7 @@
 - Expliziter R Package Version Lock für 2024-06-13 (CRAN Date)
 - Überarbeitung des Dockerfiles
 - Entfernung von überholtem Source Code
+- Entfernung der Tesseract System Library
 
 
 ## Version 2024-10-12
