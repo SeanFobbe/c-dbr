@@ -6,6 +6,7 @@
 - Vollständige Aktualisierung der Daten
 - Expliziter R Package Version Lock für 2024-06-13 (CRAN Date)
 - Überarbeitung des Dockerfiles
+- Vereinfachung der Run-Skripte und stärkere Integration mit Docker Compose
 - Entfernung von überholtem Source Code
 - Entfernung der Tesseract System Library
 
