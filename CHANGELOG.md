@@ -6,6 +6,7 @@
 - Vollständige Aktualisierung der Daten
 - Expliziter R Package Version Lock für 2024-06-13 (CRAN Date)
 - Überarbeitung des Dockerfiles
+- Vereinheitlichung der Komponenten für PDF-Extraktion und Berechnung kryptographischer Hashes
 - Vereinfachung der Run-Skripte und stärkere Integration mit Docker Compose
 - /tmp in Arbeitsspeicher ausgelagert
 - Entfernung von überholtem Source Code
