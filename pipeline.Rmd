@@ -467,6 +467,7 @@ tar_target(files.xml,
 tar_target(files.txt,
            f.tar_pdf_extract(x = files.pdf,
                              outputdir = "files/txt",
+							 ignore.error = TRUE,
                              multicore = config$parallel$extractPDF,
                              cores = fullCores),
            format = "file")
