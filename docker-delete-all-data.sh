@@ -1,4 +1,6 @@
 #!/bin/bash
 set -e
 
-time docker-compose run --build --rm c-dbr Rscript delete-all-data.R
+time docker-compose build --pull
+
+time docker-compose run --rm c-dbr Rscript delete-all-data.R
