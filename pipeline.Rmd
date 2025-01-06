@@ -660,7 +660,7 @@ csv.all <- tarchetypes::tar_map(unlist = FALSE,
 
 ## Report Targets
 
-Dieser Abschnitt der Pipeline erstellt die finalen Berichte (Codebook und Robustness Checks).
+Dieser Abschnitt der Pipeline erstellt die finalen Berichte (Codebook und Quality Assurance).
 
 
 
@@ -699,8 +699,8 @@ tar_target(lingstats.summary.rechtsakte,
 
 ### Report erstellen: Quality Assurance
 
-```{targets tar.report.robustness}
-tarchetypes::tar_render(report.robustness,
+```{targets tar.report.quality}
+tarchetypes::tar_render(report.quality,
                         file.path("reports",
                                   "quality.Rmd"),
                         output_file = file.path("../output",
@@ -818,7 +818,7 @@ tar_target(zip_analysis,
                      dir = "output",
                      mode = "cherry-pick",
                      report.codebook,    # manually enforced dependency relationship
-                     report.robustness), # manually enforced dependency relationship
+                     report.quality), # manually enforced dependency relationship
            format = "file")
 ```
 
@@ -860,7 +860,7 @@ tar_target(zip.all,
 tar_target(hashes,
            f.tar_multihashes(c(zip.all,
                                report.codebook[1],
-                               report.robustness[1]),
+                               report.quality[1]),
                              multicore = config$parallel$multihashes,
                              cores = fullCores))
 ```
