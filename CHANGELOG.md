@@ -4,6 +4,7 @@
 ## Version \version
 
 - Vollständige Aktualisierung der Daten
+- Überarbeitung der Dokumentation zu den Varianten des Datensatzes
 - Expliziter R Package Version Lock für 2024-06-13 (CRAN Date)
 - Überarbeitung des Dockerfiles
 - Vereinheitlichung der Komponenten für PDF-Extraktion und Berechnung kryptographischer Hashes
