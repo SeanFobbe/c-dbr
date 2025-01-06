@@ -922,8 +922,8 @@ zip(paste0("output/",
 edgelist <- tar_network(targets_only = TRUE)$edges
 setDT(edgelist)
 
-g  <- igraph::graph.data.frame(edgelist,
-                               directed = TRUE)
+g  <- igraph::graph_from_data_frame(edgelist,
+                                    directed = TRUE)
 
 
 ggraph(g,
