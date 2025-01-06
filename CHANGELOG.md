@@ -12,6 +12,7 @@
 - /tmp in Arbeitsspeicher ausgelagert
 - Entfernung von überholtem Source Code
 - Entfernung der Tesseract System Library
+- Entfernung der Nummerierung von Diagrammen
 
 
 ## Version 2024-10-12
