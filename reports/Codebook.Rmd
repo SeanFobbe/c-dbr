@@ -560,7 +560,7 @@ kable(lingstats.summary.rechtsakte,
 
 
 
-```{r C-DBR_01_Einzelnormen_Density_Zeichen, fig.height = 6, fig.width = 9}
+```{r C-DBR_Einzelnormen_Density_Zeichen, fig.height = 6, fig.width = 9}
 ggplot(data = dt.normen.final)+
     geom_density(aes(x = zeichen),
                  fill = "black") +
@@ -590,7 +590,7 @@ ggplot(data = dt.normen.final)+
 \vspace{1cm}
 
 
-```{r C-DBR_01_Rechtsakte_Density_Zeichen, fig.height = 6, fig.width = 9}
+```{r C-DBR_Rechtsakte_Density_Zeichen, fig.height = 6, fig.width = 9}
 ggplot(data = dt.rechtsakte.final)+
     geom_density(aes(x = zeichen),
                  fill = "black") +
@@ -620,7 +620,7 @@ ggplot(data = dt.rechtsakte.final)+
 ## Verteilung Tokens
 
 
-```{r C-DBR_02_Einzelnormen_Density_Tokens, fig.height = 6, fig.width = 9}
+```{r C-DBR_Einzelnormen_Density_Tokens, fig.height = 6, fig.width = 9}
 ggplot(data = dt.normen.final)+
     geom_density(aes(x = tokens),
                  fill = "black") +
@@ -651,7 +651,7 @@ ggplot(data = dt.normen.final)+
 
 
 
-```{r C-DBR_02_Rechtsakte_Density_Tokens, fig.height = 6, fig.width = 9}
+```{r C-DBR_Rechtsakte_Density_Tokens, fig.height = 6, fig.width = 9}
 ggplot(data = dt.rechtsakte.final)+
     geom_density(aes(x = tokens),
                  fill = "black")+
@@ -681,7 +681,7 @@ ggplot(data = dt.rechtsakte.final)+
 
 ## Verteilung Typen
 
-```{r C-DBR_03_Einzelnormen_Density_Typen, fig.height = 6, fig.width = 9}
+```{r C-DBR_Einzelnormen_Density_Typen, fig.height = 6, fig.width = 9}
 ggplot(data = dt.normen.final)+
     geom_density(aes(x = typen),
                  fill = "black")+
@@ -710,7 +710,7 @@ ggplot(data = dt.normen.final)+
 \vspace{1cm}
 
 
-```{r C-DBR_03_Rechtsakte_Density_Typen, fig.height = 6, fig.width = 9}
+```{r C-DBR_Rechtsakte_Density_Typen, fig.height = 6, fig.width = 9}
 ggplot(data = dt.rechtsakte.final)+
     geom_density(aes(x = typen),
                  fill = "black")+
@@ -743,7 +743,7 @@ ggplot(data = dt.rechtsakte.final)+
 
 
 
-```{r C-DBR_04_Einzelnormen_Density_Saetze, fig.height = 6, fig.width = 9}
+```{r C-DBR_Einzelnormen_Density_Saetze, fig.height = 6, fig.width = 9}
 ggplot(data = dt.normen.final)+
     geom_density(aes(x = saetze),
                  fill = "black")+
@@ -775,7 +775,7 @@ ggplot(data = dt.normen.final)+
 
 
 
-```{r C-DBR_04_Rechtsakte_Density_Saetze, fig.height = 6, fig.width = 9}
+```{r C-DBR_Rechtsakte_Density_Saetze, fig.height = 6, fig.width = 9}
 ggplot(data = dt.rechtsakte.final)+
     geom_density(aes(x = saetze),
                  fill = "black")+
@@ -816,7 +816,7 @@ ggplot(data = dt.rechtsakte.final)+
 
 
 
-```{r C-DBR_05_Einzelnormen_Barplot_Periodikum, fig.height = 10, fig.width = 8}
+```{r C-DBR_Einzelnormen_Barplot_Periodikum, fig.height = 10, fig.width = 8}
 ggplot(data = freqtable.normen$periodikum[-.N])+
     geom_bar(aes(x = reorder(periodikum,
                              N),
@@ -868,7 +868,7 @@ kable(freqtable.normen$periodikum,
 
 
 
-```{r C-DBR_05_Rechtsakte_Barplot_Periodikum, fig.height = 10, fig.width = 8}
+```{r C-DBR_Rechtsakte_Barplot_Periodikum, fig.height = 10, fig.width = 8}
 ggplot(data = freqtable.rechtsakte$periodikum[-.N]) +
     geom_bar(aes(x = reorder(periodikum,
                              N),
@@ -922,7 +922,7 @@ kable(freqtable.rechtsakte$periodikum,
 ### Alle Rechtsakte (mit und ohne Normtext)
 
 
-```{r C-DBR_05_Meta_Barplot_Periodikum, fig.height = 10, fig.width = 8}
+```{r C-DBR_Meta_Barplot_Periodikum, fig.height = 10, fig.width = 8}
 ggplot(data = freqtable.xmlmeta$periodikum[-.N]) +
     geom_bar(aes(x = reorder(periodikum,
                              N),
@@ -982,7 +982,7 @@ kable(freqtable.xmlmeta$periodikum,
 ### Einzelnormen
 
 
-```{r C-DBR_06_Einzelnormen_Barplot_Ausfertigungsjahr, fig.height = 7, fig.width = 11}
+```{r C-DBR_Einzelnormen_Barplot_Ausfertigungsjahr, fig.height = 7, fig.width = 11}
 
 ggplot(data = freqtable.normen$ausfertigung_jahr[-.N][,lapply(.SD, as.numeric)]) +
     geom_bar(aes(x = ausfertigung_jahr,
@@ -1028,7 +1028,7 @@ kable(freqtable.normen$ausfertigung_jahr,
 ### Rechtsakte mit veröffentlichtem Normtext
 
 
-```{r C-DBR_06_Rechtsakte_Barplot_Ausfertigungsjahr, fig.height = 7, fig.width = 11}
+```{r C-DBR_Rechtsakte_Barplot_Ausfertigungsjahr, fig.height = 7, fig.width = 11}
 ggplot(data = freqtable.rechtsakte$ausfertigung_jahr[-.N][,lapply(.SD, as.numeric)]) +
     geom_bar(aes(x = ausfertigung_jahr,
                  y = N),
@@ -1074,7 +1074,7 @@ kable(freqtable.rechtsakte$ausfertigung_jahr,
 ###  Alle Rechtsakte (mit und ohne Normtext)
 
 
-```{r C-DBR_06_Meta_Barplot_Ausfertigungsjahr, fig.height = 7, fig.width = 11}
+```{r C-DBR_Meta_Barplot_Ausfertigungsjahr, fig.height = 7, fig.width = 11}
 ggplot(data = freqtable.xmlmeta$ausfertigung_jahr[-.N][,lapply(.SD, as.numeric)]) +
     geom_bar(aes(x = ausfertigung_jahr,
                  y = N),
@@ -1118,7 +1118,7 @@ kable(freqtable.xmlmeta$ausfertigung_jahr,
 # Dateigrößen
 
 
-```{r, C-DBR_07_Density_Dateigroessen_XML, fig.height = 6, fig.width = 9}
+```{r, C-DBR_Density_Dateigroessen_XML, fig.height = 6, fig.width = 9}
 
 
 xml.MB <- file.size(files.xml) / 10^6
@@ -1154,7 +1154,7 @@ ggplot(data = dt.plot,
 
 
 
-```{r, C-DBR_07_Density_Dateigroessen_PDF, fig.height = 6, fig.width = 9}
+```{r, C-DBR_Density_Dateigroessen_PDF, fig.height = 6, fig.width = 9}
 
 
 pdf.MB <- file.size(files.pdf) / 10^6
@@ -1189,7 +1189,7 @@ ggplot(data = dt.plot,
 
 
 
-```{r, C-DBR_07_Density_Dateigroessen_TXT, fig.height = 6, fig.width = 9}
+```{r, C-DBR_Density_Dateigroessen_TXT, fig.height = 6, fig.width = 9}
 
 
 txt.MB <- file.size(files.txt) / 10^6
@@ -1225,7 +1225,7 @@ ggplot(data = dt.plot,
 
 
 
-```{r, C-DBR_07_Density_Dateigroessen_EPUB, fig.height = 6, fig.width = 9}
+```{r, C-DBR_Density_Dateigroessen_EPUB, fig.height = 6, fig.width = 9}
 
 
 epub.MB <- file.size(files.epub) / 10^6
