@@ -697,17 +697,17 @@ tar_target(lingstats.summary.rechtsakte,
 
 
 
-### Report erstellen: Robustness Checks
+### Report erstellen: Quality Assurance
 
 ```{targets tar.report.robustness}
 tarchetypes::tar_render(report.robustness,
                         file.path("reports",
-                                  "RobustnessChecks.Rmd"),
+                                  "quality.Rmd"),
                         output_file = file.path("../output",
                                                 paste0(config$project$shortname,
                                                        "_",
                                                        datestamp,
-                                                       "_RobustnessChecks.pdf")))
+                                                       "_QualityAssurance.pdf")))
 
 ```
 
@@ -720,7 +720,7 @@ tarchetypes::tar_render(report.robustness,
 ```{targets tar.report.codebook}
 tarchetypes::tar_render(report.codebook,
                         file.path("reports",
-                                  "Codebook.Rmd"),
+                                  "codebook.Rmd"),
                         output_file = file.path("../output",
                                                 paste0(config$project$shortname,
                                                        "_",
