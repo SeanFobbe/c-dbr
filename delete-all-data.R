@@ -2,8 +2,8 @@
 
 
 ## Remove {targets} objects
-targets::tar_destroy(ask = FALSE)
 targets::tar_unscript()
+targets::tar_destroy(ask = FALSE)
 
 ## Delete Manifest
 standard <- c("files/",
