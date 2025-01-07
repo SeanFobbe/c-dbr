@@ -1,5 +1,5 @@
 ---
-title: "Robustness Checks | Corpus des Deutschen Bundesrechts (C-DBR)"
+title: "Qualitätskontrolle | Corpus des Deutschen Bundesrechts (C-DBR)"
 author: Seán Fobbe
 geometry: margin=3cm
 papersize: a4
@@ -12,7 +12,7 @@ output:
     pandoc_args: --listings
     includes:
       in_header: ../tex/Preamble_DE.tex
-      before_body: [../temp/Definitions.tex, ../tex/Titlepage_Robustness.tex]
+      before_body: [../temp/Definitions.tex, ../tex/Titlepage_Quality.tex]
 bibliography: ../temp/packages.bib
 nocite: '@*'
 ---
