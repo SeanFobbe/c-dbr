@@ -81,7 +81,7 @@ $ bash docker-build-image.sh
 Falls Sie zuvor den Datensatz schon einmal kompiliert haben (ob erfolgreich oder erfolglos), können Sie mit folgendem Befehl alle Arbeitsdaten im Ordner löschen:
 
 ```
-$ Rscript delete_all_data.R
+$ bash delete_all_data.sh
 ```
 
 Den vollständigen Datensatz kompilieren Sie mit folgendem Skript:
