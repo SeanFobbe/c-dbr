@@ -4,6 +4,11 @@
 ## Version \version
 
 - Vollständige Aktualisierung der Daten
+- Reparatur der Clean Run-Option in der Konfigurationsdatei
+
+## Version 2025-01-07
+
+- Vollständige Aktualisierung der Daten
 - Überarbeitung der Dokumentation zu den Varianten des Datensatzes
 - Expliziter R Package Version Lock für 2024-06-13 (CRAN Date)
 - Überarbeitung des Dockerfiles
