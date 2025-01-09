@@ -30,7 +30,7 @@ config <- RcppTOML::parseTOML("config.toml")
 
 if(config$debug$cleanrun == TRUE){
 
-    source("delete_all_data.R")
+    source("delete_all_data.sh")
 
     }
 
